@@ -21,12 +21,49 @@
 ## 1. Core Engineering Thesis
 
 ```
-┌─────────────────┐      ┌──────────────────────────┐      ┌──────────────────────┐      ┌─────────────────────────┐
-│   AI PROPOSES   │ ───► │ DETERMINISTIC POLICY     │ ───► │  GATEWAY ADAPTER     │ ───► │  CRYPTOGRAPHIC AUDIT    │
-│  (Probabilistic │      │       CONTROLS           │      │      EXECUTES        │      │        VERIFIES         │
-│   Diagnostics)  │      │  (Zero-Hallucination)    │      │ (Live Test / Mock)   │      │ (SHA-256 Hash Chaining) │
-└─────────────────┘      └──────────────────────────┘      └──────────────────────┘      └─────────────────────────┘
+                    ┌──────────────────┐
+                    │ External Webhook │
+                    └────────┬─────────┘
+                             ↓
+                    ┌──────────────────┐
+                    │ HMAC + Replay    │
+                    │ Verification     │
+                    └────────┬─────────┘
+                             ↓
+                    ┌──────────────────┐
+                    │ Diagnostic / AI  │
+                    │ Recommendation   │
+                    └────────┬─────────┘
+                             ↓
+                    ┌──────────────────┐
+                    │ Deterministic    │
+                    │ Policy Engine    │
+                    └────────┬─────────┘
+                             ↓
+              ┌──────────────┴──────────────┐
+              ↓                             ↓
+       ┌──────────────┐             ┌───────────────┐
+       │ Auto-Execute │             │ Human Review  │
+       └──────┬───────┘             └───────────────┘
+              ↓
+       ┌──────────────┐
+       │ CAS / Idempot│
+       │ Safety Gate  │
+       └──────┬───────┘
+              ↓
+       ┌──────────────┐
+       │ Gateway      │
+       │ Adapter      │
+       └──────┬───────┘
+              ↓
+       ┌──────────────┐
+       │ Cryptographic│
+       │ Audit Ledger │
+       └──────────────┘
 ```
+
+> **The Core Invariant:**  
+> *"I designed the system so that even if the AI is wrong, the financial system remains bounded by deterministic controls."*
 
 In mission-critical fintech systems, probabilistic Large Language Models must **never** hold direct write-access to financial balance sheets, gateway debit APIs, or customer communication queues.
 
