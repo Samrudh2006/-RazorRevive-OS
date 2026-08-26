@@ -176,10 +176,16 @@
   <div class="flex-1 flex overflow-hidden">
 
     <!-- LEFT SIDEBAR -->
-    <aside class="w-56 bg-[#050c1b] border-r border-[#142442] flex flex-col justify-between p-3 shrink-0 hidden lg:flex">
+    <aside class="w-60 bg-[#050c1b] border-r border-[#142442] flex flex-col justify-between p-3 shrink-0 hidden lg:flex">
       
-      <!-- NAV ITEMS -->
-      <nav class="space-y-1 text-xs" id="sidebar-nav">
+      <div>
+        <!-- PROMINENT BRAND HERO EMBED IN SIDEBAR -->
+        <div class="px-1 pb-3 mb-3 border-b border-[#142442]">
+          <img src="/static/assets/logo.jpg" onerror="this.src='frontend/assets/logo.jpg'" alt="RazorRevive-OS Control Plane" class="w-full h-24 rounded-xl object-cover shadow-xl shadow-blue-600/20 border border-blue-400/40 hover:scale-[1.02] transition-transform duration-300">
+        </div>
+
+        <!-- NAV ITEMS -->
+        <nav class="space-y-1 text-xs" id="sidebar-nav">
         
         <!-- Overview -->
         <button onclick="switchNavTab('overview')" id="nav-overview" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg nav-btn-active transition-all text-left">
@@ -301,7 +307,8 @@
           <span>Docs</span>
         </button>
 
-      </nav>
+        </nav>
+      </div>
 
       <!-- SYSTEM STATUS FOOTER CARD -->
       <div class="p-3 rounded-lg bg-[#081224] border border-[#142442] space-y-1.5">
