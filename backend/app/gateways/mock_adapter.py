@@ -42,11 +42,21 @@ class MockPaymentGateway(PaymentGateway):
             self._gateway_records[idempotency_key] = res
         return res
 
-    def lookup_recovery_operation(self, idempotency_key: str) -> Optional[Dict[str, Any]]:
+    def lookup_recovery_operation(
+        self,
+        idempotency_key: str,
+        simulate_error: Optional[str] = None
+    ) -> Optional[Dict[str, Any]]:
         """
         Queries the gateway ledger using the deterministic idempotency key.
         Used for reconciliation when the application crashed in-flight before recording response.
+        If simulate_error is provided, raises or returns error to test fail-closed handling.
         """
+        if simulate_error == "TIMEOUT":
+            raise TimeoutError("Gateway reconciliation lookup timed out (504 Gateway Timeout)")
+        if simulate_error == "503_SERVICE_UNAVAILABLE":
+            return {"success": False, "status": "503_SERVICE_UNAVAILABLE", "retryable": True}
+            
         return self._gateway_records.get(idempotency_key)
 
     def schedule_mandate_retry(
