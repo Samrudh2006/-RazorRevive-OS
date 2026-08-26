@@ -185,10 +185,16 @@ class SimulatedFailureRequest(BaseModel):
     customer_email: str = Field(default="customer@example.com")
     attempt_count: int = Field(default=1)
 
+from fastapi.staticfiles import StaticFiles
+
+frontend_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "frontend"))
+if os.path.exists(frontend_dir):
+    app.mount("/static", StaticFiles(directory=frontend_dir), name="static")
+
 @app.get("/", response_class=HTMLResponse)
 async def serve_dashboard():
     """Serves the RazorRevive-OS Control Plane Dashboard."""
-    frontend_path = os.path.join(os.path.dirname(__file__), "..", "..", "frontend", "index.html")
+    frontend_path = os.path.join(frontend_dir, "index.html")
     if os.path.exists(frontend_path):
         with open(frontend_path, "r", encoding="utf-8") as f:
             return f.read()

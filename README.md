@@ -1,5 +1,9 @@
 # ⚡ RazorRevive-OS: AI Revenue Recovery & Smart Mandate Control Plane
 
+<div align="center">
+  <img src="docs/images/hero.jpg" alt="RazorRevive-OS Hero Banner" width="850">
+</div>
+
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg?style=flat-square)](https://github.com/Samrudh2006/Razorpay-Target-0.1percent-)
 [![Tests](https://img.shields.io/badge/tests-46%20passed%20%7C%20100%25-success.svg?style=flat-square)](https://github.com/Samrudh2006/Razorpay-Target-0.1percent-)
 [![Track](https://img.shields.io/badge/Razorpay_Track-03_Revenue_Recovery-0a58ca.svg?style=flat-square)](https://razorpay.com/buildathon/)
