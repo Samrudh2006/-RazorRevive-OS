@@ -1,0 +1,62 @@
+import pytest
+from backend.app.diagnostic_engine import DiagnosticEngine
+from backend.app.recovery_optimizer import RecoveryHazardOptimizer
+from backend.app.gateways.razorpay_adapter import RazorpayTestAdapter
+
+def test_diagnostic_engine_classifications():
+    # 1. Gateway Error Classification
+    d1 = DiagnosticEngine.diagnose(
+        payment_id="pay_diag_01",
+        amount=2499.0,
+        error_code="GATEWAY_ERROR",
+        error_description="Bank gateway timeout"
+    )
+    assert d1.failure_class == "TRANSIENT_GATEWAY"
+    assert d1.recommended_strategy == "DELAYED_RETRY"
+    assert d1.confidence >= 0.90
+
+    # 2. Insufficient Funds Classification
+    d2 = DiagnosticEngine.diagnose(
+        payment_id="pay_diag_02",
+        amount=999.0,
+        error_code="INSUFFICIENT_FUNDS",
+        error_description="Low balance"
+    )
+    assert d2.failure_class == "INSUFFICIENT_FUNDS"
+    assert d2.recommended_strategy == "DISPATCH_PAYMENT_LINK"
+
+    # 3. Suspicious Velocity Anomaly
+    d3 = DiagnosticEngine.diagnose(
+        payment_id="pay_diag_03",
+        amount=85000.0,
+        error_code="SUSPICIOUS_VELOCITY",
+        error_description="Card testing pattern"
+    )
+    assert d3.failure_class == "SUSPICIOUS_VELOCITY"
+    assert d3.recommended_strategy == "ESCALATE_HUMAN"
+    assert d3.requires_human is True
+
+def test_recovery_hazard_calculations():
+    # Test hazard peak selection for HDFC node
+    rec = RecoveryHazardOptimizer.select_optimal_retry_window(
+        failure_class="TRANSIENT_GATEWAY",
+        attempt_number=1,
+        bank_issuer="HDFC"
+    )
+    assert rec.recommended_retry_delay_minutes in [30, 45, 60]
+    assert rec.success_probability > 0.70
+    assert rec.model_version == "recovery-hazard-v1"
+
+def test_gateway_adapter_payment_link():
+    adapter = RazorpayTestAdapter()
+    res = adapter.create_recovery_link(
+        payment_id="pay_unit_test",
+        amount=2499.0,
+        customer_name="Test Customer",
+        customer_email="test@example.com",
+        customer_phone="+919876543210",
+        discount_amount=100.0
+    )
+    assert res["success"] is True
+    assert res["final_amount"] == 2399.0
+    assert "https://" in res["short_url"]

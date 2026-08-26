@@ -1,30 +1,37 @@
-import os
-from pydantic_settings import BaseSettings
-from pydantic import Field
+from pydantic_settings import BaseSettings, SettingsConfigDict
+from typing import Optional
 
 class Settings(BaseSettings):
-    RAZORPAY_KEY_ID: str = Field(default="rzp_test_mock123456789")
-    RAZORPAY_KEY_SECRET: str = Field(default="mock_razorpay_secret_key")
-    RAZORPAY_WEBHOOK_SECRET: str = Field(default="whsec_mock_razorpay_webhook_secret")
-    
-    GEMINI_API_KEY: str = Field(default="mock_gemini_api_key")
-    LLM_MODEL: str = Field(default="gemini-1.5-flash")
-    
-    ENVIRONMENT: str = Field(default="development")
-    PORT: int = Field(default=8000)
-    DATABASE_PATH: str = Field(default="recovery_audit.db")
-    
-    # Financial & Compliance Boundaries
-    ENABLE_TRAI_COMPLIANCE: bool = Field(default=True)
-    MAX_RETRY_ATTEMPTS: int = Field(default=3)
-    MAX_DISCOUNT_PERCENT: float = Field(default=10.0)
-    MAX_DISCOUNT_AMOUNT_INR: float = Field(default=500.0)
-    HIGH_VALUE_THRESHOLD_INR: float = Field(default=50000.0)
-    MIN_CONFIDENCE_THRESHOLD: float = Field(default=0.60)
-    HIGH_VALUE_CONFIDENCE_THRESHOLD: float = Field(default=0.85)
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+        extra="ignore"
+    )
 
-    class Config:
-        env_file = ".env"
-        extra = "ignore"
+    APP_NAME: str = "RazorRevive-OS"
+    ENVIRONMENT: str = "sandbox"
+    DEBUG: bool = True
+    DATABASE_PATH: str = "recovery_audit.db"
+    
+    # Razorpay API Credentials
+    RAZORPAY_KEY_ID: str = "rzp_test_mock12345"
+    RAZORPAY_KEY_SECRET: str = "mock_secret_key_12345"
+    RAZORPAY_WEBHOOK_SECRET: str = "whsec_mock_signature_test"
+
+    # LLM / Gemini Credentials
+    GEMINI_API_KEY: Optional[str] = None
+    
+    # Financial & Compliance Guardrail Boundaries
+    MAX_RETRY_ATTEMPTS: int = 3
+    MAX_DISCOUNT_PERCENT: float = 10.0
+    MAX_DISCOUNT_AMOUNT_INR: float = 500.0
+    HIGH_VALUE_THRESHOLD_INR: float = 50000.0
+    HIGH_VALUE_CONFIDENCE_THRESHOLD: float = 0.85
+    MIN_CONFIDENCE_THRESHOLD: float = 0.60
+    
+    # TRAI Quiet-Hours Enforcement
+    ENABLE_TRAI_COMPLIANCE: bool = True
+    TRAI_QUIET_START_HOUR_IST: int = 21 # 9:00 PM IST
+    TRAI_QUIET_END_HOUR_IST: int = 9   # 9:00 AM IST
 
 settings = Settings()

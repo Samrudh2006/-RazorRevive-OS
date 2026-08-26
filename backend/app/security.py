@@ -1,101 +1,140 @@
 import hmac
 import hashlib
-import sqlite3
 import time
-import os
-from typing import Optional
+import sqlite3
+import re
+import threading
+import logging
+from typing import Optional, Dict, Any
 from backend.app.config import settings
 
-def verify_razorpay_signature(raw_body: bytes, signature: Optional[str], secret: Optional[str] = None) -> bool:
+logger = logging.getLogger("RazorRevive.Security")
+
+# Thread-local storage for SQLite connections in WAL mode
+_local = threading.local()
+
+def get_db_connection(db_path: str) -> sqlite3.Connection:
+    if not hasattr(_local, f"conn_{db_path}"):
+        conn = sqlite3.connect(db_path, check_same_thread=False, timeout=10.0)
+        conn.execute("PRAGMA journal_mode = WAL;")
+        conn.execute("PRAGMA synchronous = NORMAL;")
+        setattr(_local, f"conn_{db_path}", conn)
+    return getattr(_local, f"conn_{db_path}")
+
+def mask_pii_string(value: Optional[str]) -> str:
     """
-    Cryptographically validates incoming Razorpay webhook payload against merchant secret using HMAC SHA-256.
+    DPDP Act 2023 & PCI-DSS Compliance: Masks Personally Identifiable Information (PII).
+    Masks Phone: +919876543210 -> +9198******10
+    Masks Email: customer@example.com -> c******r@example.com
+    """
+    if not value:
+        return "N/A"
+    
+    # Check if Email
+    if "@" in value:
+        parts = value.split("@")
+        name, domain = parts[0], parts[1]
+        if len(name) <= 2:
+            masked_name = name[0] + "*"
+        else:
+            masked_name = name[0] + "*" * (len(name) - 2) + name[-1]
+        return f"{masked_name}@{domain}"
+    
+    # Check if Phone (10-13 digits)
+    clean_digits = re.sub(r"[^\d+]", "", value)
+    if len(clean_digits) >= 10:
+        return clean_digits[:4] + "*" * (len(clean_digits) - 6) + clean_digits[-2:]
+    
+    return value[:2] + "****"
+
+def verify_razorpay_signature(
+    raw_payload: bytes,
+    signature: Optional[str],
+    secret: Optional[str] = None,
+    timestamp: Optional[int] = None,
+    max_drift_seconds: int = 300
+) -> bool:
+    """
+    Timing-Attack Resistant HMAC SHA-256 Webhook Signature Verification.
+    Includes replay-attack timestamp drift protection.
     """
     if not signature:
+        logger.warning("[SECURITY] Missing X-Razorpay-Signature header.")
         return False
-        
+
+    # Replay attack protection (within 300s window if timestamp provided)
+    if timestamp:
+        current_time = int(time.time())
+        if abs(current_time - timestamp) > max_drift_seconds:
+            logger.warning(f"[SECURITY] Webhook timestamp drifted by {abs(current_time - timestamp)}s > {max_drift_seconds}s. Rejecting replay.")
+            return False
+
     webhook_secret = secret or settings.RAZORPAY_WEBHOOK_SECRET
     if not webhook_secret:
+        logger.error("[SECURITY] RAZORPAY_WEBHOOK_SECRET is not configured.")
         return False
-        
+
     expected_signature = hmac.new(
         key=webhook_secret.encode("utf-8"),
-        msg=raw_body,
+        msg=raw_payload,
         digestmod=hashlib.sha256
     ).hexdigest()
-    
-    return hmac.compare_digest(expected_signature, signature)
+
+    # hmac.compare_digest prevents side-channel timing analysis attacks
+    is_valid = hmac.compare_digest(expected_signature, signature)
+    if not is_valid:
+        logger.warning("[SECURITY] Cryptographic signature mismatch.")
+    return is_valid
 
 class DistributedIdempotencyStore:
     """
-    Thread-safe atomic distributed mutex store using SQLite WAL-mode.
-    Prevents race conditions and double-charges when payment gateways replay webhooks.
+    Atomic Distributed Mutex Lock (SQLite WAL-backed).
+    Guarantees strict once-and-only-once execution per (merchant_id + payment_id).
     """
+
     def __init__(self, db_path: Optional[str] = None):
         self.db_path = db_path or settings.DATABASE_PATH
         self._init_db()
 
-    def _get_connection(self) -> sqlite3.Connection:
-        conn = sqlite3.connect(self.db_path, timeout=10.0, check_same_thread=False)
-        conn.execute("PRAGMA journal_mode = WAL;")
-        conn.execute("PRAGMA synchronous = NORMAL;")
-        return conn
-
     def _init_db(self):
-        with self._get_connection() as conn:
+        conn = get_db_connection(self.db_path)
+        with conn:
             conn.execute("""
                 CREATE TABLE IF NOT EXISTS idempotency_keys (
-                    key TEXT PRIMARY KEY,
+                    idempotency_key TEXT PRIMARY KEY,
+                    payload_hash TEXT NOT NULL,
                     created_at REAL NOT NULL,
-                    status TEXT NOT NULL,
-                    payload_hash TEXT
-                );
+                    status TEXT NOT NULL
+                )
             """)
+            conn.execute("CREATE INDEX IF NOT EXISTS idx_idem_time ON idempotency_keys (created_at)")
 
-    def acquire_lock(self, key: str, payload_hash: Optional[str] = None, ttl_seconds: int = 3600) -> bool:
+    def acquire_lock(self, key: str, payload_hash: str = "", ttl_seconds: int = 86400) -> bool:
         """
-        Attempts to atomically acquire an execution lock for a unique key (e.g. merchant_id + payment_id).
-        Returns True if lock acquired (first time), False if duplicate/locked.
+        Atomic CAS (Compare-And-Swap) lock acquisition.
+        Returns True if lock was freshly acquired; False if duplicate delivery.
         """
+        conn = get_db_connection(self.db_path)
         now = time.time()
-        conn = self._get_connection()
         try:
             with conn:
                 conn.execute(
-                    "INSERT INTO idempotency_keys (key, created_at, status, payload_hash) VALUES (?, ?, ?, ?)",
-                    (key, now, "LOCKED", payload_hash)
+                    "INSERT INTO idempotency_keys (idempotency_key, payload_hash, created_at, status) VALUES (?, ?, ?, ?)",
+                    (key, payload_hash, now, "ACQUIRED")
                 )
-                return True
+            return True
         except sqlite3.IntegrityError:
-            # Key exists: check if expired
-            cursor = conn.execute("SELECT created_at, status FROM idempotency_keys WHERE key = ?", (key,))
+            # Key already exists: check if lock has expired past TTL
+            cursor = conn.cursor()
+            cursor.execute("SELECT created_at FROM idempotency_keys WHERE idempotency_key = ?", (key,))
             row = cursor.fetchone()
-            if row:
-                created_at, status = row
-                if (now - created_at) > ttl_seconds:
-                    with conn:
-                        conn.execute(
-                            "UPDATE idempotency_keys SET created_at = ?, status = ?, payload_hash = ? WHERE key = ?",
-                            (now, "LOCKED", payload_hash, key)
-                        )
-                    return True
+            if row and (now - row[0]) > ttl_seconds:
+                with conn:
+                    conn.execute(
+                        "UPDATE idempotency_keys SET created_at = ?, payload_hash = ?, status = 'RENEWED' WHERE idempotency_key = ?",
+                        (now, payload_hash, key)
+                    )
+                return True
             return False
-        finally:
-            conn.close()
-
-    def release_lock(self, key: str, status: str = "COMPLETED"):
-        conn = self._get_connection()
-        try:
-            with conn:
-                conn.execute("UPDATE idempotency_keys SET status = ? WHERE key = ?", (status, key))
-        finally:
-            conn.close()
-
-    def clear(self):
-        conn = self._get_connection()
-        try:
-            with conn:
-                conn.execute("DELETE FROM idempotency_keys")
-        finally:
-            conn.close()
 
 idempotency_store = DistributedIdempotencyStore()
