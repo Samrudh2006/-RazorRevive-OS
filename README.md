@@ -70,8 +70,11 @@ In mission-critical fintech systems, probabilistic Large Language Models must **
 **RazorRevive-OS** is an autonomous **AI Revenue Recovery Control Plane** engineered with defense-in-depth boundaries:
 1. **AI Proposes:** The diagnostic engine outputs typed, schema-validated proposals (`DiagnosisProposal`, `MutationProposal`).
 2. **Deterministic Policy Controls:** Tier 3 policy gatekeeper unconditionally clamps discounts ($\min(10\%, ₹500)$), blocks communications during TRAI quiet hours (21:00–09:00 IST), limits retries to $\le 3$, and escalates high-value transactions ($> ₹50,000$ & confidence $< 0.85$) to Human CFO queues.
-3. **Gateway Adapters Execute:** A clean `PaymentGateway` interface executes financial operations only upon policy approval.
-4. **Cryptographic Audit Verifies:** Every decision is recorded into an immutable, SHA-256 hash-chained ledger ($\text{hash}_n = \text{SHA256}(\text{hash}_{n-1} + \text{canonical\_event}_n)$) with zero-trust tamper verification.
+3. **Gateway Adapters Execute:** A clean `PaymentGateway` interface executes financial operations only upon policy approval and idempotency authorization.
+4. **Cryptographic Audit Verifies:** Every decision is recorded into an immutable, SHA-256 hash-chained ledger ($\text{hash}_n = \text{SHA256}(\text{hash}_{n-1} + \text{canonical\_event}_n)$), providing **tamper-evident audit integrity** where modifying a committed event breaks chain verification.
+
+> **Production Validation Scope:**  
+> *RazorRevive-OS has validated production-readiness characteristics across security threat models, reliability, concurrency storms, AI safety boundaries, failure recovery, API contracts, performance, and end-to-end lifecycles. Actual live enterprise production deployment would additionally incorporate cloud secrets rotation, VPC peering, multi-region replication, and external network dependency load testing.*
 
 ---
 
