@@ -1099,22 +1099,22 @@
         </div>
       </div>
 
-      <div class="p-3 rounded-lg bg-[#050c1b] border border-[#142442] grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+      <div class="p-3 rounded-lg bg-[#050c1b] border border-[#142442] grid grid-cols-2 lg:grid-cols-4 gap-2.5 text-xs">
         <div>
           <div class="text-[10px] text-slate-400 font-medium">AI Recommended Action</div>
-          <div class="font-bold text-white truncate text-[11px]" id="res-rec-action">Poisson-Window Mandate Retry</div>
+          <div class="font-bold text-white text-[11px] leading-snug" id="res-rec-action">Poisson Mandate Retry</div>
         </div>
         <div>
           <div class="text-[10px] text-slate-400 font-medium">Recommended Retry At</div>
-          <div class="font-bold text-[#10b981] mono text-[11px]" id="res-retry-at">11:00:24 AM (in 45m)</div>
+          <div class="font-bold text-[#10b981] mono text-[11px] leading-snug" id="res-retry-at">11:00:24 AM (+45m)</div>
         </div>
         <div>
           <div class="text-[10px] text-slate-400 font-medium">Success Probability</div>
-          <div class="font-bold text-[#06b6d4] mono text-[11px]" id="res-success-prob">82.6%</div>
+          <div class="font-bold text-[#06b6d4] mono text-[11px] leading-snug" id="res-success-prob">82.6%</div>
         </div>
         <div>
           <div class="text-[10px] text-slate-400 font-medium">Max Attempts</div>
-          <div class="font-bold text-white mono text-[11px]" id="res-max-attempts">3 / 3</div>
+          <div class="font-bold text-white mono text-[11px] leading-snug" id="res-max-attempts">3 / 3</div>
         </div>
       </div>
 
@@ -1146,16 +1146,16 @@
           <label class="block text-[11px] text-slate-400 font-medium mb-1">Select Customer Objection / Speech (Hinglish/English)</label>
           <select id="voice-speech-select" class="w-full bg-[#050c1b] border border-[#142442] rounded-lg px-3 py-2 text-xs text-slate-200 mono outline-none focus:border-purple-500">
             <option value="Invoice mein hamara GST galat hai, correct GSTIN 29AABCU9603R1Z2 daal kar bhejo">
-              "Invoice mein hamara GST galat hai, correct GSTIN 29AABCU9603R1Z2 daal kar bhejo"
+              "Invoice mein GST galat hai, correct GSTIN 29AABCU9603R1Z2 daal kar bhejiye"
             </option>
             <option value="Haanji, accountant Friday ko aayega aur funds clear ho jayega 11 baje.">
-              "We will pay this Friday at 11 AM."
+              "Accountant Friday 11:00 AM ko aayega aur payment clear ho jayegi (PTP Lock)"
             </option>
             <option value="PO number is incorrect in the current tax invoice.">
-              "PO number is incorrect."
+              "PO number is incorrect in current tax invoice"
             </option>
             <option value="Ye product bilkul kharaab tha, hum payment nahi denge aur lawyer se baat karenge.">
-              "We cannot pay due to product defect, talking to legal."
+              "Commercial dispute on product quality, escalating to legal"
             </option>
           </select>
         </div>
