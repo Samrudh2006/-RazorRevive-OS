@@ -1,11 +1,11 @@
 {
   "matrix_title": "RazorRevive-OS 10-Layer Production Readiness Verification Matrix",
-  "timestamp_utc": "2026-08-26T07:49:13Z",
-  "total_assertions_executed": 41,
-  "passed_assertions": 41,
+  "timestamp_utc": "2026-08-26T07:53:33Z",
+  "total_assertions_executed": 42,
+  "passed_assertions": 42,
   "failed_assertions": 0,
   "pass_rate_pct": 100.0,
-  "total_execution_time_ms": 1518.79,
+  "total_execution_time_ms": 1079.35,
   "layers": {
     "Layer 1 \u2014 Unit & Invariants": {
       "layer_title": "Layer 1 \u2014 Unit & Invariants",
@@ -20,7 +20,7 @@
           "actual": "500.00",
           "status": "PASS",
           "evidence": "Clamped \u20b942,500 proposed discount to \u20b9500 cap",
-          "latency_ms": 0.038
+          "latency_ms": 0.059
         },
         {
           "id": "UNIT-HMAC-02",
@@ -29,7 +29,7 @@
           "actual": "True",
           "status": "PASS",
           "evidence": "Constant-time HMAC SHA-256 match confirmed",
-          "latency_ms": 0.165
+          "latency_ms": 0.253
         },
         {
           "id": "UNIT-REPLAY-03",
@@ -38,7 +38,7 @@
           "actual": "False",
           "status": "PASS",
           "evidence": "Drift of 400s > 300s boundary rejected",
-          "latency_ms": 0.269
+          "latency_ms": 0.439
         },
         {
           "id": "UNIT-FSM-04",
@@ -47,7 +47,7 @@
           "actual": "CONTACT_PENDING",
           "status": "PASS",
           "evidence": "State OVERDUE -> CONTACT_PENDING authorized",
-          "latency_ms": 0.13
+          "latency_ms": 0.208
         },
         {
           "id": "UNIT-HAZARD-05",
@@ -56,7 +56,7 @@
           "actual": "45",
           "status": "PASS",
           "evidence": "HDFC peak hazard peak at +45m",
-          "latency_ms": 0.085
+          "latency_ms": 0.206
         },
         {
           "id": "UNIT-PII-06",
@@ -65,7 +65,7 @@
           "actual": "+919*******10",
           "status": "PASS",
           "evidence": "Customer phone masked to +919*******10",
-          "latency_ms": 0.152
+          "latency_ms": 0.313
         },
         {
           "id": "UNIT-AUDIT-07",
@@ -73,8 +73,8 @@
           "expected": "64-char hex",
           "actual": "64",
           "status": "PASS",
-          "evidence": "Hash: 2119bb4e4681709e...",
-          "latency_ms": 1.003
+          "evidence": "Hash: 543ae210b4ccd8f5...",
+          "latency_ms": 1.34
         }
       ]
     },
@@ -88,10 +88,10 @@
           "id": "INT-FLOW-01",
           "description": "Diagnostic -> Policy -> Gateway -> Audit Pipeline",
           "expected": "ALLOWED & Hash Link",
-          "actual": "ALLOWED & evt_26131fcf02f5",
+          "actual": "ALLOWED & evt_c24a4f9566bb",
           "status": "PASS",
-          "evidence": "End-to-end integration committed block evt_26131fcf02f5",
-          "latency_ms": 0.942
+          "evidence": "End-to-end integration committed block evt_c24a4f9566bb",
+          "latency_ms": 1.353
         },
         {
           "id": "INT-PTP-DB-02",
@@ -100,7 +100,7 @@
           "actual": "PROMISED & True",
           "status": "PASS",
           "evidence": "PTP commitment stored in SQLite and queried with active lock=True",
-          "latency_ms": 0.676
+          "latency_ms": 0.883
         },
         {
           "id": "INT-WAL-03",
@@ -109,7 +109,7 @@
           "actual": "WAL",
           "status": "PASS",
           "evidence": "SQLite verified operating in PRAGMA journal_mode=WAL",
-          "latency_ms": 0.026
+          "latency_ms": 0.041
         }
       ]
     },
@@ -126,7 +126,7 @@
           "actual": "Acquired: 1, Dropped: 49",
           "status": "PASS",
           "evidence": "Atomic CAS mutex strictly granted 1 execution and dropped 49 race collisions (0 double charges)",
-          "latency_ms": 1352.425
+          "latency_ms": 976.871
         },
         {
           "id": "CONC-FSM-02",
@@ -135,7 +135,7 @@
           "actual": "20 / 20 CONTACT_PENDING",
           "status": "PASS",
           "evidence": "Thread-safe multi-invoice state machine updates with zero deadlocks",
-          "latency_ms": 12.2
+          "latency_ms": 10.373
         },
         {
           "id": "CONC-CRASH-03",
@@ -144,14 +144,14 @@
           "actual": "Re-acquired=True",
           "status": "PASS",
           "evidence": "Initial lock: ACQUIRED | Worker termination: SIMULATED | TTL expiration: DETECTED | Lock reclaimed: TRUE | Second execution: ALLOWED | Duplicate execution: FALSE | State corruption: FALSE",
-          "latency_ms": 42.962
+          "latency_ms": 1.06
         }
       ]
     },
     "Layer 4 \u2014 Failure Injection & Fault Tolerance": {
       "layer_title": "Layer 4 \u2014 Failure Injection & Fault Tolerance",
-      "assertions_count": 5,
-      "passed": 5,
+      "assertions_count": 6,
+      "passed": 6,
       "failed": 0,
       "assertions": [
         {
@@ -161,7 +161,7 @@
           "actual": "TRANSIENT_GATEWAY & DELAYED_RETRY",
           "status": "PASS",
           "evidence": "Transient gateway failure correctly diagnosed without unhandled exception",
-          "latency_ms": 0.12
+          "latency_ms": 0.075
         },
         {
           "id": "FAIL-MALFORM-02",
@@ -170,7 +170,7 @@
           "actual": "Caught=True",
           "status": "PASS",
           "evidence": "Malformed input isolated and rejected with HTTP 400 Bad Request",
-          "latency_ms": 0.104
+          "latency_ms": 0.09
         },
         {
           "id": "FAIL-FSM-03",
@@ -179,7 +179,7 @@
           "actual": "Caught=True",
           "status": "PASS",
           "evidence": "Illegal state transition blocked by transition table guard",
-          "latency_ms": 0.444
+          "latency_ms": 0.346
         },
         {
           "id": "FAIL-FRAUD-04",
@@ -188,7 +188,7 @@
           "actual": "SUSPICIOUS_VELOCITY & ESCALATE_HUMAN",
           "status": "PASS",
           "evidence": "Automated outreach suppressed and escalated to human fraud investigation",
-          "latency_ms": 0.07
+          "latency_ms": 0.081
         },
         {
           "id": "FAIL-POST-GW-CRASH-05",
@@ -197,7 +197,16 @@
           "actual": "L1=True, Redelivery=False",
           "status": "PASS",
           "evidence": "Gateway execution: 1 | Application crash: SIMULATED | Webhook redelivery: 1 | Redelivery Lock: False (DROPPED) | Financial execution: STILL 1 | Duplicate charge: 0 | Recovery state: CONSISTENT | Audit state: RECONCILED",
-          "latency_ms": 0.563
+          "latency_ms": 0.924
+        },
+        {
+          "id": "FAIL-POST-GW-CRASH-06",
+          "description": "Fault Injection: Lock Expiry + Post-Crash Redelivery (Durable Idempotency)",
+          "expected": "Durable Status=COMPLETED, Total Gateway Calls=1 (Zero Duplicate Charges)",
+          "actual": "Status=COMPLETED, Calls=1",
+          "status": "PASS",
+          "evidence": "Initial Gateway Executions: 1 | Application Crash: TRUE | Lock Expired: TRUE | Redelivery: TRUE | New Worker Lock Acquired: False | Durable Execution Found: COMPLETED | Second Gateway Invocation: 0 | Total Gateway Executions: 1 | Duplicate Financial Execution: 0 | Final State: CONSISTENT | Audit Reconciled: TRUE",
+          "latency_ms": 1.029
         }
       ]
     },
@@ -214,7 +223,7 @@
           "actual": "False",
           "status": "PASS",
           "evidence": "Forged signature rejected via constant-time comparison",
-          "latency_ms": 0.22
+          "latency_ms": 0.236
         },
         {
           "id": "SEC-REPLAY-02",
@@ -223,7 +232,7 @@
           "actual": "False",
           "status": "PASS",
           "evidence": "Expired webhook rejected due to timestamp skew > 300s",
-          "latency_ms": 0.139
+          "latency_ms": 0.135
         },
         {
           "id": "SEC-SQLI-03",
@@ -232,7 +241,7 @@
           "actual": "Stored: inv_01' OR '1'=...",
           "status": "PASS",
           "evidence": "Parameterized SQLite queries neutralized SQL injection payload",
-          "latency_ms": 0.601
+          "latency_ms": 0.665
         },
         {
           "id": "SEC-XSS-04",
@@ -241,7 +250,7 @@
           "actual": "+919*******10",
           "status": "PASS",
           "evidence": "XSS string safely stripped/masked in PII pipeline",
-          "latency_ms": 0.061
+          "latency_ms": 0.046
         },
         {
           "id": "SEC-SECRETS-05",
@@ -250,7 +259,7 @@
           "actual": "SecretPresent=True",
           "status": "PASS",
           "evidence": "Secrets loaded via Pydantic Settings env loader",
-          "latency_ms": 0.004
+          "latency_ms": 0.003
         }
       ]
     },
@@ -267,7 +276,7 @@
           "actual": "0.00",
           "status": "PASS",
           "evidence": "Negative discount proposal clamped safely to 0.00 INR",
-          "latency_ms": 0.009
+          "latency_ms": 0.007
         },
         {
           "id": "AI-SAFE-DISC-02",
@@ -276,7 +285,7 @@
           "actual": "500.00",
           "status": "PASS",
           "evidence": "Clamped \u20b942,500 hallucination to max allowable cap of \u20b9500.00 INR",
-          "latency_ms": 0.005
+          "latency_ms": 0.004
         },
         {
           "id": "AI-SAFE-EPSILON-03",
@@ -303,7 +312,7 @@
           "actual": "Intent: GENERAL_INQUIRY, Mutated: False",
           "status": "PASS",
           "evidence": "Prompt injection contained; zero unauthorized balance write executed",
-          "latency_ms": 0.765
+          "latency_ms": 0.751
         }
       ]
     },
@@ -320,7 +329,7 @@
           "actual": "Rejected=True",
           "status": "PASS",
           "evidence": "Pydantic Field(gt=0.0) strictly rejected negative transaction amount",
-          "latency_ms": 0.087
+          "latency_ms": 0.118
         },
         {
           "id": "API-ENVELOPE-02",
@@ -338,7 +347,7 @@
           "actual": "Returned: 10 events",
           "status": "PASS",
           "evidence": "Query returned 10 paginated cryptographic ledger events",
-          "latency_ms": 1.1
+          "latency_ms": 1.078
         }
       ]
     },
@@ -355,7 +364,7 @@
           "actual": "SUPPRESSED",
           "status": "PASS",
           "evidence": "Attempt 4 suppressed to prevent infinite retry loops and bank blacklisting",
-          "latency_ms": 0.064
+          "latency_ms": 0.061
         },
         {
           "id": "REL-TRAI-DEFER-02",
@@ -364,16 +373,16 @@
           "actual": "DEFERRED_QUIET_HOURS",
           "status": "PASS",
           "evidence": "Late-night outreach scheduled for next legal 09:05 AM IST window",
-          "latency_ms": 0.159
+          "latency_ms": 0.224
         },
         {
           "id": "REL-AUDIT-VERIFY-03",
           "description": "Reliability: Cryptographic Ledger Genesis-to-Head Scan",
           "expected": "valid=True, zero breaks",
-          "actual": "valid=True, total=188",
+          "actual": "valid=True, total=245",
           "status": "PASS",
-          "evidence": "Full cryptographic scan verified 188 sequential blocks",
-          "latency_ms": 17.749
+          "evidence": "Full cryptographic scan verified 245 sequential blocks",
+          "latency_ms": 19.435
         }
       ]
     },
@@ -387,19 +396,19 @@
           "id": "PERF-DECISION-PATH-01",
           "description": "Isolated Diagnostic + Policy Path (p50 / p95 / p99)",
           "expected": "p50 < 0.15ms, p99 < 0.80ms",
-          "actual": "p50: 0.042ms, p95: 0.065ms, p99: 0.171ms",
+          "actual": "p50: 0.024ms, p95: 0.045ms, p99: 0.117ms",
           "status": "PASS",
-          "evidence": "Measured isolated decision path throughput: 23,880 ops/sec",
-          "latency_ms": 0.042
+          "evidence": "Measured isolated decision path throughput: 37,660 ops/sec",
+          "latency_ms": 0.024
         },
         {
           "id": "PERF-FULL-E2E-02",
           "description": "Full E2E Transaction Path (Ingest -> Lock -> Policy -> DB Audit)",
           "expected": "p50 < 3.0ms, p95 < 10.0ms, p99 < 50.0ms",
-          "actual": "p50: 0.866ms, p95: 1.585ms, p99: 1.954ms",
+          "actual": "p50: 0.648ms, p95: 0.953ms, p99: 1.143ms",
           "status": "PASS",
-          "evidence": "Measured complete E2E transaction throughput: 1,012 tx/sec (p95: 1.585ms, p99: 1.954ms)",
-          "latency_ms": 0.866
+          "evidence": "Measured complete E2E transaction throughput: 1,465 tx/sec (p95: 0.953ms, p99: 1.143ms)",
+          "latency_ms": 0.648
         }
       ]
     },
@@ -413,10 +422,10 @@
           "id": "E2E-FAST-LOOP-01",
           "description": "Scenario A: Fast Loop Transient Gateway Recovery",
           "expected": "Weibull +45m Retry & Audit Hash Committed",
-          "actual": "Delay: 45m, Hash: 4183b44adf33...",
+          "actual": "Delay: 45m, Hash: dc952633090e...",
           "status": "PASS",
           "evidence": "Complete Fast Loop executed: 504 -> Diagnose -> Policy ALLOWED -> +45m retry -> SHA256 Block",
-          "latency_ms": 1.189
+          "latency_ms": 0.56
         },
         {
           "id": "E2E-DEEP-VOICE-02",
@@ -425,7 +434,7 @@
           "actual": "T1: GST_DISPUTE_RESOLUTION, T2: PROMISE_TO_PAY_COMMITMENT (PTP: True)",
           "status": "PASS",
           "evidence": "Complete Deep Loop executed: Turn 1 GST Mutation -> Turn 2 PTP Registration -> Reminders Suppressed",
-          "latency_ms": 0.764
+          "latency_ms": 0.762
         },
         {
           "id": "E2E-MUTEX-DUP-03",
@@ -434,7 +443,7 @@
           "actual": "D1=True, D2=False",
           "status": "PASS",
           "evidence": "Distributed CAS mutex safely processed initial webhook and ignored duplicate arrival",
-          "latency_ms": 0.312
+          "latency_ms": 0.465
         },
         {
           "id": "E2E-CFO-ESCALATE-04",
@@ -443,16 +452,16 @@
           "actual": "ESCALATED_HUMAN",
           "status": "PASS",
           "evidence": "Transaction > \u20b950k with confidence 0.70 < 0.85 safely rerouted to Human Review Queue",
-          "latency_ms": 0.126
+          "latency_ms": 0.227
         },
         {
           "id": "E2E-AUDIT-PROOF-05",
           "description": "Scenario E: Cryptographic Non-Repudiation Certificate",
           "expected": "valid=True, Genesis-to-Head Chain Intact",
-          "actual": "valid=True, blocks=239",
+          "actual": "valid=True, blocks=296",
           "status": "PASS",
           "evidence": "Mathematical SHA-256 hash continuity verified across all committed events",
-          "latency_ms": 27.566
+          "latency_ms": 19.744
         }
       ]
     }

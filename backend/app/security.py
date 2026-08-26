@@ -1,6 +1,7 @@
 import hmac
 import hashlib
 import time
+import json
 import sqlite3
 import re
 import threading
@@ -88,8 +89,12 @@ def verify_razorpay_signature(
 
 class DistributedIdempotencyStore:
     """
-    Atomic Distributed Mutex Lock (SQLite WAL-backed).
+    Atomic Distributed Mutex Lock & Durable Execution Store (SQLite WAL-backed).
     Guarantees strict once-and-only-once execution per (merchant_id + payment_id).
+    
+    Protects against both:
+    1. Concurrent execution (via atomic CAS lock / lease).
+    2. Repeated execution across process crashes (via durable execution state).
     """
 
     def __init__(self, db_path: Optional[str] = None):
@@ -104,15 +109,28 @@ class DistributedIdempotencyStore:
                     idempotency_key TEXT PRIMARY KEY,
                     payload_hash TEXT NOT NULL,
                     created_at REAL NOT NULL,
-                    status TEXT NOT NULL
+                    status TEXT NOT NULL,
+                    result_payload TEXT,
+                    completed_at REAL
                 )
             """)
             conn.execute("CREATE INDEX IF NOT EXISTS idx_idem_time ON idempotency_keys (created_at)")
+            # Backward-compatible schema migration
+            cursor = conn.cursor()
+            cursor.execute("PRAGMA table_info(idempotency_keys);")
+            columns = [c[1] for c in cursor.fetchall()]
+            if "result_payload" not in columns:
+                conn.execute("ALTER TABLE idempotency_keys ADD COLUMN result_payload TEXT;")
+            if "completed_at" not in columns:
+                conn.execute("ALTER TABLE idempotency_keys ADD COLUMN completed_at REAL;")
 
     def acquire_lock(self, key: str, payload_hash: str = "", ttl_seconds: int = 86400) -> bool:
         """
-        Atomic CAS (Compare-And-Swap) lock acquisition.
-        Returns True if lock was freshly acquired; False if duplicate delivery.
+        Atomic CAS lock acquisition with durable completion awareness.
+        - If key does not exist: Inserts status='ACQUIRED' and returns True.
+        - If key exists and status='COMPLETED': Returns False (already durably executed; duplicate prevented).
+        - If key exists and status='ACQUIRED' but lease expired (> ttl_seconds): Renews lease and returns True.
+        - If key exists and status='ACQUIRED' with active lease: Returns False (concurrent collision dropped).
         """
         conn = get_db_connection(self.db_path)
         now = time.time()
@@ -124,17 +142,64 @@ class DistributedIdempotencyStore:
                 )
             return True
         except sqlite3.IntegrityError:
-            # Key already exists: check if lock has expired past TTL
             cursor = conn.cursor()
-            cursor.execute("SELECT created_at FROM idempotency_keys WHERE idempotency_key = ?", (key,))
+            cursor.execute("SELECT created_at, status FROM idempotency_keys WHERE idempotency_key = ?", (key,))
             row = cursor.fetchone()
-            if row and (now - row[0]) > ttl_seconds:
-                with conn:
-                    conn.execute(
-                        "UPDATE idempotency_keys SET created_at = ?, payload_hash = ?, status = 'RENEWED' WHERE idempotency_key = ?",
-                        (now, payload_hash, key)
-                    )
-                return True
+            if row:
+                created_at, status = row[0], row[1]
+                # If already durably completed, NEVER re-execute, regardless of elapsed time
+                if status == "COMPLETED":
+                    return False
+                # If lease expired without completion (simulated crash during processing), allow reclamation
+                if (now - created_at) > ttl_seconds:
+                    with conn:
+                        conn.execute(
+                            "UPDATE idempotency_keys SET created_at = ?, payload_hash = ?, status = 'RENEWED' WHERE idempotency_key = ?",
+                            (now, payload_hash, key)
+                        )
+                    return True
             return False
 
+    def mark_completed(self, key: str, result_payload: Optional[dict] = None) -> bool:
+        """
+        Marks an execution as durably completed.
+        Prevents any subsequent execution even after lease expiration.
+        """
+        conn = get_db_connection(self.db_path)
+        now = time.time()
+        result_json = json.dumps(result_payload) if result_payload else None
+        with conn:
+            conn.execute(
+                "UPDATE idempotency_keys SET status = 'COMPLETED', result_payload = ?, completed_at = ? WHERE idempotency_key = ?",
+                (result_json, now, key)
+            )
+        return True
+
+    def get_execution_record(self, key: str) -> Optional[dict]:
+        """
+        Retrieves the durable execution record for an idempotency key.
+        """
+        conn = get_db_connection(self.db_path)
+        cursor = conn.cursor()
+        cursor.execute("SELECT idempotency_key, payload_hash, created_at, status, result_payload, completed_at FROM idempotency_keys WHERE idempotency_key = ?", (key,))
+        row = cursor.fetchone()
+        if not row:
+            return None
+        return {
+            "idempotency_key": row[0],
+            "payload_hash": row[1],
+            "created_at": row[2],
+            "status": row[3],
+            "result_payload": json.loads(row[4]) if row[4] else None,
+            "completed_at": row[5]
+        }
+
+    def is_execution_completed(self, key: str) -> bool:
+        """
+        Checks if the action for this idempotency key was already completed.
+        """
+        rec = self.get_execution_record(key)
+        return rec is not None and rec.get("status") == "COMPLETED"
+
 idempotency_store = DistributedIdempotencyStore()
+
