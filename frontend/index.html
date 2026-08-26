@@ -1832,21 +1832,25 @@
 
     function selectScenario(type) {
       document.getElementById("scenarios-dropdown")?.classList.add("hidden");
-      switchNavTab('overview');
+      
       if (type === 'A') {
+        switchNavTab('overview');
         document.querySelectorAll("#fast-scenario-select").forEach(el => el.value = "GATEWAY_ERROR");
         document.querySelectorAll("#fast-amount").forEach(el => el.value = 2499);
         document.querySelectorAll("#fast-pay-id").forEach(el => el.value = "pay_9A12BC34DE");
         triggerFastLoopPipeline();
       } else if (type === 'B') {
+        switchNavTab('overview');
         document.querySelectorAll("#fast-scenario-select").forEach(el => el.value = "INSUFFICIENT_FUNDS");
         document.querySelectorAll("#fast-amount").forEach(el => el.value = 1499);
         document.querySelectorAll("#fast-pay-id").forEach(el => el.value = "pay_B2C_001");
         triggerFastLoopPipeline();
       } else if (type === 'C') {
+        switchNavTab('deep_loop');
         document.querySelectorAll("#voice-speech-select").forEach(el => el.selectedIndex = 0);
         triggerVoiceTurnAction();
       } else if (type === 'D') {
+        switchNavTab('deep_loop');
         document.querySelectorAll("#voice-speech-select").forEach(el => el.selectedIndex = 1);
         triggerVoiceTurnAction();
       } else if (type === 'E') {
