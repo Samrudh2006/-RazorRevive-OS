@@ -193,7 +193,19 @@ python cli.py simulate-attack --attack quiet-hours
 
 ---
 
-## 5. Repository Structure
+## 5. Visual Dashboard & Control Plane Preview
+
+<div align="center">
+  <p><b>Razorpay Native Light Theme (Default)</b></p>
+  <img src="docs/images/dashboard_light.png" alt="RazorRevive-OS Light Theme Dashboard" width="850">
+  <br><br>
+  <p><b>Fintech SRE Dark Theme</b></p>
+  <img src="docs/images/dashboard_dark.png" alt="RazorRevive-OS Dark Theme Dashboard" width="850">
+</div>
+
+---
+
+## 6. Repository Structure
 
 ```
 ├── .github/
@@ -245,19 +257,7 @@ python cli.py simulate-attack --attack quiet-hours
 
 ---
 
-## 5. Visual Dashboard & Control Plane Preview
-
-<div align="center">
-  <p><b>Razorpay Native Light Theme (Default)</b></p>
-  <img src="docs/images/dashboard_light.png" alt="RazorRevive-OS Light Theme Dashboard" width="850">
-  <br><br>
-  <p><b>Fintech SRE Dark Theme</b></p>
-  <img src="docs/images/dashboard_dark.png" alt="RazorRevive-OS Dark Theme Dashboard" width="850">
-</div>
-
----
-
-## 6. Quickstart & Local Execution
+## 7. Quickstart & Local Execution
 
 ### 1. Launch Control Plane Dashboard
 ```bash
@@ -287,7 +287,6 @@ run_benchmarks.bat
 python benchmarks/benchmark_runner.py
 ```
 
-
 ---
 
 ## 8. Application & Submission Package
@@ -301,3 +300,4 @@ python benchmarks/benchmark_runner.py
 
 ---
 *Built for the Razorpay AI Buildathon 2026.*
+
