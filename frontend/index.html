@@ -15,23 +15,23 @@
         extend: {
           colors: {
             brand: {
-              bg: '#040914',
-              card: '#081224',
-              cardBorder: '#12233f',
-              cardHover: '#0d1b33',
-              sidebar: '#050c1b',
-              accentBlue: '#2563eb',
-              accentCyan: '#06b6d4',
+              bg: '#090e17',
+              card: '#0f172a',
+              cardBorder: '#1e293b',
+              cardHover: '#172339',
+              sidebar: '#0b1120',
+              accentBlue: '#0c55ea',
+              accentCyan: '#0284c7',
               accentGreen: '#10b981',
-              accentPurple: '#8b5cf6',
-              accentAmber: '#f59e0b',
-              accentRed: '#ef4444',
+              accentPurple: '#7c3aed',
+              accentAmber: '#d97706',
+              accentRed: '#dc2626',
               muted: '#64748b',
               subtext: '#94a3b8'
             }
           },
           fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
             mono: ['"JetBrains Mono"', 'monospace']
           }
         }
@@ -40,35 +40,59 @@
   </script>
   <style>
     body {
-      background-color: #040914;
-      color: #f8fafc;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #090e17;
+      color: #f1f5f9;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       overflow-x: hidden;
     }
     .mono {
       font-family: 'JetBrains Mono', monospace;
     }
     .custom-card {
-      background-color: #081224;
-      border: 1px solid #142442;
-      border-radius: 0.75rem;
+      background-color: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 0.5rem;
     }
     .custom-card:hover {
-      border-color: #1c325c;
+      border-color: #334155;
     }
     .nav-btn-active {
-      background-color: #1d4ed8 !important;
+      background-color: #0c55ea !important;
       color: #ffffff !important;
       font-weight: 600 !important;
-      border: 1px solid rgba(147, 197, 253, 0.4) !important;
-      box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.35) !important;
+      border: 1px solid #2563eb !important;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.25) !important;
     }
     .nav-btn-inactive {
-      color: #cbd5e1;
+      color: #94a3b8;
       border: 1px solid transparent;
     }
     .nav-btn-inactive:hover {
-      background-color: #0a1730;
+      background-color: #172339;
+      color: #ffffff;
+    }
+    .btn-primary {
+      background-color: #0c55ea;
+      color: #ffffff;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+      transition: all 0.15s ease-in-out;
+    }
+    .btn-primary:hover {
+      background-color: #0a47c4;
+      border-color: rgba(59, 130, 246, 0.5);
+    }
+    .btn-primary:active {
+      background-color: #083ca8;
+    }
+    .btn-secondary {
+      background-color: #1e293b;
+      color: #e2e8f0;
+      border: 1px solid #334155;
+      transition: all 0.15s ease-in-out;
+    }
+    .btn-secondary:hover {
+      background-color: #334155;
       color: #ffffff;
     }
     .wave-bar {
@@ -79,25 +103,25 @@
       height: 5px;
     }
     ::-webkit-scrollbar-track {
-      background: #040914;
+      background: #090e17;
     }
     ::-webkit-scrollbar-thumb {
-      background: #162a4d;
+      background: #1e293b;
       border-radius: 3px;
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col antialiased selection:bg-blue-600 selection:text-white">
+<body class="min-h-screen flex flex-col antialiased selection:bg-[#0c55ea] selection:text-white">
 
   <!-- TOP APP HEADER -->
-  <header class="h-16 border-b border-[#142442] bg-[#050c1b] px-5 flex items-center justify-between sticky top-0 z-50">
+  <header class="h-16 border-b border-[#1e293b] bg-[#0b1120] px-5 flex items-center justify-between sticky top-0 z-50">
     
     <!-- LEFT LOGO & SUBTITLE -->
     <div class="flex items-center gap-3 cursor-pointer" onclick="switchNavTab('overview')">
-      <img src="/static/assets/logo.jpg" onerror="this.src='frontend/assets/logo.jpg'" alt="RazorRevive-OS Logo" class="w-10 h-10 rounded-lg object-cover shadow-lg shadow-blue-500/30 border border-blue-400/40">
+      <img src="/static/assets/logo.jpg" onerror="this.src='frontend/assets/logo.jpg'" alt="RazorRevive-OS Logo" class="w-10 h-10 rounded-lg object-cover border border-blue-500/30">
       <div>
         <div class="flex items-center gap-2">
-          <span class="text-lg font-bold text-white tracking-tight">RazorRevive<span class="text-[#06b6d4]">-OS</span></span>
+          <span class="text-lg font-bold text-white tracking-tight">RazorRevive<span class="text-[#0284c7]">-OS</span></span>
         </div>
         <div class="text-[11px] text-slate-400 font-medium leading-none mt-0.5">AI Revenue Recovery Control Plane</div>
       </div>
@@ -105,7 +129,7 @@
 
     <!-- CENTER EYEBROW & METADATA -->
     <div class="hidden md:flex flex-col items-center justify-center">
-      <div class="text-[11px] font-extrabold text-[#38bdf8] tracking-widest uppercase">
+      <div class="text-[11px] font-bold text-[#38bdf8] tracking-wider uppercase">
         RAZORPAY AI BUILDATHON • TRACK 03
       </div>
       <div class="text-[11px] text-slate-400 font-normal leading-tight mt-0.5">
@@ -117,8 +141,8 @@
     <div class="flex items-center gap-3">
       
       <!-- RUN 100-BATCH BENCHMARK BUTTON -->
-      <button onclick="runBenchmarkAction()" id="header-benchmark-btn" class="h-9 px-4 rounded-lg bg-gradient-to-r from-blue-600 to-[#0284c7] hover:from-blue-500 hover:to-[#0369a1] text-white text-xs font-semibold flex items-center gap-2 shadow-lg shadow-blue-600/25 transition-all">
-        <svg class="w-3.5 h-3.5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20">
+      <button onclick="runBenchmarkAction()" id="header-benchmark-btn" class="h-9 px-4 rounded-lg btn-primary text-xs font-semibold flex items-center gap-2">
+        <svg class="w-3.5 h-3.5 text-blue-200" fill="currentColor" viewBox="0 0 20 20">
           <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
         </svg>
         <span id="benchmark-btn-text">Run 100-Batch Benchmark</span>
@@ -126,7 +150,7 @@
 
       <!-- DEMO SCENARIOS DROPDOWN BUTTON -->
       <div class="relative">
-        <button onclick="toggleScenariosMenu()" id="scenarios-btn" class="h-9 px-3 rounded-lg bg-[#081427] hover:bg-[#0f2347] border border-[#1b345f] text-xs text-slate-200 font-medium flex items-center gap-1.5 transition-colors">
+        <button onclick="toggleScenariosMenu()" id="scenarios-btn" class="h-9 px-3 rounded-lg btn-secondary text-xs font-medium flex items-center gap-1.5">
           <span>Demo Scenarios</span>
           <svg class="w-3 h-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
@@ -134,24 +158,24 @@
         </button>
 
         <!-- Dropdown Menu -->
-        <div id="scenarios-dropdown" class="hidden absolute right-0 mt-2 w-72 bg-[#081224] border border-[#1b345f] rounded-xl shadow-2xl z-50 p-2 space-y-1">
-          <button onclick="selectScenario('A')" class="w-full text-left p-2 rounded-lg hover:bg-[#0d1d3a] transition text-xs">
+        <div id="scenarios-dropdown" class="hidden absolute right-0 mt-2 w-72 bg-[#0f172a] border border-[#1e293b] rounded-xl shadow-2xl z-50 p-2 space-y-1">
+          <button onclick="selectScenario('A')" class="w-full text-left p-2 rounded-lg hover:bg-[#172339] transition text-xs">
             <div class="font-bold text-sky-400 mono text-[11px]">Scenario A: Bank Outage 504</div>
             <div class="text-[10px] text-slate-300">HDFC Degradation → Poisson Hazard Window</div>
           </button>
-          <button onclick="selectScenario('B')" class="w-full text-left p-2 rounded-lg hover:bg-[#0d1d3a] transition text-xs">
+          <button onclick="selectScenario('B')" class="w-full text-left p-2 rounded-lg hover:bg-[#172339] transition text-xs">
             <div class="font-bold text-emerald-400 mono text-[11px]">Scenario B: Soft Balance Decline</div>
             <div class="text-[10px] text-slate-300">INR 2,499 → Dynamic 1-Click UPI Payment Link</div>
           </button>
-          <button onclick="selectScenario('C')" class="w-full text-left p-2 rounded-lg hover:bg-[#0d1d3a] transition text-xs">
-            <div class="font-bold text-purple-400 mono text-[11px]">Scenario C: B2B GST Dispute</div>
+          <button onclick="selectScenario('C')" class="w-full text-left p-2 rounded-lg hover:bg-[#172339] transition text-xs">
+            <div class="font-bold text-indigo-400 mono text-[11px]">Scenario C: B2B GST Dispute</div>
             <div class="text-[10px] text-slate-300">INR 85,000 → Safe Mutation Proposal & Reissue</div>
           </button>
-          <button onclick="selectScenario('D')" class="w-full text-left p-2 rounded-lg hover:bg-[#0d1d3a] transition text-xs">
-            <div class="font-bold text-indigo-400 mono text-[11px]">Scenario D: Promise-to-Pay (PTP)</div>
+          <button onclick="selectScenario('D')" class="w-full text-left p-2 rounded-lg hover:bg-[#172339] transition text-xs">
+            <div class="font-bold text-cyan-400 mono text-[11px]">Scenario D: Promise-to-Pay (PTP)</div>
             <div class="text-[10px] text-slate-300">Friday 11:00 AM PTP Lock & Suppress Reminders</div>
           </button>
-          <button onclick="selectScenario('E')" class="w-full text-left p-2 rounded-lg hover:bg-[#0d1d3a] transition text-xs">
+          <button onclick="selectScenario('E')" class="w-full text-left p-2 rounded-lg hover:bg-[#172339] transition text-xs">
             <div class="font-bold text-rose-400 mono text-[11px]">Scenario E: 50-Webhook Storm</div>
             <div class="text-[10px] text-slate-300">Atomic CAS Mutex → 1 Acquired, 49 Dropped</div>
           </button>
@@ -159,13 +183,13 @@
       </div>
 
       <!-- SIMULATION MODE PILL -->
-      <div class="h-8 px-3 rounded-full bg-[#032014] border border-[#0d5432] flex items-center gap-1.5">
-        <span class="w-2 h-2 rounded-full bg-[#10b981] animate-pulse"></span>
-        <span class="text-[10px] font-extrabold text-[#10b981] tracking-wider mono uppercase">SIMULATION MODE</span>
+      <div class="h-8 px-3 rounded-full bg-[#0b2518] border border-[#166534] flex items-center gap-1.5">
+        <span class="w-2 h-2 rounded-full bg-[#10b981]"></span>
+        <span class="text-[10px] font-bold text-[#10b981] tracking-wider mono uppercase">SIMULATION MODE</span>
       </div>
 
       <!-- USER AVATAR -->
-      <div class="w-8 h-8 rounded-full bg-[#0f1d38] border border-[#1b345f] flex items-center justify-center text-xs font-bold text-slate-200">
+      <div class="w-8 h-8 rounded-full bg-[#1e293b] border border-[#334155] flex items-center justify-center text-xs font-bold text-slate-200">
         RR
       </div>
 
@@ -423,9 +447,9 @@
       <!-- VIEW: SEPARATE FAST-LOOP PAGE -->
       <!-- ========================================================================= -->
       <div id="view-fast_loop" class="hidden space-y-5">
-        <div class="p-4 rounded-xl bg-gradient-to-r from-blue-950/60 via-[#081224] to-[#050c1b] border border-[#1b345f] flex justify-between items-center">
+        <div class="p-4 rounded-xl bg-[#0f172a] border border-[#1e293b] flex justify-between items-center">
           <div>
-            <h1 class="text-lg font-bold text-white flex items-center gap-2">
+            <h1 class="text-base font-bold text-white flex items-center gap-2">
               <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
               </svg>
@@ -433,7 +457,7 @@
             </h1>
             <p class="text-xs text-slate-400 mt-0.5">Autonomous B2C payment failure recovery, statistical Weibull retry scheduling, and 1-click UPI links</p>
           </div>
-          <span class="px-3 py-1 rounded-full text-xs font-bold text-[#10b981] bg-[#063b22] border border-[#0e5c36] mono">● Live Ingestion Active</span>
+          <span class="px-3 py-1 rounded-full text-xs font-bold text-[#10b981] bg-[#0b2518] border border-[#166534] mono">● Live Ingestion Active</span>
         </div>
 
         <div id="fast-loop-dedicated-mount"></div>
@@ -444,10 +468,10 @@
       <!-- VIEW: SEPARATE DEEP-LOOP PAGE (WITH AUDIO SYNTHESIZER & WAVEFORM) -->
       <!-- ========================================================================= -->
       <div id="view-deep_loop" class="hidden space-y-5">
-        <div class="p-4 rounded-xl bg-gradient-to-r from-purple-950/60 via-[#081224] to-[#050c1b] border border-[#3b176d] flex justify-between items-center">
+        <div class="p-4 rounded-xl bg-[#0f172a] border border-[#1e293b] flex justify-between items-center">
           <div>
-            <h1 class="text-lg font-bold text-white flex items-center gap-2">
-              <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <h1 class="text-base font-bold text-white flex items-center gap-2">
+              <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z"/>
               </svg>
               <span>Deep-Loop: B2B Voice & Promise-to-Pay Engine</span>
@@ -455,14 +479,14 @@
             <p class="text-xs text-slate-400 mt-0.5">Conversational Hinglish objection resolution, structured invoice mutation proposals, and auto-debit PTP locks</p>
           </div>
           <div class="flex items-center gap-2">
-            <span class="px-3 py-1 rounded-full text-xs font-bold text-purple-300 bg-[#2e1065] border border-[#581c87] mono">Web Audio Speech Synthesizer</span>
+            <span class="px-3 py-1 rounded-full text-xs font-medium text-slate-300 bg-[#1e293b] border border-[#334155] mono">Web Audio Speech Synthesizer</span>
           </div>
         </div>
 
         <!-- Audio Waveform Visualizer Card -->
-        <div class="custom-card p-4 flex flex-col md:flex-row items-center justify-between gap-4 border-purple-900/40">
+        <div class="custom-card p-4 flex flex-col md:flex-row items-center justify-between gap-4">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-purple-900/50 border border-purple-500/40 flex items-center justify-center text-purple-300" id="audio-status-icon">
+            <div class="w-10 h-10 rounded-full bg-[#1e293b] border border-[#334155] flex items-center justify-center text-blue-400" id="audio-status-icon">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z"/></svg>
             </div>
             <div>
@@ -472,15 +496,15 @@
           </div>
 
           <!-- Dynamic Audio Bars -->
-          <div class="flex items-center gap-1 h-8 px-4 bg-[#050c1b] rounded-lg border border-[#142442]" id="audio-wave-bars">
-            <span class="w-1 h-2 bg-purple-500 rounded-full wave-bar"></span>
-            <span class="w-1 h-4 bg-purple-400 rounded-full wave-bar"></span>
-            <span class="w-1 h-6 bg-purple-300 rounded-full wave-bar"></span>
-            <span class="w-1 h-3 bg-purple-400 rounded-full wave-bar"></span>
-            <span class="w-1 h-5 bg-purple-500 rounded-full wave-bar"></span>
-            <span class="w-1 h-2 bg-purple-400 rounded-full wave-bar"></span>
-            <span class="w-1 h-4 bg-purple-300 rounded-full wave-bar"></span>
-            <span class="w-1 h-1 bg-purple-500 rounded-full wave-bar"></span>
+          <div class="flex items-center gap-1 h-8 px-4 bg-[#090e17] rounded-lg border border-[#1e293b]" id="audio-wave-bars">
+            <span class="w-1 h-2 bg-blue-500 rounded-full wave-bar"></span>
+            <span class="w-1 h-4 bg-blue-400 rounded-full wave-bar"></span>
+            <span class="w-1 h-6 bg-blue-300 rounded-full wave-bar"></span>
+            <span class="w-1 h-3 bg-blue-400 rounded-full wave-bar"></span>
+            <span class="w-1 h-5 bg-blue-500 rounded-full wave-bar"></span>
+            <span class="w-1 h-2 bg-blue-400 rounded-full wave-bar"></span>
+            <span class="w-1 h-4 bg-blue-300 rounded-full wave-bar"></span>
+            <span class="w-1 h-1 bg-blue-500 rounded-full wave-bar"></span>
           </div>
         </div>
 
@@ -488,83 +512,101 @@
       </div>
 
       <!-- ========================================================================= -->
-      <!-- VIEW: RED-TEAM ADVERSARIAL ATTACK LAB (NEW STANDOUT FEATURE) -->
+      <!-- VIEW: RED-TEAM ADVERSARIAL ATTACK LAB -->
       <!-- ========================================================================= -->
       <div id="view-red_team" class="hidden space-y-5">
-        <div class="p-4 rounded-xl bg-gradient-to-r from-red-950/60 via-[#081224] to-[#050c1b] border border-[#581318] flex justify-between items-center">
+        <div class="p-4 rounded-xl bg-[#0f172a] border border-[#1e293b] flex justify-between items-center">
           <div>
-            <h1 class="text-lg font-bold text-white flex items-center gap-2">
-              <svg class="w-5 h-5 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <h1 class="text-base font-bold text-white flex items-center gap-2">
+              <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
               </svg>
               <span>Adversarial Red-Team & Financial Safety Attack Lab</span>
             </h1>
             <p class="text-xs text-slate-400 mt-0.5">Test real-time defensive boundaries against simulated payment fraud, race conditions, and regulatory violations</p>
           </div>
-          <span class="px-3 py-1 rounded-full text-xs font-bold text-rose-400 bg-[#3f0f13] border border-[#7f1d1d] mono">⚡ 6 Live Exploit Vectors</span>
+          <span class="px-3 py-1 rounded-full text-xs font-medium text-red-400 bg-[#25131d] border border-red-900/60 mono">6 Exploit Vectors Active</span>
         </div>
 
         <!-- 6 Interactive Exploit Cards Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
           
           <!-- Attack 1: 50-Webhook Race -->
-          <div class="custom-card p-4 space-y-3 border-rose-950/50">
+          <div class="custom-card p-4 space-y-3">
             <div class="flex justify-between items-start">
               <div class="text-xs font-bold text-white">1. Concurrent 50-Webhook Storm</div>
-              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-900/30 text-rose-400 mono">Race Mutex</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-medium bg-[#25131d] text-red-300 border border-red-900/40 mono">Race Mutex</span>
             </div>
-            <p class="text-[11px] text-slate-300">Simulates 50 duplicate webhooks hitting the server within 2ms to induce double-deductions.</p>
-            <button onclick="runLiveAttack(1)" id="attack-btn-1" class="w-full py-2 bg-rose-900/40 hover:bg-rose-800/60 border border-rose-700/50 text-rose-200 text-xs font-bold rounded-lg mono transition">⚡ Launch 50-Thread Storm</button>
+            <p class="text-[11px] text-slate-400">Simulates 50 duplicate webhooks hitting the server within 2ms to induce double-deductions.</p>
+            <button onclick="runLiveAttack(1)" id="attack-btn-1" class="w-full py-2 bg-[#1e1217] hover:bg-[#2c1722] border border-red-900/50 text-red-300 text-xs font-medium rounded-lg mono transition-colors flex items-center justify-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              <span>Launch 50-Thread Storm</span>
+            </button>
           </div>
 
           <!-- Attack 2: Tampered HMAC Signature -->
-          <div class="custom-card p-4 space-y-3 border-rose-950/50">
+          <div class="custom-card p-4 space-y-3">
             <div class="flex justify-between items-start">
               <div class="text-xs font-bold text-white">2. Tampered HMAC Signature</div>
-              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-900/30 text-rose-400 mono">Auth Bypass</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-medium bg-[#25131d] text-red-300 border border-red-900/40 mono">Auth Bypass</span>
             </div>
-            <p class="text-[11px] text-slate-300">Injects a forged payload signature `sha256_fake_payload_sig` to hijack payout confirmation.</p>
-            <button onclick="runLiveAttack(2)" id="attack-btn-2" class="w-full py-2 bg-rose-900/40 hover:bg-rose-800/60 border border-rose-700/50 text-rose-200 text-xs font-bold rounded-lg mono transition">🛡️ Inject Forged HMAC</button>
+            <p class="text-[11px] text-slate-400">Injects a forged payload signature to test cryptographic rejection on tampered webhooks.</p>
+            <button onclick="runLiveAttack(2)" id="attack-btn-2" class="w-full py-2 bg-[#1e1217] hover:bg-[#2c1722] border border-red-900/50 text-red-300 text-xs font-medium rounded-lg mono transition-colors flex items-center justify-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              <span>Inject Forged HMAC</span>
+            </button>
           </div>
 
           <!-- Attack 3: Timestamp Replay Attack -->
-          <div class="custom-card p-4 space-y-3 border-rose-950/50">
+          <div class="custom-card p-4 space-y-3">
             <div class="flex justify-between items-start">
               <div class="text-xs font-bold text-white">3. Replay Attack (&gt;300s Drift)</div>
-              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-900/30 text-rose-400 mono">Replay Defense</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-medium bg-[#25131d] text-red-300 border border-red-900/40 mono">Replay Defense</span>
             </div>
-            <p class="text-[11px] text-slate-300">Replays a valid signature from 2 hours ago to trigger duplicate retry executions.</p>
-            <button onclick="runLiveAttack(3)" id="attack-btn-3" class="w-full py-2 bg-rose-900/40 hover:bg-rose-800/60 border border-rose-700/50 text-rose-200 text-xs font-bold rounded-lg mono transition">⏳ Launch Replay Attack</button>
+            <p class="text-[11px] text-slate-400">Replays a valid signature from 2 hours ago to trigger duplicate retry executions.</p>
+            <button onclick="runLiveAttack(3)" id="attack-btn-3" class="w-full py-2 bg-[#1e1217] hover:bg-[#2c1722] border border-red-900/50 text-red-300 text-xs font-medium rounded-lg mono transition-colors flex items-center justify-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <span>Launch Replay Attack</span>
+            </button>
           </div>
 
           <!-- Attack 4: TRAI Quiet Hours Breach -->
-          <div class="custom-card p-4 space-y-3 border-rose-950/50">
+          <div class="custom-card p-4 space-y-3">
             <div class="flex justify-between items-start">
               <div class="text-xs font-bold text-white">4. TRAI Late-Night Outreach Breach</div>
-              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-900/30 text-rose-400 mono">Regulatory</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-medium bg-[#25131d] text-red-300 border border-red-900/40 mono">Regulatory</span>
             </div>
-            <p class="text-[11px] text-slate-300">Attempts automated voice/WhatsApp customer outreach at 23:45 IST (Prohibited 21:00-09:00).</p>
-            <button onclick="runLiveAttack(4)" id="attack-btn-4" class="w-full py-2 bg-rose-900/40 hover:bg-rose-800/60 border border-rose-700/50 text-rose-200 text-xs font-bold rounded-lg mono transition">🛑 Trigger 23:45 Outreach</button>
+            <p class="text-[11px] text-slate-400">Attempts automated voice/WhatsApp customer outreach at 23:45 IST (Prohibited 21:00-09:00).</p>
+            <button onclick="runLiveAttack(4)" id="attack-btn-4" class="w-full py-2 bg-[#1e1217] hover:bg-[#2c1722] border border-red-900/50 text-red-300 text-xs font-medium rounded-lg mono transition-colors flex items-center justify-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg>
+              <span>Trigger 23:45 Outreach</span>
+            </button>
           </div>
 
           <!-- Attack 5: Unbounded LLM Discount Hallucination -->
-          <div class="custom-card p-4 space-y-3 border-rose-950/50">
+          <div class="custom-card p-4 space-y-3">
             <div class="flex justify-between items-start">
               <div class="text-xs font-bold text-white">5. Unbounded Discount Hallucination</div>
-              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-900/30 text-rose-400 mono">Financial Clamp</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-medium bg-[#25131d] text-red-300 border border-red-900/40 mono">Financial Clamp</span>
             </div>
-            <p class="text-[11px] text-slate-300">AI hallucinates a 50% waiver (₹42,500) on a ₹85,000 invoice. Tested against hard policy ceiling.</p>
-            <button onclick="runLiveAttack(5)" id="attack-btn-5" class="w-full py-2 bg-rose-900/40 hover:bg-rose-800/60 border border-rose-700/50 text-rose-200 text-xs font-bold rounded-lg mono transition">💰 Propose 50% Waiver</button>
+            <p class="text-[11px] text-slate-400">AI hallucinates a 50% waiver (₹42,500) on a ₹85,000 invoice. Tested against hard policy ceiling.</p>
+            <button onclick="runLiveAttack(5)" id="attack-btn-5" class="w-full py-2 bg-[#1e1217] hover:bg-[#2c1722] border border-red-900/50 text-red-300 text-xs font-medium rounded-lg mono transition-colors flex items-center justify-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <span>Propose 50% Waiver</span>
+            </button>
           </div>
 
           <!-- Attack 6: Illegal FSM State Transition -->
-          <div class="custom-card p-4 space-y-3 border-rose-950/50">
+          <div class="custom-card p-4 space-y-3">
             <div class="flex justify-between items-start">
               <div class="text-xs font-bold text-white">6. Illegal State Jump Bypass</div>
-              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-900/30 text-rose-400 mono">FSM Guard</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-medium bg-[#25131d] text-red-300 border border-red-900/40 mono">FSM Guard</span>
             </div>
-            <p class="text-[11px] text-slate-300">Attempts to force a B2B invoice directly from `DRAFT` to `RESOLVED` bypassing approvals.</p>
-            <button onclick="runLiveAttack(6)" id="attack-btn-6" class="w-full py-2 bg-rose-900/40 hover:bg-rose-800/60 border border-rose-700/50 text-rose-200 text-xs font-bold rounded-lg mono transition">🔀 Force State Jump</button>
+            <p class="text-[11px] text-slate-400">Attempts to force a B2B invoice directly from `DRAFT` to `RESOLVED` bypassing approvals.</p>
+            <button onclick="runLiveAttack(6)" id="attack-btn-6" class="w-full py-2 bg-[#1e1217] hover:bg-[#2c1722] border border-red-900/50 text-red-300 text-xs font-medium rounded-lg mono transition-colors flex items-center justify-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+              <span>Force State Jump</span>
+            </button>
           </div>
 
         </div>
@@ -572,10 +614,10 @@
         <!-- Attack Result Console -->
         <div class="custom-card p-4 space-y-2">
           <div class="text-xs font-bold text-white flex items-center justify-between">
-            <span>🛡️ Red-Team Defense Telemetry Console</span>
-            <span class="text-[10px] mono text-slate-400">Zero-Trust Architecture</span>
+            <span>Red-Team Defense Telemetry Console</span>
+            <span class="text-[10px] mono text-slate-400">Zero-Trust Verification</span>
           </div>
-          <div class="p-3 bg-[#02050c] rounded-lg border border-[#111d31] font-mono text-xs text-emerald-400 max-h-48 overflow-y-auto space-y-1" id="red-team-console">
+          <div class="p-3 bg-[#060a12] rounded-lg border border-[#1e293b] font-mono text-xs text-emerald-400 max-h-48 overflow-y-auto space-y-1" id="red-team-console">
             <div>[READY] Red-Team Adversarial Sandbox Initialized. Select any exploit vector above to test defensive boundaries.</div>
           </div>
         </div>
@@ -585,29 +627,34 @@
       <!-- VIEW: SEPARATE BENCHMARK 100-CASE PAGE -->
       <!-- ========================================================================= -->
       <div id="view-benchmark" class="hidden space-y-5">
-        <div class="p-4 rounded-xl bg-gradient-to-r from-emerald-950/60 via-[#081224] to-[#050c1b] border border-[#0d4a30] flex justify-between items-center">
+        <div class="p-4 rounded-xl bg-[#0f172a] border border-[#1e293b] flex justify-between items-center">
           <div>
-            <h1 class="text-lg font-bold text-white flex items-center gap-2">
-              <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            <h1 class="text-base font-bold text-white flex items-center gap-2">
+              <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
               </svg>
               <span>100-Case Held-Out Quantitative Benchmark Suite</span>
             </h1>
             <p class="text-xs text-slate-400 mt-0.5">Real dynamic execution across seeded Indian payment failure distributions</p>
           </div>
-          <button onclick="runBenchmarkAction()" class="px-4 py-2 bg-gradient-to-r from-blue-600 to-sky-600 hover:from-blue-500 hover:to-sky-500 text-white font-bold rounded-lg text-xs mono shadow-lg">⚡ Run 100-Batch Suite</button>
+          <button onclick="runBenchmarkAction()" class="h-9 px-4 rounded-lg btn-primary text-xs font-semibold flex items-center gap-2">
+            <svg class="w-3.5 h-3.5 text-blue-200" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
+            </svg>
+            <span>Run 100-Batch Suite</span>
+          </button>
         </div>
 
         <div id="benchmark-dedicated-mount"></div>
       </div>
 
       <!-- ========================================================================= -->
-      <!-- VIEW: SEPARATE AUDIT LEDGER PAGE (WITH CERTIFICATE EXPORT) -->
+      <!-- VIEW: SEPARATE AUDIT LEDGER PAGE -->
       <!-- ========================================================================= -->
       <div id="view-audit_ledger" class="hidden space-y-5">
-        <div class="p-4 rounded-xl bg-gradient-to-r from-slate-900 via-[#081224] to-[#050c1b] border border-[#1b345f] flex justify-between items-center">
+        <div class="p-4 rounded-xl bg-[#0f172a] border border-[#1e293b] flex justify-between items-center">
           <div>
-            <h1 class="text-lg font-bold text-white flex items-center gap-2">
+            <h1 class="text-base font-bold text-white flex items-center gap-2">
               <svg class="w-5 h-5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
               </svg>
@@ -616,11 +663,11 @@
             <p class="text-xs text-slate-400 mt-0.5">Immutable event stream with zero-trust mathematical integrity verification from Genesis to Head</p>
           </div>
           <div class="flex items-center gap-2.5">
-            <button onclick="downloadAuditCertificate()" class="px-3 py-1.5 rounded-lg bg-[#08284d] hover:bg-[#0c3b72] text-sky-300 border border-[#0d4a8f] text-xs font-bold mono flex items-center gap-1.5 transition">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            <button onclick="downloadAuditCertificate()" class="h-8 px-3 rounded-lg btn-secondary text-xs font-medium mono flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
               <span>Export Audit Proof JSON</span>
             </button>
-            <button onclick="verifyAuditLedgerIntegrity()" class="px-3.5 py-1.5 rounded-lg bg-[#063b22] hover:bg-[#0a4f2e] text-[#10b981] border border-[#0e5c36] text-xs font-bold mono">✓ Verify Chain</button>
+            <button onclick="verifyAuditLedgerIntegrity()" class="h-8 px-3.5 rounded-lg bg-[#0b2518] hover:bg-[#0e3522] text-[#10b981] border border-[#166534] text-xs font-bold mono">Verify Chain</button>
           </div>
         </div>
 
@@ -822,7 +869,7 @@
           </div>
 
           <!-- 3D Interactive Financial Rail Topology Canvas -->
-          <div class="p-4 rounded-lg bg-[#02050c] border border-[#142442] space-y-2">
+          <div class="p-4 rounded-lg bg-[#090e17] border border-[#1e293b] space-y-2">
             <div class="flex justify-between items-center">
               <div class="text-xs font-bold text-sky-400 uppercase tracking-wider mono flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
@@ -830,31 +877,31 @@
               </div>
               <span class="text-[10px] text-slate-400 mono">Interactive Mouse-Reactive 3D Constellation</span>
             </div>
-            <div class="relative w-full h-56 rounded-lg overflow-hidden border border-[#0d2347] bg-gradient-to-b from-[#030914] to-[#010308]">
+            <div class="relative w-full h-56 rounded-lg overflow-hidden border border-[#1e293b] bg-[#060a12]">
               <canvas id="fintech-topology-canvas" class="w-full h-full block"></canvas>
-              <div class="absolute bottom-2 left-3 text-[10px] text-slate-400 mono bg-[#050c1b]/80 px-2 py-1 rounded border border-[#142442]">
+              <div class="absolute bottom-2 left-3 text-[10px] text-slate-400 mono bg-[#0b1120]/90 px-2 py-1 rounded border border-[#1e293b]">
                 Hover cursor to rotate 3D node vectors | 6 Nodes Active | Latency: 0.07ms
               </div>
             </div>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-4 gap-3.5 text-xs">
-            <div class="p-3.5 rounded-lg bg-[#050c1b] border border-[#142442]">
+            <div class="p-3.5 rounded-lg bg-[#090e17] border border-[#1e293b]">
               <div class="text-slate-400 font-medium">HDFC Bank Outages</div>
               <div class="text-xl font-bold text-emerald-400 mono mt-1">91.4% Recovery</div>
               <div class="text-[10px] text-slate-400 mt-0.5">Peak Hazard Window: +45m</div>
             </div>
-            <div class="p-3.5 rounded-lg bg-[#050c1b] border border-[#142442]">
+            <div class="p-3.5 rounded-lg bg-[#090e17] border border-[#1e293b]">
               <div class="text-slate-400 font-medium">SBI Outages</div>
               <div class="text-xl font-bold text-emerald-400 mono mt-1">84.2% Recovery</div>
               <div class="text-[10px] text-slate-400 mt-0.5">Peak Hazard Window: +60m</div>
             </div>
-            <div class="p-3.5 rounded-lg bg-[#050c1b] border border-[#142442]">
+            <div class="p-3.5 rounded-lg bg-[#090e17] border border-[#1e293b]">
               <div class="text-slate-400 font-medium">ICICI Netbanking</div>
               <div class="text-xl font-bold text-emerald-400 mono mt-1">93.1% Recovery</div>
               <div class="text-[10px] text-slate-400 mt-0.5">Peak Hazard Window: +30m</div>
             </div>
-            <div class="p-3.5 rounded-lg bg-[#050c1b] border border-[#142442]">
+            <div class="p-3.5 rounded-lg bg-[#090e17] border border-[#1e293b]">
               <div class="text-slate-400 font-medium">Axis Bank Degradation</div>
               <div class="text-xl font-bold text-emerald-400 mono mt-1">87.5% Recovery</div>
               <div class="text-[10px] text-slate-400 mt-0.5">Peak Hazard Window: +45m</div>
@@ -1113,8 +1160,9 @@
         </div>
       </div>
 
-      <button onclick="triggerFastLoopPipeline()" id="fast-loop-btn" class="w-full h-10 rounded-lg bg-gradient-to-r from-blue-600 via-blue-500 to-sky-500 hover:from-blue-500 hover:to-sky-400 text-white text-xs font-bold flex items-center justify-center gap-2 shadow-lg shadow-blue-600/20 transition-all">
-        <span>🚀 Ingest Webhook & Trigger Recovery Pipeline</span>
+      <button onclick="triggerFastLoopPipeline()" id="fast-loop-btn" class="w-full h-10 rounded-lg btn-primary text-xs font-semibold flex items-center justify-center gap-2">
+        <svg class="w-4 h-4 text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        <span>Ingest Webhook & Trigger Recovery Pipeline</span>
       </button>
     </div>
   </template>
@@ -1124,14 +1172,14 @@
       <div class="flex items-start justify-between">
         <div>
           <h2 class="text-sm font-bold text-white flex items-center gap-2">
-            <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z"/>
             </svg>
             <span>Deep-Loop: B2B Voice & PTP Engine</span>
           </h2>
           <p class="text-[11px] text-slate-400 mt-0.5">Autonomous conversational recovery for high-value invoices</p>
         </div>
-        <span class="px-2 py-0.5 rounded text-[10px] font-bold text-purple-300 bg-[#2e1065] border border-[#581c87]">
+        <span class="px-2 py-0.5 rounded text-[10px] font-medium text-slate-300 bg-[#1e293b] border border-[#334155]">
           Deep Loop
         </span>
       </div>
@@ -1139,7 +1187,7 @@
       <div class="space-y-3">
         <div>
           <label class="block text-[11px] text-slate-400 font-medium mb-1">Select Customer Objection / Speech (Hinglish/English)</label>
-          <select id="voice-speech-select" class="w-full bg-[#050c1b] border border-[#142442] rounded-lg px-3 py-2 text-xs text-slate-200 mono outline-none focus:border-purple-500">
+          <select id="voice-speech-select" class="w-full bg-[#090e17] border border-[#1e293b] rounded-lg px-3 py-2 text-xs text-slate-200 mono outline-none focus:border-blue-500">
             <option value="Invoice mein hamara GST galat hai, correct GSTIN 29AABCU9603R1Z2 daal kar bhejo">
               "Invoice mein GST galat hai, correct GSTIN 29AABCU9603R1Z2 daal kar bhejiye"
             </option>
@@ -1158,15 +1206,15 @@
         <div class="grid grid-cols-3 gap-2.5">
           <div>
             <label class="block text-[11px] text-slate-400 font-medium mb-1">Invoice ID</label>
-            <input type="text" id="voice-inv-id" value="inv_enterprise_998" class="w-full bg-[#050c1b] border border-[#142442] rounded-lg px-2.5 py-1.5 text-xs text-slate-200 mono outline-none focus:border-purple-500">
+            <input type="text" id="voice-inv-id" value="inv_enterprise_998" class="w-full bg-[#090e17] border border-[#1e293b] rounded-lg px-2.5 py-1.5 text-xs text-slate-200 mono outline-none focus:border-blue-500">
           </div>
           <div>
             <label class="block text-[11px] text-slate-400 font-medium mb-1">Invoice Value (INR)</label>
-            <input type="number" id="voice-inv-amount" value="85000" class="w-full bg-[#050c1b] border border-[#142442] rounded-lg px-2.5 py-1.5 text-xs text-slate-200 mono outline-none focus:border-purple-500">
+            <input type="number" id="voice-inv-amount" value="85000" class="w-full bg-[#090e17] border border-[#1e293b] rounded-lg px-2.5 py-1.5 text-xs text-slate-200 mono outline-none focus:border-blue-500">
           </div>
           <div>
             <label class="block text-[11px] text-slate-400 font-medium mb-1">Customer Name</label>
-            <input type="text" id="voice-cust-name" value="Acme Pvt Ltd" class="w-full bg-[#050c1b] border border-[#142442] rounded-lg px-2.5 py-1.5 text-xs text-slate-200 mono outline-none focus:border-purple-500">
+            <input type="text" id="voice-cust-name" value="Acme Pvt Ltd" class="w-full bg-[#090e17] border border-[#1e293b] rounded-lg px-2.5 py-1.5 text-xs text-slate-200 mono outline-none focus:border-blue-500">
           </div>
         </div>
       </div>
@@ -1174,47 +1222,47 @@
       <div class="py-2">
         <div class="flex items-center justify-between relative">
           <div class="flex flex-col items-center z-10">
-            <div class="w-6 h-6 rounded-full bg-[#2e1065] border border-[#a855f7] flex items-center justify-center text-[#c084fc]">
+            <div class="w-6 h-6 rounded-full bg-[#1e293b] border border-[#334155] flex items-center justify-center text-slate-200">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
             </div>
             <div class="text-[10px] font-bold text-slate-300 mt-1">Voice Input</div>
             <div class="text-[9px] text-slate-400 mono">10:16:10 AM</div>
           </div>
-          <div class="flex-1 h-[2px] bg-[#a855f7] -mt-5"></div>
+          <div class="flex-1 h-[2px] bg-[#334155] -mt-5"></div>
           <div class="flex flex-col items-center z-10">
-            <div class="w-6 h-6 rounded-full bg-[#2e1065] border border-[#a855f7] flex items-center justify-center text-[#c084fc]">
+            <div class="w-6 h-6 rounded-full bg-[#1e293b] border border-[#334155] flex items-center justify-center text-slate-200">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
             </div>
             <div class="text-[10px] font-bold text-slate-300 mt-1">Intent Extracted</div>
             <div class="text-[9px] text-[#10b981] font-bold mono">GST Dispute</div>
           </div>
-          <div class="flex-1 h-[2px] bg-[#a855f7] -mt-5"></div>
+          <div class="flex-1 h-[2px] bg-[#334155] -mt-5"></div>
           <div class="flex flex-col items-center z-10">
-            <div class="w-6 h-6 rounded-full bg-[#2e1065] border border-[#a855f7] flex items-center justify-center text-[#c084fc]">
+            <div class="w-6 h-6 rounded-full bg-[#1e293b] border border-[#334155] flex items-center justify-center text-slate-200">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
             </div>
             <div class="text-[10px] font-bold text-slate-300 mt-1">Mutation Proposal</div>
             <div class="text-[9px] text-[#10b981] font-bold mono">GSTIN Update</div>
           </div>
-          <div class="flex-1 h-[2px] bg-[#a855f7] -mt-5"></div>
+          <div class="flex-1 h-[2px] bg-[#334155] -mt-5"></div>
           <div class="flex flex-col items-center z-10">
-            <div class="w-6 h-6 rounded-full bg-[#2e1065] border border-[#a855f7] flex items-center justify-center text-[#c084fc]">
+            <div class="w-6 h-6 rounded-full bg-[#1e293b] border border-[#334155] flex items-center justify-center text-slate-200">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
             </div>
             <div class="text-[10px] font-bold text-slate-300 mt-1">Policy Check</div>
             <div class="text-[9px] text-[#10b981] font-bold mono">ALLOWED</div>
           </div>
-          <div class="flex-1 h-[2px] bg-[#a855f7] -mt-5"></div>
+          <div class="flex-1 h-[2px] bg-[#334155] -mt-5"></div>
           <div class="flex flex-col items-center z-10">
-            <div class="w-6 h-6 rounded-full bg-[#2e1065] border border-[#a855f7] flex items-center justify-center text-[#c084fc]">
+            <div class="w-6 h-6 rounded-full bg-[#1e293b] border border-[#334155] flex items-center justify-center text-slate-200">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
             </div>
             <div class="text-[10px] font-bold text-slate-300 mt-1">Invoice Updated</div>
             <div class="text-[9px] text-slate-400 mono">10:16:13 AM</div>
           </div>
-          <div class="flex-1 h-[2px] bg-[#a855f7] -mt-5"></div>
+          <div class="flex-1 h-[2px] bg-[#334155] -mt-5"></div>
           <div class="flex flex-col items-center z-10">
-            <div class="w-6 h-6 rounded-full bg-[#2e1065] border border-[#a855f7] flex items-center justify-center text-[#c084fc]">
+            <div class="w-6 h-6 rounded-full bg-[#1e293b] border border-[#334155] flex items-center justify-center text-slate-200">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
             </div>
             <div class="text-[10px] font-bold text-slate-300 mt-1">PTP Registered</div>
@@ -1223,11 +1271,11 @@
         </div>
       </div>
 
-      <button onclick="triggerVoiceTurnAction()" id="voice-turn-btn" class="w-full h-10 rounded-lg bg-[#059669] hover:bg-[#047857] text-white text-xs font-bold flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/20 transition-all">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <button onclick="triggerVoiceTurnAction()" id="voice-turn-btn" class="w-full h-10 rounded-lg btn-primary text-xs font-semibold flex items-center justify-center gap-2">
+        <svg class="w-4 h-4 text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z"/>
         </svg>
-        <span>Process & Speak Autonomous Voice Turn</span>
+        <span>Process Autonomous Voice Turn</span>
       </button>
     </div>
   </template>
