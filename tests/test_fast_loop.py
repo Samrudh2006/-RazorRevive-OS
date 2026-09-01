@@ -59,4 +59,17 @@ def test_gateway_adapter_payment_link():
     )
     assert res["success"] is True
     assert res["final_amount"] == 2399.0
+    assert "short_url" in res
     assert "https://" in res["short_url"]
+
+def test_llm_prompt_builder():
+    prompt = DiagnosticEngine.build_llm_prompt(
+        payment_id="pay_prompt_01",
+        amount=5000.0,
+        error_code="GATEWAY_ERROR",
+        error_description="HDFC node timeout"
+    )
+    assert "system" in prompt
+    assert "user" in prompt
+    assert "TRANSIENT_GATEWAY" in prompt["system"]
+    assert "pay_prompt_01" in prompt["user"]

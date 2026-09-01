@@ -108,6 +108,39 @@ class DiagnosticEngine:
     }
 
     @classmethod
+    def build_llm_prompt(
+        cls,
+        payment_id: str,
+        amount: float,
+        error_code: str,
+        error_description: str = "",
+        metadata: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, str]:
+        """
+        Builds a structured prompt adhering to JSON schema contracts for LLM inference.
+        """
+        system_prompt = (
+            "You are RazorRevive-OS AI Diagnostic Kernel, an autonomous revenue recovery engine for Razorpay.\n"
+            "Analyze the payment failure metadata and output a JSON object adhering to this schema:\n"
+            "{\n"
+            '  "failure_class": "TRANSIENT_GATEWAY" | "INSUFFICIENT_FUNDS" | "EXPIRED_MANDATE" | "ABANDONED_AUTH" | "SUSPICIOUS_VELOCITY",\n'
+            '  "confidence": float (0.0 to 1.0),\n'
+            '  "recommended_strategy": "DELAYED_RETRY" | "DISPATCH_PAYMENT_LINK" | "ESCALATE_HUMAN",\n'
+            '  "reason_codes": [string],\n'
+            '  "diagnostic_summary": string\n'
+            "}\n"
+            "SAFETY RULE: If fraud, velocity spike, or stolen card patterns are suspected, classify as SUSPICIOUS_VELOCITY with ESCALATE_HUMAN."
+        )
+        user_prompt = (
+            f"Payment ID: {payment_id}\n"
+            f"Amount: INR {amount}\n"
+            f"Raw Error Code: {error_code}\n"
+            f"Error Description: {error_description}\n"
+            f"Metadata: {metadata or {}}"
+        )
+        return {"system": system_prompt, "user": user_prompt}
+
+    @classmethod
     def diagnose(
         cls,
         payment_id: str,
@@ -181,3 +214,4 @@ class DiagnosticEngine:
         )
 
 diagnostic_engine = DiagnosticEngine()
+
