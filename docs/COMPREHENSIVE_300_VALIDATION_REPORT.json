@@ -1,11 +1,11 @@
 {
   "suite_title": "RazorRevive-OS 300+ Automated Validation Suite",
-  "timestamp_utc": "2026-08-26T07:35:55Z",
+  "timestamp_utc": "2026-08-27T06:21:46Z",
   "total_tests_executed": 345,
   "passed": 345,
   "failed": 0,
   "pass_rate_pct": 100.0,
-  "total_execution_time_ms": 83.96,
+  "total_execution_time_ms": 126.21,
   "test_results": [
     {
       "test_id": "SEC-HMAC-001",
@@ -17,7 +17,7 @@
       "actual_result": "Verified (True)",
       "status": "PASS",
       "evidence": "HMAC SHA-256 match confirmed",
-      "execution_time_ms": 0.227,
+      "execution_time_ms": 0.113,
       "severity": "HIGH"
     },
     {
@@ -30,7 +30,7 @@
       "actual_result": "Verified (True)",
       "status": "PASS",
       "evidence": "HMAC SHA-256 match confirmed",
-      "execution_time_ms": 0.086,
+      "execution_time_ms": 0.027,
       "severity": "HIGH"
     },
     {
@@ -43,7 +43,7 @@
       "actual_result": "Rejected (True)",
       "status": "PASS",
       "evidence": "Cryptographic mismatch detected via constant-time hmac comparison",
-      "execution_time_ms": 0.365,
+      "execution_time_ms": 0.136,
       "severity": "HIGH"
     },
     {
@@ -56,7 +56,7 @@
       "actual_result": "Verified (True)",
       "status": "PASS",
       "evidence": "HMAC SHA-256 match confirmed",
-      "execution_time_ms": 0.067,
+      "execution_time_ms": 0.033,
       "severity": "HIGH"
     },
     {
@@ -69,7 +69,7 @@
       "actual_result": "Rejected (True)",
       "status": "PASS",
       "evidence": "Empty signature caught and safely rejected",
-      "execution_time_ms": 0.198,
+      "execution_time_ms": 0.065,
       "severity": "HIGH"
     },
     {
@@ -82,7 +82,7 @@
       "actual_result": "Rejected (True)",
       "status": "PASS",
       "evidence": "Cryptographic mismatch detected via constant-time hmac comparison",
-      "execution_time_ms": 0.19,
+      "execution_time_ms": 0.071,
       "severity": "HIGH"
     },
     {
@@ -95,7 +95,7 @@
       "actual_result": "Verified (True)",
       "status": "PASS",
       "evidence": "HMAC SHA-256 match confirmed",
-      "execution_time_ms": 0.067,
+      "execution_time_ms": 0.025,
       "severity": "HIGH"
     },
     {
@@ -108,7 +108,7 @@
       "actual_result": "Verified (True)",
       "status": "PASS",
       "evidence": "HMAC SHA-256 match confirmed",
-      "execution_time_ms": 0.04,
+      "execution_time_ms": 0.028,
       "severity": "HIGH"
     },
     {
@@ -121,7 +121,7 @@
       "actual_result": "Rejected (True)",
       "status": "PASS",
       "evidence": "Cryptographic mismatch detected via constant-time hmac comparison",
-      "execution_time_ms": 0.113,
+      "execution_time_ms": 0.066,
       "severity": "HIGH"
     },
     {
@@ -134,7 +134,7 @@
       "actual_result": "Rejected (True)",
       "status": "PASS",
       "evidence": "Empty signature caught and safely rejected",
-      "execution_time_ms": 0.137,
+      "execution_time_ms": 0.055,
       "severity": "HIGH"
     },
     {
@@ -147,7 +147,7 @@
       "actual_result": "Verified (True)",
       "status": "PASS",
       "evidence": "HMAC SHA-256 match confirmed",
-      "execution_time_ms": 0.078,
+      "execution_time_ms": 0.024,
       "severity": "HIGH"
     },
     {
@@ -160,7 +160,7 @@
       "actual_result": "Rejected (True)",
       "status": "PASS",
       "evidence": "Cryptographic mismatch detected via constant-time hmac comparison",
-      "execution_time_ms": 0.151,
+      "execution_time_ms": 0.058,
       "severity": "HIGH"
     },
     {
@@ -173,7 +173,7 @@
       "actual_result": "Verified (True)",
       "status": "PASS",
       "evidence": "HMAC SHA-256 match confirmed",
-      "execution_time_ms": 0.051,
+      "execution_time_ms": 0.036,
       "severity": "HIGH"
     },
     {
@@ -186,7 +186,7 @@
       "actual_result": "Verified (True)",
       "status": "PASS",
       "evidence": "HMAC SHA-256 match confirmed",
-      "execution_time_ms": 0.061,
+      "execution_time_ms": 0.036,
       "severity": "HIGH"
     },
     {
@@ -199,7 +199,7 @@
       "actual_result": "Rejected (True)",
       "status": "PASS",
       "evidence": "Cryptographic mismatch detected via constant-time hmac comparison",
-      "execution_time_ms": 0.166,
+      "execution_time_ms": 0.085,
       "severity": "HIGH"
     },
     {
@@ -212,7 +212,7 @@
       "actual_result": "Verified (True)",
       "status": "PASS",
       "evidence": "HMAC SHA-256 match confirmed",
-      "execution_time_ms": 0.059,
+      "execution_time_ms": 0.021,
       "severity": "HIGH"
     },
     {
@@ -225,7 +225,7 @@
       "actual_result": "Verified (True)",
       "status": "PASS",
       "evidence": "HMAC SHA-256 match confirmed",
-      "execution_time_ms": 0.084,
+      "execution_time_ms": 0.018,
       "severity": "HIGH"
     },
     {
@@ -238,7 +238,7 @@
       "actual_result": "Rejected (True)",
       "status": "PASS",
       "evidence": "Cryptographic mismatch detected via constant-time hmac comparison",
-      "execution_time_ms": 0.177,
+      "execution_time_ms": 0.124,
       "severity": "HIGH"
     },
     {
@@ -251,7 +251,7 @@
       "actual_result": "Verified (True)",
       "status": "PASS",
       "evidence": "HMAC SHA-256 match confirmed",
-      "execution_time_ms": 0.059,
+      "execution_time_ms": 0.032,
       "severity": "HIGH"
     },
     {
@@ -264,7 +264,7 @@
       "actual_result": "Rejected (True)",
       "status": "PASS",
       "evidence": "Empty signature caught and safely rejected",
-      "execution_time_ms": 0.168,
+      "execution_time_ms": 0.092,
       "severity": "HIGH"
     },
     {
@@ -277,7 +277,7 @@
       "actual_result": "Rejected (True)",
       "status": "PASS",
       "evidence": "Cryptographic mismatch detected via constant-time hmac comparison",
-      "execution_time_ms": 0.207,
+      "execution_time_ms": 0.081,
       "severity": "HIGH"
     },
     {
@@ -290,7 +290,7 @@
       "actual_result": "Verified (True)",
       "status": "PASS",
       "evidence": "HMAC SHA-256 match confirmed",
-      "execution_time_ms": 0.06,
+      "execution_time_ms": 0.024,
       "severity": "HIGH"
     },
     {
@@ -303,7 +303,7 @@
       "actual_result": "Verified (True)",
       "status": "PASS",
       "evidence": "HMAC SHA-256 match confirmed",
-      "execution_time_ms": 0.043,
+      "execution_time_ms": 0.029,
       "severity": "HIGH"
     },
     {
@@ -316,7 +316,7 @@
       "actual_result": "Rejected (True)",
       "status": "PASS",
       "evidence": "Cryptographic mismatch detected via constant-time hmac comparison",
-      "execution_time_ms": 0.15,
+      "execution_time_ms": 0.08,
       "severity": "HIGH"
     },
     {
@@ -329,7 +329,7 @@
       "actual_result": "Rejected (True)",
       "status": "PASS",
       "evidence": "Empty signature caught and safely rejected",
-      "execution_time_ms": 0.18,
+      "execution_time_ms": 0.113,
       "severity": "HIGH"
     },
     {
@@ -342,7 +342,7 @@
       "actual_result": "Valid=False",
       "status": "PASS",
       "evidence": "Enforced 300s window boundary: abs(-600) <= 300 -> False",
-      "execution_time_ms": 0.098,
+      "execution_time_ms": 0.049,
       "severity": "HIGH"
     },
     {
@@ -355,7 +355,7 @@
       "actual_result": "Valid=False",
       "status": "PASS",
       "evidence": "Enforced 300s window boundary: abs(-450) <= 300 -> False",
-      "execution_time_ms": 0.06,
+      "execution_time_ms": 0.033,
       "severity": "HIGH"
     },
     {
@@ -368,7 +368,7 @@
       "actual_result": "Valid=False",
       "status": "PASS",
       "evidence": "Enforced 300s window boundary: abs(-350) <= 300 -> False",
-      "execution_time_ms": 0.045,
+      "execution_time_ms": 0.027,
       "severity": "HIGH"
     },
     {
@@ -381,7 +381,7 @@
       "actual_result": "Valid=False",
       "status": "PASS",
       "evidence": "Enforced 300s window boundary: abs(-305) <= 300 -> False",
-      "execution_time_ms": 0.057,
+      "execution_time_ms": 0.044,
       "severity": "HIGH"
     },
     {
@@ -394,7 +394,7 @@
       "actual_result": "Valid=False",
       "status": "PASS",
       "evidence": "Enforced 300s window boundary: abs(-301) <= 300 -> False",
-      "execution_time_ms": 0.058,
+      "execution_time_ms": 0.034,
       "severity": "HIGH"
     },
     {
@@ -407,7 +407,7 @@
       "actual_result": "Valid=True",
       "status": "PASS",
       "evidence": "Enforced 300s window boundary: abs(-299) <= 300 -> True",
-      "execution_time_ms": 0.026,
+      "execution_time_ms": 0.014,
       "severity": "HIGH"
     },
     {
@@ -420,7 +420,7 @@
       "actual_result": "Valid=True",
       "status": "PASS",
       "evidence": "Enforced 300s window boundary: abs(-150) <= 300 -> True",
-      "execution_time_ms": 0.025,
+      "execution_time_ms": 0.009,
       "severity": "HIGH"
     },
     {
@@ -433,7 +433,7 @@
       "actual_result": "Valid=True",
       "status": "PASS",
       "evidence": "Enforced 300s window boundary: abs(-60) <= 300 -> True",
-      "execution_time_ms": 0.031,
+      "execution_time_ms": 0.009,
       "severity": "HIGH"
     },
     {
@@ -446,7 +446,7 @@
       "actual_result": "Valid=True",
       "status": "PASS",
       "evidence": "Enforced 300s window boundary: abs(-10) <= 300 -> True",
-      "execution_time_ms": 0.027,
+      "execution_time_ms": 0.008,
       "severity": "HIGH"
     },
     {
@@ -459,7 +459,7 @@
       "actual_result": "Valid=True",
       "status": "PASS",
       "evidence": "Enforced 300s window boundary: abs(0) <= 300 -> True",
-      "execution_time_ms": 0.014,
+      "execution_time_ms": 0.013,
       "severity": "HIGH"
     },
     {
@@ -485,7 +485,7 @@
       "actual_result": "Valid=True",
       "status": "PASS",
       "evidence": "Enforced 300s window boundary: abs(60) <= 300 -> True",
-      "execution_time_ms": 0.012,
+      "execution_time_ms": 0.008,
       "severity": "HIGH"
     },
     {
@@ -498,7 +498,7 @@
       "actual_result": "Valid=True",
       "status": "PASS",
       "evidence": "Enforced 300s window boundary: abs(150) <= 300 -> True",
-      "execution_time_ms": 0.016,
+      "execution_time_ms": 0.025,
       "severity": "HIGH"
     },
     {
@@ -511,7 +511,7 @@
       "actual_result": "Valid=True",
       "status": "PASS",
       "evidence": "Enforced 300s window boundary: abs(299) <= 300 -> True",
-      "execution_time_ms": 0.016,
+      "execution_time_ms": 0.013,
       "severity": "HIGH"
     },
     {
@@ -524,7 +524,7 @@
       "actual_result": "Valid=False",
       "status": "PASS",
       "evidence": "Enforced 300s window boundary: abs(301) <= 300 -> False",
-      "execution_time_ms": 0.075,
+      "execution_time_ms": 0.05,
       "severity": "HIGH"
     },
     {
@@ -537,7 +537,7 @@
       "actual_result": "Valid=False",
       "status": "PASS",
       "evidence": "Enforced 300s window boundary: abs(305) <= 300 -> False",
-      "execution_time_ms": 0.046,
+      "execution_time_ms": 0.044,
       "severity": "HIGH"
     },
     {
@@ -550,7 +550,7 @@
       "actual_result": "Valid=False",
       "status": "PASS",
       "evidence": "Enforced 300s window boundary: abs(350) <= 300 -> False",
-      "execution_time_ms": 0.082,
+      "execution_time_ms": 0.047,
       "severity": "HIGH"
     },
     {
@@ -563,7 +563,7 @@
       "actual_result": "Valid=False",
       "status": "PASS",
       "evidence": "Enforced 300s window boundary: abs(450) <= 300 -> False",
-      "execution_time_ms": 0.072,
+      "execution_time_ms": 0.035,
       "severity": "HIGH"
     },
     {
@@ -576,7 +576,7 @@
       "actual_result": "Valid=False",
       "status": "PASS",
       "evidence": "Enforced 300s window boundary: abs(600) <= 300 -> False",
-      "execution_time_ms": 0.081,
+      "execution_time_ms": 0.041,
       "severity": "HIGH"
     },
     {
@@ -589,7 +589,7 @@
       "actual_result": "Valid=False",
       "status": "PASS",
       "evidence": "Enforced 300s window boundary: abs(7200) <= 300 -> False",
-      "execution_time_ms": 0.054,
+      "execution_time_ms": 0.082,
       "severity": "HIGH"
     },
     {
@@ -597,12 +597,12 @@
       "category": "Idempotency & Mutex",
       "description": "Atomic CAS Mutex Lock Lifecycle #1",
       "precondition": "Simultaneous identical deliveries and payload tampering attempts",
-      "input": "mutex_test_event_75aab299",
+      "input": "mutex_test_event_710bda1e",
       "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
       "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
       "status": "PASS",
       "evidence": "CAS lock successfully isolated single execution and dropped collisions",
-      "execution_time_ms": 4.574,
+      "execution_time_ms": 3.397,
       "severity": "HIGH"
     },
     {
@@ -610,228 +610,7 @@
       "category": "Idempotency & Mutex",
       "description": "Atomic CAS Mutex Lock Lifecycle #2",
       "precondition": "Simultaneous identical deliveries and payload tampering attempts",
-      "input": "mutex_test_event_1a25c3ef",
-      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "status": "PASS",
-      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
-      "execution_time_ms": 1.489,
-      "severity": "HIGH"
-    },
-    {
-      "test_id": "SEC-MUTEX-003",
-      "category": "Idempotency & Mutex",
-      "description": "Atomic CAS Mutex Lock Lifecycle #3",
-      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
-      "input": "mutex_test_event_51bee98c",
-      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "status": "PASS",
-      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
-      "execution_time_ms": 0.61,
-      "severity": "HIGH"
-    },
-    {
-      "test_id": "SEC-MUTEX-004",
-      "category": "Idempotency & Mutex",
-      "description": "Atomic CAS Mutex Lock Lifecycle #4",
-      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
-      "input": "mutex_test_event_78c20a15",
-      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "status": "PASS",
-      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
-      "execution_time_ms": 0.461,
-      "severity": "HIGH"
-    },
-    {
-      "test_id": "SEC-MUTEX-005",
-      "category": "Idempotency & Mutex",
-      "description": "Atomic CAS Mutex Lock Lifecycle #5",
-      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
-      "input": "mutex_test_event_d803b0b0",
-      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "status": "PASS",
-      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
-      "execution_time_ms": 0.501,
-      "severity": "HIGH"
-    },
-    {
-      "test_id": "SEC-MUTEX-006",
-      "category": "Idempotency & Mutex",
-      "description": "Atomic CAS Mutex Lock Lifecycle #6",
-      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
-      "input": "mutex_test_event_ae9a9381",
-      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "status": "PASS",
-      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
-      "execution_time_ms": 0.33,
-      "severity": "HIGH"
-    },
-    {
-      "test_id": "SEC-MUTEX-007",
-      "category": "Idempotency & Mutex",
-      "description": "Atomic CAS Mutex Lock Lifecycle #7",
-      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
-      "input": "mutex_test_event_a7373e3e",
-      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "status": "PASS",
-      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
-      "execution_time_ms": 0.447,
-      "severity": "HIGH"
-    },
-    {
-      "test_id": "SEC-MUTEX-008",
-      "category": "Idempotency & Mutex",
-      "description": "Atomic CAS Mutex Lock Lifecycle #8",
-      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
-      "input": "mutex_test_event_458348c2",
-      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "status": "PASS",
-      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
-      "execution_time_ms": 0.42,
-      "severity": "HIGH"
-    },
-    {
-      "test_id": "SEC-MUTEX-009",
-      "category": "Idempotency & Mutex",
-      "description": "Atomic CAS Mutex Lock Lifecycle #9",
-      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
-      "input": "mutex_test_event_bd2e599b",
-      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "status": "PASS",
-      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
-      "execution_time_ms": 0.354,
-      "severity": "HIGH"
-    },
-    {
-      "test_id": "SEC-MUTEX-010",
-      "category": "Idempotency & Mutex",
-      "description": "Atomic CAS Mutex Lock Lifecycle #10",
-      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
-      "input": "mutex_test_event_ee25d9aa",
-      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "status": "PASS",
-      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
-      "execution_time_ms": 0.432,
-      "severity": "HIGH"
-    },
-    {
-      "test_id": "SEC-MUTEX-011",
-      "category": "Idempotency & Mutex",
-      "description": "Atomic CAS Mutex Lock Lifecycle #11",
-      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
-      "input": "mutex_test_event_20dd6124",
-      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "status": "PASS",
-      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
-      "execution_time_ms": 0.626,
-      "severity": "HIGH"
-    },
-    {
-      "test_id": "SEC-MUTEX-012",
-      "category": "Idempotency & Mutex",
-      "description": "Atomic CAS Mutex Lock Lifecycle #12",
-      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
-      "input": "mutex_test_event_1fcd8de5",
-      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "status": "PASS",
-      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
-      "execution_time_ms": 0.325,
-      "severity": "HIGH"
-    },
-    {
-      "test_id": "SEC-MUTEX-013",
-      "category": "Idempotency & Mutex",
-      "description": "Atomic CAS Mutex Lock Lifecycle #13",
-      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
-      "input": "mutex_test_event_4d5b4a7d",
-      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "status": "PASS",
-      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
-      "execution_time_ms": 0.292,
-      "severity": "HIGH"
-    },
-    {
-      "test_id": "SEC-MUTEX-014",
-      "category": "Idempotency & Mutex",
-      "description": "Atomic CAS Mutex Lock Lifecycle #14",
-      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
-      "input": "mutex_test_event_118834b8",
-      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "status": "PASS",
-      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
-      "execution_time_ms": 0.215,
-      "severity": "HIGH"
-    },
-    {
-      "test_id": "SEC-MUTEX-015",
-      "category": "Idempotency & Mutex",
-      "description": "Atomic CAS Mutex Lock Lifecycle #15",
-      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
-      "input": "mutex_test_event_668d1ff7",
-      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "status": "PASS",
-      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
-      "execution_time_ms": 0.239,
-      "severity": "HIGH"
-    },
-    {
-      "test_id": "SEC-MUTEX-016",
-      "category": "Idempotency & Mutex",
-      "description": "Atomic CAS Mutex Lock Lifecycle #16",
-      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
-      "input": "mutex_test_event_185750bc",
-      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "status": "PASS",
-      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
-      "execution_time_ms": 0.307,
-      "severity": "HIGH"
-    },
-    {
-      "test_id": "SEC-MUTEX-017",
-      "category": "Idempotency & Mutex",
-      "description": "Atomic CAS Mutex Lock Lifecycle #17",
-      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
-      "input": "mutex_test_event_8f6fda31",
-      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "status": "PASS",
-      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
-      "execution_time_ms": 0.757,
-      "severity": "HIGH"
-    },
-    {
-      "test_id": "SEC-MUTEX-018",
-      "category": "Idempotency & Mutex",
-      "description": "Atomic CAS Mutex Lock Lifecycle #18",
-      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
-      "input": "mutex_test_event_71c62fb4",
-      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
-      "status": "PASS",
-      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
-      "execution_time_ms": 0.352,
-      "severity": "HIGH"
-    },
-    {
-      "test_id": "SEC-MUTEX-019",
-      "category": "Idempotency & Mutex",
-      "description": "Atomic CAS Mutex Lock Lifecycle #19",
-      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
-      "input": "mutex_test_event_7db7d833",
+      "input": "mutex_test_event_17d3d93e",
       "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
       "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
       "status": "PASS",
@@ -840,16 +619,237 @@
       "severity": "HIGH"
     },
     {
-      "test_id": "SEC-MUTEX-020",
+      "test_id": "SEC-MUTEX-003",
       "category": "Idempotency & Mutex",
-      "description": "Atomic CAS Mutex Lock Lifecycle #20",
+      "description": "Atomic CAS Mutex Lock Lifecycle #3",
       "precondition": "Simultaneous identical deliveries and payload tampering attempts",
-      "input": "mutex_test_event_e5b7e462",
+      "input": "mutex_test_event_86dbaf85",
       "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
       "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
       "status": "PASS",
       "evidence": "CAS lock successfully isolated single execution and dropped collisions",
-      "execution_time_ms": 0.541,
+      "execution_time_ms": 0.181,
+      "severity": "HIGH"
+    },
+    {
+      "test_id": "SEC-MUTEX-004",
+      "category": "Idempotency & Mutex",
+      "description": "Atomic CAS Mutex Lock Lifecycle #4",
+      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
+      "input": "mutex_test_event_382a3211",
+      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "status": "PASS",
+      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
+      "execution_time_ms": 0.205,
+      "severity": "HIGH"
+    },
+    {
+      "test_id": "SEC-MUTEX-005",
+      "category": "Idempotency & Mutex",
+      "description": "Atomic CAS Mutex Lock Lifecycle #5",
+      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
+      "input": "mutex_test_event_54c99b7c",
+      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "status": "PASS",
+      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
+      "execution_time_ms": 0.208,
+      "severity": "HIGH"
+    },
+    {
+      "test_id": "SEC-MUTEX-006",
+      "category": "Idempotency & Mutex",
+      "description": "Atomic CAS Mutex Lock Lifecycle #6",
+      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
+      "input": "mutex_test_event_da8b42f2",
+      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "status": "PASS",
+      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
+      "execution_time_ms": 0.17,
+      "severity": "HIGH"
+    },
+    {
+      "test_id": "SEC-MUTEX-007",
+      "category": "Idempotency & Mutex",
+      "description": "Atomic CAS Mutex Lock Lifecycle #7",
+      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
+      "input": "mutex_test_event_b94e484e",
+      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "status": "PASS",
+      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
+      "execution_time_ms": 0.294,
+      "severity": "HIGH"
+    },
+    {
+      "test_id": "SEC-MUTEX-008",
+      "category": "Idempotency & Mutex",
+      "description": "Atomic CAS Mutex Lock Lifecycle #8",
+      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
+      "input": "mutex_test_event_22dfda62",
+      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "status": "PASS",
+      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
+      "execution_time_ms": 0.579,
+      "severity": "HIGH"
+    },
+    {
+      "test_id": "SEC-MUTEX-009",
+      "category": "Idempotency & Mutex",
+      "description": "Atomic CAS Mutex Lock Lifecycle #9",
+      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
+      "input": "mutex_test_event_1e3a0732",
+      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "status": "PASS",
+      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
+      "execution_time_ms": 0.233,
+      "severity": "HIGH"
+    },
+    {
+      "test_id": "SEC-MUTEX-010",
+      "category": "Idempotency & Mutex",
+      "description": "Atomic CAS Mutex Lock Lifecycle #10",
+      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
+      "input": "mutex_test_event_696cc615",
+      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "status": "PASS",
+      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
+      "execution_time_ms": 0.435,
+      "severity": "HIGH"
+    },
+    {
+      "test_id": "SEC-MUTEX-011",
+      "category": "Idempotency & Mutex",
+      "description": "Atomic CAS Mutex Lock Lifecycle #11",
+      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
+      "input": "mutex_test_event_b3111318",
+      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "status": "PASS",
+      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
+      "execution_time_ms": 0.266,
+      "severity": "HIGH"
+    },
+    {
+      "test_id": "SEC-MUTEX-012",
+      "category": "Idempotency & Mutex",
+      "description": "Atomic CAS Mutex Lock Lifecycle #12",
+      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
+      "input": "mutex_test_event_dace2004",
+      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "status": "PASS",
+      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
+      "execution_time_ms": 0.162,
+      "severity": "HIGH"
+    },
+    {
+      "test_id": "SEC-MUTEX-013",
+      "category": "Idempotency & Mutex",
+      "description": "Atomic CAS Mutex Lock Lifecycle #13",
+      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
+      "input": "mutex_test_event_192d90c7",
+      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "status": "PASS",
+      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
+      "execution_time_ms": 0.123,
+      "severity": "HIGH"
+    },
+    {
+      "test_id": "SEC-MUTEX-014",
+      "category": "Idempotency & Mutex",
+      "description": "Atomic CAS Mutex Lock Lifecycle #14",
+      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
+      "input": "mutex_test_event_b914f96a",
+      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "status": "PASS",
+      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
+      "execution_time_ms": 0.12,
+      "severity": "HIGH"
+    },
+    {
+      "test_id": "SEC-MUTEX-015",
+      "category": "Idempotency & Mutex",
+      "description": "Atomic CAS Mutex Lock Lifecycle #15",
+      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
+      "input": "mutex_test_event_0cb1e80f",
+      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "status": "PASS",
+      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
+      "execution_time_ms": 0.299,
+      "severity": "HIGH"
+    },
+    {
+      "test_id": "SEC-MUTEX-016",
+      "category": "Idempotency & Mutex",
+      "description": "Atomic CAS Mutex Lock Lifecycle #16",
+      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
+      "input": "mutex_test_event_9ecc0299",
+      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "status": "PASS",
+      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
+      "execution_time_ms": 0.256,
+      "severity": "HIGH"
+    },
+    {
+      "test_id": "SEC-MUTEX-017",
+      "category": "Idempotency & Mutex",
+      "description": "Atomic CAS Mutex Lock Lifecycle #17",
+      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
+      "input": "mutex_test_event_5957f3df",
+      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "status": "PASS",
+      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
+      "execution_time_ms": 0.148,
+      "severity": "HIGH"
+    },
+    {
+      "test_id": "SEC-MUTEX-018",
+      "category": "Idempotency & Mutex",
+      "description": "Atomic CAS Mutex Lock Lifecycle #18",
+      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
+      "input": "mutex_test_event_076139a1",
+      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "status": "PASS",
+      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
+      "execution_time_ms": 0.216,
+      "severity": "HIGH"
+    },
+    {
+      "test_id": "SEC-MUTEX-019",
+      "category": "Idempotency & Mutex",
+      "description": "Atomic CAS Mutex Lock Lifecycle #19",
+      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
+      "input": "mutex_test_event_49366e36",
+      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "status": "PASS",
+      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
+      "execution_time_ms": 0.24,
+      "severity": "HIGH"
+    },
+    {
+      "test_id": "SEC-MUTEX-020",
+      "category": "Idempotency & Mutex",
+      "description": "Atomic CAS Mutex Lock Lifecycle #20",
+      "precondition": "Simultaneous identical deliveries and payload tampering attempts",
+      "input": "mutex_test_event_72719657",
+      "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
+      "status": "PASS",
+      "evidence": "CAS lock successfully isolated single execution and dropped collisions",
+      "execution_time_ms": 0.171,
       "severity": "HIGH"
     },
     {
@@ -857,12 +857,12 @@
       "category": "Idempotency & Mutex",
       "description": "Atomic CAS Mutex Lock Lifecycle #21",
       "precondition": "Simultaneous identical deliveries and payload tampering attempts",
-      "input": "mutex_test_event_d741cc9f",
+      "input": "mutex_test_event_6b0cf285",
       "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
       "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
       "status": "PASS",
       "evidence": "CAS lock successfully isolated single execution and dropped collisions",
-      "execution_time_ms": 0.422,
+      "execution_time_ms": 0.502,
       "severity": "HIGH"
     },
     {
@@ -870,12 +870,12 @@
       "category": "Idempotency & Mutex",
       "description": "Atomic CAS Mutex Lock Lifecycle #22",
       "precondition": "Simultaneous identical deliveries and payload tampering attempts",
-      "input": "mutex_test_event_a535564d",
+      "input": "mutex_test_event_9237718c",
       "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
       "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
       "status": "PASS",
       "evidence": "CAS lock successfully isolated single execution and dropped collisions",
-      "execution_time_ms": 0.697,
+      "execution_time_ms": 0.277,
       "severity": "HIGH"
     },
     {
@@ -883,12 +883,12 @@
       "category": "Idempotency & Mutex",
       "description": "Atomic CAS Mutex Lock Lifecycle #23",
       "precondition": "Simultaneous identical deliveries and payload tampering attempts",
-      "input": "mutex_test_event_536a36d1",
+      "input": "mutex_test_event_7e9ef718",
       "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
       "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
       "status": "PASS",
       "evidence": "CAS lock successfully isolated single execution and dropped collisions",
-      "execution_time_ms": 0.372,
+      "execution_time_ms": 0.185,
       "severity": "HIGH"
     },
     {
@@ -896,12 +896,12 @@
       "category": "Idempotency & Mutex",
       "description": "Atomic CAS Mutex Lock Lifecycle #24",
       "precondition": "Simultaneous identical deliveries and payload tampering attempts",
-      "input": "mutex_test_event_da5cc29a",
+      "input": "mutex_test_event_a987588d",
       "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
       "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
       "status": "PASS",
       "evidence": "CAS lock successfully isolated single execution and dropped collisions",
-      "execution_time_ms": 0.314,
+      "execution_time_ms": 0.158,
       "severity": "HIGH"
     },
     {
@@ -909,12 +909,12 @@
       "category": "Idempotency & Mutex",
       "description": "Atomic CAS Mutex Lock Lifecycle #25",
       "precondition": "Simultaneous identical deliveries and payload tampering attempts",
-      "input": "mutex_test_event_bc0e6895",
+      "input": "mutex_test_event_865a3eb1",
       "expected_result": "Acquired=True, Duplicate=False, Tampered=False",
       "actual_result": "Acquired=True, Duplicate=False, Tampered=False",
       "status": "PASS",
       "evidence": "CAS lock successfully isolated single execution and dropped collisions",
-      "execution_time_ms": 0.306,
+      "execution_time_ms": 0.333,
       "severity": "HIGH"
     },
     {
@@ -927,7 +927,7 @@
       "actual_result": "+919*******10",
       "status": "PASS",
       "evidence": "Masked representation verified: +919*******10",
-      "execution_time_ms": 0.131,
+      "execution_time_ms": 0.141,
       "severity": "HIGH"
     },
     {
@@ -953,7 +953,7 @@
       "actual_result": "+919*******55",
       "status": "PASS",
       "evidence": "Masked representation verified: +919*******55",
-      "execution_time_ms": 0.012,
+      "execution_time_ms": 0.014,
       "severity": "HIGH"
     },
     {
@@ -966,7 +966,7 @@
       "actual_result": "p**********a@fintechcorp.in",
       "status": "PASS",
       "evidence": "Masked representation verified: p**********a@fintechcorp.in",
-      "execution_time_ms": 0.004,
+      "execution_time_ms": 0.003,
       "severity": "HIGH"
     },
     {
@@ -979,7 +979,7 @@
       "actual_result": "9876****10",
       "status": "PASS",
       "evidence": "Masked representation verified: 9876****10",
-      "execution_time_ms": 0.004,
+      "execution_time_ms": 0.006,
       "severity": "HIGH"
     },
     {
@@ -992,7 +992,7 @@
       "actual_result": "s*****t@merchant.org",
       "status": "PASS",
       "evidence": "Masked representation verified: s*****t@merchant.org",
-      "execution_time_ms": 0.002,
+      "execution_time_ms": 0.003,
       "severity": "HIGH"
     },
     {
@@ -1005,7 +1005,7 @@
       "actual_result": "+918*******88",
       "status": "PASS",
       "evidence": "Masked representation verified: +918*******88",
-      "execution_time_ms": 0.004,
+      "execution_time_ms": 0.005,
       "severity": "HIGH"
     },
     {
@@ -1018,7 +1018,7 @@
       "actual_result": "d**************s@cloud.io",
       "status": "PASS",
       "evidence": "Masked representation verified: d**************s@cloud.io",
-      "execution_time_ms": 0.002,
+      "execution_time_ms": 0.007,
       "severity": "HIGH"
     },
     {
@@ -1031,7 +1031,7 @@
       "actual_result": "+917*******77",
       "status": "PASS",
       "evidence": "Masked representation verified: +917*******77",
-      "execution_time_ms": 0.003,
+      "execution_time_ms": 0.006,
       "severity": "HIGH"
     },
     {
@@ -1044,7 +1044,7 @@
       "actual_result": "a*********l@startup.co",
       "status": "PASS",
       "evidence": "Masked representation verified: a*********l@startup.co",
-      "execution_time_ms": 0.002,
+      "execution_time_ms": 0.003,
       "severity": "HIGH"
     },
     {
@@ -1057,7 +1057,7 @@
       "actual_result": "+916*******66",
       "status": "PASS",
       "evidence": "Masked representation verified: +916*******66",
-      "execution_time_ms": 0.002,
+      "execution_time_ms": 0.005,
       "severity": "HIGH"
     },
     {
@@ -1083,7 +1083,7 @@
       "actual_result": "+919*******89",
       "status": "PASS",
       "evidence": "Masked representation verified: +919*******89",
-      "execution_time_ms": 0.003,
+      "execution_time_ms": 0.004,
       "severity": "HIGH"
     },
     {
@@ -1096,7 +1096,7 @@
       "actual_result": "f*****r@stealth.ai",
       "status": "PASS",
       "evidence": "Masked representation verified: f*****r@stealth.ai",
-      "execution_time_ms": 0.001,
+      "execution_time_ms": 0.002,
       "severity": "HIGH"
     },
     {
@@ -1109,7 +1109,7 @@
       "actual_result": "+919*******33",
       "status": "PASS",
       "evidence": "Masked representation verified: +919*******33",
-      "execution_time_ms": 0.002,
+      "execution_time_ms": 0.003,
       "severity": "HIGH"
     },
     {
@@ -1135,7 +1135,7 @@
       "actual_result": "+918*******78",
       "status": "PASS",
       "evidence": "Masked representation verified: +918*******78",
-      "execution_time_ms": 0.002,
+      "execution_time_ms": 0.003,
       "severity": "HIGH"
     },
     {
@@ -1187,7 +1187,7 @@
       "actual_result": "QuietHours=True",
       "status": "PASS",
       "evidence": "TRAI boundary enforced: 00:00 IST -> Quiet=True",
-      "execution_time_ms": 0.039,
+      "execution_time_ms": 0.075,
       "severity": "HIGH"
     },
     {
@@ -1200,7 +1200,7 @@
       "actual_result": "QuietHours=True",
       "status": "PASS",
       "evidence": "TRAI boundary enforced: 01:00 IST -> Quiet=True",
-      "execution_time_ms": 0.022,
+      "execution_time_ms": 0.01,
       "severity": "HIGH"
     },
     {
@@ -1213,7 +1213,7 @@
       "actual_result": "QuietHours=True",
       "status": "PASS",
       "evidence": "TRAI boundary enforced: 02:00 IST -> Quiet=True",
-      "execution_time_ms": 0.014,
+      "execution_time_ms": 0.005,
       "severity": "HIGH"
     },
     {
@@ -1226,7 +1226,7 @@
       "actual_result": "QuietHours=True",
       "status": "PASS",
       "evidence": "TRAI boundary enforced: 03:00 IST -> Quiet=True",
-      "execution_time_ms": 0.006,
+      "execution_time_ms": 0.003,
       "severity": "HIGH"
     },
     {
@@ -1239,7 +1239,7 @@
       "actual_result": "QuietHours=True",
       "status": "PASS",
       "evidence": "TRAI boundary enforced: 04:00 IST -> Quiet=True",
-      "execution_time_ms": 0.005,
+      "execution_time_ms": 0.004,
       "severity": "HIGH"
     },
     {
@@ -1252,7 +1252,7 @@
       "actual_result": "QuietHours=True",
       "status": "PASS",
       "evidence": "TRAI boundary enforced: 05:00 IST -> Quiet=True",
-      "execution_time_ms": 0.005,
+      "execution_time_ms": 0.004,
       "severity": "HIGH"
     },
     {
@@ -1265,7 +1265,7 @@
       "actual_result": "QuietHours=True",
       "status": "PASS",
       "evidence": "TRAI boundary enforced: 06:00 IST -> Quiet=True",
-      "execution_time_ms": 0.005,
+      "execution_time_ms": 0.016,
       "severity": "HIGH"
     },
     {
@@ -1278,7 +1278,7 @@
       "actual_result": "QuietHours=True",
       "status": "PASS",
       "evidence": "TRAI boundary enforced: 07:00 IST -> Quiet=True",
-      "execution_time_ms": 0.004,
+      "execution_time_ms": 0.008,
       "severity": "HIGH"
     },
     {
@@ -1304,7 +1304,7 @@
       "actual_result": "QuietHours=False",
       "status": "PASS",
       "evidence": "TRAI boundary enforced: 09:00 IST -> Quiet=False",
-      "execution_time_ms": 0.004,
+      "execution_time_ms": 0.007,
       "severity": "HIGH"
     },
     {
@@ -1330,7 +1330,7 @@
       "actual_result": "QuietHours=False",
       "status": "PASS",
       "evidence": "TRAI boundary enforced: 11:00 IST -> Quiet=False",
-      "execution_time_ms": 0.005,
+      "execution_time_ms": 0.004,
       "severity": "HIGH"
     },
     {
@@ -1343,7 +1343,7 @@
       "actual_result": "QuietHours=False",
       "status": "PASS",
       "evidence": "TRAI boundary enforced: 12:00 IST -> Quiet=False",
-      "execution_time_ms": 0.007,
+      "execution_time_ms": 0.003,
       "severity": "HIGH"
     },
     {
@@ -1356,7 +1356,7 @@
       "actual_result": "QuietHours=False",
       "status": "PASS",
       "evidence": "TRAI boundary enforced: 13:00 IST -> Quiet=False",
-      "execution_time_ms": 0.005,
+      "execution_time_ms": 0.004,
       "severity": "HIGH"
     },
     {
@@ -1369,7 +1369,7 @@
       "actual_result": "QuietHours=False",
       "status": "PASS",
       "evidence": "TRAI boundary enforced: 14:00 IST -> Quiet=False",
-      "execution_time_ms": 0.004,
+      "execution_time_ms": 0.003,
       "severity": "HIGH"
     },
     {
@@ -1382,7 +1382,7 @@
       "actual_result": "QuietHours=False",
       "status": "PASS",
       "evidence": "TRAI boundary enforced: 15:00 IST -> Quiet=False",
-      "execution_time_ms": 0.004,
+      "execution_time_ms": 0.003,
       "severity": "HIGH"
     },
     {
@@ -1395,7 +1395,7 @@
       "actual_result": "QuietHours=False",
       "status": "PASS",
       "evidence": "TRAI boundary enforced: 16:00 IST -> Quiet=False",
-      "execution_time_ms": 0.004,
+      "execution_time_ms": 0.003,
       "severity": "HIGH"
     },
     {
@@ -1408,7 +1408,7 @@
       "actual_result": "QuietHours=False",
       "status": "PASS",
       "evidence": "TRAI boundary enforced: 17:00 IST -> Quiet=False",
-      "execution_time_ms": 0.005,
+      "execution_time_ms": 0.003,
       "severity": "HIGH"
     },
     {
@@ -1421,7 +1421,7 @@
       "actual_result": "QuietHours=False",
       "status": "PASS",
       "evidence": "TRAI boundary enforced: 18:00 IST -> Quiet=False",
-      "execution_time_ms": 0.005,
+      "execution_time_ms": 0.003,
       "severity": "HIGH"
     },
     {
@@ -1434,7 +1434,7 @@
       "actual_result": "QuietHours=False",
       "status": "PASS",
       "evidence": "TRAI boundary enforced: 19:00 IST -> Quiet=False",
-      "execution_time_ms": 0.004,
+      "execution_time_ms": 0.003,
       "severity": "HIGH"
     },
     {
@@ -1447,7 +1447,7 @@
       "actual_result": "QuietHours=False",
       "status": "PASS",
       "evidence": "TRAI boundary enforced: 20:00 IST -> Quiet=False",
-      "execution_time_ms": 0.005,
+      "execution_time_ms": 0.003,
       "severity": "HIGH"
     },
     {
@@ -1460,7 +1460,7 @@
       "actual_result": "QuietHours=True",
       "status": "PASS",
       "evidence": "TRAI boundary enforced: 21:00 IST -> Quiet=True",
-      "execution_time_ms": 0.004,
+      "execution_time_ms": 0.003,
       "severity": "HIGH"
     },
     {
@@ -1473,7 +1473,7 @@
       "actual_result": "QuietHours=True",
       "status": "PASS",
       "evidence": "TRAI boundary enforced: 22:00 IST -> Quiet=True",
-      "execution_time_ms": 0.004,
+      "execution_time_ms": 0.003,
       "severity": "HIGH"
     },
     {
@@ -1486,7 +1486,7 @@
       "actual_result": "QuietHours=True",
       "status": "PASS",
       "evidence": "TRAI boundary enforced: 23:00 IST -> Quiet=True",
-      "execution_time_ms": 0.007,
+      "execution_time_ms": 0.003,
       "severity": "HIGH"
     },
     {
@@ -1499,7 +1499,7 @@
       "actual_result": "QuietHours=True",
       "status": "PASS",
       "evidence": "TRAI boundary enforced: 00:00 IST -> Quiet=True",
-      "execution_time_ms": 0.004,
+      "execution_time_ms": 0.003,
       "severity": "HIGH"
     },
     {
@@ -1512,7 +1512,7 @@
       "actual_result": "ALLOWED",
       "status": "PASS",
       "evidence": "3-Retry Ceiling enforced: attempt 1 -> ALLOWED",
-      "execution_time_ms": 0.101,
+      "execution_time_ms": 0.113,
       "severity": "HIGH"
     },
     {
@@ -1525,7 +1525,7 @@
       "actual_result": "ALLOWED",
       "status": "PASS",
       "evidence": "3-Retry Ceiling enforced: attempt 2 -> ALLOWED",
-      "execution_time_ms": 0.031,
+      "execution_time_ms": 0.023,
       "severity": "HIGH"
     },
     {
@@ -1538,7 +1538,7 @@
       "actual_result": "ALLOWED",
       "status": "PASS",
       "evidence": "3-Retry Ceiling enforced: attempt 3 -> ALLOWED",
-      "execution_time_ms": 0.021,
+      "execution_time_ms": 0.024,
       "severity": "HIGH"
     },
     {
@@ -1551,7 +1551,7 @@
       "actual_result": "SUPPRESSED",
       "status": "PASS",
       "evidence": "3-Retry Ceiling enforced: attempt 4 -> SUPPRESSED",
-      "execution_time_ms": 0.021,
+      "execution_time_ms": 0.017,
       "severity": "HIGH"
     },
     {
@@ -1564,7 +1564,7 @@
       "actual_result": "SUPPRESSED",
       "status": "PASS",
       "evidence": "3-Retry Ceiling enforced: attempt 5 -> SUPPRESSED",
-      "execution_time_ms": 0.016,
+      "execution_time_ms": 0.011,
       "severity": "HIGH"
     },
     {
@@ -1577,7 +1577,7 @@
       "actual_result": "SUPPRESSED",
       "status": "PASS",
       "evidence": "3-Retry Ceiling enforced: attempt 6 -> SUPPRESSED",
-      "execution_time_ms": 0.013,
+      "execution_time_ms": 0.01,
       "severity": "HIGH"
     },
     {
@@ -1590,7 +1590,7 @@
       "actual_result": "SUPPRESSED",
       "status": "PASS",
       "evidence": "3-Retry Ceiling enforced: attempt 7 -> SUPPRESSED",
-      "execution_time_ms": 0.015,
+      "execution_time_ms": 0.01,
       "severity": "HIGH"
     },
     {
@@ -1603,7 +1603,7 @@
       "actual_result": "SUPPRESSED",
       "status": "PASS",
       "evidence": "3-Retry Ceiling enforced: attempt 8 -> SUPPRESSED",
-      "execution_time_ms": 0.021,
+      "execution_time_ms": 0.014,
       "severity": "HIGH"
     },
     {
@@ -1616,7 +1616,7 @@
       "actual_result": "SUPPRESSED",
       "status": "PASS",
       "evidence": "3-Retry Ceiling enforced: attempt 9 -> SUPPRESSED",
-      "execution_time_ms": 0.017,
+      "execution_time_ms": 0.011,
       "severity": "HIGH"
     },
     {
@@ -1629,7 +1629,7 @@
       "actual_result": "SUPPRESSED",
       "status": "PASS",
       "evidence": "3-Retry Ceiling enforced: attempt 10 -> SUPPRESSED",
-      "execution_time_ms": 0.016,
+      "execution_time_ms": 0.009,
       "severity": "HIGH"
     },
     {
@@ -1642,7 +1642,7 @@
       "actual_result": "SUPPRESSED",
       "status": "PASS",
       "evidence": "3-Retry Ceiling enforced: attempt 11 -> SUPPRESSED",
-      "execution_time_ms": 0.023,
+      "execution_time_ms": 0.009,
       "severity": "HIGH"
     },
     {
@@ -1655,7 +1655,7 @@
       "actual_result": "SUPPRESSED",
       "status": "PASS",
       "evidence": "3-Retry Ceiling enforced: attempt 12 -> SUPPRESSED",
-      "execution_time_ms": 0.02,
+      "execution_time_ms": 0.012,
       "severity": "HIGH"
     },
     {
@@ -1668,7 +1668,7 @@
       "actual_result": "SUPPRESSED",
       "status": "PASS",
       "evidence": "3-Retry Ceiling enforced: attempt 13 -> SUPPRESSED",
-      "execution_time_ms": 0.02,
+      "execution_time_ms": 0.009,
       "severity": "HIGH"
     },
     {
@@ -1681,7 +1681,7 @@
       "actual_result": "SUPPRESSED",
       "status": "PASS",
       "evidence": "3-Retry Ceiling enforced: attempt 14 -> SUPPRESSED",
-      "execution_time_ms": 0.026,
+      "execution_time_ms": 0.008,
       "severity": "HIGH"
     },
     {
@@ -1694,7 +1694,7 @@
       "actual_result": "SUPPRESSED",
       "status": "PASS",
       "evidence": "3-Retry Ceiling enforced: attempt 15 -> SUPPRESSED",
-      "execution_time_ms": 0.041,
+      "execution_time_ms": 0.009,
       "severity": "HIGH"
     },
     {
@@ -1707,7 +1707,7 @@
       "actual_result": "SUPPRESSED",
       "status": "PASS",
       "evidence": "3-Retry Ceiling enforced: attempt 16 -> SUPPRESSED",
-      "execution_time_ms": 0.092,
+      "execution_time_ms": 0.01,
       "severity": "HIGH"
     },
     {
@@ -1720,7 +1720,7 @@
       "actual_result": "SUPPRESSED",
       "status": "PASS",
       "evidence": "3-Retry Ceiling enforced: attempt 17 -> SUPPRESSED",
-      "execution_time_ms": 0.091,
+      "execution_time_ms": 0.015,
       "severity": "HIGH"
     },
     {
@@ -1733,7 +1733,7 @@
       "actual_result": "SUPPRESSED",
       "status": "PASS",
       "evidence": "3-Retry Ceiling enforced: attempt 18 -> SUPPRESSED",
-      "execution_time_ms": 0.042,
+      "execution_time_ms": 0.01,
       "severity": "HIGH"
     },
     {
@@ -1746,7 +1746,7 @@
       "actual_result": "SUPPRESSED",
       "status": "PASS",
       "evidence": "3-Retry Ceiling enforced: attempt 19 -> SUPPRESSED",
-      "execution_time_ms": 0.026,
+      "execution_time_ms": 0.009,
       "severity": "HIGH"
     },
     {
@@ -1759,7 +1759,7 @@
       "actual_result": "SUPPRESSED",
       "status": "PASS",
       "evidence": "3-Retry Ceiling enforced: attempt 20 -> SUPPRESSED",
-      "execution_time_ms": 0.021,
+      "execution_time_ms": 0.008,
       "severity": "HIGH"
     },
     {
@@ -1772,7 +1772,7 @@
       "actual_result": "\u20b950.00",
       "status": "PASS",
       "evidence": "min(10%, \u20b9500) enforced: \u20b950.00",
-      "execution_time_ms": 0.007,
+      "execution_time_ms": 0.017,
       "severity": "HIGH"
     },
     {
@@ -1785,7 +1785,7 @@
       "actual_result": "\u20b950.00",
       "status": "PASS",
       "evidence": "min(10%, \u20b9500) enforced: \u20b950.00",
-      "execution_time_ms": 0.005,
+      "execution_time_ms": 0.002,
       "severity": "HIGH"
     },
     {
@@ -1798,7 +1798,7 @@
       "actual_result": "\u20b9249.90",
       "status": "PASS",
       "evidence": "min(10%, \u20b9500) enforced: \u20b9249.90",
-      "execution_time_ms": 0.003,
+      "execution_time_ms": 0.002,
       "severity": "HIGH"
     },
     {
@@ -1824,7 +1824,7 @@
       "actual_result": "\u20b9500.00",
       "status": "PASS",
       "evidence": "min(10%, \u20b9500) enforced: \u20b9500.00",
-      "execution_time_ms": 0.221,
+      "execution_time_ms": 0.003,
       "severity": "HIGH"
     },
     {
@@ -1837,7 +1837,7 @@
       "actual_result": "\u20b9500.00",
       "status": "PASS",
       "evidence": "min(10%, \u20b9500) enforced: \u20b9500.00",
-      "execution_time_ms": 0.003,
+      "execution_time_ms": 0.002,
       "severity": "HIGH"
     },
     {
@@ -1850,7 +1850,7 @@
       "actual_result": "\u20b9500.00",
       "status": "PASS",
       "evidence": "min(10%, \u20b9500) enforced: \u20b9500.00",
-      "execution_time_ms": 0.003,
+      "execution_time_ms": 0.002,
       "severity": "HIGH"
     },
     {
@@ -1863,7 +1863,7 @@
       "actual_result": "\u20b9500.00",
       "status": "PASS",
       "evidence": "min(10%, \u20b9500) enforced: \u20b9500.00",
-      "execution_time_ms": 0.003,
+      "execution_time_ms": 0.002,
       "severity": "HIGH"
     },
     {
@@ -1876,7 +1876,7 @@
       "actual_result": "\u20b9500.00",
       "status": "PASS",
       "evidence": "min(10%, \u20b9500) enforced: \u20b9500.00",
-      "execution_time_ms": 0.003,
+      "execution_time_ms": 0.002,
       "severity": "HIGH"
     },
     {
@@ -1889,7 +1889,7 @@
       "actual_result": "\u20b9100.00",
       "status": "PASS",
       "evidence": "min(10%, \u20b9500) enforced: \u20b9100.00",
-      "execution_time_ms": 0.002,
+      "execution_time_ms": 0.001,
       "severity": "HIGH"
     },
     {
@@ -1902,7 +1902,7 @@
       "actual_result": "\u20b9500.00",
       "status": "PASS",
       "evidence": "min(10%, \u20b9500) enforced: \u20b9500.00",
-      "execution_time_ms": 0.004,
+      "execution_time_ms": 0.001,
       "severity": "HIGH"
     },
     {
@@ -1915,7 +1915,7 @@
       "actual_result": "\u20b9500.00",
       "status": "PASS",
       "evidence": "min(10%, \u20b9500) enforced: \u20b9500.00",
-      "execution_time_ms": 0.003,
+      "execution_time_ms": 0.001,
       "severity": "HIGH"
     },
     {
@@ -1928,7 +1928,7 @@
       "actual_result": "\u20b910.00",
       "status": "PASS",
       "evidence": "min(10%, \u20b9500) enforced: \u20b910.00",
-      "execution_time_ms": 0.002,
+      "execution_time_ms": 0.001,
       "severity": "HIGH"
     },
     {
@@ -1941,7 +1941,7 @@
       "actual_result": "\u20b910.00",
       "status": "PASS",
       "evidence": "min(10%, \u20b9500) enforced: \u20b910.00",
-      "execution_time_ms": 0.002,
+      "execution_time_ms": 0.001,
       "severity": "HIGH"
     },
     {
@@ -1954,7 +1954,7 @@
       "actual_result": "\u20b924.00",
       "status": "PASS",
       "evidence": "min(10%, \u20b9500) enforced: \u20b924.00",
-      "execution_time_ms": 0.004,
+      "execution_time_ms": 0.001,
       "severity": "HIGH"
     },
     {
@@ -1967,7 +1967,7 @@
       "actual_result": "\u20b940.00",
       "status": "PASS",
       "evidence": "min(10%, \u20b9500) enforced: \u20b940.00",
-      "execution_time_ms": 0.002,
+      "execution_time_ms": 0.001,
       "severity": "HIGH"
     },
     {
@@ -1980,7 +1980,7 @@
       "actual_result": "\u20b960.00",
       "status": "PASS",
       "evidence": "min(10%, \u20b9500) enforced: \u20b960.00",
-      "execution_time_ms": 0.002,
+      "execution_time_ms": 0.001,
       "severity": "HIGH"
     },
     {
@@ -1993,7 +1993,7 @@
       "actual_result": "\u20b970.00",
       "status": "PASS",
       "evidence": "min(10%, \u20b9500) enforced: \u20b970.00",
-      "execution_time_ms": 0.002,
+      "execution_time_ms": 0.001,
       "severity": "HIGH"
     },
     {
@@ -2006,7 +2006,7 @@
       "actual_result": "\u20b980.00",
       "status": "PASS",
       "evidence": "min(10%, \u20b9500) enforced: \u20b980.00",
-      "execution_time_ms": 0.002,
+      "execution_time_ms": 0.001,
       "severity": "HIGH"
     },
     {
@@ -2019,7 +2019,7 @@
       "actual_result": "\u20b990.00",
       "status": "PASS",
       "evidence": "min(10%, \u20b9500) enforced: \u20b990.00",
-      "execution_time_ms": 0.002,
+      "execution_time_ms": 0.001,
       "severity": "HIGH"
     },
     {
@@ -2032,7 +2032,7 @@
       "actual_result": "\u20b9150.00",
       "status": "PASS",
       "evidence": "min(10%, \u20b9500) enforced: \u20b9150.00",
-      "execution_time_ms": 0.002,
+      "execution_time_ms": 0.001,
       "severity": "HIGH"
     },
     {
@@ -2045,7 +2045,7 @@
       "actual_result": "\u20b9200.00",
       "status": "PASS",
       "evidence": "min(10%, \u20b9500) enforced: \u20b9200.00",
-      "execution_time_ms": 0.002,
+      "execution_time_ms": 0.001,
       "severity": "HIGH"
     },
     {
@@ -2058,7 +2058,7 @@
       "actual_result": "\u20b9300.00",
       "status": "PASS",
       "evidence": "min(10%, \u20b9500) enforced: \u20b9300.00",
-      "execution_time_ms": 0.003,
+      "execution_time_ms": 0.001,
       "severity": "HIGH"
     },
     {
@@ -2071,7 +2071,7 @@
       "actual_result": "\u20b9400.00",
       "status": "PASS",
       "evidence": "min(10%, \u20b9500) enforced: \u20b9400.00",
-      "execution_time_ms": 0.002,
+      "execution_time_ms": 0.001,
       "severity": "HIGH"
     },
     {
@@ -2084,7 +2084,7 @@
       "actual_result": "\u20b9500.00",
       "status": "PASS",
       "evidence": "min(10%, \u20b9500) enforced: \u20b9500.00",
-      "execution_time_ms": 0.002,
+      "execution_time_ms": 0.001,
       "severity": "HIGH"
     },
     {
@@ -2097,7 +2097,7 @@
       "actual_result": "ALLOWED",
       "status": "PASS",
       "evidence": "Threshold rule (>\u20b950k & conf<0.85) enforced: ALLOWED",
-      "execution_time_ms": 0.146,
+      "execution_time_ms": 0.017,
       "severity": "HIGH"
     },
     {
@@ -2110,7 +2110,7 @@
       "actual_result": "ALLOWED",
       "status": "PASS",
       "evidence": "Threshold rule (>\u20b950k & conf<0.85) enforced: ALLOWED",
-      "execution_time_ms": 0.041,
+      "execution_time_ms": 0.031,
       "severity": "HIGH"
     },
     {
@@ -2123,7 +2123,7 @@
       "actual_result": "ALLOWED",
       "status": "PASS",
       "evidence": "Threshold rule (>\u20b950k & conf<0.85) enforced: ALLOWED",
-      "execution_time_ms": 0.032,
+      "execution_time_ms": 0.013,
       "severity": "HIGH"
     },
     {
@@ -2136,7 +2136,7 @@
       "actual_result": "ESCALATED_HUMAN",
       "status": "PASS",
       "evidence": "Threshold rule (>\u20b950k & conf<0.85) enforced: ESCALATED_HUMAN",
-      "execution_time_ms": 0.044,
+      "execution_time_ms": 0.018,
       "severity": "HIGH"
     },
     {
@@ -2149,7 +2149,7 @@
       "actual_result": "ESCALATED_HUMAN",
       "status": "PASS",
       "evidence": "Threshold rule (>\u20b950k & conf<0.85) enforced: ESCALATED_HUMAN",
-      "execution_time_ms": 0.035,
+      "execution_time_ms": 0.013,
       "severity": "HIGH"
     },
     {
@@ -2162,7 +2162,7 @@
       "actual_result": "ESCALATED_HUMAN",
       "status": "PASS",
       "evidence": "Threshold rule (>\u20b950k & conf<0.85) enforced: ESCALATED_HUMAN",
-      "execution_time_ms": 0.029,
+      "execution_time_ms": 0.013,
       "severity": "HIGH"
     },
     {
@@ -2175,7 +2175,7 @@
       "actual_result": "ALLOWED",
       "status": "PASS",
       "evidence": "Threshold rule (>\u20b950k & conf<0.85) enforced: ALLOWED",
-      "execution_time_ms": 0.03,
+      "execution_time_ms": 0.024,
       "severity": "HIGH"
     },
     {
@@ -2188,7 +2188,7 @@
       "actual_result": "ESCALATED_HUMAN",
       "status": "PASS",
       "evidence": "Threshold rule (>\u20b950k & conf<0.85) enforced: ESCALATED_HUMAN",
-      "execution_time_ms": 0.027,
+      "execution_time_ms": 0.011,
       "severity": "HIGH"
     },
     {
@@ -2201,7 +2201,7 @@
       "actual_result": "ESCALATED_HUMAN",
       "status": "PASS",
       "evidence": "Threshold rule (>\u20b950k & conf<0.85) enforced: ESCALATED_HUMAN",
-      "execution_time_ms": 0.03,
+      "execution_time_ms": 0.011,
       "severity": "HIGH"
     },
     {
@@ -2214,7 +2214,7 @@
       "actual_result": "ALLOWED",
       "status": "PASS",
       "evidence": "Threshold rule (>\u20b950k & conf<0.85) enforced: ALLOWED",
-      "execution_time_ms": 0.027,
+      "execution_time_ms": 0.01,
       "severity": "HIGH"
     },
     {
@@ -2227,7 +2227,7 @@
       "actual_result": "ALLOWED",
       "status": "PASS",
       "evidence": "Threshold rule (>\u20b950k & conf<0.85) enforced: ALLOWED",
-      "execution_time_ms": 0.029,
+      "execution_time_ms": 0.011,
       "severity": "HIGH"
     },
     {
@@ -2240,7 +2240,7 @@
       "actual_result": "ESCALATED_HUMAN",
       "status": "PASS",
       "evidence": "Threshold rule (>\u20b950k & conf<0.85) enforced: ESCALATED_HUMAN",
-      "execution_time_ms": 0.03,
+      "execution_time_ms": 0.011,
       "severity": "HIGH"
     },
     {
@@ -2253,7 +2253,7 @@
       "actual_result": "ALLOWED",
       "status": "PASS",
       "evidence": "Threshold rule (>\u20b950k & conf<0.85) enforced: ALLOWED",
-      "execution_time_ms": 0.029,
+      "execution_time_ms": 0.01,
       "severity": "HIGH"
     },
     {
@@ -2266,7 +2266,7 @@
       "actual_result": "ESCALATED_HUMAN",
       "status": "PASS",
       "evidence": "Threshold rule (>\u20b950k & conf<0.85) enforced: ESCALATED_HUMAN",
-      "execution_time_ms": 0.055,
+      "execution_time_ms": 0.01,
       "severity": "HIGH"
     },
     {
@@ -2279,7 +2279,7 @@
       "actual_result": "ALLOWED",
       "status": "PASS",
       "evidence": "Threshold rule (>\u20b950k & conf<0.85) enforced: ALLOWED",
-      "execution_time_ms": 0.028,
+      "execution_time_ms": 0.01,
       "severity": "HIGH"
     },
     {
@@ -2292,7 +2292,7 @@
       "actual_result": "ESCALATED_HUMAN",
       "status": "PASS",
       "evidence": "Threshold rule (>\u20b950k & conf<0.85) enforced: ESCALATED_HUMAN",
-      "execution_time_ms": 0.028,
+      "execution_time_ms": 0.01,
       "severity": "HIGH"
     },
     {
@@ -2305,7 +2305,7 @@
       "actual_result": "ALLOWED",
       "status": "PASS",
       "evidence": "Threshold rule (>\u20b950k & conf<0.85) enforced: ALLOWED",
-      "execution_time_ms": 0.033,
+      "execution_time_ms": 0.011,
       "severity": "HIGH"
     },
     {
@@ -2318,7 +2318,7 @@
       "actual_result": "ESCALATED_HUMAN",
       "status": "PASS",
       "evidence": "Threshold rule (>\u20b950k & conf<0.85) enforced: ESCALATED_HUMAN",
-      "execution_time_ms": 0.026,
+      "execution_time_ms": 0.01,
       "severity": "HIGH"
     },
     {
@@ -2331,7 +2331,7 @@
       "actual_result": "ALLOWED",
       "status": "PASS",
       "evidence": "Threshold rule (>\u20b950k & conf<0.85) enforced: ALLOWED",
-      "execution_time_ms": 0.027,
+      "execution_time_ms": 0.01,
       "severity": "HIGH"
     },
     {
@@ -2344,7 +2344,7 @@
       "actual_result": "ESCALATED_HUMAN",
       "status": "PASS",
       "evidence": "Threshold rule (>\u20b950k & conf<0.85) enforced: ESCALATED_HUMAN",
-      "execution_time_ms": 0.036,
+      "execution_time_ms": 0.009,
       "severity": "HIGH"
     },
     {
@@ -2357,7 +2357,7 @@
       "actual_result": "TRANSIENT_GATEWAY",
       "status": "PASS",
       "evidence": "Diagnosed class=TRANSIENT_GATEWAY (confidence=0.94)",
-      "execution_time_ms": 0.053,
+      "execution_time_ms": 0.024,
       "severity": "HIGH"
     },
     {
@@ -2370,7 +2370,7 @@
       "actual_result": "TRANSIENT_GATEWAY",
       "status": "PASS",
       "evidence": "Diagnosed class=TRANSIENT_GATEWAY (confidence=0.91)",
-      "execution_time_ms": 0.034,
+      "execution_time_ms": 0.009,
       "severity": "HIGH"
     },
     {
@@ -2383,7 +2383,7 @@
       "actual_result": "INSUFFICIENT_FUNDS",
       "status": "PASS",
       "evidence": "Diagnosed class=INSUFFICIENT_FUNDS (confidence=0.92)",
-      "execution_time_ms": 0.02,
+      "execution_time_ms": 0.144,
       "severity": "HIGH"
     },
     {
@@ -2396,7 +2396,7 @@
       "actual_result": "ABANDONED_AUTH",
       "status": "PASS",
       "evidence": "Diagnosed class=ABANDONED_AUTH (confidence=0.86)",
-      "execution_time_ms": 0.019,
+      "execution_time_ms": 0.013,
       "severity": "HIGH"
     },
     {
@@ -2409,7 +2409,7 @@
       "actual_result": "EXPIRED_MANDATE",
       "status": "PASS",
       "evidence": "Diagnosed class=EXPIRED_MANDATE (confidence=0.88)",
-      "execution_time_ms": 0.019,
+      "execution_time_ms": 0.007,
       "severity": "HIGH"
     },
     {
@@ -2422,7 +2422,7 @@
       "actual_result": "SUSPICIOUS_VELOCITY",
       "status": "PASS",
       "evidence": "Diagnosed class=SUSPICIOUS_VELOCITY (confidence=0.95)",
-      "execution_time_ms": 0.019,
+      "execution_time_ms": 0.026,
       "severity": "HIGH"
     },
     {
@@ -2435,7 +2435,7 @@
       "actual_result": "TRANSIENT_GATEWAY",
       "status": "PASS",
       "evidence": "Diagnosed class=TRANSIENT_GATEWAY (confidence=0.96)",
-      "execution_time_ms": 0.03,
+      "execution_time_ms": 0.008,
       "severity": "HIGH"
     },
     {
@@ -2448,7 +2448,7 @@
       "actual_result": "INSUFFICIENT_FUNDS",
       "status": "PASS",
       "evidence": "Diagnosed class=INSUFFICIENT_FUNDS (confidence=0.90)",
-      "execution_time_ms": 0.018,
+      "execution_time_ms": 0.013,
       "severity": "HIGH"
     },
     {
@@ -2461,7 +2461,7 @@
       "actual_result": "EXPIRED_MANDATE",
       "status": "PASS",
       "evidence": "Diagnosed class=EXPIRED_MANDATE (confidence=0.88)",
-      "execution_time_ms": 0.032,
+      "execution_time_ms": 0.016,
       "severity": "HIGH"
     },
     {
@@ -2474,7 +2474,7 @@
       "actual_result": "TRANSIENT_GATEWAY",
       "status": "PASS",
       "evidence": "Diagnosed class=TRANSIENT_GATEWAY (confidence=0.94)",
-      "execution_time_ms": 0.02,
+      "execution_time_ms": 0.008,
       "severity": "HIGH"
     },
     {
@@ -2487,7 +2487,7 @@
       "actual_result": "ABANDONED_AUTH",
       "status": "PASS",
       "evidence": "Diagnosed class=ABANDONED_AUTH (confidence=0.86)",
-      "execution_time_ms": 0.02,
+      "execution_time_ms": 0.008,
       "severity": "HIGH"
     },
     {
@@ -2500,7 +2500,7 @@
       "actual_result": "SUSPICIOUS_VELOCITY",
       "status": "PASS",
       "evidence": "Diagnosed class=SUSPICIOUS_VELOCITY (confidence=0.95)",
-      "execution_time_ms": 0.016,
+      "execution_time_ms": 0.007,
       "severity": "HIGH"
     },
     {
@@ -2513,7 +2513,7 @@
       "actual_result": "TRANSIENT_GATEWAY",
       "status": "PASS",
       "evidence": "Diagnosed class=TRANSIENT_GATEWAY (confidence=0.95)",
-      "execution_time_ms": 0.015,
+      "execution_time_ms": 0.006,
       "severity": "HIGH"
     },
     {
@@ -2526,7 +2526,7 @@
       "actual_result": "INSUFFICIENT_FUNDS",
       "status": "PASS",
       "evidence": "Diagnosed class=INSUFFICIENT_FUNDS (confidence=0.92)",
-      "execution_time_ms": 0.015,
+      "execution_time_ms": 0.007,
       "severity": "HIGH"
     },
     {
@@ -2539,7 +2539,7 @@
       "actual_result": "EXPIRED_MANDATE",
       "status": "PASS",
       "evidence": "Diagnosed class=EXPIRED_MANDATE (confidence=0.88)",
-      "execution_time_ms": 0.018,
+      "execution_time_ms": 0.007,
       "severity": "HIGH"
     },
     {
@@ -2552,7 +2552,7 @@
       "actual_result": "TRANSIENT_GATEWAY",
       "status": "PASS",
       "evidence": "Diagnosed class=TRANSIENT_GATEWAY (confidence=0.94)",
-      "execution_time_ms": 0.022,
+      "execution_time_ms": 0.007,
       "severity": "HIGH"
     },
     {
@@ -2565,7 +2565,7 @@
       "actual_result": "ABANDONED_AUTH",
       "status": "PASS",
       "evidence": "Diagnosed class=ABANDONED_AUTH (confidence=0.86)",
-      "execution_time_ms": 0.017,
+      "execution_time_ms": 0.007,
       "severity": "HIGH"
     },
     {
@@ -2578,7 +2578,7 @@
       "actual_result": "SUSPICIOUS_VELOCITY",
       "status": "PASS",
       "evidence": "Diagnosed class=SUSPICIOUS_VELOCITY (confidence=0.95)",
-      "execution_time_ms": 0.016,
+      "execution_time_ms": 0.007,
       "severity": "HIGH"
     },
     {
@@ -2591,7 +2591,7 @@
       "actual_result": "INSUFFICIENT_FUNDS",
       "status": "PASS",
       "evidence": "Diagnosed class=INSUFFICIENT_FUNDS (confidence=0.89)",
-      "execution_time_ms": 0.018,
+      "execution_time_ms": 0.008,
       "severity": "HIGH"
     },
     {
@@ -2604,7 +2604,7 @@
       "actual_result": "TRANSIENT_GATEWAY",
       "status": "PASS",
       "evidence": "Diagnosed class=TRANSIENT_GATEWAY (confidence=0.94)",
-      "execution_time_ms": 0.017,
+      "execution_time_ms": 0.007,
       "severity": "HIGH"
     },
     {
@@ -2617,7 +2617,7 @@
       "actual_result": "EXPIRED_MANDATE",
       "status": "PASS",
       "evidence": "Diagnosed class=EXPIRED_MANDATE (confidence=0.88)",
-      "execution_time_ms": 0.017,
+      "execution_time_ms": 0.007,
       "severity": "HIGH"
     },
     {
@@ -2630,7 +2630,7 @@
       "actual_result": "ABANDONED_AUTH",
       "status": "PASS",
       "evidence": "Diagnosed class=ABANDONED_AUTH (confidence=0.86)",
-      "execution_time_ms": 0.024,
+      "execution_time_ms": 0.009,
       "severity": "HIGH"
     },
     {
@@ -2643,7 +2643,7 @@
       "actual_result": "TRANSIENT_GATEWAY",
       "status": "PASS",
       "evidence": "Diagnosed class=TRANSIENT_GATEWAY (confidence=0.94)",
-      "execution_time_ms": 0.015,
+      "execution_time_ms": 0.007,
       "severity": "HIGH"
     },
     {
@@ -2656,7 +2656,7 @@
       "actual_result": "INSUFFICIENT_FUNDS",
       "status": "PASS",
       "evidence": "Diagnosed class=INSUFFICIENT_FUNDS (confidence=0.92)",
-      "execution_time_ms": 0.016,
+      "execution_time_ms": 0.007,
       "severity": "HIGH"
     },
     {
@@ -2669,7 +2669,7 @@
       "actual_result": "SUSPICIOUS_VELOCITY",
       "status": "PASS",
       "evidence": "Diagnosed class=SUSPICIOUS_VELOCITY (confidence=0.95)",
-      "execution_time_ms": 0.016,
+      "execution_time_ms": 0.011,
       "severity": "HIGH"
     },
     {
@@ -2682,7 +2682,7 @@
       "actual_result": "Delay=45m, Prob=0.86",
       "status": "PASS",
       "evidence": "Continuous CDF calculated peak hazard window at +45m",
-      "execution_time_ms": 0.122,
+      "execution_time_ms": 0.046,
       "severity": "HIGH"
     },
     {
@@ -2695,7 +2695,7 @@
       "actual_result": "Delay=60m, Prob=0.84",
       "status": "PASS",
       "evidence": "Continuous CDF calculated peak hazard window at +60m",
-      "execution_time_ms": 0.029,
+      "execution_time_ms": 0.018,
       "severity": "HIGH"
     },
     {
@@ -2708,7 +2708,7 @@
       "actual_result": "Delay=90m, Prob=0.79",
       "status": "PASS",
       "evidence": "Continuous CDF calculated peak hazard window at +90m",
-      "execution_time_ms": 0.018,
+      "execution_time_ms": 0.013,
       "severity": "HIGH"
     },
     {
@@ -2721,7 +2721,7 @@
       "actual_result": "Delay=45m, Prob=0.86",
       "status": "PASS",
       "evidence": "Continuous CDF calculated peak hazard window at +45m",
-      "execution_time_ms": 0.014,
+      "execution_time_ms": 0.011,
       "severity": "HIGH"
     },
     {
@@ -2734,7 +2734,7 @@
       "actual_result": "Delay=60m, Prob=0.84",
       "status": "PASS",
       "evidence": "Continuous CDF calculated peak hazard window at +60m",
-      "execution_time_ms": 0.013,
+      "execution_time_ms": 0.011,
       "severity": "HIGH"
     },
     {
@@ -2747,7 +2747,7 @@
       "actual_result": "Delay=60m, Prob=0.74",
       "status": "PASS",
       "evidence": "Continuous CDF calculated peak hazard window at +60m",
-      "execution_time_ms": 0.019,
+      "execution_time_ms": 0.012,
       "severity": "HIGH"
     },
     {
@@ -2773,7 +2773,7 @@
       "actual_result": "Delay=120m, Prob=0.77",
       "status": "PASS",
       "evidence": "Continuous CDF calculated peak hazard window at +120m",
-      "execution_time_ms": 0.012,
+      "execution_time_ms": 0.02,
       "severity": "HIGH"
     },
     {
@@ -2786,7 +2786,7 @@
       "actual_result": "Delay=60m, Prob=0.74",
       "status": "PASS",
       "evidence": "Continuous CDF calculated peak hazard window at +60m",
-      "execution_time_ms": 0.012,
+      "execution_time_ms": 0.013,
       "severity": "HIGH"
     },
     {
@@ -2799,7 +2799,7 @@
       "actual_result": "Delay=90m, Prob=0.79",
       "status": "PASS",
       "evidence": "Continuous CDF calculated peak hazard window at +90m",
-      "execution_time_ms": 0.011,
+      "execution_time_ms": 0.01,
       "severity": "HIGH"
     },
     {
@@ -2812,7 +2812,7 @@
       "actual_result": "Delay=30m, Prob=0.77",
       "status": "PASS",
       "evidence": "Continuous CDF calculated peak hazard window at +30m",
-      "execution_time_ms": 0.015,
+      "execution_time_ms": 0.011,
       "severity": "HIGH"
     },
     {
@@ -2825,7 +2825,7 @@
       "actual_result": "Delay=45m, Prob=0.83",
       "status": "PASS",
       "evidence": "Continuous CDF calculated peak hazard window at +45m",
-      "execution_time_ms": 0.012,
+      "execution_time_ms": 0.01,
       "severity": "HIGH"
     },
     {
@@ -2838,7 +2838,7 @@
       "actual_result": "Delay=60m, Prob=0.79",
       "status": "PASS",
       "evidence": "Continuous CDF calculated peak hazard window at +60m",
-      "execution_time_ms": 0.012,
+      "execution_time_ms": 0.033,
       "severity": "HIGH"
     },
     {
@@ -2851,7 +2851,7 @@
       "actual_result": "Delay=30m, Prob=0.77",
       "status": "PASS",
       "evidence": "Continuous CDF calculated peak hazard window at +30m",
-      "execution_time_ms": 0.012,
+      "execution_time_ms": 0.016,
       "severity": "HIGH"
     },
     {
@@ -2864,7 +2864,7 @@
       "actual_result": "Delay=45m, Prob=0.83",
       "status": "PASS",
       "evidence": "Continuous CDF calculated peak hazard window at +45m",
-      "execution_time_ms": 0.011,
+      "execution_time_ms": 0.009,
       "severity": "HIGH"
     },
     {
@@ -2877,7 +2877,7 @@
       "actual_result": "Delay=45m, Prob=0.82",
       "status": "PASS",
       "evidence": "Continuous CDF calculated peak hazard window at +45m",
-      "execution_time_ms": 0.012,
+      "execution_time_ms": 0.01,
       "severity": "HIGH"
     },
     {
@@ -2890,7 +2890,7 @@
       "actual_result": "Delay=60m, Prob=0.82",
       "status": "PASS",
       "evidence": "Continuous CDF calculated peak hazard window at +60m",
-      "execution_time_ms": 0.011,
+      "execution_time_ms": 0.009,
       "severity": "HIGH"
     },
     {
@@ -2903,7 +2903,7 @@
       "actual_result": "Delay=90m, Prob=0.79",
       "status": "PASS",
       "evidence": "Continuous CDF calculated peak hazard window at +90m",
-      "execution_time_ms": 0.012,
+      "execution_time_ms": 0.009,
       "severity": "HIGH"
     },
     {
@@ -2916,7 +2916,7 @@
       "actual_result": "Delay=45m, Prob=0.82",
       "status": "PASS",
       "evidence": "Continuous CDF calculated peak hazard window at +45m",
-      "execution_time_ms": 0.011,
+      "execution_time_ms": 0.009,
       "severity": "HIGH"
     },
     {
@@ -2929,7 +2929,7 @@
       "actual_result": "Delay=60m, Prob=0.82",
       "status": "PASS",
       "evidence": "Continuous CDF calculated peak hazard window at +60m",
-      "execution_time_ms": 0.011,
+      "execution_time_ms": 0.009,
       "severity": "HIGH"
     },
     {
@@ -2942,7 +2942,7 @@
       "actual_result": "Delay=45m, Prob=0.76",
       "status": "PASS",
       "evidence": "Continuous CDF calculated peak hazard window at +45m",
-      "execution_time_ms": 0.011,
+      "execution_time_ms": 0.01,
       "severity": "HIGH"
     },
     {
@@ -2955,7 +2955,7 @@
       "actual_result": "Delay=60m, Prob=0.77",
       "status": "PASS",
       "evidence": "Continuous CDF calculated peak hazard window at +60m",
-      "execution_time_ms": 0.011,
+      "execution_time_ms": 0.009,
       "severity": "HIGH"
     },
     {
@@ -2968,7 +2968,7 @@
       "actual_result": "Delay=90m, Prob=0.78",
       "status": "PASS",
       "evidence": "Continuous CDF calculated peak hazard window at +90m",
-      "execution_time_ms": 0.011,
+      "execution_time_ms": 0.009,
       "severity": "HIGH"
     },
     {
@@ -2981,7 +2981,7 @@
       "actual_result": "Delay=45m, Prob=0.76",
       "status": "PASS",
       "evidence": "Continuous CDF calculated peak hazard window at +45m",
-      "execution_time_ms": 0.011,
+      "execution_time_ms": 0.009,
       "severity": "HIGH"
     },
     {
@@ -2994,7 +2994,7 @@
       "actual_result": "Delay=60m, Prob=0.77",
       "status": "PASS",
       "evidence": "Continuous CDF calculated peak hazard window at +60m",
-      "execution_time_ms": 0.011,
+      "execution_time_ms": 0.009,
       "severity": "HIGH"
     },
     {
@@ -3007,7 +3007,7 @@
       "actual_result": "State == PTP_REGISTERED",
       "status": "PASS",
       "evidence": "State graph strictly traversed through valid transitions",
-      "execution_time_ms": 0.1,
+      "execution_time_ms": 0.073,
       "severity": "HIGH"
     },
     {
@@ -3020,7 +3020,7 @@
       "actual_result": "State == PTP_REGISTERED",
       "status": "PASS",
       "evidence": "State graph strictly traversed through valid transitions",
-      "execution_time_ms": 0.034,
+      "execution_time_ms": 0.012,
       "severity": "HIGH"
     },
     {
@@ -3033,7 +3033,7 @@
       "actual_result": "State == PTP_REGISTERED",
       "status": "PASS",
       "evidence": "State graph strictly traversed through valid transitions",
-      "execution_time_ms": 0.019,
+      "execution_time_ms": 0.02,
       "severity": "HIGH"
     },
     {
@@ -3046,7 +3046,7 @@
       "actual_result": "State == PTP_REGISTERED",
       "status": "PASS",
       "evidence": "State graph strictly traversed through valid transitions",
-      "execution_time_ms": 0.023,
+      "execution_time_ms": 0.016,
       "severity": "HIGH"
     },
     {
@@ -3059,7 +3059,7 @@
       "actual_result": "State == PTP_REGISTERED",
       "status": "PASS",
       "evidence": "State graph strictly traversed through valid transitions",
-      "execution_time_ms": 0.018,
+      "execution_time_ms": 0.013,
       "severity": "HIGH"
     },
     {
@@ -3072,7 +3072,7 @@
       "actual_result": "State == PTP_REGISTERED",
       "status": "PASS",
       "evidence": "State graph strictly traversed through valid transitions",
-      "execution_time_ms": 0.018,
+      "execution_time_ms": 0.015,
       "severity": "HIGH"
     },
     {
@@ -3085,7 +3085,7 @@
       "actual_result": "State == PTP_REGISTERED",
       "status": "PASS",
       "evidence": "State graph strictly traversed through valid transitions",
-      "execution_time_ms": 0.025,
+      "execution_time_ms": 0.013,
       "severity": "HIGH"
     },
     {
@@ -3098,7 +3098,7 @@
       "actual_result": "State == PTP_REGISTERED",
       "status": "PASS",
       "evidence": "State graph strictly traversed through valid transitions",
-      "execution_time_ms": 0.029,
+      "execution_time_ms": 0.015,
       "severity": "HIGH"
     },
     {
@@ -3111,7 +3111,7 @@
       "actual_result": "State == PTP_REGISTERED",
       "status": "PASS",
       "evidence": "State graph strictly traversed through valid transitions",
-      "execution_time_ms": 0.06,
+      "execution_time_ms": 0.013,
       "severity": "HIGH"
     },
     {
@@ -3124,7 +3124,7 @@
       "actual_result": "State == PTP_REGISTERED",
       "status": "PASS",
       "evidence": "State graph strictly traversed through valid transitions",
-      "execution_time_ms": 0.034,
+      "execution_time_ms": 0.029,
       "severity": "HIGH"
     },
     {
@@ -3137,7 +3137,7 @@
       "actual_result": "State == PTP_REGISTERED",
       "status": "PASS",
       "evidence": "State graph strictly traversed through valid transitions",
-      "execution_time_ms": 0.021,
+      "execution_time_ms": 0.032,
       "severity": "HIGH"
     },
     {
@@ -3150,7 +3150,7 @@
       "actual_result": "State == PTP_REGISTERED",
       "status": "PASS",
       "evidence": "State graph strictly traversed through valid transitions",
-      "execution_time_ms": 0.021,
+      "execution_time_ms": 0.012,
       "severity": "HIGH"
     },
     {
@@ -3163,7 +3163,7 @@
       "actual_result": "State == PTP_REGISTERED",
       "status": "PASS",
       "evidence": "State graph strictly traversed through valid transitions",
-      "execution_time_ms": 0.017,
+      "execution_time_ms": 0.015,
       "severity": "HIGH"
     },
     {
@@ -3176,7 +3176,7 @@
       "actual_result": "State == PTP_REGISTERED",
       "status": "PASS",
       "evidence": "State graph strictly traversed through valid transitions",
-      "execution_time_ms": 0.023,
+      "execution_time_ms": 0.014,
       "severity": "HIGH"
     },
     {
@@ -3189,7 +3189,7 @@
       "actual_result": "State == PTP_REGISTERED",
       "status": "PASS",
       "evidence": "State graph strictly traversed through valid transitions",
-      "execution_time_ms": 0.017,
+      "execution_time_ms": 0.025,
       "severity": "HIGH"
     },
     {
@@ -3202,7 +3202,7 @@
       "actual_result": "Rejected=True",
       "status": "PASS",
       "evidence": "Illegal state jump caught and blocked by FSM transition guard",
-      "execution_time_ms": 0.156,
+      "execution_time_ms": 0.123,
       "severity": "HIGH"
     },
     {
@@ -3215,7 +3215,7 @@
       "actual_result": "Rejected=True",
       "status": "PASS",
       "evidence": "Illegal state jump caught and blocked by FSM transition guard",
-      "execution_time_ms": 0.111,
+      "execution_time_ms": 0.079,
       "severity": "HIGH"
     },
     {
@@ -3228,7 +3228,7 @@
       "actual_result": "Rejected=True",
       "status": "PASS",
       "evidence": "Illegal state jump caught and blocked by FSM transition guard",
-      "execution_time_ms": 0.077,
+      "execution_time_ms": 0.04,
       "severity": "HIGH"
     },
     {
@@ -3241,7 +3241,7 @@
       "actual_result": "Rejected=True",
       "status": "PASS",
       "evidence": "Illegal state jump caught and blocked by FSM transition guard",
-      "execution_time_ms": 0.057,
+      "execution_time_ms": 0.069,
       "severity": "HIGH"
     },
     {
@@ -3254,7 +3254,7 @@
       "actual_result": "Rejected=True",
       "status": "PASS",
       "evidence": "Illegal state jump caught and blocked by FSM transition guard",
-      "execution_time_ms": 0.051,
+      "execution_time_ms": 0.036,
       "severity": "HIGH"
     },
     {
@@ -3267,7 +3267,7 @@
       "actual_result": "Rejected=True",
       "status": "PASS",
       "evidence": "Illegal state jump caught and blocked by FSM transition guard",
-      "execution_time_ms": 0.076,
+      "execution_time_ms": 0.045,
       "severity": "HIGH"
     },
     {
@@ -3280,7 +3280,7 @@
       "actual_result": "Rejected=True",
       "status": "PASS",
       "evidence": "Illegal state jump caught and blocked by FSM transition guard",
-      "execution_time_ms": 0.054,
+      "execution_time_ms": 0.028,
       "severity": "HIGH"
     },
     {
@@ -3293,7 +3293,7 @@
       "actual_result": "Rejected=True",
       "status": "PASS",
       "evidence": "Illegal state jump caught and blocked by FSM transition guard",
-      "execution_time_ms": 0.08,
+      "execution_time_ms": 0.029,
       "severity": "HIGH"
     },
     {
@@ -3306,7 +3306,7 @@
       "actual_result": "Rejected=True",
       "status": "PASS",
       "evidence": "Illegal state jump caught and blocked by FSM transition guard",
-      "execution_time_ms": 0.079,
+      "execution_time_ms": 0.052,
       "severity": "HIGH"
     },
     {
@@ -3319,7 +3319,7 @@
       "actual_result": "Rejected=True",
       "status": "PASS",
       "evidence": "Illegal state jump caught and blocked by FSM transition guard",
-      "execution_time_ms": 0.084,
+      "execution_time_ms": 0.039,
       "severity": "HIGH"
     },
     {
@@ -3332,7 +3332,7 @@
       "actual_result": "Intent=GST_DISPUTE_RESOLUTION",
       "status": "PASS",
       "evidence": "Resolved turn with action=MUTATE_RAZORPAY_INVOICE",
-      "execution_time_ms": 0.585,
+      "execution_time_ms": 0.358,
       "severity": "HIGH"
     },
     {
@@ -3345,7 +3345,7 @@
       "actual_result": "Intent=PROMISE_TO_PAY_COMMITMENT",
       "status": "PASS",
       "evidence": "Resolved turn with action=REGISTER_PTP_LOCK",
-      "execution_time_ms": 0.705,
+      "execution_time_ms": 1.447,
       "severity": "HIGH"
     },
     {
@@ -3358,7 +3358,7 @@
       "actual_result": "Intent=GST_DISPUTE_RESOLUTION",
       "status": "PASS",
       "evidence": "Resolved turn with action=MUTATE_RAZORPAY_INVOICE",
-      "execution_time_ms": 0.245,
+      "execution_time_ms": 0.212,
       "severity": "HIGH"
     },
     {
@@ -3371,7 +3371,7 @@
       "actual_result": "Intent=COMMERCIAL_DISPUTE_ESCALATION",
       "status": "PASS",
       "evidence": "Resolved turn with action=ESCALATE_TO_HUMAN_CFO",
-      "execution_time_ms": 0.089,
+      "execution_time_ms": 0.067,
       "severity": "HIGH"
     },
     {
@@ -3384,7 +3384,7 @@
       "actual_result": "Intent=GST_DISPUTE_RESOLUTION",
       "status": "PASS",
       "evidence": "Resolved turn with action=MUTATE_RAZORPAY_INVOICE",
-      "execution_time_ms": 0.142,
+      "execution_time_ms": 0.067,
       "severity": "HIGH"
     },
     {
@@ -3397,7 +3397,7 @@
       "actual_result": "Intent=PROMISE_TO_PAY_COMMITMENT",
       "status": "PASS",
       "evidence": "Resolved turn with action=REGISTER_PTP_LOCK",
-      "execution_time_ms": 1.183,
+      "execution_time_ms": 0.514,
       "severity": "HIGH"
     },
     {
@@ -3410,7 +3410,7 @@
       "actual_result": "Intent=GST_DISPUTE_RESOLUTION",
       "status": "PASS",
       "evidence": "Resolved turn with action=MUTATE_RAZORPAY_INVOICE",
-      "execution_time_ms": 0.254,
+      "execution_time_ms": 0.139,
       "severity": "HIGH"
     },
     {
@@ -3423,7 +3423,7 @@
       "actual_result": "Intent=COMMERCIAL_DISPUTE_ESCALATION",
       "status": "PASS",
       "evidence": "Resolved turn with action=ESCALATE_TO_HUMAN_CFO",
-      "execution_time_ms": 0.09,
+      "execution_time_ms": 0.054,
       "severity": "HIGH"
     },
     {
@@ -3436,7 +3436,7 @@
       "actual_result": "Intent=GST_DISPUTE_RESOLUTION",
       "status": "PASS",
       "evidence": "Resolved turn with action=MUTATE_RAZORPAY_INVOICE",
-      "execution_time_ms": 0.159,
+      "execution_time_ms": 0.06,
       "severity": "HIGH"
     },
     {
@@ -3449,7 +3449,7 @@
       "actual_result": "Intent=PROMISE_TO_PAY_COMMITMENT",
       "status": "PASS",
       "evidence": "Resolved turn with action=REGISTER_PTP_LOCK",
-      "execution_time_ms": 0.453,
+      "execution_time_ms": 0.482,
       "severity": "HIGH"
     },
     {
@@ -3462,7 +3462,7 @@
       "actual_result": "Intent=GST_DISPUTE_RESOLUTION",
       "status": "PASS",
       "evidence": "Resolved turn with action=MUTATE_RAZORPAY_INVOICE",
-      "execution_time_ms": 0.164,
+      "execution_time_ms": 0.143,
       "severity": "HIGH"
     },
     {
@@ -3475,7 +3475,7 @@
       "actual_result": "Intent=PROMISE_TO_PAY_COMMITMENT",
       "status": "PASS",
       "evidence": "Resolved turn with action=REGISTER_PTP_LOCK",
-      "execution_time_ms": 0.547,
+      "execution_time_ms": 0.471,
       "severity": "HIGH"
     },
     {
@@ -3488,7 +3488,7 @@
       "actual_result": "Intent=GST_DISPUTE_RESOLUTION",
       "status": "PASS",
       "evidence": "Resolved turn with action=MUTATE_RAZORPAY_INVOICE",
-      "execution_time_ms": 0.192,
+      "execution_time_ms": 0.107,
       "severity": "HIGH"
     },
     {
@@ -3501,7 +3501,7 @@
       "actual_result": "Intent=COMMERCIAL_DISPUTE_ESCALATION",
       "status": "PASS",
       "evidence": "Resolved turn with action=ESCALATE_TO_HUMAN_CFO",
-      "execution_time_ms": 0.081,
+      "execution_time_ms": 0.056,
       "severity": "HIGH"
     },
     {
@@ -3514,7 +3514,7 @@
       "actual_result": "Intent=GST_DISPUTE_RESOLUTION",
       "status": "PASS",
       "evidence": "Resolved turn with action=MUTATE_RAZORPAY_INVOICE",
-      "execution_time_ms": 0.138,
+      "execution_time_ms": 0.07,
       "severity": "HIGH"
     },
     {
@@ -3527,7 +3527,7 @@
       "actual_result": "Intent=PROMISE_TO_PAY_COMMITMENT",
       "status": "PASS",
       "evidence": "Resolved turn with action=REGISTER_PTP_LOCK",
-      "execution_time_ms": 0.495,
+      "execution_time_ms": 0.402,
       "severity": "HIGH"
     },
     {
@@ -3540,7 +3540,7 @@
       "actual_result": "Intent=GST_DISPUTE_RESOLUTION",
       "status": "PASS",
       "evidence": "Resolved turn with action=MUTATE_RAZORPAY_INVOICE",
-      "execution_time_ms": 0.159,
+      "execution_time_ms": 0.092,
       "severity": "HIGH"
     },
     {
@@ -3553,7 +3553,7 @@
       "actual_result": "Intent=COMMERCIAL_DISPUTE_ESCALATION",
       "status": "PASS",
       "evidence": "Resolved turn with action=ESCALATE_TO_HUMAN_CFO",
-      "execution_time_ms": 0.084,
+      "execution_time_ms": 0.032,
       "severity": "HIGH"
     },
     {
@@ -3566,7 +3566,7 @@
       "actual_result": "Intent=GST_DISPUTE_RESOLUTION",
       "status": "PASS",
       "evidence": "Resolved turn with action=MUTATE_RAZORPAY_INVOICE",
-      "execution_time_ms": 0.121,
+      "execution_time_ms": 0.041,
       "severity": "HIGH"
     },
     {
@@ -3579,7 +3579,7 @@
       "actual_result": "Intent=PROMISE_TO_PAY_COMMITMENT",
       "status": "PASS",
       "evidence": "Resolved turn with action=REGISTER_PTP_LOCK",
-      "execution_time_ms": 0.482,
+      "execution_time_ms": 0.328,
       "severity": "HIGH"
     },
     {
@@ -3592,7 +3592,7 @@
       "actual_result": "Intent=GST_DISPUTE_RESOLUTION",
       "status": "PASS",
       "evidence": "Resolved turn with action=MUTATE_RAZORPAY_INVOICE",
-      "execution_time_ms": 0.212,
+      "execution_time_ms": 0.099,
       "severity": "HIGH"
     },
     {
@@ -3605,7 +3605,7 @@
       "actual_result": "Intent=COMMERCIAL_DISPUTE_ESCALATION",
       "status": "PASS",
       "evidence": "Resolved turn with action=ESCALATE_TO_HUMAN_CFO",
-      "execution_time_ms": 0.098,
+      "execution_time_ms": 0.03,
       "severity": "HIGH"
     },
     {
@@ -3618,7 +3618,7 @@
       "actual_result": "Intent=GST_DISPUTE_RESOLUTION",
       "status": "PASS",
       "evidence": "Resolved turn with action=MUTATE_RAZORPAY_INVOICE",
-      "execution_time_ms": 0.136,
+      "execution_time_ms": 0.107,
       "severity": "HIGH"
     },
     {
@@ -3631,7 +3631,7 @@
       "actual_result": "Intent=PROMISE_TO_PAY_COMMITMENT",
       "status": "PASS",
       "evidence": "Resolved turn with action=REGISTER_PTP_LOCK",
-      "execution_time_ms": 0.431,
+      "execution_time_ms": 0.198,
       "severity": "HIGH"
     },
     {
@@ -3644,7 +3644,7 @@
       "actual_result": "Intent=GST_DISPUTE_RESOLUTION",
       "status": "PASS",
       "evidence": "Resolved turn with action=MUTATE_RAZORPAY_INVOICE",
-      "execution_time_ms": 0.185,
+      "execution_time_ms": 0.051,
       "severity": "HIGH"
     },
     {
@@ -3657,7 +3657,7 @@
       "actual_result": "Status=PROMISED, Suppressed=True",
       "status": "PASS",
       "evidence": "Auto-debit target window locked and automated nudges silenced",
-      "execution_time_ms": 0.692,
+      "execution_time_ms": 0.44,
       "severity": "HIGH"
     },
     {
@@ -3670,7 +3670,7 @@
       "actual_result": "Status=PROMISED, Suppressed=True",
       "status": "PASS",
       "evidence": "Auto-debit target window locked and automated nudges silenced",
-      "execution_time_ms": 0.387,
+      "execution_time_ms": 0.79,
       "severity": "HIGH"
     },
     {
@@ -3683,7 +3683,7 @@
       "actual_result": "Status=PROMISED, Suppressed=True",
       "status": "PASS",
       "evidence": "Auto-debit target window locked and automated nudges silenced",
-      "execution_time_ms": 0.333,
+      "execution_time_ms": 0.261,
       "severity": "HIGH"
     },
     {
@@ -3696,7 +3696,7 @@
       "actual_result": "Status=PROMISED, Suppressed=True",
       "status": "PASS",
       "evidence": "Auto-debit target window locked and automated nudges silenced",
-      "execution_time_ms": 0.333,
+      "execution_time_ms": 0.156,
       "severity": "HIGH"
     },
     {
@@ -3709,7 +3709,7 @@
       "actual_result": "Status=PROMISED, Suppressed=True",
       "status": "PASS",
       "evidence": "Auto-debit target window locked and automated nudges silenced",
-      "execution_time_ms": 0.448,
+      "execution_time_ms": 0.646,
       "severity": "HIGH"
     },
     {
@@ -3722,7 +3722,7 @@
       "actual_result": "Status=PROMISED, Suppressed=True",
       "status": "PASS",
       "evidence": "Auto-debit target window locked and automated nudges silenced",
-      "execution_time_ms": 0.852,
+      "execution_time_ms": 0.457,
       "severity": "HIGH"
     },
     {
@@ -3735,7 +3735,7 @@
       "actual_result": "Status=PROMISED, Suppressed=True",
       "status": "PASS",
       "evidence": "Auto-debit target window locked and automated nudges silenced",
-      "execution_time_ms": 2.578,
+      "execution_time_ms": 0.182,
       "severity": "HIGH"
     },
     {
@@ -3748,7 +3748,7 @@
       "actual_result": "Status=PROMISED, Suppressed=True",
       "status": "PASS",
       "evidence": "Auto-debit target window locked and automated nudges silenced",
-      "execution_time_ms": 0.688,
+      "execution_time_ms": 0.194,
       "severity": "HIGH"
     },
     {
@@ -3761,7 +3761,7 @@
       "actual_result": "Status=PROMISED, Suppressed=True",
       "status": "PASS",
       "evidence": "Auto-debit target window locked and automated nudges silenced",
-      "execution_time_ms": 0.378,
+      "execution_time_ms": 0.536,
       "severity": "HIGH"
     },
     {
@@ -3774,7 +3774,7 @@
       "actual_result": "Status=PROMISED, Suppressed=True",
       "status": "PASS",
       "evidence": "Auto-debit target window locked and automated nudges silenced",
-      "execution_time_ms": 0.36,
+      "execution_time_ms": 0.873,
       "severity": "HIGH"
     },
     {
@@ -3787,7 +3787,7 @@
       "actual_result": "Status=PROMISED, Suppressed=True",
       "status": "PASS",
       "evidence": "Auto-debit target window locked and automated nudges silenced",
-      "execution_time_ms": 0.45,
+      "execution_time_ms": 0.402,
       "severity": "HIGH"
     },
     {
@@ -3800,7 +3800,7 @@
       "actual_result": "Status=PROMISED, Suppressed=True",
       "status": "PASS",
       "evidence": "Auto-debit target window locked and automated nudges silenced",
-      "execution_time_ms": 0.354,
+      "execution_time_ms": 0.39,
       "severity": "HIGH"
     },
     {
@@ -3813,7 +3813,7 @@
       "actual_result": "Status=PROMISED, Suppressed=True",
       "status": "PASS",
       "evidence": "Auto-debit target window locked and automated nudges silenced",
-      "execution_time_ms": 0.32,
+      "execution_time_ms": 0.287,
       "severity": "HIGH"
     },
     {
@@ -3826,7 +3826,7 @@
       "actual_result": "Status=PROMISED, Suppressed=True",
       "status": "PASS",
       "evidence": "Auto-debit target window locked and automated nudges silenced",
-      "execution_time_ms": 0.324,
+      "execution_time_ms": 0.332,
       "severity": "HIGH"
     },
     {
@@ -3839,7 +3839,7 @@
       "actual_result": "Status=PROMISED, Suppressed=True",
       "status": "PASS",
       "evidence": "Auto-debit target window locked and automated nudges silenced",
-      "execution_time_ms": 0.333,
+      "execution_time_ms": 0.274,
       "severity": "HIGH"
     },
     {
@@ -3852,7 +3852,7 @@
       "actual_result": "Status=PROMISED, Suppressed=True",
       "status": "PASS",
       "evidence": "Auto-debit target window locked and automated nudges silenced",
-      "execution_time_ms": 0.73,
+      "execution_time_ms": 0.327,
       "severity": "HIGH"
     },
     {
@@ -3865,7 +3865,7 @@
       "actual_result": "Status=PROMISED, Suppressed=True",
       "status": "PASS",
       "evidence": "Auto-debit target window locked and automated nudges silenced",
-      "execution_time_ms": 1.358,
+      "execution_time_ms": 1.163,
       "severity": "HIGH"
     },
     {
@@ -3878,7 +3878,7 @@
       "actual_result": "Status=PROMISED, Suppressed=True",
       "status": "PASS",
       "evidence": "Auto-debit target window locked and automated nudges silenced",
-      "execution_time_ms": 0.771,
+      "execution_time_ms": 0.331,
       "severity": "HIGH"
     },
     {
@@ -3891,7 +3891,7 @@
       "actual_result": "Status=PROMISED, Suppressed=True",
       "status": "PASS",
       "evidence": "Auto-debit target window locked and automated nudges silenced",
-      "execution_time_ms": 0.387,
+      "execution_time_ms": 0.393,
       "severity": "HIGH"
     },
     {
@@ -3904,7 +3904,7 @@
       "actual_result": "Status=PROMISED, Suppressed=True",
       "status": "PASS",
       "evidence": "Auto-debit target window locked and automated nudges silenced",
-      "execution_time_ms": 0.36,
+      "execution_time_ms": 0.496,
       "severity": "HIGH"
     },
     {
@@ -3912,12 +3912,12 @@
       "category": "Cryptographic Audit Ledger",
       "description": "SHA-256 Block Commit #1",
       "precondition": "Sequential event commit for payment pay_audit_0001",
-      "input": "evt_5a56bdc08071",
+      "input": "evt_96b782c50ccf",
       "expected_result": "64-char SHA256 current & prev hash linkage",
-      "actual_result": "Hash=7024063ad2a5781b...",
+      "actual_result": "Hash=5c70cb00a09ec9b1...",
       "status": "PASS",
       "evidence": "Block commit mathematically linked to previous block",
-      "execution_time_ms": 0.867,
+      "execution_time_ms": 0.824,
       "severity": "HIGH"
     },
     {
@@ -3925,12 +3925,12 @@
       "category": "Cryptographic Audit Ledger",
       "description": "SHA-256 Block Commit #2",
       "precondition": "Sequential event commit for payment pay_audit_0002",
-      "input": "evt_2889167a8793",
+      "input": "evt_b98426cad2e0",
       "expected_result": "64-char SHA256 current & prev hash linkage",
-      "actual_result": "Hash=bbff930c7259b7c4...",
+      "actual_result": "Hash=183c3a9a1ade9c2f...",
       "status": "PASS",
       "evidence": "Block commit mathematically linked to previous block",
-      "execution_time_ms": 0.919,
+      "execution_time_ms": 0.445,
       "severity": "HIGH"
     },
     {
@@ -3938,12 +3938,12 @@
       "category": "Cryptographic Audit Ledger",
       "description": "SHA-256 Block Commit #3",
       "precondition": "Sequential event commit for payment pay_audit_0003",
-      "input": "evt_929b6c832a9c",
+      "input": "evt_66779777a8e6",
       "expected_result": "64-char SHA256 current & prev hash linkage",
-      "actual_result": "Hash=cec57a0236374145...",
+      "actual_result": "Hash=44ee279bdaa2a6a9...",
       "status": "PASS",
       "evidence": "Block commit mathematically linked to previous block",
-      "execution_time_ms": 0.691,
+      "execution_time_ms": 1.293,
       "severity": "HIGH"
     },
     {
@@ -3951,12 +3951,12 @@
       "category": "Cryptographic Audit Ledger",
       "description": "SHA-256 Block Commit #4",
       "precondition": "Sequential event commit for payment pay_audit_0004",
-      "input": "evt_f3302d51064e",
+      "input": "evt_c40fc671ba63",
       "expected_result": "64-char SHA256 current & prev hash linkage",
-      "actual_result": "Hash=becd9393f5dc2336...",
+      "actual_result": "Hash=29dd910671e29609...",
       "status": "PASS",
       "evidence": "Block commit mathematically linked to previous block",
-      "execution_time_ms": 1.058,
+      "execution_time_ms": 0.614,
       "severity": "HIGH"
     },
     {
@@ -3964,12 +3964,12 @@
       "category": "Cryptographic Audit Ledger",
       "description": "SHA-256 Block Commit #5",
       "precondition": "Sequential event commit for payment pay_audit_0005",
-      "input": "evt_dd5c86547877",
+      "input": "evt_71e78e33c93c",
       "expected_result": "64-char SHA256 current & prev hash linkage",
-      "actual_result": "Hash=d12cedd0282f88c5...",
+      "actual_result": "Hash=0a64f456f46fcde0...",
       "status": "PASS",
       "evidence": "Block commit mathematically linked to previous block",
-      "execution_time_ms": 1.838,
+      "execution_time_ms": 0.61,
       "severity": "HIGH"
     },
     {
@@ -3977,12 +3977,12 @@
       "category": "Cryptographic Audit Ledger",
       "description": "SHA-256 Block Commit #6",
       "precondition": "Sequential event commit for payment pay_audit_0006",
-      "input": "evt_9b65d6999057",
+      "input": "evt_e2ad0688775d",
       "expected_result": "64-char SHA256 current & prev hash linkage",
-      "actual_result": "Hash=12495ad87ecee845...",
+      "actual_result": "Hash=db9c72a524bab7fc...",
       "status": "PASS",
       "evidence": "Block commit mathematically linked to previous block",
-      "execution_time_ms": 3.134,
+      "execution_time_ms": 0.46,
       "severity": "HIGH"
     },
     {
@@ -3990,12 +3990,12 @@
       "category": "Cryptographic Audit Ledger",
       "description": "SHA-256 Block Commit #7",
       "precondition": "Sequential event commit for payment pay_audit_0007",
-      "input": "evt_2e6485939da8",
+      "input": "evt_aa53f911e61a",
       "expected_result": "64-char SHA256 current & prev hash linkage",
-      "actual_result": "Hash=bb3cee1e17a3afd9...",
+      "actual_result": "Hash=53e6bec55b7a2dd1...",
       "status": "PASS",
       "evidence": "Block commit mathematically linked to previous block",
-      "execution_time_ms": 1.283,
+      "execution_time_ms": 0.366,
       "severity": "HIGH"
     },
     {
@@ -4003,12 +4003,12 @@
       "category": "Cryptographic Audit Ledger",
       "description": "SHA-256 Block Commit #8",
       "precondition": "Sequential event commit for payment pay_audit_0008",
-      "input": "evt_d04d6ebec9f0",
+      "input": "evt_7a1027d8e798",
       "expected_result": "64-char SHA256 current & prev hash linkage",
-      "actual_result": "Hash=bdcd6c179a18545c...",
+      "actual_result": "Hash=42d07489b0d6fabb...",
       "status": "PASS",
       "evidence": "Block commit mathematically linked to previous block",
-      "execution_time_ms": 0.86,
+      "execution_time_ms": 0.659,
       "severity": "HIGH"
     },
     {
@@ -4016,12 +4016,12 @@
       "category": "Cryptographic Audit Ledger",
       "description": "SHA-256 Block Commit #9",
       "precondition": "Sequential event commit for payment pay_audit_0009",
-      "input": "evt_b493829929d4",
+      "input": "evt_c8944980d4fc",
       "expected_result": "64-char SHA256 current & prev hash linkage",
-      "actual_result": "Hash=b7817ebbce6f6228...",
+      "actual_result": "Hash=af82f97a51ebf51b...",
       "status": "PASS",
       "evidence": "Block commit mathematically linked to previous block",
-      "execution_time_ms": 0.891,
+      "execution_time_ms": 0.607,
       "severity": "HIGH"
     },
     {
@@ -4029,12 +4029,12 @@
       "category": "Cryptographic Audit Ledger",
       "description": "SHA-256 Block Commit #10",
       "precondition": "Sequential event commit for payment pay_audit_0010",
-      "input": "evt_74f4117446b5",
+      "input": "evt_855031588e61",
       "expected_result": "64-char SHA256 current & prev hash linkage",
-      "actual_result": "Hash=623e7a46b8375069...",
+      "actual_result": "Hash=27a0d13211834a0b...",
       "status": "PASS",
       "evidence": "Block commit mathematically linked to previous block",
-      "execution_time_ms": 0.503,
+      "execution_time_ms": 0.651,
       "severity": "HIGH"
     },
     {
@@ -4042,12 +4042,12 @@
       "category": "Cryptographic Audit Ledger",
       "description": "SHA-256 Block Commit #11",
       "precondition": "Sequential event commit for payment pay_audit_0011",
-      "input": "evt_7e9911e305d2",
+      "input": "evt_a5b0344f40ff",
       "expected_result": "64-char SHA256 current & prev hash linkage",
-      "actual_result": "Hash=bbdcc99a45b73bad...",
+      "actual_result": "Hash=4d8910812072ff78...",
       "status": "PASS",
       "evidence": "Block commit mathematically linked to previous block",
-      "execution_time_ms": 0.9,
+      "execution_time_ms": 0.395,
       "severity": "HIGH"
     },
     {
@@ -4055,12 +4055,12 @@
       "category": "Cryptographic Audit Ledger",
       "description": "SHA-256 Block Commit #12",
       "precondition": "Sequential event commit for payment pay_audit_0012",
-      "input": "evt_8f066db28ffd",
+      "input": "evt_901862f92849",
       "expected_result": "64-char SHA256 current & prev hash linkage",
-      "actual_result": "Hash=864b3965d7be758c...",
+      "actual_result": "Hash=79492aebb9367676...",
       "status": "PASS",
       "evidence": "Block commit mathematically linked to previous block",
-      "execution_time_ms": 0.716,
+      "execution_time_ms": 0.461,
       "severity": "HIGH"
     },
     {
@@ -4068,12 +4068,12 @@
       "category": "Cryptographic Audit Ledger",
       "description": "SHA-256 Block Commit #13",
       "precondition": "Sequential event commit for payment pay_audit_0013",
-      "input": "evt_09f66ca23636",
+      "input": "evt_12d613b94402",
       "expected_result": "64-char SHA256 current & prev hash linkage",
-      "actual_result": "Hash=459eb9cf86df5ddc...",
+      "actual_result": "Hash=fad80065d665a181...",
       "status": "PASS",
       "evidence": "Block commit mathematically linked to previous block",
-      "execution_time_ms": 0.451,
+      "execution_time_ms": 0.701,
       "severity": "HIGH"
     },
     {
@@ -4081,12 +4081,12 @@
       "category": "Cryptographic Audit Ledger",
       "description": "SHA-256 Block Commit #14",
       "precondition": "Sequential event commit for payment pay_audit_0014",
-      "input": "evt_db015429a3f4",
+      "input": "evt_367f67c73cac",
       "expected_result": "64-char SHA256 current & prev hash linkage",
-      "actual_result": "Hash=136c991bb4ec6263...",
+      "actual_result": "Hash=3031652ad884eaf1...",
       "status": "PASS",
       "evidence": "Block commit mathematically linked to previous block",
-      "execution_time_ms": 0.634,
+      "execution_time_ms": 0.913,
       "severity": "HIGH"
     },
     {
@@ -4094,12 +4094,12 @@
       "category": "Cryptographic Audit Ledger",
       "description": "SHA-256 Block Commit #15",
       "precondition": "Sequential event commit for payment pay_audit_0015",
-      "input": "evt_4bcefe121aad",
+      "input": "evt_8fda00758629",
       "expected_result": "64-char SHA256 current & prev hash linkage",
-      "actual_result": "Hash=4f0e7ff8b90f7d91...",
+      "actual_result": "Hash=22be5c72c77f63fc...",
       "status": "PASS",
       "evidence": "Block commit mathematically linked to previous block",
-      "execution_time_ms": 0.528,
+      "execution_time_ms": 0.717,
       "severity": "HIGH"
     },
     {
@@ -4107,12 +4107,12 @@
       "category": "Cryptographic Audit Ledger",
       "description": "SHA-256 Block Commit #16",
       "precondition": "Sequential event commit for payment pay_audit_0016",
-      "input": "evt_112ccd451689",
+      "input": "evt_0d336cbb78ba",
       "expected_result": "64-char SHA256 current & prev hash linkage",
-      "actual_result": "Hash=da4fba2a7918cb84...",
+      "actual_result": "Hash=9c5a471d56687886...",
       "status": "PASS",
       "evidence": "Block commit mathematically linked to previous block",
-      "execution_time_ms": 0.549,
+      "execution_time_ms": 0.719,
       "severity": "HIGH"
     },
     {
@@ -4120,12 +4120,12 @@
       "category": "Cryptographic Audit Ledger",
       "description": "SHA-256 Block Commit #17",
       "precondition": "Sequential event commit for payment pay_audit_0017",
-      "input": "evt_8c2dd4c0cb6c",
+      "input": "evt_a4d80e6b597c",
       "expected_result": "64-char SHA256 current & prev hash linkage",
-      "actual_result": "Hash=2f48427d364553bc...",
+      "actual_result": "Hash=915ac95192703624...",
       "status": "PASS",
       "evidence": "Block commit mathematically linked to previous block",
-      "execution_time_ms": 1.001,
+      "execution_time_ms": 1.147,
       "severity": "HIGH"
     },
     {
@@ -4133,12 +4133,12 @@
       "category": "Cryptographic Audit Ledger",
       "description": "SHA-256 Block Commit #18",
       "precondition": "Sequential event commit for payment pay_audit_0018",
-      "input": "evt_e2a5b51ec7d0",
+      "input": "evt_579ad3c8c88e",
       "expected_result": "64-char SHA256 current & prev hash linkage",
-      "actual_result": "Hash=ffaa783408001cf0...",
+      "actual_result": "Hash=84740ca744dfb4b2...",
       "status": "PASS",
       "evidence": "Block commit mathematically linked to previous block",
-      "execution_time_ms": 0.662,
+      "execution_time_ms": 1.652,
       "severity": "HIGH"
     },
     {
@@ -4146,12 +4146,12 @@
       "category": "Cryptographic Audit Ledger",
       "description": "SHA-256 Block Commit #19",
       "precondition": "Sequential event commit for payment pay_audit_0019",
-      "input": "evt_a5cae90e71a1",
+      "input": "evt_ac3e15a97a00",
       "expected_result": "64-char SHA256 current & prev hash linkage",
-      "actual_result": "Hash=17e78af0838445ed...",
+      "actual_result": "Hash=55b23644102e4240...",
       "status": "PASS",
       "evidence": "Block commit mathematically linked to previous block",
-      "execution_time_ms": 0.838,
+      "execution_time_ms": 0.865,
       "severity": "HIGH"
     },
     {
@@ -4159,12 +4159,12 @@
       "category": "Cryptographic Audit Ledger",
       "description": "SHA-256 Block Commit #20",
       "precondition": "Sequential event commit for payment pay_audit_0020",
-      "input": "evt_116f1edd1065",
+      "input": "evt_281f5eed358c",
       "expected_result": "64-char SHA256 current & prev hash linkage",
-      "actual_result": "Hash=713795af0720a167...",
+      "actual_result": "Hash=dba65d69ad3eaedb...",
       "status": "PASS",
       "evidence": "Block commit mathematically linked to previous block",
-      "execution_time_ms": 0.689,
+      "execution_time_ms": 0.783,
       "severity": "HIGH"
     },
     {
@@ -4174,10 +4174,10 @@
       "precondition": "Full cryptographic scan of all blocks in SQLite WAL audit ledger",
       "input": "audit_chain_ledger",
       "expected_result": "valid=True, unbroken continuity from Genesis",
-      "actual_result": "valid=True, total_blocks=70",
+      "actual_result": "valid=True, total_blocks=487",
       "status": "PASS",
-      "evidence": "Verified unbroken cryptographic integrity across 70 events",
-      "execution_time_ms": 4.472,
+      "evidence": "Verified unbroken cryptographic integrity across 487 events",
+      "execution_time_ms": 19.48,
       "severity": "HIGH"
     },
     {
@@ -4187,10 +4187,10 @@
       "precondition": "Full cryptographic scan of all blocks in SQLite WAL audit ledger",
       "input": "audit_chain_ledger",
       "expected_result": "valid=True, unbroken continuity from Genesis",
-      "actual_result": "valid=True, total_blocks=70",
+      "actual_result": "valid=True, total_blocks=487",
       "status": "PASS",
-      "evidence": "Verified unbroken cryptographic integrity across 70 events",
-      "execution_time_ms": 4.051,
+      "evidence": "Verified unbroken cryptographic integrity across 487 events",
+      "execution_time_ms": 15.739,
       "severity": "HIGH"
     },
     {
@@ -4200,10 +4200,10 @@
       "precondition": "Full cryptographic scan of all blocks in SQLite WAL audit ledger",
       "input": "audit_chain_ledger",
       "expected_result": "valid=True, unbroken continuity from Genesis",
-      "actual_result": "valid=True, total_blocks=70",
+      "actual_result": "valid=True, total_blocks=487",
       "status": "PASS",
-      "evidence": "Verified unbroken cryptographic integrity across 70 events",
-      "execution_time_ms": 2.443,
+      "evidence": "Verified unbroken cryptographic integrity across 487 events",
+      "execution_time_ms": 15.889,
       "severity": "HIGH"
     },
     {
@@ -4213,10 +4213,10 @@
       "precondition": "Full cryptographic scan of all blocks in SQLite WAL audit ledger",
       "input": "audit_chain_ledger",
       "expected_result": "valid=True, unbroken continuity from Genesis",
-      "actual_result": "valid=True, total_blocks=70",
+      "actual_result": "valid=True, total_blocks=487",
       "status": "PASS",
-      "evidence": "Verified unbroken cryptographic integrity across 70 events",
-      "execution_time_ms": 2.285,
+      "evidence": "Verified unbroken cryptographic integrity across 487 events",
+      "execution_time_ms": 14.054,
       "severity": "HIGH"
     },
     {
@@ -4226,10 +4226,10 @@
       "precondition": "Full cryptographic scan of all blocks in SQLite WAL audit ledger",
       "input": "audit_chain_ledger",
       "expected_result": "valid=True, unbroken continuity from Genesis",
-      "actual_result": "valid=True, total_blocks=70",
+      "actual_result": "valid=True, total_blocks=487",
       "status": "PASS",
-      "evidence": "Verified unbroken cryptographic integrity across 70 events",
-      "execution_time_ms": 2.195,
+      "evidence": "Verified unbroken cryptographic integrity across 487 events",
+      "execution_time_ms": 13.783,
       "severity": "HIGH"
     },
     {
@@ -4242,7 +4242,7 @@
       "actual_result": "success=True, id=plink_mock_pay_mock_001",
       "status": "PASS",
       "evidence": "Generated sandbox payment link: https://mockpay.local/i/pay_mock_001",
-      "execution_time_ms": 0.017,
+      "execution_time_ms": 0.008,
       "severity": "HIGH"
     },
     {
@@ -4255,7 +4255,7 @@
       "actual_result": "success=True, id=plink_mock_pay_mock_002",
       "status": "PASS",
       "evidence": "Generated sandbox payment link: https://mockpay.local/i/pay_mock_002",
-      "execution_time_ms": 0.006,
+      "execution_time_ms": 0.003,
       "severity": "HIGH"
     },
     {
@@ -4268,7 +4268,7 @@
       "actual_result": "success=True, id=plink_mock_pay_mock_003",
       "status": "PASS",
       "evidence": "Generated sandbox payment link: https://mockpay.local/i/pay_mock_003",
-      "execution_time_ms": 0.003,
+      "execution_time_ms": 0.002,
       "severity": "HIGH"
     },
     {
@@ -4281,7 +4281,7 @@
       "actual_result": "success=True, id=plink_mock_pay_mock_004",
       "status": "PASS",
       "evidence": "Generated sandbox payment link: https://mockpay.local/i/pay_mock_004",
-      "execution_time_ms": 0.003,
+      "execution_time_ms": 0.002,
       "severity": "HIGH"
     },
     {
@@ -4294,7 +4294,7 @@
       "actual_result": "success=True, id=plink_mock_pay_mock_005",
       "status": "PASS",
       "evidence": "Generated sandbox payment link: https://mockpay.local/i/pay_mock_005",
-      "execution_time_ms": 0.003,
+      "execution_time_ms": 0.002,
       "severity": "HIGH"
     },
     {
@@ -4307,7 +4307,7 @@
       "actual_result": "success=True, id=plink_mock_pay_mock_006",
       "status": "PASS",
       "evidence": "Generated sandbox payment link: https://mockpay.local/i/pay_mock_006",
-      "execution_time_ms": 0.017,
+      "execution_time_ms": 0.002,
       "severity": "HIGH"
     },
     {
@@ -4320,7 +4320,7 @@
       "actual_result": "success=True, id=plink_mock_pay_mock_007",
       "status": "PASS",
       "evidence": "Generated sandbox payment link: https://mockpay.local/i/pay_mock_007",
-      "execution_time_ms": 0.003,
+      "execution_time_ms": 0.002,
       "severity": "HIGH"
     },
     {
@@ -4333,7 +4333,7 @@
       "actual_result": "success=True, id=plink_mock_pay_mock_008",
       "status": "PASS",
       "evidence": "Generated sandbox payment link: https://mockpay.local/i/pay_mock_008",
-      "execution_time_ms": 0.003,
+      "execution_time_ms": 0.005,
       "severity": "HIGH"
     },
     {
@@ -4359,7 +4359,7 @@
       "actual_result": "success=True, id=plink_mock_pay_mock_010",
       "status": "PASS",
       "evidence": "Generated sandbox payment link: https://mockpay.local/i/pay_mock_010",
-      "execution_time_ms": 0.003,
+      "execution_time_ms": 0.002,
       "severity": "HIGH"
     },
     {
@@ -4372,7 +4372,7 @@
       "actual_result": "success=True, id=plink_rzp_011",
       "status": "PASS",
       "evidence": "Generated test payment link via Razorpay adapter: https://rzp.io/i/rec_011",
-      "execution_time_ms": 0.01,
+      "execution_time_ms": 0.006,
       "severity": "HIGH"
     },
     {
@@ -4385,7 +4385,7 @@
       "actual_result": "success=True, id=plink_rzp_012",
       "status": "PASS",
       "evidence": "Generated test payment link via Razorpay adapter: https://rzp.io/i/rec_012",
-      "execution_time_ms": 0.006,
+      "execution_time_ms": 0.003,
       "severity": "HIGH"
     },
     {
@@ -4398,7 +4398,7 @@
       "actual_result": "success=True, id=plink_rzp_013",
       "status": "PASS",
       "evidence": "Generated test payment link via Razorpay adapter: https://rzp.io/i/rec_013",
-      "execution_time_ms": 0.004,
+      "execution_time_ms": 0.002,
       "severity": "HIGH"
     },
     {
@@ -4411,7 +4411,7 @@
       "actual_result": "success=True, id=plink_rzp_014",
       "status": "PASS",
       "evidence": "Generated test payment link via Razorpay adapter: https://rzp.io/i/rec_014",
-      "execution_time_ms": 0.004,
+      "execution_time_ms": 0.002,
       "severity": "HIGH"
     },
     {
@@ -4424,7 +4424,7 @@
       "actual_result": "success=True, id=plink_rzp_015",
       "status": "PASS",
       "evidence": "Generated test payment link via Razorpay adapter: https://rzp.io/i/rec_015",
-      "execution_time_ms": 0.003,
+      "execution_time_ms": 0.002,
       "severity": "HIGH"
     },
     {
@@ -4437,7 +4437,7 @@
       "actual_result": "success=True, id=plink_rzp_016",
       "status": "PASS",
       "evidence": "Generated test payment link via Razorpay adapter: https://rzp.io/i/rec_016",
-      "execution_time_ms": 0.003,
+      "execution_time_ms": 0.002,
       "severity": "HIGH"
     },
     {
@@ -4450,7 +4450,7 @@
       "actual_result": "success=True, id=plink_rzp_017",
       "status": "PASS",
       "evidence": "Generated test payment link via Razorpay adapter: https://rzp.io/i/rec_017",
-      "execution_time_ms": 0.003,
+      "execution_time_ms": 0.002,
       "severity": "HIGH"
     },
     {
@@ -4463,7 +4463,7 @@
       "actual_result": "success=True, id=plink_rzp_018",
       "status": "PASS",
       "evidence": "Generated test payment link via Razorpay adapter: https://rzp.io/i/rec_018",
-      "execution_time_ms": 0.003,
+      "execution_time_ms": 0.005,
       "severity": "HIGH"
     },
     {
@@ -4489,7 +4489,7 @@
       "actual_result": "success=True, id=plink_rzp_020",
       "status": "PASS",
       "evidence": "Generated test payment link via Razorpay adapter: https://rzp.io/i/rec_020",
-      "execution_time_ms": 0.003,
+      "execution_time_ms": 0.002,
       "severity": "HIGH"
     }
   ]
