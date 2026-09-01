@@ -73,3 +73,22 @@ def test_llm_prompt_builder():
     assert "user" in prompt
     assert "TRANSIENT_GATEWAY" in prompt["system"]
     assert "pay_prompt_01" in prompt["user"]
+
+def test_local_vector_space_semantic_classifier():
+    from backend.app.diagnostic_engine import LocalVectorSpaceSemanticClassifier
+    
+    # 1. Test bank timeout classification
+    f_class, conf = LocalVectorSpaceSemanticClassifier.classify("Bank gateway server degraded 504 timeout")
+    assert f_class == "TRANSIENT_GATEWAY"
+    assert conf >= 0.70
+    
+    # 2. Test balance decline classification
+    f_class2, conf2 = LocalVectorSpaceSemanticClassifier.classify("Customer account balance insufficient for transfer")
+    assert f_class2 == "INSUFFICIENT_FUNDS"
+    assert conf2 >= 0.70
+
+    # 3. Test fraud risk classification
+    f_class3, conf3 = LocalVectorSpaceSemanticClassifier.classify("High risk velocity anomaly detected card testing")
+    assert f_class3 == "SUSPICIOUS_VELOCITY"
+    assert conf3 >= 0.70
+

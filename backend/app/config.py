@@ -18,12 +18,12 @@ class Settings(BaseSettings):
     RAZORPAY_KEY_SECRET: str = "mock_secret_key_12345"
     RAZORPAY_WEBHOOK_SECRET: str = "whsec_mock_signature_test"
 
-    # LLM & AI Engine Credentials
-    GEMINI_API_KEY: Optional[str] = None
-    OPENAI_API_KEY: Optional[str] = None
-    LLM_PROVIDER: str = "auto"
-    LLM_MODEL: str = "gpt-4o-mini"
-    LLM_TEMPERATURE: float = 0.0
+    # Local Open-Source AI Engine (Zero External API Keys Required)
+    AI_PROVIDER: str = "LOCAL_OPENSOURCE" # "LOCAL_OPENSOURCE" | "OLLAMA"
+    LOCAL_MODEL_NAME: str = "RazorRevive-Embed-v1"
+    OLLAMA_BASE_URL: str = "http://localhost:11434"
+    EMBEDDED_AI_ENABLED: bool = True
+
 
     MAX_RETRY_ATTEMPTS: int = 3
     MAX_DISCOUNT_PERCENT: float = 10.0
