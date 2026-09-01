@@ -137,7 +137,7 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
     trace_id = getattr(request.state, "trace_id", f"tr_{uuid.uuid4().hex[:12]}")
     log_system_event("WARN", "SchemaValidation", "Payload failed schema validation", trace_id=trace_id)
     return JSONResponse(
-        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        status_code=422,
         content={
             "success": False,
             "error": {
@@ -201,6 +201,7 @@ async def serve_dashboard():
     return "<h1>RazorRevive-OS Control Plane Running</h1>"
 
 @app.get("/health")
+@app.get("/api/v1/health")
 async def healthcheck(request: Request):
     trace_id = getattr(request.state, "trace_id", f"tr_{uuid.uuid4().hex[:12]}")
     return {
