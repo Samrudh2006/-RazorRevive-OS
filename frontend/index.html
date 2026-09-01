@@ -1397,12 +1397,18 @@
         </div>
       </div>
 
-      <button onclick="triggerFastLoopPipeline()" id="fast-loop-btn" class="w-full h-10 rounded-lg btn-primary text-xs font-semibold flex items-center justify-center gap-2">
-        <svg class="w-4 h-4 text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-        <span>Ingest Webhook & Trigger Recovery Pipeline</span>
-      </button>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+        <button onclick="triggerFastLoopPipeline()" id="fast-loop-btn" class="h-10 rounded-lg btn-primary text-xs font-semibold flex items-center justify-center gap-2">
+          <svg class="w-4 h-4 text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          <span>Trigger Pipeline</span>
+        </button>
+        <button onclick="openWhatsAppPreviewModal()" class="h-10 rounded-lg bg-[#064e3b] hover:bg-[#065f46] text-[#34d399] border border-[#059669] text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors">
+          <span>💬 Preview WhatsApp</span>
+        </button>
+      </div>
     </div>
   </template>
+
 
   <template id="tmpl-deep-loop-card">
     <div class="custom-card p-4 space-y-4" id="deep-loop-panel">
@@ -2606,6 +2612,31 @@
       if (outUsers) outUsers.textContent = `${retainedUsers.toLocaleString('en-IN')} / mo`;
     }
 
+    function openWhatsAppPreviewModal() {
+      const amtInput = document.getElementById("fast-amount");
+      const payIdInput = document.getElementById("fast-pay-id");
+      const phoneInput = document.getElementById("fast-phone");
+
+      const amt = amtInput ? parseFloat(amtInput.value) || 2499.0 : 2499.0;
+      const payId = payIdInput ? payIdInput.value : "pay_9A12BC34DE";
+
+      const waOrder = document.getElementById("wa-order-id");
+      const waAmt = document.getElementById("wa-amount");
+      const waUpi = document.getElementById("wa-upi-btn");
+
+      if (waOrder) waOrder.textContent = payId;
+      if (waAmt) waAmt.textContent = `₹${amt.toFixed(2)}`;
+      if (waUpi) waUpi.href = `upi://pay?pa=merchant@razorpay&pn=RazorRevive&am=${amt.toFixed(2)}&cu=INR`;
+
+      const modal = document.getElementById("whatsapp-modal");
+      if (modal) modal.classList.remove("hidden");
+    }
+
+    function closeWhatsAppPreviewModal() {
+      const modal = document.getElementById("whatsapp-modal");
+      if (modal) modal.classList.add("hidden");
+    }
+
     mountComponents();
     refreshAuditLedger();
     renderWeibullCurve();
@@ -2614,5 +2645,70 @@
     setInterval(refreshAuditLedger, 5000);
 
   </script>
+
+  <!-- WHATSAPP OUTREACH PREVIEW MODAL -->
+  <div id="whatsapp-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-[#111b21] border border-[#222d34] rounded-3xl w-full max-w-sm shadow-2xl overflow-hidden">
+      <!-- Phone Top Notch Bar -->
+      <div class="bg-[#202c33] px-4 py-3 flex items-center justify-between border-b border-[#2a3942]">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-full bg-[#00a884] flex items-center justify-center font-bold text-white text-xs">
+            R
+          </div>
+          <div>
+            <div class="text-xs font-semibold text-white flex items-center gap-1">
+              <span>Razorpay Verified</span>
+              <svg class="w-3.5 h-3.5 text-[#00a884]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            </div>
+            <div class="text-[10px] text-slate-400">Official Payment Recovery Bot</div>
+          </div>
+        </div>
+        <button onclick="closeWhatsAppPreviewModal()" class="text-slate-400 hover:text-white text-lg font-bold">✕</button>
+      </div>
+
+      <!-- Chat Bubble Container -->
+      <div class="p-4 space-y-3 bg-[#0b141a] min-h-[280px]">
+        <!-- System Notice -->
+        <div class="text-center">
+          <span class="px-2 py-1 rounded bg-[#182229] text-[9px] text-[#8696a0] mono">🔒 End-to-end encrypted • DPDP Act Compliant</span>
+        </div>
+
+        <!-- WhatsApp Message Bubble -->
+        <div class="bg-[#202c33] rounded-2xl rounded-tl-sm p-3.5 space-y-2.5 text-slate-200 shadow-md border border-[#2a3942]">
+          <div class="text-xs font-semibold text-[#00a884] flex items-center gap-1.5">
+            <span>⚡ Razorpay Priority Checkout Nudge</span>
+          </div>
+          <p class="text-[11px] leading-relaxed text-slate-300" id="wa-message-body">
+            Hi <span class="font-semibold text-white">Rahul</span>, your recent payment for order was interrupted due to an issuing bank timeout. Click below to complete in 1-click via UPI:
+          </p>
+          <div class="p-2.5 bg-[#111b21] rounded-xl border border-[#2a3942] space-y-1">
+            <div class="flex justify-between text-[10px] text-slate-400">
+              <span>Order ID:</span>
+              <span class="mono text-slate-300" id="wa-order-id">pay_9A12BC34DE</span>
+            </div>
+            <div class="flex justify-between text-[10px] text-slate-400">
+              <span>Amount Due:</span>
+              <span class="mono text-emerald-400 font-bold" id="wa-amount">₹2,499.00</span>
+            </div>
+          </div>
+
+          <!-- 1-Click Pay Buttons -->
+          <div class="space-y-1.5 pt-1">
+            <a id="wa-upi-btn" href="upi://pay?pa=merchant@razorpay&pn=RazorRevive&am=2499.00&cu=INR" target="_blank" class="w-full py-2 bg-[#00a884] hover:bg-[#008f6f] text-white text-xs font-bold rounded-xl flex items-center justify-center gap-2 shadow-lg transition-colors">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              <span>1-Click Pay with UPI Intent</span>
+            </a>
+            <div class="flex gap-1.5">
+              <button class="flex-1 py-1.5 bg-[#182229] hover:bg-[#202c33] text-[10px] text-[#8696a0] font-medium rounded-lg border border-[#2a3942]">GPay</button>
+              <button class="flex-1 py-1.5 bg-[#182229] hover:bg-[#202c33] text-[10px] text-[#8696a0] font-medium rounded-lg border border-[#2a3942]">PhonePe</button>
+              <button class="flex-1 py-1.5 bg-[#182229] hover:bg-[#202c33] text-[10px] text-[#8696a0] font-medium rounded-lg border border-[#2a3942]">Paytm</button>
+            </div>
+          </div>
+          <div class="text-[9px] text-right text-[#8696a0] mono">Just now ✓✓</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
+
