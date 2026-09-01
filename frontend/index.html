@@ -615,8 +615,68 @@
           <div id="benchmark-summary-slot"></div>
         </div>
 
+        <!-- INTERACTIVE LIVE MERCHANT ROI CALCULATOR WIDGET -->
+        <div class="custom-card p-5 space-y-4">
+          <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 border-b border-[#1e293b] pb-3">
+            <div>
+              <div class="text-sm font-bold text-white flex items-center gap-2">
+                <span class="text-blue-500 font-bold">⚡</span>
+                <span>Interactive Merchant Revenue Expansion & ROI Calculator</span>
+              </div>
+              <p class="text-xs text-slate-400 mt-0.5">Calculate net new cash flow unlocked for your business by RazorRevive-OS local open-source AI</p>
+            </div>
+            <span class="px-3 py-1 rounded-full text-xs font-bold text-emerald-400 bg-emerald-950/40 border border-emerald-800/60 mono">100% Local AI (₹0 API Cost)</span>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Sliders -->
+            <div class="space-y-4 bg-[#081224] p-4 rounded-xl border border-[#142442]">
+              <div>
+                <div class="flex justify-between text-xs font-semibold text-slate-300 mb-1">
+                  <span>Monthly Processed GMV:</span>
+                  <span class="text-blue-400 mono font-bold" id="slider-gmv-val">₹1,00,00,000 (1 Cr)</span>
+                </div>
+                <input type="range" min="1000000" max="50000000" step="500000" value="10000000" id="slider-gmv" oninput="updateLiveRoiCalculator()" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-600">
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs font-semibold text-slate-300 mb-1">
+                  <span>Estimated Payment Failure Rate:</span>
+                  <span class="text-amber-400 mono font-bold" id="slider-fail-val">12.5%</span>
+                </div>
+                <input type="range" min="5.0" max="25.0" step="0.5" value="12.5" id="slider-fail" oninput="updateLiveRoiCalculator()" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-amber-500">
+              </div>
+            </div>
+
+            <!-- Projections Output Grid -->
+            <div class="grid grid-cols-2 gap-3">
+              <div class="p-3 bg-[#081224] rounded-xl border border-[#142442]">
+                <div class="text-[11px] text-slate-400 font-medium">Monthly Recovered GMV</div>
+                <div class="text-xl font-bold text-emerald-400 mono mt-1" id="roi-out-monthly">₹5,28,000</div>
+                <div class="text-[10px] text-slate-400 mt-0.5">Based on 42.24% Recovery</div>
+              </div>
+              <div class="p-3 bg-[#081224] rounded-xl border border-[#142442]">
+                <div class="text-[11px] text-slate-400 font-medium">Annualized Run-Rate</div>
+                <div class="text-xl font-bold text-blue-400 mono mt-1" id="roi-out-annual">₹63,36,000</div>
+                <div class="text-[10px] text-slate-400 mt-0.5">+5.28% Net Top-Line Growth</div>
+              </div>
+              <div class="p-3 bg-[#081224] rounded-xl border border-[#142442]">
+                <div class="text-[11px] text-slate-400 font-medium">Retained Customers</div>
+                <div class="text-xl font-bold text-purple-400 mono mt-1" id="roi-out-users">385 / mo</div>
+                <div class="text-[10px] text-slate-400 mt-0.5">Prevented Churn</div>
+              </div>
+              <div class="p-3 bg-[#081224] rounded-xl border border-[#142442]">
+                <div class="text-[11px] text-slate-400 font-medium">Cloud AI Token Cost</div>
+                <div class="text-xl font-bold text-emerald-400 mono mt-1">₹0.00 / mo</div>
+                <div class="text-[10px] text-slate-400 mt-0.5">₹15,000+ API Bills Saved</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- BOTTOM FULL-WIDTH AUDIT LEDGER -->
         <div id="audit-ledger-slot"></div>
+
 
       </div>
 
@@ -2509,11 +2569,50 @@
       }
     })();
 
+    function updateLiveRoiCalculator() {
+      const gmvInput = document.getElementById("slider-gmv");
+      const failInput = document.getElementById("slider-fail");
+      if (!gmvInput || !failInput) return;
+
+      const gmv = parseFloat(gmvInput.value);
+      const failRate = parseFloat(failInput.value);
+
+      const gmvLabel = document.getElementById("slider-gmv-val");
+      const failLabel = document.getElementById("slider-fail-val");
+
+      if (gmvLabel) {
+        if (gmv >= 10000000) {
+          gmvLabel.textContent = `₹${(gmv / 10000000).toFixed(2)} Cr`;
+        } else {
+          gmvLabel.textContent = `₹${(gmv / 100000).toFixed(0)} Lakhs`;
+        }
+      }
+      if (failLabel) {
+        failLabel.textContent = `${failRate.toFixed(1)}%`;
+      }
+
+      // Projections calibrated to 100-case held-out benchmark
+      const failedGmv = gmv * (failRate / 100.0);
+      const recoveredGmv = failedGmv * 0.4224;
+      const annualRecovered = recoveredGmv * 12;
+      const retainedUsers = Math.round((failedGmv / 2500) * 0.77);
+
+      const outMonthly = document.getElementById("roi-out-monthly");
+      const outAnnual = document.getElementById("roi-out-annual");
+      const outUsers = document.getElementById("roi-out-users");
+
+      if (outMonthly) outMonthly.textContent = `₹${Math.round(recoveredGmv).toLocaleString('en-IN')}`;
+      if (outAnnual) outAnnual.textContent = `₹${Math.round(annualRecovered).toLocaleString('en-IN')}`;
+      if (outUsers) outUsers.textContent = `${retainedUsers.toLocaleString('en-IN')} / mo`;
+    }
+
     mountComponents();
     refreshAuditLedger();
     renderWeibullCurve();
     initFintech3DTopology();
+    updateLiveRoiCalculator();
     setInterval(refreshAuditLedger, 5000);
+
   </script>
 </body>
 </html>
