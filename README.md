@@ -245,6 +245,18 @@ python cli.py simulate-attack --attack quiet-hours
 
 ---
 
+## 5. Visual Dashboard & Control Plane Preview
+
+<div align="center">
+  <p><b>Razorpay Native Light Theme (Default)</b></p>
+  <img src="docs/images/dashboard_light.png" alt="RazorRevive-OS Light Theme Dashboard" width="850">
+  <br><br>
+  <p><b>Fintech SRE Dark Theme</b></p>
+  <img src="docs/images/dashboard_dark.png" alt="RazorRevive-OS Dark Theme Dashboard" width="850">
+</div>
+
+---
+
 ## 6. Quickstart & Local Execution
 
 ### 1. Launch Control Plane Dashboard
@@ -257,7 +269,7 @@ uvicorn backend.app.main:app --port 8000 --reload
 ```
 Open **`http://localhost:8000`** in your browser to interact with the Razorpay Control Plane and toggle between Razorpay Light and Dark themes.
 
-### 2. Run All Unit & Adversarial Tests (47 Tests)
+### 2. Run All Unit & Adversarial Tests (53 Tests)
 ```bash
 # Windows
 run_tests.bat
@@ -274,6 +286,7 @@ run_benchmarks.bat
 # Manual
 python benchmarks/benchmark_runner.py
 ```
+
 
 ---
 
