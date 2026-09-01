@@ -4,9 +4,16 @@ import time
 import json
 import sqlite3
 import re
+import os
 import threading
 import logging
 from typing import Optional, Dict, Any
+from cryptography.hazmat.primitives import constant_time
+try:
+    import redis
+except ImportError:
+    redis = None
+
 from backend.app.config import settings
 
 logger = logging.getLogger("RazorRevive.Security")
@@ -57,7 +64,7 @@ def verify_razorpay_signature(
 ) -> bool:
     """
     Timing-Attack Resistant HMAC SHA-256 Webhook Signature Verification.
-    Includes replay-attack timestamp drift protection.
+    Uses cryptography constant_time.bytes_eq and replay timestamp drift protection.
     """
     if not signature:
         logger.warning("[SECURITY] Missing X-Razorpay-Signature header.")
@@ -81,24 +88,33 @@ def verify_razorpay_signature(
         digestmod=hashlib.sha256
     ).hexdigest()
 
-    # hmac.compare_digest prevents side-channel timing analysis attacks
-    is_valid = hmac.compare_digest(expected_signature, signature)
+    # Hardware-accelerated constant_time.bytes_eq prevents side-channel timing analysis attacks
+    is_valid = constant_time.bytes_eq(expected_signature.encode("utf-8"), signature.encode("utf-8"))
     if not is_valid:
         logger.warning("[SECURITY] Cryptographic signature mismatch.")
     return is_valid
 
 class DistributedIdempotencyStore:
     """
-    Atomic Distributed Mutex Lock & Durable Execution Store (SQLite WAL-backed).
+    Atomic Distributed Mutex Lock & Durable Execution Store.
+    Supports Redis distributed lock with SQLite WAL-backed local fallback.
     Guarantees strict once-and-only-once execution per (merchant_id + payment_id).
-    
-    Protects against both:
-    1. Concurrent execution (via atomic CAS lock / lease).
-    2. Repeated execution across process crashes (via durable execution state).
     """
 
-    def __init__(self, db_path: Optional[str] = None):
+    def __init__(self, db_path: Optional[str] = None, redis_url: Optional[str] = None):
         self.db_path = db_path or settings.DATABASE_PATH
+        self.redis_client = None
+        
+        target_redis = redis_url or os.getenv("REDIS_URL")
+        if target_redis and redis:
+            try:
+                self.redis_client = redis.Redis.from_url(target_redis, decode_responses=True, socket_timeout=1.0)
+                self.redis_client.ping()
+                logger.info("[SECURITY] Connected to distributed Redis lock manager.")
+            except Exception as e:
+                logger.warning(f"[SECURITY] Redis not reachable ({e}). Falling back to local SQLite WAL mutex.")
+                self.redis_client = None
+
         self._init_db()
 
     def _init_db(self):

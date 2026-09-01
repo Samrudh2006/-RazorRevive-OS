@@ -1,6 +1,8 @@
 import math
 import logging
 from typing import Dict, Any, List, Tuple
+import numpy as np
+from scipy import stats
 from backend.app.schemas import RetryWindowRecommendation, FailureClassType
 
 logger = logging.getLogger("RazorRevive.RecoveryOptimizer")
@@ -11,8 +13,8 @@ class RecoveryHazardOptimizer:
     
     CRITICAL METHODOLOGY NOTE:
     This model computes conditional recovery probabilities using an empirical hazard rate function h(t)
-    fitted over synthetic historical bank outage telemetry data. It does not pretend to possess proprietary
-    internal core-banking telemetry.
+    fitted over synthetic historical bank outage telemetry data using SciPy and NumPy survival analysis.
+    It does not pretend to possess proprietary internal core-banking telemetry.
     """
 
     # Empirical baseline hazard parameters (lambda_0, shape_beta) derived from synthetic historical bank outage logs
@@ -33,7 +35,7 @@ class RecoveryHazardOptimizer:
         bank_profile: str = "DEFAULT"
     ) -> Tuple[float, float]:
         """
-        Computes F(t) = 1 - exp(- (base_hazard * t)^shape_beta) under Weibull-Hazard model.
+        Computes F(t) = 1 - exp(- (base_hazard * t)^shape_beta) under Weibull-Hazard model via SciPy/NumPy.
         Returns: (cumulative_prob, instantaneous_hazard)
         """
         prof = cls.SYNTHETIC_BANK_HAZARD_PROFILES.get(bank_profile.upper(), cls.SYNTHETIC_BANK_HAZARD_PROFILES["DEFAULT"])
@@ -43,14 +45,17 @@ class RecoveryHazardOptimizer:
         if t_minutes <= 0:
             return 0.0, 0.0
 
-        # Cumulative distribution function
-        exponent = -1.0 * math.pow(b_haz * t_minutes, beta)
-        cdf_prob = 1.0 - math.exp(exponent)
+        # Scale parameter eta = 1 / base_hazard for SciPy weibull_min(c=beta, scale=1/b_haz)
+        scale_eta = 1.0 / b_haz
+        cdf_prob = float(stats.weibull_min.cdf(t_minutes, c=beta, scale=scale_eta))
+        pdf_val = float(stats.weibull_min.pdf(t_minutes, c=beta, scale=scale_eta))
         
-        # Instantaneous hazard rate h(t)
-        instant_hazard = b_haz * beta * math.pow(b_haz * t_minutes, beta - 1.0)
+        # Instantaneous hazard rate h(t) = f(t) / S(t) = f(t) / (1 - F(t))
+        survival = max(1e-6, 1.0 - cdf_prob)
+        instant_hazard = float(pdf_val / survival)
         
-        return round(min(0.98, max(0.05, cdf_prob)), 4), round(instant_hazard, 5)
+        bounded_prob = float(np.clip(cdf_prob, 0.05, 0.98))
+        return round(bounded_prob, 4), round(instant_hazard, 5)
 
     @classmethod
     def select_optimal_retry_window(

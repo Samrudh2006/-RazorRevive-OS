@@ -70,3 +70,10 @@ def test_contract_security_headers_present():
     assert headers.get("X-Content-Type-Options") == "nosniff"
     assert headers.get("X-Frame-Options") == "DENY"
     assert headers.get("X-Trace-ID") is not None
+
+def test_contract_prometheus_metrics():
+    response = client.get("/metrics")
+    assert response.status_code == 200
+    assert "razorrevive_recovery_requests_total" in response.text
+    assert "razorrevive_diagnostic_latency_seconds" in response.text
+

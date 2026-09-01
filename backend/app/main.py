@@ -23,6 +23,38 @@ from backend.app.b2b.voice_agent import VoiceDialogueTurnRequest, VoiceDialogueR
 from backend.app.policy_engine import policy_engine
 from benchmarks.benchmark_runner import run_held_out_benchmark
 
+from prometheus_client import Counter, Histogram, generate_latest, CONTENT_TYPE_LATEST
+import structlog
+
+# Prometheus Metrics Definitions for Production SRE Telemetry
+RECOVERY_REQUESTS_TOTAL = Counter(
+    "razorrevive_recovery_requests_total",
+    "Total count of revenue recovery requests processed",
+    ["status", "failure_class"]
+)
+RECOVERED_GMV_INR = Counter(
+    "razorrevive_recovered_gmv_inr_total",
+    "Total Gross Merchandise Value recovered in INR"
+)
+DIAGNOSTIC_LATENCY_HISTOGRAM = Histogram(
+    "razorrevive_diagnostic_latency_seconds",
+    "End-to-end diagnostic and hazard window latency in seconds",
+    buckets=[0.0001, 0.0005, 0.001, 0.005, 0.01, 0.05, 0.1, 0.5, 1.0]
+)
+IDEMPOTENCY_COLLISIONS_TOTAL = Counter(
+    "razorrevive_idempotency_collisions_total",
+    "Total count of concurrent duplicate attacks blocked by distributed mutex"
+)
+
+# Structured JSON Logger Configuration
+structlog.configure(
+    processors=[
+        structlog.processors.TimeStamper(fmt="iso"),
+        structlog.processors.JSONRenderer()
+    ]
+)
+s_logger = structlog.get_logger()
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("RazorRevive")
 
@@ -36,6 +68,7 @@ app = FastAPI(
 LIVE_LOGS_BUFFER: List[Dict[str, Any]] = []
 
 def log_system_event(level: str, module: str, message: str, trace_id: str = "tr_system", details: Optional[Dict[str, Any]] = None):
+    s_logger.info(message, module=module, trace_id=trace_id, details=details or {})
     now_ist = time.strftime("%d %b %Y, %I:%M:%S %p", time.gmtime(time.time() + 5.5 * 3600))
     entry = {
         "id": f"log_{uuid.uuid4().hex[:8]}",
@@ -216,6 +249,13 @@ async def healthcheck(request: Request):
         "trace_id": trace_id,
         "timestamp": time.time()
     }
+
+@app.get("/metrics")
+async def prometheus_metrics():
+    """
+    Production Prometheus metrics endpoint for SRE telemetry and alerting scrapers.
+    """
+    return Response(content=generate_latest(), media_type=CONTENT_TYPE_LATEST)
 
 @app.get("/api/v1/dashboard/summary")
 async def get_dashboard_summary(request: Request):
@@ -509,7 +549,14 @@ async def execute_recovery_pipeline(
 
     log_system_event("INFO", "AuditLedger", f"Committed Event {audit_commit['event_id']} (Hash: {audit_commit['current_hash'][:10]}...)", trace_id=trace_id)
 
-    latency_ms = round((time.perf_counter() - start_time) * 1000.0, 2)
+    total_duration = time.perf_counter() - start_time
+    latency_ms = round(total_duration * 1000.0, 2)
+
+    # Prometheus Metric Increments
+    DIAGNOSTIC_LATENCY_HISTOGRAM.observe(total_duration)
+    RECOVERY_REQUESTS_TOTAL.labels(status=policy_verdict.verdict, failure_class=diagnosis.failure_class).inc()
+    if action_taken in ["SCHEDULE_MANDATE_RETRY", "DISPATCH_DYNAMIC_UPI_LINK"]:
+        RECOVERED_GMV_INR.inc(amount)
 
     return {
         "trace_id": trace_id,
