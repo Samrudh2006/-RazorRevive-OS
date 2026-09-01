@@ -91,30 +91,41 @@
     .custom-card:hover {
       border-color: #cbd5e1;
     }
-    html.light .text-white {
+
+    /* Scoped Light Theme Contrast Fixes (Preserves Dark Navy Sidebar & Blue Buttons) */
+    html.light main .text-white,
+    html.light .custom-card .text-white,
+    html.light #app-header .text-white {
       color: #0f172a !important;
     }
-    html.light .text-slate-200 {
+    html.light main .text-slate-200,
+    html.light .custom-card .text-slate-200 {
       color: #1e293b !important;
     }
-    html.light .text-slate-300 {
+    html.light main .text-slate-300,
+    html.light .custom-card .text-slate-300 {
       color: #334155 !important;
     }
-    html.light .text-slate-400 {
+    html.light main .text-slate-400,
+    html.light .custom-card .text-slate-400 {
       color: #64748b !important;
     }
-    html.light .bg-\[\#050c1b\],
-    html.light .bg-\[\#090e17\],
-    html.light .bg-\[\#081224\],
-    html.light .bg-\[\#0f172a\],
-    html.light .bg-\[\#060a12\] {
+
+    /* Inner containers in light mode */
+    html.light main .bg-\[\#050c1b\],
+    html.light main .bg-\[\#090e17\],
+    html.light main .bg-\[\#081224\],
+    html.light main .bg-\[\#0f172a\],
+    html.light main .bg-\[\#060a12\] {
       background-color: #f8fafc !important;
     }
-    html.light .border-\[\#142442\],
-    html.light .border-\[\#1e293b\],
-    html.light .border-\[\#1b345f\] {
+    html.light main .border-\[\#142442\],
+    html.light main .border-\[\#1e293b\],
+    html.light main .border-\[\#1b345f\] {
       border-color: #e2e8f0 !important;
     }
+
+    /* Form Inputs */
     html.light input,
     html.light select,
     html.light textarea {
@@ -126,6 +137,8 @@
     html.light select:focus {
       border-color: #0c55ea !important;
     }
+
+    /* Header */
     html.light #app-header {
       background-color: #ffffff !important;
       border-color: #e2e8f0 !important;
@@ -133,49 +146,50 @@
     html.light #app-header .header-brand-title {
       color: #0c2340 !important;
     }
+
+    /* Sidebar ALWAYS Dark Navy with High Contrast White/Light Slate Text */
+    #app-sidebar,
     html.light #app-sidebar {
       background-color: #0c2340 !important;
       border-color: #132f54 !important;
     }
+    #app-sidebar .text-white,
+    html.light #app-sidebar .text-white {
+      color: #ffffff !important;
+    }
+    #app-sidebar .text-slate-400,
+    html.light #app-sidebar .text-slate-400 {
+      color: #94a3b8 !important;
+    }
+    #app-sidebar .nav-btn-inactive,
     html.light #app-sidebar .nav-btn-inactive {
       color: #cbd5e1 !important;
     }
+    #app-sidebar .nav-btn-inactive:hover,
     html.light #app-sidebar .nav-btn-inactive:hover {
       background-color: #132f54 !important;
       color: #ffffff !important;
     }
+    #app-sidebar .nav-btn-active,
     html.light #app-sidebar .nav-btn-active {
       background-color: #0c55ea !important;
       color: #ffffff !important;
     }
-    .nav-btn-active {
+
+    /* Primary Action Buttons ALWAYS Crisp White Text */
+    .btn-primary,
+    .btn-primary *,
+    html.light .btn-primary,
+    html.light .btn-primary * {
       background-color: #0c55ea !important;
       color: #ffffff !important;
-      font-weight: 600 !important;
-      border: 1px solid #2563eb !important;
-      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.25) !important;
     }
-    .nav-btn-inactive {
-      color: #94a3b8;
-      border: 1px solid transparent;
+    .btn-primary:hover,
+    html.light .btn-primary:hover {
+      background-color: #0a47c4 !important;
     }
-    .nav-btn-inactive:hover {
-      background-color: #172339;
-      color: #ffffff;
-    }
-    .btn-primary {
-      background-color: #0c55ea;
-      color: #ffffff !important;
-      border: 1px solid rgba(59, 130, 246, 0.3);
-      box-shadow: 0 1px 2px 0 rgba(12, 85, 234, 0.2);
-      transition: all 0.15s ease-in-out;
-    }
-    .btn-primary:hover {
-      background-color: #0a47c4;
-    }
-    .btn-primary:active {
-      background-color: #083ca8;
-    }
+
+    /* Secondary Buttons */
     .btn-secondary {
       background-color: #ffffff;
       color: #1e293b;
@@ -194,6 +208,63 @@
     html.dark .btn-secondary:hover {
       background-color: #334155;
       color: #ffffff;
+    }
+
+    /* Dedicated High-Contrast Terminal Console */
+    #red-team-console,
+    html.light #red-team-console,
+    html.light #red-team-console * {
+      background-color: #0c1729 !important;
+      color: #34d399 !important;
+      border-color: #1e2e4a !important;
+    }
+
+    /* Light Mode Red-Team Attack Buttons */
+    html.light [id^="attack-btn-"] {
+      background-color: #fee2e2 !important;
+      border-color: #fca5a5 !important;
+      color: #991b1b !important;
+    }
+    html.light [id^="attack-btn-"]:hover {
+      background-color: #fecaca !important;
+      color: #7f1d1d !important;
+    }
+
+    /* Light Mode Badges & Pills */
+    html.light main .bg-\[\#063b22\],
+    html.light main .bg-\[\#0b2518\] {
+      background-color: #ecfdf5 !important;
+      color: #047857 !important;
+      border-color: #a7f3d0 !important;
+    }
+    html.light main .bg-\[\#2e1065\] {
+      background-color: #f5f3ff !important;
+      color: #6d28d9 !important;
+      border-color: #ddd6fe !important;
+    }
+    html.light main .bg-\[\#3f0f13\],
+    html.light main .bg-\[\#25131d\] {
+      background-color: #fef2f2 !important;
+      color: #b91c1c !important;
+      border-color: #fecaca !important;
+    }
+    html.light main .bg-\[\#08284d\] {
+      background-color: #eff6ff !important;
+      color: #1d4ed8 !important;
+      border-color: #bfdbfe !important;
+    }
+
+    /* Light Mode Table Styling */
+    html.light table th {
+      background-color: #f8fafc !important;
+      color: #475569 !important;
+      border-color: #e2e8f0 !important;
+    }
+    html.light table td {
+      border-color: #e2e8f0 !important;
+    }
+    html.light table tr:hover {
+      background-color: #f1f5f9 !important;
     }
     .wave-bar {
       transition: height 0.1s ease-in-out;
