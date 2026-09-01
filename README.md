@@ -241,10 +241,9 @@ python cli.py simulate-attack --attack quiet-hours
 │   ├── test_scaffold.py            # Baseline Architecture Checks
 │   └── test_security.py            # HMAC, Concurrency & Replay Attack Tests
 ├── docs/
-│   ├── APPLICATION_FORM_ANSWERS.md # Copy-Paste Ready 12-Question Application Package
-│   ├── PITCH_VIDEO_SCRIPT.md       # 5-Minute Timed Video Walkthrough Script
 │   ├── CLOUD_DEPLOYMENT.md         # 1-Click Cloud Deployment Guide (Docker/Render/Fly.io)
-│   └── grafana_dashboard.json      # Official Grafana SRE Dashboard Specification
+│   ├── grafana_dashboard.json      # Official Grafana SRE Dashboard Specification
+│   └── images/                     # Architecture & UI Screenshots
 ├── cli.py                          # Enterprise Command-Line Interface Suite
 ├── Dockerfile                      # Production Multi-Stage Container Specification
 ├── docker-compose.yml              # Clustered FastAPI + Redis Compose Specification
@@ -289,15 +288,16 @@ python benchmarks/benchmark_runner.py
 
 ---
 
-## 8. Application & Submission Package
+## 8. Project & Candidate Information
 
 * **Candidate:** Samrudh
 * **Target Role:** AI Builder Intern (₹75,000/mo stipend in Bangalore, 6 or 12 Months)
 * **Track:** Track 03 — AI Revenue Recovery
 * **GitHub Repository:** [Samrudh2006/Razorpay-Target-0.1percent-](https://github.com/Samrudh2006/Razorpay-Target-0.1percent-)
-* **Playbook & Form Answers:** [`docs/APPLICATION_FORM_ANSWERS.md`](docs/APPLICATION_FORM_ANSWERS.md)
-* **Video Pitch Script:** [`docs/PITCH_VIDEO_SCRIPT.md`](docs/PITCH_VIDEO_SCRIPT.md)
+* **Architecture Whitepaper:** [`ARCHITECTURE.md`](ARCHITECTURE.md)
+* **Cloud Deployment Guide:** [`docs/CLOUD_DEPLOYMENT.md`](docs/CLOUD_DEPLOYMENT.md)
 
 ---
 *Built for the Razorpay AI Buildathon 2026.*
+
 
