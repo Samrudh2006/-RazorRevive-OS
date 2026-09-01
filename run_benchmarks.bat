@@ -2,8 +2,9 @@
 echo ===================================================
 echo Running RazorRevive-OS 100-Batch Benchmark Suite
 echo ===================================================
-"C:\Users\HP\AppData\Local\Programs\Python\Python313\python.exe" benchmarks\benchmark_runner.py
-if %ERRORLEVEL% NEQ 0 (
-    py benchmarks\benchmark_runner.py
+if exist "%USERPROFILE%\.local\bin\uv.exe" (
+    "%USERPROFILE%\.local\bin\uv.exe" run --with-requirements requirements.txt python benchmarks/benchmark_runner.py
+) else (
+    python benchmarks\benchmark_runner.py || py benchmarks\benchmark_runner.py
 )
 pause

@@ -2,8 +2,9 @@
 echo ===================================================
 echo Running RazorRevive-OS Full Test Suite
 echo ===================================================
-"C:\Users\HP\AppData\Local\Programs\Python\Python313\python.exe" -m pytest -v
-if %ERRORLEVEL% NEQ 0 (
-    py -m pytest -v
+if exist "%USERPROFILE%\.local\bin\uv.exe" (
+    "%USERPROFILE%\.local\bin\uv.exe" run --with-requirements requirements.txt pytest -v
+) else (
+    pytest -v || python -m pytest -v
 )
 pause
