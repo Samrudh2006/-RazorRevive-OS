@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,11 +15,11 @@
         extend: {
           colors: {
             brand: {
-              bg: '#090e17',
-              card: '#0f172a',
-              cardBorder: '#1e293b',
-              cardHover: '#172339',
-              sidebar: '#0b1120',
+              bg: '#f4f6fa',
+              card: '#ffffff',
+              cardBorder: '#e2e8f0',
+              cardHover: '#f8fafc',
+              sidebar: '#0c2340',
               accentBlue: '#0c55ea',
               accentCyan: '#0284c7',
               accentGreen: '#10b981',
@@ -27,7 +27,7 @@
               accentAmber: '#d97706',
               accentRed: '#dc2626',
               muted: '#64748b',
-              subtext: '#94a3b8'
+              subtext: '#475569'
             }
           },
           fontFamily: {
@@ -39,22 +39,114 @@
     }
   </script>
   <style>
+    :root, html.light {
+      --bg-page: #f4f6fa;
+      --bg-header: #ffffff;
+      --border-header: #e2e8f0;
+      --bg-sidebar: #0c2340;
+      --border-sidebar: #132f54;
+      --bg-card: #ffffff;
+      --border-card: #e2e8f0;
+      --bg-inner: #f8fafc;
+      --border-inner: #e2e8f0;
+      --text-title: #0f172a;
+      --text-sub: #334155;
+      --text-meta: #64748b;
+      --color-brand: #0c55ea;
+      --card-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.05);
+    }
+    html.dark {
+      --bg-page: #090e17;
+      --bg-header: #0b1120;
+      --border-header: #1e293b;
+      --bg-sidebar: #0b1120;
+      --border-sidebar: #1e293b;
+      --bg-card: #0f172a;
+      --border-card: #1e293b;
+      --bg-inner: #090e17;
+      --border-inner: #1e293b;
+      --text-title: #f8fafc;
+      --text-sub: #cbd5e1;
+      --text-meta: #94a3b8;
+      --color-brand: #0c55ea;
+      --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.25);
+    }
     body {
-      background-color: #090e17;
-      color: #f1f5f9;
+      background-color: var(--bg-page);
+      color: var(--text-title);
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       overflow-x: hidden;
+      transition: background-color 0.15s ease, color 0.15s ease;
     }
     .mono {
       font-family: 'JetBrains Mono', monospace;
     }
     .custom-card {
-      background-color: #0f172a;
-      border: 1px solid #1e293b;
-      border-radius: 0.5rem;
+      background-color: var(--bg-card) !important;
+      border: 1px solid var(--border-card) !important;
+      border-radius: 0.625rem;
+      box-shadow: var(--card-shadow);
+      color: var(--text-title);
     }
     .custom-card:hover {
-      border-color: #334155;
+      border-color: #cbd5e1;
+    }
+    html.light .text-white {
+      color: #0f172a !important;
+    }
+    html.light .text-slate-200 {
+      color: #1e293b !important;
+    }
+    html.light .text-slate-300 {
+      color: #334155 !important;
+    }
+    html.light .text-slate-400 {
+      color: #64748b !important;
+    }
+    html.light .bg-\[\#050c1b\],
+    html.light .bg-\[\#090e17\],
+    html.light .bg-\[\#081224\],
+    html.light .bg-\[\#0f172a\],
+    html.light .bg-\[\#060a12\] {
+      background-color: #f8fafc !important;
+    }
+    html.light .border-\[\#142442\],
+    html.light .border-\[\#1e293b\],
+    html.light .border-\[\#1b345f\] {
+      border-color: #e2e8f0 !important;
+    }
+    html.light input,
+    html.light select,
+    html.light textarea {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+    html.light input:focus,
+    html.light select:focus {
+      border-color: #0c55ea !important;
+    }
+    html.light #app-header {
+      background-color: #ffffff !important;
+      border-color: #e2e8f0 !important;
+    }
+    html.light #app-header .header-brand-title {
+      color: #0c2340 !important;
+    }
+    html.light #app-sidebar {
+      background-color: #0c2340 !important;
+      border-color: #132f54 !important;
+    }
+    html.light #app-sidebar .nav-btn-inactive {
+      color: #cbd5e1 !important;
+    }
+    html.light #app-sidebar .nav-btn-inactive:hover {
+      background-color: #132f54 !important;
+      color: #ffffff !important;
+    }
+    html.light #app-sidebar .nav-btn-active {
+      background-color: #0c55ea !important;
+      color: #ffffff !important;
     }
     .nav-btn-active {
       background-color: #0c55ea !important;
@@ -73,25 +165,33 @@
     }
     .btn-primary {
       background-color: #0c55ea;
-      color: #ffffff;
+      color: #ffffff !important;
       border: 1px solid rgba(59, 130, 246, 0.3);
-      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+      box-shadow: 0 1px 2px 0 rgba(12, 85, 234, 0.2);
       transition: all 0.15s ease-in-out;
     }
     .btn-primary:hover {
       background-color: #0a47c4;
-      border-color: rgba(59, 130, 246, 0.5);
     }
     .btn-primary:active {
       background-color: #083ca8;
     }
     .btn-secondary {
+      background-color: #ffffff;
+      color: #1e293b;
+      border: 1px solid #cbd5e1;
+      transition: all 0.15s ease-in-out;
+    }
+    html.dark .btn-secondary {
       background-color: #1e293b;
       color: #e2e8f0;
       border: 1px solid #334155;
-      transition: all 0.15s ease-in-out;
     }
     .btn-secondary:hover {
+      background-color: #f1f5f9;
+      color: #0f172a;
+    }
+    html.dark .btn-secondary:hover {
       background-color: #334155;
       color: #ffffff;
     }
@@ -103,10 +203,10 @@
       height: 5px;
     }
     ::-webkit-scrollbar-track {
-      background: #090e17;
+      background: var(--bg-page);
     }
     ::-webkit-scrollbar-thumb {
-      background: #1e293b;
+      background: #cbd5e1;
       border-radius: 3px;
     }
   </style>
@@ -114,35 +214,41 @@
 <body class="min-h-screen flex flex-col antialiased selection:bg-[#0c55ea] selection:text-white">
 
   <!-- TOP APP HEADER -->
-  <header class="h-16 border-b border-[#1e293b] bg-[#0b1120] px-5 flex items-center justify-between sticky top-0 z-50">
+  <header id="app-header" class="h-16 border-b border-[#e2e8f0] bg-[#ffffff] px-5 flex items-center justify-between sticky top-0 z-50 transition-colors">
     
     <!-- LEFT LOGO & SUBTITLE -->
     <div class="flex items-center gap-3 cursor-pointer" onclick="switchNavTab('overview')">
-      <img src="/static/assets/logo.jpg" onerror="this.src='frontend/assets/logo.jpg'" alt="RazorRevive-OS Logo" class="w-10 h-10 rounded-lg object-cover border border-blue-500/30">
+      <img src="/static/assets/logo.jpg" onerror="this.src='frontend/assets/logo.jpg'" alt="RazorRevive-OS Logo" class="w-10 h-10 rounded-lg object-cover border border-blue-500/30 shadow-sm">
       <div>
         <div class="flex items-center gap-2">
-          <span class="text-lg font-bold text-white tracking-tight">RazorRevive<span class="text-[#0284c7]">-OS</span></span>
+          <span class="text-lg font-bold text-[#0c2340] header-brand-title tracking-tight">RazorRevive<span class="text-[#0c55ea]">-OS</span></span>
         </div>
-        <div class="text-[11px] text-slate-400 font-medium leading-none mt-0.5">AI Revenue Recovery Control Plane</div>
+        <div class="text-[11px] text-slate-500 font-medium leading-none mt-0.5">AI Revenue Recovery Control Plane</div>
       </div>
     </div>
 
     <!-- CENTER EYEBROW & METADATA -->
     <div class="hidden md:flex flex-col items-center justify-center">
-      <div class="text-[11px] font-bold text-[#38bdf8] tracking-wider uppercase">
+      <div class="text-[11px] font-bold text-[#0c55ea] tracking-wider uppercase">
         RAZORPAY AI BUILDATHON • TRACK 03
       </div>
-      <div class="text-[11px] text-slate-400 font-normal leading-tight mt-0.5">
+      <div class="text-[11px] text-slate-500 font-normal leading-tight mt-0.5">
         Autonomous Revenue Recovery, Dynamic Mandate Retrier & B2B Voice PTP Engine
       </div>
     </div>
 
     <!-- RIGHT HEADER CONTROLS -->
-    <div class="flex items-center gap-3">
+    <div class="flex items-center gap-2.5">
       
+      <!-- THEME TOGGLE BUTTON -->
+      <button onclick="toggleThemeMode()" id="theme-toggle-btn" class="h-9 px-3 rounded-lg btn-secondary text-xs font-medium flex items-center gap-1.5 shadow-sm" title="Toggle Razorpay Light / Dark Theme">
+        <span id="theme-icon">🌙</span>
+        <span id="theme-text" class="hidden sm:inline text-xs font-semibold">Dark</span>
+      </button>
+
       <!-- RUN 100-BATCH BENCHMARK BUTTON -->
       <button onclick="runBenchmarkAction()" id="header-benchmark-btn" class="h-9 px-4 rounded-lg btn-primary text-xs font-semibold flex items-center gap-2">
-        <svg class="w-3.5 h-3.5 text-blue-200" fill="currentColor" viewBox="0 0 20 20">
+        <svg class="w-3.5 h-3.5 text-blue-100" fill="currentColor" viewBox="0 0 20 20">
           <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
         </svg>
         <span id="benchmark-btn-text">Run 100-Batch Benchmark</span>
@@ -158,38 +264,38 @@
         </button>
 
         <!-- Dropdown Menu -->
-        <div id="scenarios-dropdown" class="hidden absolute right-0 mt-2 w-72 bg-[#0f172a] border border-[#1e293b] rounded-xl shadow-2xl z-50 p-2 space-y-1">
-          <button onclick="selectScenario('A')" class="w-full text-left p-2 rounded-lg hover:bg-[#172339] transition text-xs">
-            <div class="font-bold text-sky-400 mono text-[11px]">Scenario A: Bank Outage 504</div>
-            <div class="text-[10px] text-slate-300">HDFC Degradation → Poisson Hazard Window</div>
+        <div id="scenarios-dropdown" class="hidden absolute right-0 mt-2 w-72 bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-[#1e293b] rounded-xl shadow-xl z-50 p-2 space-y-1">
+          <button onclick="selectScenario('A')" class="w-full text-left p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-[#172339] transition text-xs">
+            <div class="font-bold text-sky-600 dark:text-sky-400 mono text-[11px]">Scenario A: Bank Outage 504</div>
+            <div class="text-[10px] text-slate-600 dark:text-slate-300">HDFC Degradation → Poisson Hazard Window</div>
           </button>
-          <button onclick="selectScenario('B')" class="w-full text-left p-2 rounded-lg hover:bg-[#172339] transition text-xs">
-            <div class="font-bold text-emerald-400 mono text-[11px]">Scenario B: Soft Balance Decline</div>
-            <div class="text-[10px] text-slate-300">INR 2,499 → Dynamic 1-Click UPI Payment Link</div>
+          <button onclick="selectScenario('B')" class="w-full text-left p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-[#172339] transition text-xs">
+            <div class="font-bold text-emerald-600 dark:text-emerald-400 mono text-[11px]">Scenario B: Soft Balance Decline</div>
+            <div class="text-[10px] text-slate-600 dark:text-slate-300">INR 2,499 → Dynamic 1-Click UPI Payment Link</div>
           </button>
-          <button onclick="selectScenario('C')" class="w-full text-left p-2 rounded-lg hover:bg-[#172339] transition text-xs">
-            <div class="font-bold text-indigo-400 mono text-[11px]">Scenario C: B2B GST Dispute</div>
-            <div class="text-[10px] text-slate-300">INR 85,000 → Safe Mutation Proposal & Reissue</div>
+          <button onclick="selectScenario('C')" class="w-full text-left p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-[#172339] transition text-xs">
+            <div class="font-bold text-indigo-600 dark:text-indigo-400 mono text-[11px]">Scenario C: B2B GST Dispute</div>
+            <div class="text-[10px] text-slate-600 dark:text-slate-300">INR 85,000 → Safe Mutation Proposal & Reissue</div>
           </button>
-          <button onclick="selectScenario('D')" class="w-full text-left p-2 rounded-lg hover:bg-[#172339] transition text-xs">
-            <div class="font-bold text-cyan-400 mono text-[11px]">Scenario D: Promise-to-Pay (PTP)</div>
-            <div class="text-[10px] text-slate-300">Friday 11:00 AM PTP Lock & Suppress Reminders</div>
+          <button onclick="selectScenario('D')" class="w-full text-left p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-[#172339] transition text-xs">
+            <div class="font-bold text-cyan-600 dark:text-cyan-400 mono text-[11px]">Scenario D: Promise-to-Pay (PTP)</div>
+            <div class="text-[10px] text-slate-600 dark:text-slate-300">Friday 11:00 AM PTP Lock & Suppress Reminders</div>
           </button>
-          <button onclick="selectScenario('E')" class="w-full text-left p-2 rounded-lg hover:bg-[#172339] transition text-xs">
-            <div class="font-bold text-rose-400 mono text-[11px]">Scenario E: 50-Webhook Storm</div>
-            <div class="text-[10px] text-slate-300">Atomic CAS Mutex → 1 Acquired, 49 Dropped</div>
+          <button onclick="selectScenario('E')" class="w-full text-left p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-[#172339] transition text-xs">
+            <div class="font-bold text-rose-600 dark:text-rose-400 mono text-[11px]">Scenario E: 50-Webhook Storm</div>
+            <div class="text-[10px] text-slate-600 dark:text-slate-300">Atomic CAS Mutex → 1 Acquired, 49 Dropped</div>
           </button>
         </div>
       </div>
 
       <!-- SIMULATION MODE PILL -->
-      <div class="h-8 px-3 rounded-full bg-[#0b2518] border border-[#166534] flex items-center gap-1.5">
+      <div class="h-8 px-3 rounded-full bg-[#ecfdf5] dark:bg-[#0b2518] border border-[#a7f3d0] dark:border-[#166534] flex items-center gap-1.5">
         <span class="w-2 h-2 rounded-full bg-[#10b981]"></span>
-        <span class="text-[10px] font-bold text-[#10b981] tracking-wider mono uppercase">SIMULATION MODE</span>
+        <span class="text-[10px] font-bold text-[#047857] dark:text-[#10b981] tracking-wider mono uppercase">SIMULATION MODE</span>
       </div>
 
       <!-- USER AVATAR -->
-      <div class="w-8 h-8 rounded-full bg-[#1e293b] border border-[#334155] flex items-center justify-center text-xs font-bold text-slate-200">
+      <div class="w-8 h-8 rounded-full bg-[#0c2340] border border-[#132f54] flex items-center justify-center text-xs font-bold text-white shadow-sm">
         RR
       </div>
 
@@ -200,7 +306,7 @@
   <div class="flex-1 flex overflow-hidden">
 
     <!-- LEFT SIDEBAR -->
-    <aside class="w-60 bg-[#050c1b] border-r border-[#142442] flex flex-col justify-between p-3 shrink-0 hidden lg:flex">
+    <aside id="app-sidebar" class="w-60 bg-[#0c2340] border-r border-[#132f54] flex flex-col justify-between p-3 shrink-0 hidden lg:flex">
       
       <div>
         <!-- NAV ITEMS -->
@@ -2115,18 +2221,18 @@
             const traceShort = e.trace_id ? (e.trace_id.length > 10 ? e.trace_id.slice(0, 10) + '...' : e.trace_id) : 'tr_01...';
             
             return `
-              <tr class="hover:bg-[#0c1b36] transition-colors">
-                <td class="p-2.5 text-slate-400">${e.sequence_id || (16234 + idx)}</td>
-                <td class="p-2.5 text-slate-300">${dateStr}, ${timeStr}</td>
-                <td class="p-2.5 text-slate-300">${e.event_type}</td>
-                <td class="p-2.5 text-white font-medium">${e.payment_id}</td>
-                <td class="p-2.5 text-[#38bdf8]">${traceShort}</td>
-                <td class="p-2.5 text-white">${e.decision?.strategy || e.decision?.recommended_strategy || 'POISSON_RETRY'}</td>
-                <td class="p-2.5 text-slate-300">${e.decision?.confidence || 0.95}</td>
-                <td class="p-2.5"><span class="text-[#10b981] font-bold">${e.policy_verdict}</span></td>
-                <td class="p-2.5 text-slate-200">${e.action_taken}</td>
-                <td class="p-2.5"><span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-[#063b22] text-[#10b981]">SCHEDULED</span></td>
-                <td class="p-2.5 text-slate-400 font-mono">${hashShort}</td>
+              <tr class="hover:bg-slate-100 dark:hover:bg-[#0c1b36] border-b border-slate-200 dark:border-slate-800 transition-colors">
+                <td class="p-2.5 text-slate-500 dark:text-slate-400">${e.sequence_id || (16234 + idx)}</td>
+                <td class="p-2.5 text-slate-700 dark:text-slate-300">${dateStr}, ${timeStr}</td>
+                <td class="p-2.5 text-slate-700 dark:text-slate-300 font-medium">${e.event_type}</td>
+                <td class="p-2.5 text-slate-900 dark:text-white font-medium">${e.payment_id}</td>
+                <td class="p-2.5 text-[#0c55ea] dark:text-[#38bdf8] font-mono">${traceShort}</td>
+                <td class="p-2.5 text-slate-900 dark:text-white">${e.decision?.strategy || e.decision?.recommended_strategy || 'POISSON_RETRY'}</td>
+                <td class="p-2.5 text-slate-600 dark:text-slate-300">${e.decision?.confidence || 0.95}</td>
+                <td class="p-2.5"><span class="text-[#047857] dark:text-[#10b981] font-bold">${e.policy_verdict}</span></td>
+                <td class="p-2.5 text-slate-700 dark:text-slate-200">${e.action_taken}</td>
+                <td class="p-2.5"><span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-[#ecfdf5] dark:bg-[#063b22] text-[#047857] dark:text-[#10b981] border border-[#a7f3d0] dark:border-[#0e5c36]">SCHEDULED</span></td>
+                <td class="p-2.5 text-slate-500 dark:text-slate-400 font-mono">${hashShort}</td>
               </tr>
             `;
           }).join('');
@@ -2293,6 +2399,44 @@
       }
       render();
     }
+
+    function toggleThemeMode() {
+      const html = document.documentElement;
+      const isLight = html.classList.contains("light");
+      const icon = document.getElementById("theme-icon");
+      const text = document.getElementById("theme-text");
+      if (isLight) {
+        html.classList.remove("light");
+        html.classList.add("dark");
+        if (icon) icon.textContent = "☀️";
+        if (text) text.textContent = "Light";
+        localStorage.setItem("rr_theme", "dark");
+      } else {
+        html.classList.remove("dark");
+        html.classList.add("light");
+        if (icon) icon.textContent = "🌙";
+        if (text) text.textContent = "Dark";
+        localStorage.setItem("rr_theme", "light");
+      }
+    }
+
+    // Initialize Theme Preference
+    (function initTheme() {
+      const savedTheme = localStorage.getItem("rr_theme");
+      const icon = document.getElementById("theme-icon");
+      const text = document.getElementById("theme-text");
+      if (savedTheme === "dark") {
+        document.documentElement.classList.remove("light");
+        document.documentElement.classList.add("dark");
+        if (icon) icon.textContent = "☀️";
+        if (text) text.textContent = "Light";
+      } else {
+        document.documentElement.classList.remove("dark");
+        document.documentElement.classList.add("light");
+        if (icon) icon.textContent = "🌙";
+        if (text) text.textContent = "Dark";
+      }
+    })();
 
     mountComponents();
     refreshAuditLedger();
