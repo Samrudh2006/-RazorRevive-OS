@@ -77,3 +77,29 @@ def test_contract_prometheus_metrics():
     assert "razorrevive_recovery_requests_total" in response.text
     assert "razorrevive_diagnostic_latency_seconds" in response.text
 
+def test_contract_roi_calculator():
+    response = client.get("/api/v1/analytics/roi?monthly_gmv=10000000&failure_rate_pct=15.0")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["success"] is True
+    assert data["data"]["monthly_gmv_inr"] == 10000000.0
+    assert data["data"]["failed_gmv_inr"] == 1500000.0
+    assert data["data"]["projected_monthly_recovered_gmv_inr"] > 600000.0
+    assert "retained_customers_monthly" in data["data"]
+
+def test_contract_upi_qr_generation():
+    payload = {
+        "payment_id": "pay_test_upi_88",
+        "amount": 3499.0,
+        "merchant_vpa": "razorpay.test@icici",
+        "merchant_name": "Test Merchant"
+    }
+    response = client.post("/api/v1/recovery/upi-qr", json=payload)
+    assert response.status_code == 200
+    data = response.json()
+    assert data["success"] is True
+    assert "upi://" in data["data"]["upi_uri"]
+    assert "gpay" in data["data"]["app_intents"]
+    assert "<svg" in data["data"]["svg_qr"]
+
+

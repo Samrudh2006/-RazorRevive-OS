@@ -35,3 +35,23 @@ def test_benchmark_runner_execution(tmp_path):
     assert results["recovered_gmv"] > 0
     assert results["recovered_count"] >= 70
     assert results["false_positive_overhead_inr"] > 0
+
+def test_cli_replay_and_fuzz():
+    from cli import cmd_replay, cmd_fuzz, cmd_roi
+    from unittest.mock import MagicMock
+    
+    # 1. Test CLI Replay
+    args_replay = MagicMock(case=1)
+    code_replay = cmd_replay(args_replay)
+    assert code_replay == 0
+    
+    # 2. Test CLI Fuzz
+    args_fuzz = MagicMock(count=5)
+    code_fuzz = cmd_fuzz(args_fuzz)
+    assert code_fuzz == 0
+    
+    # 3. Test CLI ROI
+    args_roi = MagicMock(gmv=10000000.0, failure_rate=12.5)
+    code_roi = cmd_roi(args_roi)
+    assert code_roi == 0
+
