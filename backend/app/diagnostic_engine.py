@@ -62,6 +62,57 @@ class LocalVectorSpaceSemanticClassifier:
         return best_class, confidence
 
 
+class LocalOllamaClient:
+    """
+    Zero-Config Client for Local Open-Source LLMs (Ollama / Llama-3 / Mistral / DeepSeek).
+    Communicates over HTTP to localhost:11434 with strict JSON grammar schema.
+    """
+    
+    @classmethod
+    def query_local_llm(
+        cls,
+        prompt: Dict[str, str],
+        model_name: str = "llama3:8b-instruct",
+        base_url: str = "http://localhost:11434",
+        timeout_sec: float = 0.5
+    ) -> Optional[Dict[str, Any]]:
+        """
+        Attempts to query local Ollama instance. Returns parsed JSON or None if unavailable.
+        """
+        import json
+        import urllib.request
+        import urllib.error
+        
+        endpoint = f"{base_url.rstrip('/')}/api/generate"
+        payload = {
+            "model": model_name,
+            "prompt": f"{prompt.get('system', '')}\n\n{prompt.get('user', '')}",
+            "format": "json",
+            "stream": False,
+            "options": {"temperature": 0.0}
+        }
+        
+        try:
+            req_data = json.dumps(payload).encode("utf-8")
+            req = urllib.request.Request(
+                endpoint,
+                data=req_data,
+                headers={"Content-Type": "application/json"},
+                method="POST"
+            )
+            with urllib.request.urlopen(req, timeout=timeout_sec) as resp:
+                if resp.status == 200:
+                    raw_resp = json.loads(resp.read().decode("utf-8"))
+                    response_text = raw_resp.get("response", "{}")
+                    return json.loads(response_text)
+        except Exception:
+            # Expected when Ollama is offline or not installed; fallback executes seamlessly
+            return None
+            
+        return None
+
+
+
 class DiagnosticEngine:
     """
     AI Diagnosis & Root-Cause Classification Kernel.
@@ -214,8 +265,37 @@ class DiagnosticEngine:
         meta = metadata or {}
         normalized_code = error_code.upper().strip()
         
+        # Rule 0: Optional Local Ollama LLM Inference (Llama-3 / Mistral / DeepSeek on localhost:11434)
+        if getattr(settings, "AI_PROVIDER", "") == "OLLAMA":
+            prompt = cls.build_llm_prompt(payment_id, amount, error_code, error_description, metadata)
+            ollama_res = LocalOllamaClient.query_local_llm(
+                prompt,
+                model_name=getattr(settings, "LOCAL_MODEL_NAME", "llama3:8b-instruct"),
+                base_url=getattr(settings, "OLLAMA_BASE_URL", "http://localhost:11434")
+            )
+            if ollama_res and "failure_class" in ollama_res and "confidence" in ollama_res:
+                f_class_llm = ollama_res.get("failure_class", "TRANSIENT_GATEWAY")
+                strategy_llm = ollama_res.get("recommended_strategy", "DELAYED_RETRY")
+                confidence_llm = float(ollama_res.get("confidence", 0.88))
+                reasons_llm = list(ollama_res.get("reason_codes", ["OLLAMA_LOCAL_INFERENCE"]))
+                requires_human_llm = (strategy_llm == "ESCALATE_HUMAN")
+                summary_llm = ollama_res.get("diagnostic_summary", "Ollama local open-source model inference.")
+                return DiagnosisProposal(
+                    payment_id=payment_id,
+                    amount=amount,
+                    raw_error_code=error_code,
+                    failure_class=f_class_llm,
+                    confidence=confidence_llm,
+                    recommended_strategy=strategy_llm,
+                    reason_codes=reasons_llm,
+                    requires_human=requires_human_llm,
+                    diagnostic_summary=summary_llm,
+                    model_version=f"ollama-{settings.LOCAL_MODEL_NAME}"
+                )
+
         # Rule 1: Match against verified Razorpay Error Catalog
         matched_spec = cls.ERROR_CODE_MAP.get(normalized_code)
+
         
         if matched_spec:
             f_class: FailureClassType = matched_spec["class"]

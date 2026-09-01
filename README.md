@@ -5,12 +5,15 @@
 </div>
 
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg?style=flat-square)](https://github.com/Samrudh2006/Razorpay-Target-0.1percent-)
-[![Tests](https://img.shields.io/badge/tests-46%20passed%20%7C%20100%25-success.svg?style=flat-square)](https://github.com/Samrudh2006/Razorpay-Target-0.1percent-)
+[![CI/CD](https://github.com/Samrudh2006/Razorpay-Target-0.1percent-/actions/workflows/ci.yml/badge.svg)](https://github.com/Samrudh2006/Razorpay-Target-0.1percent-/actions)
+[![Tests](https://img.shields.io/badge/tests-50%20passed%20%7C%20100%25-success.svg?style=flat-square)](https://github.com/Samrudh2006/Razorpay-Target-0.1percent-)
+[![Open-Source AI](https://img.shields.io/badge/AI-100%25%20Open--Source%20%7C%20Zero--API--Key-blueviolet.svg?style=flat-square)](https://github.com/Samrudh2006/Razorpay-Target-0.1percent-)
 [![Track](https://img.shields.io/badge/Razorpay_Track-03_Revenue_Recovery-0a58ca.svg?style=flat-square)](https://razorpay.com/buildathon/)
 [![Python](https://img.shields.io/badge/python-3.11%20%7C%203.12%20%7C%203.13-blue.svg?style=flat-square)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110.0-009688.svg?style=flat-square)](https://fastapi.tiangolo.com/)
 [![Audit Chain](https://img.shields.io/badge/audit-SHA--256%20chained-emerald.svg?style=flat-square)](https://github.com/Samrudh2006/Razorpay-Target-0.1percent-)
 [![License](https://img.shields.io/badge/license-MIT-purple.svg?style=flat-square)](LICENSE)
+
 
 > **Razorpay AI Buildathon Submission**  
 > **Track 03:** AI Revenue Recovery — *Detect revenue at risk, diagnose root causes, and execute bounded recovery workflows.*  

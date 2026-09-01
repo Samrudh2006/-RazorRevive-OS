@@ -92,3 +92,16 @@ def test_local_vector_space_semantic_classifier():
     assert f_class3 == "SUSPICIOUS_VELOCITY"
     assert conf3 >= 0.70
 
+def test_local_ollama_client_offline_fallback():
+    from backend.app.diagnostic_engine import LocalOllamaClient
+    
+    # Verify that querying an offline port gracefully returns None without raising exceptions
+    prompt = {"system": "System Prompt", "user": "User Prompt"}
+    res = LocalOllamaClient.query_local_llm(
+        prompt=prompt,
+        base_url="http://127.0.0.1:59999", # Non-existent port
+        timeout_sec=0.1
+    )
+    assert res is None
+
+
