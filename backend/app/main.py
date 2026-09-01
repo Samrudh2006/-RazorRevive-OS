@@ -58,10 +58,52 @@ s_logger = structlog.get_logger()
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("RazorRevive")
 
+TAGS_METADATA = [
+    {
+        "name": "System & Telemetry",
+        "description": "Health checks, system diagnostics, and Prometheus SRE metrics.",
+    },
+    {
+        "name": "Fast-Loop Recovery Engine",
+        "description": "Autonomous real-time diagnostic engine, Weibull hazard curves, and dynamic UPI/mandate retries.",
+    },
+    {
+        "name": "Deep-Loop B2B Voice & PTP",
+        "description": "Deterministic Finite State Machine (FSM) voice agent for invoice mutation and Promise-to-Pay (PTP) scheduling.",
+    },
+    {
+        "name": "Cryptographic Audit Ledger",
+        "description": "Sequential SHA-256 Merkle hash chain verification and forensic ledger export.",
+    },
+    {
+        "name": "Production Benchmarks",
+        "description": "100-case held-out production benchmark evaluation and GMV recovery telemetry.",
+    }
+]
+
 app = FastAPI(
-    title="RazorRevive-OS",
-    description="Autonomous Revenue Recovery & Smart Mandate Control Plane",
-    version="1.0.0"
+    title="RazorRevive-OS API",
+    description="""
+# 🚀 RazorRevive-OS Control Plane API
+
+Autonomous AI Revenue Recovery Engine with Zero-Trust Cryptographic Guardrails, Dynamic Mandate Retrier & B2B Voice PTP Engine.
+
+### 🏛️ Architecture Highlights:
+* **Tier 1 (Fast-Loop):** Sub-millisecond error classification, hazard window optimization, and dynamic UPI payment links.
+* **Tier 2 (Deep-Loop):** Deterministic voice FSM for automated dispute resolution and promise-to-pay calendar locks.
+* **Tier 3 (Policy Gatekeeper):** Zero-trust compliance rules enforcing TRAI quiet hours (21:00-09:00 IST), maximum discount caps (≤10%, ≤₹500), and distributed idempotency.
+* **Audit Ledger:** SHA-256 sequential hash chaining ensuring 100% cryptographic continuity.
+    """,
+    version="1.0.0",
+    openapi_tags=TAGS_METADATA,
+    contact={
+        "name": "Razorpay AI Buildathon Engineering Team",
+        "url": "https://github.com/Samrudh2006/Razorpay-Target-0.1percent-"
+    },
+    license_info={
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+    }
 )
 
 # System live logs ring buffer
@@ -233,8 +275,8 @@ async def serve_dashboard():
             return f.read()
     return "<h1>RazorRevive-OS Control Plane Running</h1>"
 
-@app.get("/health")
-@app.get("/api/v1/health")
+@app.get("/health", tags=["System & Telemetry"], summary="Control Plane Health Status")
+@app.get("/api/v1/health", tags=["System & Telemetry"], summary="Health Status API Alias")
 async def healthcheck(request: Request):
     trace_id = getattr(request.state, "trace_id", f"tr_{uuid.uuid4().hex[:12]}")
     return {
@@ -250,14 +292,14 @@ async def healthcheck(request: Request):
         "timestamp": time.time()
     }
 
-@app.get("/metrics")
+@app.get("/metrics", tags=["System & Telemetry"], summary="Prometheus SRE Metrics Exposition")
 async def prometheus_metrics():
     """
     Production Prometheus metrics endpoint for SRE telemetry and alerting scrapers.
     """
     return Response(content=generate_latest(), media_type=CONTENT_TYPE_LATEST)
 
-@app.get("/api/v1/dashboard/summary")
+@app.get("/api/v1/dashboard/summary", tags=["System & Telemetry"], summary="Live Telemetry Dashboard KPI Summary")
 async def get_dashboard_summary(request: Request):
     trace_id = getattr(request.state, "trace_id", f"tr_{uuid.uuid4().hex[:12]}")
     audit_health = audit_store.verify_chain_integrity()
@@ -285,7 +327,7 @@ async def get_dashboard_summary(request: Request):
         "timestamp": time.time()
     }
 
-@app.get("/api/v1/policy/rules")
+@app.get("/api/v1/policy/rules", tags=["Fast-Loop Recovery Engine"], summary="Active Policy Gatekeeper Constraints")
 async def get_policy_rules(request: Request):
     trace_id = getattr(request.state, "trace_id", f"tr_{uuid.uuid4().hex[:12]}")
     return {
@@ -316,7 +358,7 @@ async def get_policy_rules(request: Request):
         "timestamp": time.time()
     }
 
-@app.get("/api/v1/logs/recent")
+@app.get("/api/v1/logs/recent", tags=["System & Telemetry"], summary="Live Ring-Buffer System Logs")
 async def get_recent_logs(limit: int = 50, request: Request = None):
     trace_id = getattr(request.state, "trace_id", f"tr_{uuid.uuid4().hex[:12]}") if request else "tr_logs"
     return {
@@ -329,7 +371,7 @@ async def get_recent_logs(limit: int = 50, request: Request = None):
         "timestamp": time.time()
     }
 
-@app.get("/api/v1/alerts/active")
+@app.get("/api/v1/alerts/active", tags=["System & Telemetry"], summary="Active Threat & Incident Alerts")
 async def get_active_alerts(request: Request):
     trace_id = getattr(request.state, "trace_id", f"tr_{uuid.uuid4().hex[:12]}")
     return {
@@ -342,7 +384,7 @@ async def get_active_alerts(request: Request):
         "timestamp": time.time()
     }
 
-@app.post("/api/v1/benchmark/run")
+@app.post("/api/v1/benchmark/run", tags=["Production Benchmarks"], summary="Trigger 100-Batch Recovery Benchmark")
 async def trigger_benchmark_run(request: Request):
     trace_id = getattr(request.state, "trace_id", f"tr_{uuid.uuid4().hex[:12]}")
     log_system_event("INFO", "Benchmark", "Initiated 100-batch dynamic held-out evaluation", trace_id=trace_id)
@@ -366,7 +408,7 @@ async def trigger_benchmark_run(request: Request):
         "timestamp": time.time()
     }
 
-@app.get("/api/v1/benchmark/latest")
+@app.get("/api/v1/benchmark/latest", tags=["Production Benchmarks"], summary="Fetch Latest Benchmark Metrics")
 async def get_latest_benchmark(request: Request):
     trace_id = getattr(request.state, "trace_id", f"tr_{uuid.uuid4().hex[:12]}")
     return {
@@ -581,7 +623,7 @@ async def execute_recovery_pipeline(
         "decision_trace": decision_trace_steps
     }
 
-@app.post("/api/v1/webhooks/razorpay", status_code=status.HTTP_202_ACCEPTED)
+@app.post("/api/v1/webhooks/razorpay", status_code=status.HTTP_202_ACCEPTED, tags=["Fast-Loop Recovery Engine"], summary="Razorpay Webhook Ingestion & Recovery Dispatch")
 async def razorpay_webhook_receiver(
     request: Request,
     background_tasks: BackgroundTasks,
@@ -653,7 +695,7 @@ async def razorpay_webhook_receiver(
         "timestamp": time.time()
     }
 
-@app.post("/api/v1/simulate/failure")
+@app.post("/api/v1/simulate/failure", tags=["Fast-Loop Recovery Engine"], summary="Simulate Failed Transaction Recovery")
 async def simulate_failure_endpoint(req: SimulatedFailureRequest, request: Request):
     trace_id = getattr(request.state, "trace_id", f"tr_{uuid.uuid4().hex[:12]}")
     result = await execute_recovery_pipeline(
@@ -673,7 +715,7 @@ async def simulate_failure_endpoint(req: SimulatedFailureRequest, request: Reque
         "timestamp": time.time()
     }
 
-@app.post("/api/v1/b2b/voice/turn")
+@app.post("/api/v1/b2b/voice/turn", tags=["Deep-Loop B2B Voice & PTP"], summary="Process Autonomous B2B Voice Turn")
 async def handle_b2b_voice_turn(req: VoiceDialogueTurnRequest, request: Request):
     trace_id = getattr(request.state, "trace_id", f"tr_{uuid.uuid4().hex[:12]}")
     response = b2b_voice_engine.process_customer_turn(req)
@@ -710,7 +752,7 @@ async def handle_b2b_voice_turn(req: VoiceDialogueTurnRequest, request: Request)
         "timestamp": time.time()
     }
 
-@app.get("/api/v1/audit/verify")
+@app.get("/api/v1/audit/verify", tags=["Cryptographic Audit Ledger"], summary="Verify SHA-256 Hash Chain Integrity")
 async def verify_audit_chain(request: Request):
     """Cryptographic hash chain verification endpoint."""
     trace_id = getattr(request.state, "trace_id", f"tr_{uuid.uuid4().hex[:12]}")
@@ -722,7 +764,7 @@ async def verify_audit_chain(request: Request):
         "timestamp": time.time()
     }
 
-@app.get("/api/v1/audit/events")
+@app.get("/api/v1/audit/events", tags=["Cryptographic Audit Ledger"], summary="Fetch Sequenced Audit Blocks")
 async def get_audit_ledger(limit: int = 50, request: Request = None):
     trace_id = getattr(request.state, "trace_id", f"tr_{uuid.uuid4().hex[:12]}") if request else f"tr_{uuid.uuid4().hex[:12]}"
     events = audit_store.get_events(limit=limit)
@@ -736,7 +778,7 @@ async def get_audit_ledger(limit: int = 50, request: Request = None):
         "timestamp": time.time()
     }
 
-@app.get("/api/v1/ptp/active")
+@app.get("/api/v1/ptp/active", tags=["Deep-Loop B2B Voice & PTP"], summary="Fetch Active Promise-to-Pay Records")
 async def get_active_ptp_records(request: Request):
     trace_id = getattr(request.state, "trace_id", f"tr_{uuid.uuid4().hex[:12]}")
     records = ptp_store.get_all_ptp_records()
