@@ -322,15 +322,9 @@
 
     <!-- RIGHT HEADER CONTROLS -->
     <div class="flex items-center gap-2.5">
-      
-      <!-- THEME TOGGLE BUTTON -->
-      <button onclick="toggleThemeMode()" id="theme-toggle-btn" class="h-9 px-3 rounded-lg btn-secondary text-xs font-medium flex items-center gap-1.5 shadow-sm" title="Toggle Razorpay Light / Dark Theme">
-        <span id="theme-icon">🌙</span>
-        <span id="theme-text" class="hidden sm:inline text-xs font-semibold">Dark</span>
-      </button>
 
       <!-- RUN 100-BATCH BENCHMARK BUTTON -->
-      <button onclick="runBenchmarkAction()" id="header-benchmark-btn" class="h-9 px-4 rounded-lg btn-primary text-xs font-semibold flex items-center gap-2">
+      <button onclick="runBenchmarkAction()" id="header-benchmark-btn" class="h-9 px-4 rounded-lg btn-primary text-xs font-semibold flex items-center gap-2 shadow-sm">
         <svg class="w-3.5 h-3.5 text-blue-100" fill="currentColor" viewBox="0 0 20 20">
           <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
         </svg>
@@ -1340,53 +1334,72 @@
 
       <div class="py-2">
         <div class="flex items-center justify-between relative">
+          
+          <!-- Step 1: Webhook Ingested -->
           <div class="flex flex-col items-center z-10">
-            <div class="w-6 h-6 rounded-full bg-[#063b22] border border-[#10b981] flex items-center justify-center text-[#10b981]">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+            <div class="w-7 h-7 rounded-full bg-[#063b22] border border-[#10b981] flex items-center justify-center text-[#10b981] shadow-sm">
+              <!-- Webhook Lightning -->
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
             </div>
             <div class="text-[10px] font-bold text-slate-300 mt-1">Webhook Ingested</div>
             <div class="text-[9px] text-slate-400 mono">10:15:23 AM</div>
           </div>
           <div class="flex-1 h-[2px] bg-[#10b981] -mt-5"></div>
+
+          <!-- Step 2: HMAC Verified -->
           <div class="flex flex-col items-center z-10">
-            <div class="w-6 h-6 rounded-full bg-[#063b22] border border-[#10b981] flex items-center justify-center text-[#10b981]">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+            <div class="w-7 h-7 rounded-full bg-[#063b22] border border-[#10b981] flex items-center justify-center text-[#10b981] shadow-sm">
+              <!-- Cryptographic Key / Shield -->
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
             </div>
             <div class="text-[10px] font-bold text-slate-300 mt-1">HMAC Verified</div>
             <div class="text-[9px] text-slate-400 mono">10:15:23 AM</div>
           </div>
           <div class="flex-1 h-[2px] bg-[#10b981] -mt-5"></div>
+
+          <!-- Step 3: Idempotency Lock -->
           <div class="flex flex-col items-center z-10">
-            <div class="w-6 h-6 rounded-full bg-[#063b22] border border-[#10b981] flex items-center justify-center text-[#10b981]">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+            <div class="w-7 h-7 rounded-full bg-[#063b22] border border-[#10b981] flex items-center justify-center text-[#10b981] shadow-sm">
+              <!-- Distributed CAS Mutex Padlock -->
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
             </div>
             <div class="text-[10px] font-bold text-slate-300 mt-1">Idempotency Lock</div>
             <div class="text-[9px] text-[#10b981] font-bold mono">LOCKED</div>
           </div>
           <div class="flex-1 h-[2px] bg-[#10b981] -mt-5"></div>
+
+          <!-- Step 4: AI Diagnosis -->
           <div class="flex flex-col items-center z-10">
-            <div class="w-6 h-6 rounded-full bg-[#063b22] border border-[#10b981] flex items-center justify-center text-[#10b981]">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+            <div class="w-7 h-7 rounded-full bg-[#063b22] border border-[#10b981] flex items-center justify-center text-[#38bdf8] shadow-sm">
+              <!-- Vector AI Kernel Brain -->
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
             </div>
             <div class="text-[10px] font-bold text-slate-300 mt-1">AI Diagnosis</div>
             <div class="text-[9px] text-[#38bdf8] font-bold mono">95% confidence</div>
           </div>
           <div class="flex-1 h-[2px] bg-[#10b981] -mt-5"></div>
+
+          <!-- Step 5: Policy Check -->
           <div class="flex flex-col items-center z-10">
-            <div class="w-6 h-6 rounded-full bg-[#063b22] border border-[#10b981] flex items-center justify-center text-[#10b981]">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+            <div class="w-7 h-7 rounded-full bg-[#063b22] border border-[#10b981] flex items-center justify-center text-[#10b981] shadow-sm">
+              <!-- Zero-Trust Compliance Shield -->
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             </div>
             <div class="text-[10px] font-bold text-slate-300 mt-1">Policy Check</div>
             <div class="text-[9px] text-[#10b981] font-bold mono">ALLOWED</div>
           </div>
           <div class="flex-1 h-[2px] bg-[#10b981] -mt-5"></div>
+
+          <!-- Step 6: Action Scheduled -->
           <div class="flex flex-col items-center z-10">
-            <div class="w-6 h-6 rounded-full bg-[#063b22] border border-[#10b981] flex items-center justify-center text-[#10b981]">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+            <div class="w-7 h-7 rounded-full bg-[#063b22] border border-[#10b981] flex items-center justify-center text-[#10b981] shadow-sm">
+              <!-- SciPy Hazard Timer -->
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             </div>
             <div class="text-[10px] font-bold text-slate-300 mt-1">Action Scheduled</div>
             <div class="text-[9px] text-[#10b981] font-bold mono">Retry in 45m</div>
           </div>
+
         </div>
       </div>
 
@@ -1476,53 +1489,72 @@
 
       <div class="py-2">
         <div class="flex items-center justify-between relative">
+          
+          <!-- Step 1: Voice Input -->
           <div class="flex flex-col items-center z-10">
-            <div class="w-6 h-6 rounded-full bg-[#1e293b] border border-[#334155] flex items-center justify-center text-slate-200">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+            <div class="w-7 h-7 rounded-full bg-[#1e293b] border border-[#475569] flex items-center justify-center text-slate-200 shadow-sm">
+              <!-- Microphone / Voice Wave -->
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z"/></svg>
             </div>
             <div class="text-[10px] font-bold text-slate-300 mt-1">Voice Input</div>
             <div class="text-[9px] text-slate-400 mono">10:16:10 AM</div>
           </div>
           <div class="flex-1 h-[2px] bg-[#334155] -mt-5"></div>
+
+          <!-- Step 2: Intent Extracted -->
           <div class="flex flex-col items-center z-10">
-            <div class="w-6 h-6 rounded-full bg-[#1e293b] border border-[#334155] flex items-center justify-center text-slate-200">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+            <div class="w-7 h-7 rounded-full bg-[#1e293b] border border-[#475569] flex items-center justify-center text-[#10b981] shadow-sm">
+              <!-- NLP Intent Spark -->
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
             </div>
             <div class="text-[10px] font-bold text-slate-300 mt-1">Intent Extracted</div>
             <div class="text-[9px] text-[#10b981] font-bold mono">GST Dispute</div>
           </div>
           <div class="flex-1 h-[2px] bg-[#334155] -mt-5"></div>
+
+          <!-- Step 3: Mutation Proposal -->
           <div class="flex flex-col items-center z-10">
-            <div class="w-6 h-6 rounded-full bg-[#1e293b] border border-[#334155] flex items-center justify-center text-slate-200">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+            <div class="w-7 h-7 rounded-full bg-[#1e293b] border border-[#475569] flex items-center justify-center text-[#38bdf8] shadow-sm">
+              <!-- Invoice Edit Document -->
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
             </div>
             <div class="text-[10px] font-bold text-slate-300 mt-1">Mutation Proposal</div>
             <div class="text-[9px] text-[#10b981] font-bold mono">GSTIN Update</div>
           </div>
           <div class="flex-1 h-[2px] bg-[#334155] -mt-5"></div>
+
+          <!-- Step 4: Policy Check -->
           <div class="flex flex-col items-center z-10">
-            <div class="w-6 h-6 rounded-full bg-[#1e293b] border border-[#334155] flex items-center justify-center text-slate-200">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+            <div class="w-7 h-7 rounded-full bg-[#1e293b] border border-[#475569] flex items-center justify-center text-[#10b981] shadow-sm">
+              <!-- Policy Shield -->
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
             </div>
             <div class="text-[10px] font-bold text-slate-300 mt-1">Policy Check</div>
             <div class="text-[9px] text-[#10b981] font-bold mono">ALLOWED</div>
           </div>
           <div class="flex-1 h-[2px] bg-[#334155] -mt-5"></div>
+
+          <!-- Step 5: Invoice Updated -->
           <div class="flex flex-col items-center z-10">
-            <div class="w-6 h-6 rounded-full bg-[#1e293b] border border-[#334155] flex items-center justify-center text-slate-200">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+            <div class="w-7 h-7 rounded-full bg-[#1e293b] border border-[#475569] flex items-center justify-center text-slate-200 shadow-sm">
+              <!-- Reissued Invoice -->
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
             </div>
             <div class="text-[10px] font-bold text-slate-300 mt-1">Invoice Updated</div>
             <div class="text-[9px] text-slate-400 mono">10:16:13 AM</div>
           </div>
           <div class="flex-1 h-[2px] bg-[#334155] -mt-5"></div>
+
+          <!-- Step 6: PTP Registered -->
           <div class="flex flex-col items-center z-10">
-            <div class="w-6 h-6 rounded-full bg-[#1e293b] border border-[#334155] flex items-center justify-center text-slate-200">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+            <div class="w-7 h-7 rounded-full bg-[#1e293b] border border-[#475569] flex items-center justify-center text-[#10b981] shadow-sm">
+              <!-- Calendar Clock PTP Lock -->
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
             </div>
             <div class="text-[10px] font-bold text-slate-300 mt-1">PTP Registered</div>
             <div class="text-[9px] text-[#10b981] font-bold mono">Fri 11:00 AM</div>
           </div>
+
         </div>
       </div>
 
