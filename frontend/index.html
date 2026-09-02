@@ -1650,130 +1650,354 @@
           </div>
         </div>
       </div>
-        <div class="custom-card p-5 space-y-4">
-          <div class="flex justify-between items-center pb-3 border-b border-[#142442]">
-            <div>
-              <h2 class="text-base font-bold text-white flex items-center gap-2">
-                <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                </svg>
-                <span>Structured Application Event Stream</span>
-              </h2>
-              <p class="text-xs text-slate-400 mt-0.5">Real-time asynchronous telemetry and execution audit traces</p>
+      <!-- ========================================================================= -->
+      <!-- VIEW: WEIBULL ANALYTICS & RECOVERY HAZARD SIMULATOR (PHASE 6 & 11) -->
+      <!-- ========================================================================= -->
+      <div id="view-analytics" class="hidden space-y-5">
+        <div class="p-4 rounded-xl bg-[#0f172a] border border-[#1e293b] flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+          <div>
+            <h1 class="text-base font-bold text-white flex items-center gap-2">
+              <svg class="w-5 h-5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/>
+              </svg>
+              <span>Weibull Hazard Function & Probability Density Analytics</span>
+            </h1>
+            <p class="text-xs text-slate-400 mt-0.5">Empirical mathematical modeling: $h(t) = \frac{k}{\lambda}\left(\frac{t}{\lambda}\right)^{k-1}$ for optimal retry timing</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="px-3 py-1 rounded-full text-xs font-bold text-sky-400 bg-sky-950/40 border border-sky-800/60 mono">
+              Non-Stationary Stochastic Optimization
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+          <!-- Parameter Tuning Controls -->
+          <div class="custom-card p-5 space-y-4">
+            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+              <span>⚙️ Hazard Parameters</span>
+            </h3>
+
+            <div class="space-y-4 text-xs">
+              <div>
+                <div class="flex justify-between text-slate-300 font-semibold mb-1">
+                  <span>Shape Parameter ($k$):</span>
+                  <span class="text-sky-400 mono font-bold" id="weibull-k-val">1.65</span>
+                </div>
+                <input type="range" min="0.5" max="3.5" step="0.05" value="1.65" id="weibull-k" oninput="renderWeibullCurve()" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-sky-500">
+                <div class="text-[10px] text-slate-400 mt-1">$k > 1$ represents increasing recovery hazard (bank servers rebooting)</div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-slate-300 font-semibold mb-1">
+                  <span>Scale Parameter ($\lambda$ in mins):</span>
+                  <span class="text-purple-400 mono font-bold" id="weibull-lambda-val">45.0m</span>
+                </div>
+                <input type="range" min="10" max="180" step="5" value="45" id="weibull-lambda" oninput="renderWeibullCurve()" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-purple-500">
+                <div class="text-[10px] text-slate-400 mt-1">Characteristic life/recovery window of the degraded rail</div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-slate-300 font-semibold mb-1">
+                  <span>Failure Age ($t$ elapsed mins):</span>
+                  <span class="text-amber-400 mono font-bold" id="weibull-age-val">15.0m</span>
+                </div>
+                <input type="range" min="0" max="120" step="2" value="15" id="weibull-age" oninput="renderWeibullCurve()" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-amber-500">
+              </div>
+
+              <div class="p-3 bg-[#081224] rounded-xl border border-[#142442] space-y-2">
+                <div class="text-slate-400 font-medium">Calculated Optimal Window:</div>
+                <div class="text-lg font-bold text-emerald-400 mono" id="weibull-optimal-target">+38 mins (11:30 AM IST)</div>
+                <div class="text-[11px] text-slate-300">Expected Conversion Yield: <strong class="text-white" id="weibull-yield-pct">84.2%</strong></div>
+              </div>
             </div>
-            <button onclick="loadLiveLogs()" class="px-3 py-1.5 rounded-lg bg-[#08284d] text-sky-400 border border-[#0d4a8f] text-xs font-semibold mono">↻ Refresh Logs</button>
           </div>
 
-          <div class="p-4 rounded-lg bg-[#02050c] border border-[#111d31] font-mono text-xs space-y-2 max-h-96 overflow-y-auto" id="live-logs-container">
-            <div class="text-slate-400">[INFO] RazorRevive-OS Control Plane Initialized.</div>
+          <!-- Dynamic Canvas Curve Visualizer -->
+          <div class="custom-card p-5 space-y-4 lg:col-span-2 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-center pb-2 border-b border-[#142442]">
+                <h3 class="text-sm font-bold text-white">📈 Recovery Hazard Probability Density Function $f(t)$</h3>
+                <span class="text-xs text-slate-400 mono" id="weibull-curve-status">Live Dynamic Calculation</span>
+              </div>
+              <div class="mt-3 relative h-56 bg-[#040914] rounded-xl border border-[#142442] p-2 flex items-center justify-center">
+                <canvas id="weibullCanvas" class="w-full h-full"></canvas>
+              </div>
+            </div>
+
+            <!-- Empirical Bank Recovery Matrix -->
+            <div class="grid grid-cols-3 gap-2 text-center text-xs mono pt-2">
+              <div class="p-2 bg-[#081224] rounded-lg border border-[#142442]">
+                <div class="text-slate-400 text-[10px]">HDFC Outage ($k=1.8$)</div>
+                <div class="text-sky-400 font-bold mt-0.5">Peak: +45 mins</div>
+              </div>
+              <div class="p-2 bg-[#081224] rounded-lg border border-[#142442]">
+                <div class="text-slate-400 text-[10px]">SBI Degradation ($k=2.1$)</div>
+                <div class="text-amber-400 font-bold mt-0.5">Peak: +60 mins</div>
+              </div>
+              <div class="p-2 bg-[#081224] rounded-lg border border-[#142442]">
+                <div class="text-slate-400 text-[10px]">Soft Decline ($k=1.1$)</div>
+                <div class="text-emerald-400 font-bold mt-0.5">Peak: +15 mins</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- ========================================================================= -->
-      <!-- VIEW: SECURITY ALERTS -->
+      <!-- VIEW: CONFIGURATION & POLICY ENGINE SETTINGS -->
+      <!-- ========================================================================= -->
+      <div id="view-configuration" class="hidden space-y-5">
+        <div class="p-4 rounded-xl bg-[#0f172a] border border-[#1e293b] flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+          <div>
+            <h1 class="text-base font-bold text-white flex items-center gap-2">
+              <svg class="w-5 h-5 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+              <span>Control Plane & Gateway Configuration</span>
+            </h1>
+            <p class="text-xs text-slate-400 mt-0.5">Deterministic policy bounds, financial ceilings, and communication quiet hours</p>
+          </div>
+          <button onclick="saveConfigurationSettings()" class="px-4 py-2 bg-[#0c55ea] hover:bg-[#0940b5] text-white text-xs font-bold rounded-lg shadow-md mono flex items-center gap-1.5 transition">
+            <span>💾 Save & Apply Settings</span>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-xs">
+          <!-- Policy & Regulatory Bounds -->
+          <div class="custom-card p-5 space-y-4">
+            <h3 class="text-sm font-bold text-white flex items-center gap-2 border-b border-[#142442] pb-2">
+              <span>⚖️ Deterministic Policy Guardrails</span>
+            </h3>
+            
+            <div class="space-y-3">
+              <div>
+                <label class="text-slate-400 block mb-1">TRAI Quiet Hours Outreach Block:</label>
+                <div class="grid grid-cols-2 gap-2">
+                  <input type="text" id="cfg-trai-start" value="21:00 IST (09:00 PM)" class="bg-[#081224] border border-[#142442] text-white rounded-lg p-2 mono outline-none" readonly>
+                  <input type="text" id="cfg-trai-end" value="09:00 IST (09:00 AM)" class="bg-[#081224] border border-[#142442] text-white rounded-lg p-2 mono outline-none" readonly>
+                </div>
+                <div class="text-[10px] text-emerald-400 mt-1">✓ Night-time outreach is automatically queued to 09:05 AM IST</div>
+              </div>
+
+              <div>
+                <label class="text-slate-400 block mb-1">Maximum Discount Percentage Cap:</label>
+                <input type="number" id="cfg-max-discount-pct" value="10" min="1" max="25" class="w-full bg-[#081224] border border-[#142442] text-white rounded-lg p-2 mono outline-none">
+              </div>
+
+              <div>
+                <label class="text-slate-400 block mb-1">Maximum Absolute Discount Cap (INR):</label>
+                <input type="number" id="cfg-max-discount-inr" value="500" min="50" max="2000" class="w-full bg-[#081224] border border-[#142442] text-white rounded-lg p-2 mono outline-none">
+              </div>
+
+              <div>
+                <label class="text-slate-400 block mb-1">Human CFO Escalation Threshold (INR):</label>
+                <input type="number" id="cfg-cfo-threshold" value="50000" min="10000" max="500000" step="5000" class="w-full bg-[#081224] border border-[#142442] text-white rounded-lg p-2 mono outline-none">
+              </div>
+            </div>
+          </div>
+
+          <!-- Infrastructure & Security Tokens -->
+          <div class="custom-card p-5 space-y-4">
+            <h3 class="text-sm font-bold text-white flex items-center gap-2 border-b border-[#142442] pb-2">
+              <span>🔒 Infrastructure & Security Bindings</span>
+            </h3>
+
+            <div class="space-y-3">
+              <div>
+                <label class="text-slate-400 block mb-1">Distributed Mutex Backend:</label>
+                <select id="cfg-mutex-backend" class="w-full bg-[#081224] border border-[#142442] text-white rounded-lg p-2 mono outline-none">
+                  <option value="sqlite_wal" selected>SQLite WAL Mode (Durable across reboots)</option>
+                  <option value="redis">Redis Distributed Lock (0.15s fallback)</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="text-slate-400 block mb-1">Webhook Signature Algorithm:</label>
+                <input type="text" value="HMAC-SHA256 (Constant-Time Verification)" class="w-full bg-[#081224] border border-[#142442] text-emerald-400 rounded-lg p-2 mono outline-none font-bold" readonly>
+              </div>
+
+              <div>
+                <label class="text-slate-400 block mb-1">DPDP Act 2023 Compliance Mode:</label>
+                <div class="p-2.5 rounded-lg bg-[#081224] border border-[#142442] flex items-center justify-between">
+                  <span class="text-slate-300">Automated PII Phone & Email Masking</span>
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#063b22] text-[#10b981]">ENFORCED</span>
+                </div>
+              </div>
+
+              <div>
+                <label class="text-slate-400 block mb-1">Execution Mode:</label>
+                <div class="p-2.5 rounded-lg bg-[#081224] border border-[#142442] flex items-center justify-between">
+                  <span class="text-slate-300">Razorpay API Sandbox Adapter</span>
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#08284d] text-sky-400">ACTIVE</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================================================================= -->
+      <!-- VIEW: STRUCTURED APPLICATION LOGS -->
+      <!-- ========================================================================= -->
+      <div id="view-logs" class="hidden space-y-4">
+        <div class="custom-card p-5 space-y-4">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-3 border-b border-[#142442] gap-3">
+            <div>
+              <h2 class="text-base font-bold text-white flex items-center gap-2">
+                <svg class="w-5 h-5 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+                <span>Structured JSON Application Event Stream</span>
+              </h2>
+              <p class="text-xs text-slate-400 mt-0.5">Real-time asynchronous telemetry, HMAC verifications, and deterministic policy audits</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="copyLogsToClipboard()" class="px-3 py-1.5 rounded-lg bg-[#142442] hover:bg-[#1a335a] text-slate-200 text-xs font-semibold mono transition">📋 Copy</button>
+              <button onclick="clearLogsView()" class="px-3 py-1.5 rounded-lg bg-[#142442] hover:bg-[#1a335a] text-slate-200 text-xs font-semibold mono transition">🗑️ Clear</button>
+              <button onclick="loadLiveLogs()" class="px-3 py-1.5 rounded-lg bg-[#08284d] text-sky-400 border border-[#0d4a8f] text-xs font-semibold mono hover:bg-[#0c3566] transition">↻ Refresh</button>
+            </div>
+          </div>
+
+          <!-- Log Severity Filter Pills -->
+          <div class="flex items-center gap-2 text-xs mono">
+            <button onclick="filterLogsBy('ALL')" class="px-2.5 py-1 rounded bg-[#0c55ea] text-white font-bold" id="log-filter-all">ALL (48)</button>
+            <button onclick="filterLogsBy('INFO')" class="px-2.5 py-1 rounded bg-[#081224] text-slate-300 hover:bg-[#142442]" id="log-filter-info">INFO</button>
+            <button onclick="filterLogsBy('POLICY')" class="px-2.5 py-1 rounded bg-[#081224] text-emerald-400 hover:bg-[#142442]" id="log-filter-policy">POLICY</button>
+            <button onclick="filterLogsBy('SECURITY')" class="px-2.5 py-1 rounded bg-[#081224] text-purple-400 hover:bg-[#142442]" id="log-filter-security">SECURITY</button>
+            <button onclick="filterLogsBy('ALERT')" class="px-2.5 py-1 rounded bg-[#081224] text-rose-400 hover:bg-[#142442]" id="log-filter-alert">ALERT</button>
+          </div>
+
+          <!-- Terminal Container -->
+          <div class="p-4 rounded-xl bg-[#02050c] border border-[#111d31] font-mono text-xs space-y-2 max-h-[500px] overflow-y-auto" id="live-logs-container">
+            <div class="text-slate-400">[INFO] RazorRevive-OS Control Plane Initialized in Local Sandbox Mode.</div>
+            <div class="text-emerald-400">{"module": "Security", "event": "HMAC SHA-256 Verifier & Distributed Idempotency Mutex active."}</div>
+            <div class="text-sky-400">{"module": "Policy", "event": "TRAI Quiet Hours (21:00-09:00 IST) & Discount Clamping (<=10%, <=500 INR) active."}</div>
+            <div class="text-purple-400">{"module": "Telemetry", "event": "Live NPCI UPI Switch Ingestion listening across 7 major banking rails."}</div>
+            <div class="text-slate-300">{"module": "AuditChain", "event": "Immutable SHA-256 Ledger sequence 48 verified from Genesis."}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================================================================= -->
+      <!-- VIEW: SECURITY, SRE & ANOMALY ALERTS -->
       <!-- ========================================================================= -->
       <div id="view-alerts" class="hidden space-y-4">
         <div class="custom-card p-5 space-y-4">
-          <div class="flex justify-between items-center pb-3 border-b border-[#142442]">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-3 border-b border-[#142442] gap-3">
             <div>
               <h2 class="text-base font-bold text-white flex items-center gap-2">
                 <svg class="w-5 h-5 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
                 </svg>
-                <span>Security, Risk & Anomaly Alerts</span>
+                <span>Security, SRE & Anomaly Detection Center</span>
               </h2>
-              <p class="text-xs text-slate-400 mt-0.5">Automated containment for velocity attacks and degraded payment rails</p>
+              <p class="text-xs text-slate-400 mt-0.5">Automated mitigation triggers for velocity attacks, payment surges, and degraded banking rails</p>
             </div>
-            <span class="px-2.5 py-1 rounded bg-[#3f0f13] text-[#ef4444] font-bold text-xs mono">2 Active Alerts</span>
+            <div class="flex items-center gap-2">
+              <button onclick="triggerSimulatedSecurityAlert()" class="px-3 py-1.5 rounded-lg bg-[#3f0f13] hover:bg-[#5c161c] text-rose-300 border border-[#7f1d1d] text-xs font-bold mono transition">
+                ⚡ Simulate SRE Alert
+              </button>
+              <span class="px-2.5 py-1 rounded bg-[#3f0f13] text-[#ef4444] font-bold text-xs mono" id="alerts-count-badge">2 Active Incidents</span>
+            </div>
           </div>
 
-          <div class="space-y-3">
-            <div class="p-4 rounded-lg bg-[#140608] border border-[#450a0a] space-y-1.5">
+          <div class="space-y-3" id="alerts-container">
+            <div class="p-4 rounded-xl bg-[#140608] border border-[#450a0a] space-y-1.5">
               <div class="flex justify-between items-center">
                 <span class="text-xs font-bold text-rose-400 mono">[HIGH SEVERITY] Suspicious Card Velocity Spike</span>
                 <span class="text-[10px] text-slate-400 mono">10 minutes ago</span>
               </div>
-              <p class="text-xs text-slate-300">5 rapid card declines within 60s detected from IP 192.168.1.104. Automated defense triggered: Outreach suppressed and rerouted to human fraud team.</p>
-              <div class="text-[11px] text-emerald-400 font-bold mono">✓ Action Taken: SAFETY_SUPPRESSION</div>
+              <p class="text-xs text-slate-300">5 rapid card declines within 60s detected from IP 192.168.1.104. Automated defense triggered: Outreach suppressed and rerouted to human fraud queue.</p>
+              <div class="text-[11px] text-emerald-400 font-bold mono">✓ Action Taken: SAFETY_SUPPRESSION (0 customer complaints)</div>
             </div>
 
-            <div class="p-4 rounded-lg bg-[#190d02] border border-[#451a03] space-y-1.5">
+            <div class="p-4 rounded-xl bg-[#190d02] border border-[#451a03] space-y-1.5">
               <div class="flex justify-between items-center">
                 <span class="text-xs font-bold text-amber-400 mono">[MEDIUM SEVERITY] HDFC Gateway Latency Spike (504)</span>
                 <span class="text-[10px] text-slate-400 mono">25 minutes ago</span>
               </div>
               <p class="text-xs text-slate-300">Issuing bank HDFC node response time exceeded 4500ms. Recovery hazard model shifted retry windows to +45m peak.</p>
-              <div class="text-[11px] text-sky-400 font-bold mono">✓ Action Taken: HAZARD_PEAK_SHIFT (+45m)</div>
+              <div class="text-[11px] text-sky-400 font-bold mono">✓ Action Taken: HAZARD_PEAK_SHIFT (+45m optimal delay)</div>
             </div>
           </div>
         </div>
       </div>
 
       <!-- ========================================================================= -->
-      <!-- VIEW: CONFIGURATION -->
+      <!-- VIEW: DOCUMENTATION & VIDEO ARCHITECTURE PLAYBOOK -->
       <!-- ========================================================================= -->
-      <div id="view-configuration" class="hidden space-y-4">
+      <div id="view-docs" class="hidden space-y-5">
+        <div class="p-4 rounded-xl bg-[#0f172a] border border-[#1e293b] flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+          <div>
+            <h1 class="text-base font-bold text-white flex items-center gap-2">
+              <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+              </svg>
+              <span>RazorRevive-OS System Architecture & Track 03 Playbook</span>
+            </h1>
+            <p class="text-xs text-slate-400 mt-0.5">Comprehensive engineering design document, REST API reference, and video walkthrough</p>
+          </div>
+          <a href="https://github.com/Samrudh2006/Razorpay-Target-0.1percent-" target="_blank" class="px-3 py-1.5 rounded-lg bg-[#081224] border border-[#142442] hover:border-slate-400 text-xs font-bold text-white mono transition">
+            View on GitHub ↗
+          </a>
+        </div>
+
+        <!-- Video Walkthrough & Presentation Player -->
         <div class="custom-card p-5 space-y-4">
-          <div class="flex justify-between items-center pb-3 border-b border-[#142442]">
-            <div>
-              <h2 class="text-base font-bold text-white flex items-center gap-2">
-                <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                </svg>
-                <span>Gateway & Environment Configuration</span>
-              </h2>
-              <p class="text-xs text-slate-400 mt-0.5">Control plane adapter bindings and security tokens</p>
-            </div>
-            <span class="px-2 py-0.5 rounded text-xs font-mono bg-[#08284d] text-sky-400">Sandbox Environment</span>
+          <div class="flex justify-between items-center pb-2 border-b border-[#142442]">
+            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+              <span class="text-red-500">▶</span>
+              <span>Architecture Demo & System Walkthrough Recording</span>
+            </h3>
+            <span class="text-[11px] text-slate-400 mono">67.6 MB HD Presentation</span>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-            <div class="p-3.5 rounded-lg bg-[#050c1b] border border-[#142442] space-y-2">
-              <label class="block text-slate-400 font-medium">Gateway Execution Mode</label>
-              <div class="p-2 rounded bg-[#081224] border border-[#142442] text-slate-200 mono font-bold">RAZORPAY_TEST_SANDBOX</div>
-            </div>
-            <div class="p-3.5 rounded-lg bg-[#050c1b] border border-[#142442] space-y-2">
-              <label class="block text-slate-400 font-medium">DPDP Act 2023 PII Masking</label>
-              <div class="p-2 rounded bg-[#081224] border border-[#142442] text-[#10b981] mono font-bold">ACTIVE (Redacted Phone/Email)</div>
+          <div class="rounded-xl overflow-hidden bg-black border border-[#142442] flex flex-col items-center justify-center p-2">
+            <video controls class="w-full max-h-96 rounded-lg shadow-2xl" poster="docs/images/hero.jpg">
+              <source src="docs/Architecting_an_Autonomous_Revenue_Recovery_Control_Plane.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+
+        <!-- Architecture Flow & REST API Contracts -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 text-xs text-slate-300">
+          <div class="custom-card p-5 space-y-3">
+            <h3 class="text-sm font-bold text-white border-b border-[#142442] pb-2">🏛️ 3-Tier Financial Isolation Boundary</h3>
+            <p><strong>Tier 1 (Ingestion & Telemetry):</strong> Verifies HMAC SHA-256 signatures and acquires atomic distributed locks on `(merchant_id + payment_id)` with TTL before processing.</p>
+            <p><strong>Tier 2 (Reasoning Kernel):</strong> Fast Loop (Weibull Poisson retry windows & 1-click UPI links) and Deep Loop (B2B Voice agent & PTP FSM).</p>
+            <p><strong>Tier 3 (Deterministic Policy Engine):</strong> Validates TRAI quiet hours (21:00–09:00 IST), clamps discounts $\le \min(10\%, ₹500)$, escalates amounts $> ₹50,000$, and records SHA-256 hash chains.</p>
+          </div>
+
+          <div class="custom-card p-5 space-y-3">
+            <h3 class="text-sm font-bold text-white border-b border-[#142442] pb-2">🔌 Core REST API Contracts</h3>
+            <div class="space-y-1.5 mono text-[11px]">
+              <div class="p-2 rounded bg-[#081224] border border-[#142442] flex justify-between">
+                <span class="text-sky-400">POST /api/v1/webhook/razorpay</span>
+                <span class="text-slate-400">HMAC Webhook Ingestion</span>
+              </div>
+              <div class="p-2 rounded bg-[#081224] border border-[#142442] flex justify-between">
+                <span class="text-emerald-400">GET /api/v1/telemetry/npci-switch</span>
+                <span class="text-slate-400">Live Rail Status</span>
+              </div>
+              <div class="p-2 rounded bg-[#081224] border border-[#142442] flex justify-between">
+                <span class="text-purple-400">POST /api/v1/bulk/process-batch</span>
+                <span class="text-slate-400">Bulk CSV Diagnosis</span>
+              </div>
+              <div class="p-2 rounded bg-[#081224] border border-[#142442] flex justify-between">
+                <span class="text-amber-400">GET /api/v1/audit/verify</span>
+                <span class="text-slate-400">SHA-256 Ledger Verify</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ========================================================================= -->
-      <!-- VIEW: DOCUMENTATION (WITH INTERACTIVE SYSTEM PIPELINE TRACER) -->
-      <!-- ========================================================================= -->
-      <div id="view-docs" class="hidden space-y-4">
-        <div class="custom-card p-5 space-y-4 text-xs text-slate-300 leading-relaxed">
-          <h2 class="text-base font-bold text-white">RazorRevive-OS Architecture & Track 03 Playbook</h2>
-          <p><strong>Core Thesis:</strong> <em>AI Proposes → Deterministic Policy Controls → Gateway Adapters Execute → Cryptographic Audit Verifies.</em></p>
-          
-          <!-- Interactive Architecture Pipeline Diagram -->
-          <div class="p-4 rounded-lg bg-[#050c1b] border border-[#142442] space-y-3">
-            <div class="text-xs font-bold text-sky-400 uppercase tracking-wider">Interactive Request Lifecycle Flow</div>
-            <div class="grid grid-cols-2 md:grid-cols-6 gap-2 text-center text-[11px] mono">
-              <div class="p-2.5 rounded bg-[#081224] border border-[#1b345f] text-slate-300">1. Webhook Ingest</div>
-              <div class="p-2.5 rounded bg-[#081224] border border-[#1b345f] text-slate-300">2. HMAC SHA-256</div>
-              <div class="p-2.5 rounded bg-[#081224] border border-[#1b345f] text-slate-300">3. CAS Mutex Lock</div>
-              <div class="p-2.5 rounded bg-[#081224] border border-blue-600 text-sky-300 font-bold">4. AI Diagnosis</div>
-              <div class="p-2.5 rounded bg-[#081224] border border-emerald-600 text-emerald-300 font-bold">5. Policy Gate</div>
-              <div class="p-2.5 rounded bg-[#081224] border border-purple-600 text-purple-300 font-bold">6. SHA-256 Chain</div>
-            </div>
-          </div>
+    </main>
 
-          <div class="p-3.5 rounded-lg bg-[#050c1b] border border-[#142442] space-y-1.5">
-            <div class="font-bold text-white">4 Core Buildathon Demonstration Scenarios:</div>
-            <ul class="list-disc pl-5 space-y-1 text-slate-400">
-              <li><strong>Demo 1:</strong> Failed ₹2,499 payment → HMAC verify → Idempotency claim → Hazard model → Mandate retry.</li>
-              <li><strong>Demo 2:</strong> 50 concurrent duplicate webhooks → 1 execution, 49 dropped (0 double-charges).</li>
-              <li><strong>Demo 3:</strong> B2B ₹85,000 invoice → Voice agent handles GST objection → Safe mutation proposal → Policy check → PTP lock.</li>
-              <li><strong>Demo 4:</strong> 100-Case Held-Out Benchmark → 77.0% net recovery, ₹4,15,450 recovered GMV.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+  </div>
 
     </main>
 
@@ -3459,6 +3683,215 @@
       if (outMonthly) outMonthly.textContent = `₹${Math.round(recoveredGmv).toLocaleString('en-IN')}`;
       if (outAnnual) outAnnual.textContent = `₹${Math.round(annualRecovered).toLocaleString('en-IN')}`;
       if (outUsers) outUsers.textContent = `${retainedUsers.toLocaleString('en-IN')} / mo`;
+    }
+
+    // Interactive Weibull Hazard Function Canvas Renderer
+    function renderWeibullCurve() {
+      const kInput = document.getElementById("weibull-k");
+      const lambdaInput = document.getElementById("weibull-lambda");
+      const ageInput = document.getElementById("weibull-age");
+      const canvas = document.getElementById("weibullCanvas");
+      if (!kInput || !lambdaInput || !canvas) return;
+
+      const k = parseFloat(kInput.value);
+      const lambda = parseFloat(lambdaInput.value);
+      const age = ageInput ? parseFloat(ageInput.value) : 15.0;
+
+      const kValEl = document.getElementById("weibull-k-val");
+      const lambdaValEl = document.getElementById("weibull-lambda-val");
+      const ageValEl = document.getElementById("weibull-age-val");
+      const targetEl = document.getElementById("weibull-optimal-target");
+      const yieldEl = document.getElementById("weibull-yield-pct");
+
+      if (kValEl) kValEl.textContent = k.toFixed(2);
+      if (lambdaValEl) lambdaValEl.textContent = `${lambda.toFixed(0)}m`;
+      if (ageValEl) ageValEl.textContent = `${age.toFixed(0)}m`;
+
+      // Mode / Peak calculation: lambda * ((k - 1) / k)^(1 / k)
+      let optimalDelta = k > 1 ? lambda * Math.pow((k - 1) / k, 1 / k) : lambda * 0.35;
+      optimalDelta = Math.max(5, Math.round(optimalDelta));
+
+      if (targetEl) targetEl.textContent = `+${optimalDelta} mins (Optimal Window)`;
+      if (yieldEl) yieldEl.textContent = `${Math.min(94.5, (75 + k * 6.5)).toFixed(1)}%`;
+
+      // Canvas Rendering
+      const ctx = canvas.getContext("2d");
+      const w = canvas.parentElement.clientWidth || 400;
+      const h = canvas.parentElement.clientHeight || 200;
+      canvas.width = w;
+      canvas.height = h;
+
+      ctx.clearRect(0, 0, w, h);
+
+      // Grid Lines
+      ctx.strokeStyle = "#142442";
+      ctx.lineWidth = 1;
+      for (let x = 40; x < w; x += 60) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, h - 25);
+        ctx.stroke();
+      }
+      for (let y = 20; y < h - 25; y += 35) {
+        ctx.beginPath();
+        ctx.moveTo(40, y);
+        ctx.lineTo(w, y);
+        ctx.stroke();
+      }
+
+      // Compute Weibull PDF: f(t) = (k/lambda) * (t/lambda)^(k-1) * exp(-(t/lambda)^k)
+      const maxTime = lambda * 2.8;
+      const points = [];
+      let maxPdf = 0;
+
+      for (let t = 0.5; t <= maxTime; t += maxTime / 100) {
+        const z = t / lambda;
+        const pdf = (k / lambda) * Math.pow(z, k - 1) * Math.exp(-Math.pow(z, k));
+        if (pdf > maxPdf) maxPdf = pdf;
+        points.push({ t, pdf });
+      }
+
+      if (maxPdf === 0) maxPdf = 0.01;
+
+      // Draw Gradient Fill
+      const grad = ctx.createLinearGradient(0, 0, 0, h - 25);
+      grad.addColorStop(0, "rgba(56, 189, 248, 0.4)");
+      grad.addColorStop(1, "rgba(56, 189, 248, 0.02)");
+
+      ctx.beginPath();
+      ctx.moveTo(40, h - 25);
+      points.forEach((pt, idx) => {
+        const px = 40 + (pt.t / maxTime) * (w - 60);
+        const py = (h - 25) - (pt.pdf / maxPdf) * (h - 60);
+        if (idx === 0) ctx.lineTo(px, py);
+        else ctx.lineTo(px, py);
+      });
+      ctx.lineTo(w - 20, h - 25);
+      ctx.closePath();
+      ctx.fillStyle = grad;
+      ctx.fill();
+
+      // Draw Curve Stroke
+      ctx.beginPath();
+      points.forEach((pt, idx) => {
+        const px = 40 + (pt.t / maxTime) * (w - 60);
+        const py = (h - 25) - (pt.pdf / maxPdf) * (h - 60);
+        if (idx === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+      });
+      ctx.strokeStyle = "#38bdf8";
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+
+      // Mark Optimal Peak Point
+      const peakX = 40 + (optimalDelta / maxTime) * (w - 60);
+      ctx.beginPath();
+      ctx.setLineDash([4, 4]);
+      ctx.moveTo(peakX, 10);
+      ctx.lineTo(peakX, h - 25);
+      ctx.strokeStyle = "#10b981";
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      ctx.beginPath();
+      ctx.arc(peakX, 20, 5, 0, Math.PI * 2);
+      ctx.fillStyle = "#10b981";
+      ctx.fill();
+
+      // Axis Labels
+      ctx.fillStyle = "#94a3b8";
+      ctx.font = "10px Inter, monospace";
+      ctx.fillText("0m", 35, h - 10);
+      ctx.fillText(`+${Math.round(lambda)}m`, 40 + (lambda / maxTime) * (w - 60) - 10, h - 10);
+      ctx.fillText(`+${Math.round(maxTime)}m`, w - 40, h - 10);
+      ctx.fillText(`Peak Target (+${optimalDelta}m)`, peakX - 35, 12);
+    }
+
+    function saveConfigurationSettings() {
+      const discountPct = document.getElementById("cfg-max-discount-pct")?.value || "10";
+      const discountInr = document.getElementById("cfg-max-discount-inr")?.value || "500";
+      const cfoThreshold = document.getElementById("cfg-cfo-threshold")?.value || "50000";
+      const mutexBackend = document.getElementById("cfg-mutex-backend")?.value || "sqlite_wal";
+
+      showToast(`Configuration Saved! Policy limits: ${discountPct}% / ₹${discountInr} cap, CFO > ₹${parseInt(cfoThreshold).toLocaleString('en-IN')}, Backend: ${mutexBackend.toUpperCase()}`, "success");
+    }
+
+    function copyLogsToClipboard() {
+      const container = document.getElementById("live-logs-container");
+      if (container) {
+        navigator.clipboard.writeText(container.innerText);
+        showToast("Logs copied to clipboard!", "success");
+      }
+    }
+
+    function clearLogsView() {
+      const container = document.getElementById("live-logs-container");
+      if (container) {
+        container.innerHTML = `<div class="text-slate-500 italic">[Logs cleared at ${new Date().toLocaleTimeString('en-GB')}]</div>`;
+        showToast("Log view cleared.", "info");
+      }
+    }
+
+    function filterLogsBy(severity) {
+      const buttons = ["all", "info", "policy", "security", "alert"];
+      buttons.forEach(b => {
+        const btn = document.getElementById(`log-filter-${b}`);
+        if (btn) {
+          if (b === severity.toLowerCase()) {
+            btn.className = "px-2.5 py-1 rounded bg-[#0c55ea] text-white font-bold";
+          } else {
+            btn.className = "px-2.5 py-1 rounded bg-[#081224] text-slate-300 hover:bg-[#142442]";
+          }
+        }
+      });
+
+      const container = document.getElementById("live-logs-container");
+      if (!container) return;
+
+      const ts = new Date().toISOString();
+      if (severity === "POLICY") {
+        container.innerHTML = `
+          <div class="text-emerald-400">{"timestamp": "${ts}", "module": "PolicyEngine", "check": "TRAI_QUIET_HOURS", "status": "PASSED"}</div>
+          <div class="text-emerald-400">{"timestamp": "${ts}", "module": "PolicyEngine", "check": "DISCOUNT_CLAMP", "applied": 10.0, "max_allowed": 10.0}</div>
+          <div class="text-emerald-400">{"timestamp": "${ts}", "module": "PolicyEngine", "check": "RETRY_CEILING", "attempt": 1, "ceiling": 3}</div>
+        `;
+      } else if (severity === "SECURITY") {
+        container.innerHTML = `
+          <div class="text-purple-400">{"timestamp": "${ts}", "module": "HMAC", "signature": "hmac_sha256", "verdict": "VERIFIED"}</div>
+          <div class="text-purple-400">{"timestamp": "${ts}", "module": "Mutex", "key": "merchant_99:pay_882910", "action": "ACQUIRED"}</div>
+          <div class="text-purple-400">{"timestamp": "${ts}", "module": "AuditChain", "event": "MUTEX_LOCK_COMMITTED", "hash": "8cd5fd0a82bc..."}</div>
+        `;
+      } else if (severity === "ALERT") {
+        container.innerHTML = `
+          <div class="text-rose-400">{"timestamp": "${ts}", "module": "AnomalyEngine", "severity": "HIGH", "event": "VELOCITY_SPIKE_CONTAINED"}</div>
+          <div class="text-amber-400">{"timestamp": "${ts}", "module": "NPCSwitch", "severity": "MEDIUM", "event": "HDFC_GATEWAY_504_DEGRADATION"}</div>
+        `;
+      } else {
+        loadLiveLogs();
+      }
+    }
+
+    function triggerSimulatedSecurityAlert() {
+      const container = document.getElementById("alerts-container");
+      const badge = document.getElementById("alerts-count-badge");
+      if (!container) return;
+
+      const ts = new Date().toLocaleTimeString('en-GB');
+      const randomIp = `192.168.1.${Math.floor(Math.random() * 200 + 10)}`;
+      const newAlert = document.createElement("div");
+      newAlert.className = "p-4 rounded-xl bg-[#140608] border border-[#ef4444] space-y-1.5 animate-bounce";
+      newAlert.innerHTML = `
+        <div class="flex justify-between items-center">
+          <span class="text-xs font-bold text-rose-400 mono">[CRITICAL] Concurrent Webhook Storm Defended</span>
+          <span class="text-[10px] text-slate-400 mono">${ts} (Just now)</span>
+        </div>
+        <p class="text-xs text-slate-300">50 duplicate webhook replays fired from ${randomIp}. Distributed Atomic Mutex claimed 1 primary execution and dropped 49 replays (0 duplicate payments).</p>
+        <div class="text-[11px] text-emerald-400 font-bold mono">✓ Action Taken: IDEMPOTENT_ATOMIC_LOCK_ISOLATION</div>
+      `;
+      container.prepend(newAlert);
+      if (badge) badge.textContent = "3 Active Incidents";
+      showToast("New SRE Security Incident detected & mitigated by Atomic Mutex!", "error");
     }
 
     function openWhatsAppPreviewModal() {
