@@ -2800,9 +2800,9 @@
   <!-- ========================================================================= -->
   <!-- FLOATING RAZOR CYBER-HUMANOID AI COPILOT WIDGET (BOTTOM RIGHT) -->
   <!-- ========================================================================= -->
-  <!-- Floating Trigger Pill (Enlarged & Mobile Optimized) -->
-  <div class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40">
-    <button onclick="toggleAiCopilotDrawer()" id="ai-copilot-trigger" class="relative group px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-full bg-gradient-to-r from-[#0c55ea] via-[#0284c7] to-[#38bdf8] text-white text-xs sm:text-sm font-extrabold shadow-2xl flex items-center gap-2.5 sm:gap-3 hover:scale-105 active:scale-95 transition-all duration-200 border-2 border-white/40 cursor-pointer">
+  <!-- Floating Trigger Pill (Enlarged & Always Visible on Mobile & Desktop) -->
+  <div class="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-[9999]" style="z-index: 9999 !important;">
+    <button onclick="toggleAiCopilotDrawer()" id="ai-copilot-trigger" class="relative group px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-full bg-gradient-to-r from-[#0c55ea] via-[#0284c7] to-[#38bdf8] text-white text-xs sm:text-sm font-extrabold shadow-2xl flex items-center gap-2.5 sm:gap-3 hover:scale-105 active:scale-95 transition-all duration-200 border-2 border-white/50 cursor-pointer">
       <span class="absolute -top-1 -right-1 flex h-4 w-4">
         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
         <span class="relative inline-flex rounded-full h-4 w-4 bg-emerald-400 border-2 border-white"></span>
@@ -2818,8 +2818,8 @@
     </button>
   </div>
 
-  <!-- Floating Copilot Interactive Drawer (Full Mobile Responsive Width & Padding) -->
-  <div id="ai-copilot-drawer" class="hidden fixed bottom-18 right-3 left-3 sm:left-auto sm:right-6 sm:bottom-22 z-50 w-auto sm:w-[440px] max-h-[85vh] overflow-y-auto rounded-3xl bg-white dark:bg-[#0c182c] border-2 border-blue-500/50 shadow-2xl p-4 sm:p-5 space-y-4 transition-all duration-300 text-xs">
+  <!-- Floating Copilot Interactive Drawer (Always on Top of All Layers on Mobile & Desktop) -->
+  <div id="ai-copilot-drawer" class="hidden fixed bottom-20 right-3 left-3 sm:left-auto sm:right-6 sm:bottom-22 z-[10000] w-auto sm:w-[440px] max-h-[85vh] overflow-y-auto rounded-3xl bg-white dark:bg-[#0c182c] border-2 border-blue-500/60 shadow-2xl p-4 sm:p-5 space-y-4 transition-all duration-300 text-xs" style="z-index: 10000 !important;">
     
     <!-- Header with Big Front-Facing Cyber Humanoid Avatar -->
     <div class="flex items-center justify-between border-b border-slate-200 dark:border-[#142442] pb-3.5">
