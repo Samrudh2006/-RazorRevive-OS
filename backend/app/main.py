@@ -269,10 +269,23 @@ class SimulatedFailureRequest(BaseModel):
     attempt_count: int = Field(default=1)
 
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 frontend_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "frontend"))
 if os.path.exists(frontend_dir):
     app.mount("/static", StaticFiles(directory=frontend_dir), name="static")
+    assets_dir = os.path.join(frontend_dir, "assets")
+    if os.path.exists(assets_dir):
+        app.mount("/assets", StaticFiles(directory=assets_dir), name="assets")
+
+@app.get("/copilot_avatar.jpg")
+async def serve_copilot_avatar():
+    img_path = os.path.join(frontend_dir, "assets", "copilot_avatar.jpg")
+    if not os.path.exists(img_path):
+        img_path = os.path.join(frontend_dir, "copilot_avatar.jpg")
+    if os.path.exists(img_path):
+        return FileResponse(img_path, media_type="image/jpeg")
+    raise HTTPException(status_code=404, detail="Avatar image not found")
 
 @app.get("/", response_class=HTMLResponse)
 async def serve_dashboard():
