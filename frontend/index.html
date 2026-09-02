@@ -289,7 +289,19 @@
     
     <!-- LEFT LOGO & SUBTITLE -->
     <div class="flex items-center gap-3 cursor-pointer" onclick="switchNavTab('overview')">
-      <img src="/static/assets/logo.jpg" onerror="this.src='frontend/assets/logo.jpg'" alt="RazorRevive-OS Logo" class="w-10 h-10 rounded-lg object-cover border border-blue-500/30 shadow-sm">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0c2340] via-[#0c55ea] to-[#38bdf8] p-0.5 shadow-md flex items-center justify-center">
+        <div class="w-full h-full bg-[#0c2340] rounded-[10px] flex items-center justify-center">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="url(#rzp-grad-logo)" stroke="#38bdf8" stroke-width="1.2" stroke-linejoin="round"/>
+            <defs>
+              <linearGradient id="rzp-grad-logo" x1="3" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#0c55ea"/>
+                <stop offset="1" stop-color="#38bdf8"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+      </div>
       <div>
         <div class="flex items-center gap-2">
           <span class="text-lg font-bold text-[#0c2340] header-brand-title tracking-tight">RazorRevive<span class="text-[#0c55ea]">-OS</span></span>
@@ -1302,11 +1314,11 @@
         <div>
           <label class="block text-[11px] text-slate-400 font-medium mb-1">Failure Scenario</label>
           <select id="fast-scenario-select" class="w-full bg-[#050c1b] border border-[#142442] rounded-lg px-3 py-2 text-xs text-slate-200 mono outline-none focus:border-blue-500">
-            <option value="GATEWAY_ERROR">GATEWAY_ERROR • HDFC Bank Timeout 504 (Poisson Mandate Retry)</option>
-            <option value="INSUFFICIENT_FUNDS">INSUFFICIENT_FUNDS • Soft Balance Decline (1-Click UPI Payment Link)</option>
-            <option value="PAYMENT_AUTHENTICATION_FAILED">PAYMENT_AUTHENTICATION_FAILED • Abandoned 2FA (Instant Nudge)</option>
-            <option value="TOKEN_EXPIRED">TOKEN_EXPIRED • Expired Mandate Token (Re-auth Link)</option>
-            <option value="SUSPICIOUS_VELOCITY">SUSPICIOUS_VELOCITY • Card Testing Anomaly (Escalate to Human)</option>
+            <option value="GATEWAY_ERROR">GATEWAY_ERROR • 🏦 HDFC Bank Timeout 504 (Weibull Hazard Retry)</option>
+            <option value="INSUFFICIENT_FUNDS">INSUFFICIENT_FUNDS • 📱 Soft Balance Decline (1-Click UPI Payment Link)</option>
+            <option value="PAYMENT_AUTHENTICATION_FAILED">PAYMENT_AUTHENTICATION_FAILED • 🔐 Abandoned 2FA (Instant Customer Nudge)</option>
+            <option value="TOKEN_EXPIRED">TOKEN_EXPIRED • 🔁 Expired Mandate Token (1-Click Re-Auth Link)</option>
+            <option value="SUSPICIOUS_VELOCITY">SUSPICIOUS_VELOCITY • 🛡️ Card Testing Spike (Zero-Trust Human Escalation)</option>
           </select>
         </div>
 
@@ -1373,7 +1385,7 @@
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
             </div>
             <div class="text-[10px] font-bold text-slate-300 mt-1">Action Scheduled</div>
-            <div class="text-[9px] text-slate-400 mono">Retry in 45m</div>
+            <div class="text-[9px] text-[#10b981] font-bold mono">Retry in 45m</div>
           </div>
         </div>
       </div>
@@ -1381,7 +1393,7 @@
       <div class="p-3 rounded-lg bg-[#050c1b] border border-[#142442] grid grid-cols-2 lg:grid-cols-4 gap-2.5 text-xs">
         <div>
           <div class="text-[10px] text-slate-400 font-medium">AI Recommended Action</div>
-          <div class="font-bold text-white text-[11px] leading-snug" id="res-rec-action">Poisson Mandate Retry</div>
+          <div class="font-bold text-white text-[11px] leading-snug" id="res-rec-action">Weibull Hazard Retry</div>
         </div>
         <div>
           <div class="text-[10px] text-slate-400 font-medium">Recommended Retry At</div>
