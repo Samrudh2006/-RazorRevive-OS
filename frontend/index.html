@@ -294,17 +294,38 @@
       color: #fbbf24 !important;
     }
 
-    /* Header in Light Mode */
+    /* Header Theme Engine: Perfect Dynamic Contrast in Both Modes */
+    #app-header,
+    html.dark #app-header {
+      background-color: #0c182c !important;
+      border-bottom: 1px solid #142442 !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    html.dark #app-header .header-brand-title,
+    html.dark #app-header .header-brand-title .brand-main-text {
+      color: #ffffff !important;
+    }
+    html.dark #app-header .brand-highlight {
+      color: #38bdf8 !important;
+    }
+    html.dark #app-header .header-center-sub {
+      color: #94a3b8 !important;
+    }
+
     html.light #app-header {
       background-color: #ffffff !important;
       border-bottom: 1px solid #e2e8f0 !important;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
-    html.light #app-header .header-brand-title {
+    html.light #app-header .header-brand-title,
+    html.light #app-header .header-brand-title .brand-main-text {
       color: #0c2340 !important;
     }
-    html.light #app-header .text-white {
-      color: #0f172a !important;
+    html.light #app-header .brand-highlight {
+      color: #0c55ea !important;
+    }
+    html.light #app-header .header-center-sub {
+      color: #475569 !important;
     }
 
     /* Sidebar ALWAYS Stays Premium Deep Navy with High-Contrast White Text */
@@ -425,7 +446,7 @@
 <body class="min-h-screen flex flex-col antialiased selection:bg-[#0c55ea] selection:text-white">
 
   <!-- TOP APP HEADER -->
-  <header id="app-header" class="h-16 border-b border-[#e2e8f0] bg-[#ffffff] px-3 sm:px-5 flex items-center justify-between sticky top-0 z-50 transition-colors">
+  <header id="app-header" class="h-16 border-b border-slate-200 dark:border-[#142442] bg-white dark:bg-[#0c182c] px-3 sm:px-5 flex items-center justify-between sticky top-0 z-50 transition-colors">
     
     <!-- LEFT LOGO & MOBILE HAMBURGER -->
     <div class="flex items-center gap-2.5">
@@ -453,9 +474,11 @@
         </div>
         <div>
           <div class="flex items-center gap-2">
-            <span class="text-base sm:text-lg font-bold text-slate-900 dark:text-white header-brand-title tracking-tight">RazorRevive<span class="text-[#0c55ea] dark:text-[#38bdf8]">-OS</span></span>
+            <span class="text-base sm:text-lg font-extrabold header-brand-title tracking-tight">
+              <span class="brand-main-text">RazorRevive</span><span class="brand-highlight text-[#0c55ea] dark:text-[#38bdf8]">-OS</span>
+            </span>
           </div>
-          <div class="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 font-medium leading-none mt-0.5 hidden xs:block">AI Revenue Recovery Control Plane</div>
+          <div class="text-[10px] sm:text-[11px] header-center-sub text-slate-500 dark:text-slate-400 font-medium leading-none mt-0.5 hidden xs:block">AI Revenue Recovery Control Plane</div>
         </div>
       </div>
     </div>
@@ -465,7 +488,7 @@
       <div class="text-[11px] font-bold text-[#0c55ea] dark:text-[#38bdf8] tracking-wider uppercase">
         RAZORPAY AI BUILDATHON • TRACK 03
       </div>
-      <div class="text-[11px] text-slate-600 dark:text-slate-300 font-normal leading-tight mt-0.5">
+      <div class="text-[11px] header-center-sub text-slate-600 dark:text-slate-400 font-normal leading-tight mt-0.5">
         Autonomous Revenue Recovery, Dynamic Mandate Retrier & B2B Voice PTP Engine
       </div>
     </div>
