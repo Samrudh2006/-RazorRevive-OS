@@ -547,21 +547,88 @@
           <button onclick="toggleMobileMenu()" class="p-1.5 text-slate-400 hover:text-white rounded-lg">✕</button>
         </div>
 
-        <nav class="space-y-1 text-xs" id="mobile-sidebar-nav">
-          <button onclick="switchNavTab('overview'); toggleMobileMenu();" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-[#132f54] hover:text-white text-left font-medium">🏠 Overview</button>
-          <button onclick="switchNavTab('fast_loop'); toggleMobileMenu();" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-[#132f54] hover:text-white text-left font-medium">⚡ Fast Loop Sentinel</button>
-          <button onclick="switchNavTab('npci_switch'); toggleMobileMenu();" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sky-400 hover:bg-[#132f54] hover:text-white text-left font-medium">📡 NPCI Switch Radar</button>
-          <button onclick="switchNavTab('bulk_recovery'); toggleMobileMenu();" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-emerald-400 hover:bg-[#132f54] hover:text-white text-left font-medium">📄 Bulk Batch CSV</button>
-          <button onclick="switchNavTab('card_tokens'); toggleMobileMenu();" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-amber-400 hover:bg-[#132f54] hover:text-white text-left font-medium">💳 Card Token Lifecycle</button>
-          <button onclick="switchNavTab('deep_loop'); toggleMobileMenu();" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-purple-400 hover:bg-[#132f54] hover:text-white text-left font-medium">🎙️ Deep Loop Voice</button>
-          <button onclick="switchNavTab('financial_yield'); toggleMobileMenu();" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-indigo-400 hover:bg-[#132f54] hover:text-white text-left font-medium">💰 Financial Yield & ROI</button>
-          <button onclick="switchNavTab('red_team'); toggleMobileMenu();" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-rose-400 hover:bg-[#132f54] hover:text-white text-left font-medium">🛡️ Red-Team Lab</button>
-          <button onclick="switchNavTab('ptp_calendar'); toggleMobileMenu();" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-[#132f54] hover:text-white text-left font-medium">📅 PTP Calendar</button>
-          <button onclick="switchNavTab('audit_ledger'); toggleMobileMenu();" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-[#132f54] hover:text-white text-left font-medium">🔒 Audit Ledger (SHA-256)</button>
-          <button onclick="switchNavTab('benchmark'); toggleMobileMenu();" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-[#132f54] hover:text-white text-left font-medium">📊 100-Case Benchmark</button>
-          <button onclick="switchNavTab('policy_engine'); toggleMobileMenu();" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-[#132f54] hover:text-white text-left font-medium">⚖️ Policy Engine</button>
-          <button onclick="switchNavTab('analytics'); toggleMobileMenu();" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-[#132f54] hover:text-white text-left font-medium">📈 Weibull Analytics</button>
-          <button onclick="switchNavTab('logs'); toggleMobileMenu();" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-[#132f54] hover:text-white text-left font-medium">📜 Live Logs</button>
+        <nav class="space-y-4 text-xs" id="mobile-sidebar-nav">
+          
+          <!-- GROUP 1: RECOVERY ENGINES -->
+          <div class="space-y-1">
+            <div class="px-3 pb-1 text-[9.5px] uppercase font-bold tracking-wider text-slate-400">Recovery Engines</div>
+            <button onclick="switchNavTab('overview'); toggleMobileMenu();" class="w-full flex items-center justify-between px-3 py-2 rounded-lg text-slate-200 hover:bg-[#132f54] hover:text-white text-left font-medium transition">
+              <span class="flex items-center gap-2"><span>🏠</span> Overview</span>
+            </button>
+            <button onclick="switchNavTab('fast_loop'); toggleMobileMenu();" class="w-full flex items-center justify-between px-3 py-2 rounded-lg text-slate-200 hover:bg-[#132f54] hover:text-white text-left font-medium transition">
+              <span class="flex items-center gap-2"><span>⚡</span> Fast Loop (B2C)</span>
+              <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#063b22] text-[#10b981] border border-[#0e5c36]">Live</span>
+            </button>
+            <button onclick="switchNavTab('deep_loop'); toggleMobileMenu();" class="w-full flex items-center justify-between px-3 py-2 rounded-lg text-slate-200 hover:bg-[#132f54] hover:text-white text-left font-medium transition">
+              <span class="flex items-center gap-2"><span>🎙️</span> Deep Loop (Voice)</span>
+              <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#2e1065] text-[#c084fc] border border-[#581c87]">Voice</span>
+            </button>
+            <button onclick="switchNavTab('bulk_recovery'); toggleMobileMenu();" class="w-full flex items-center justify-between px-3 py-2 rounded-lg text-slate-200 hover:bg-[#132f54] hover:text-white text-left font-medium transition">
+              <span class="flex items-center gap-2"><span>📄</span> Bulk Batch CSV</span>
+              <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#063b22] text-[#10b981] border border-[#0e5c36]">CSV</span>
+            </button>
+            <button onclick="switchNavTab('financial_yield'); toggleMobileMenu();" class="w-full flex items-center justify-between px-3 py-2 rounded-lg text-slate-200 hover:bg-[#132f54] hover:text-white text-left font-medium transition">
+              <span class="flex items-center gap-2"><span>💰</span> Financial Yield & ROI</span>
+              <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#2e1065] text-[#c084fc] border border-[#581c87]">Yield</span>
+            </button>
+          </div>
+
+          <!-- GROUP 2: BANKING & RAILS -->
+          <div class="space-y-1 pt-1">
+            <div class="px-3 pb-1 text-[9.5px] uppercase font-bold tracking-wider text-slate-400">Banking & Rails</div>
+            <button onclick="switchNavTab('npci_switch'); toggleMobileMenu();" class="w-full flex items-center justify-between px-3 py-2 rounded-lg text-sky-400 hover:bg-[#132f54] hover:text-white text-left font-medium transition">
+              <span class="flex items-center gap-2"><span>📡</span> NPCI Switch Radar</span>
+              <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#08284d] text-[#38bdf8] border border-[#0c55ea]">Rail</span>
+            </button>
+            <button onclick="switchNavTab('card_tokens'); toggleMobileMenu();" class="w-full flex items-center justify-between px-3 py-2 rounded-lg text-amber-400 hover:bg-[#132f54] hover:text-white text-left font-medium transition">
+              <span class="flex items-center gap-2"><span>💳</span> Card Token Lifecycle</span>
+              <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#25131d] text-[#f59e0b] border border-[#d97706]">Token</span>
+            </button>
+            <button onclick="switchNavTab('ptp_calendar'); toggleMobileMenu();" class="w-full flex items-center justify-between px-3 py-2 rounded-lg text-slate-200 hover:bg-[#132f54] hover:text-white text-left font-medium transition">
+              <span class="flex items-center gap-2"><span>📅</span> PTP Scheduling Matrix</span>
+            </button>
+          </div>
+
+          <!-- GROUP 3: SAFETY & GOVERNANCE -->
+          <div class="space-y-1 pt-1">
+            <div class="px-3 pb-1 text-[9.5px] uppercase font-bold tracking-wider text-slate-400">Safety & Governance</div>
+            <button onclick="switchNavTab('policy_engine'); toggleMobileMenu();" class="w-full flex items-center justify-between px-3 py-2 rounded-lg text-slate-200 hover:bg-[#132f54] hover:text-white text-left font-medium transition">
+              <span class="flex items-center gap-2"><span>⚖️</span> Policy Guardrails</span>
+            </button>
+            <button onclick="switchNavTab('red_team'); toggleMobileMenu();" class="w-full flex items-center justify-between px-3 py-2 rounded-lg text-rose-400 hover:bg-[#132f54] hover:text-white text-left font-medium transition">
+              <span class="flex items-center gap-2"><span>🛡️</span> Red-Team Attack Lab</span>
+              <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#3f0f13] text-[#ef4444] border border-[#7f1d1d]">Attack</span>
+            </button>
+            <button onclick="switchNavTab('audit_ledger'); toggleMobileMenu();" class="w-full flex items-center justify-between px-3 py-2 rounded-lg text-slate-200 hover:bg-[#132f54] hover:text-white text-left font-medium transition">
+              <span class="flex items-center gap-2"><span>🔒</span> Immutable Audit Ledger</span>
+            </button>
+            <button onclick="switchNavTab('benchmark'); toggleMobileMenu();" class="w-full flex items-center justify-between px-3 py-2 rounded-lg text-slate-200 hover:bg-[#132f54] hover:text-white text-left font-medium transition">
+              <span class="flex items-center gap-2"><span>📊</span> 100-Case Benchmark</span>
+              <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#063b22] text-[#10b981] border border-[#0e5c36]">100</span>
+            </button>
+          </div>
+
+          <!-- GROUP 4: OBSERVABILITY & DOCS -->
+          <div class="space-y-1 pt-1 pb-4">
+            <div class="px-3 pb-1 text-[9.5px] uppercase font-bold tracking-wider text-slate-400">Observability & Docs</div>
+            <button onclick="switchNavTab('analytics'); toggleMobileMenu();" class="w-full flex items-center justify-between px-3 py-2 rounded-lg text-slate-200 hover:bg-[#132f54] hover:text-white text-left font-medium transition">
+              <span class="flex items-center gap-2"><span>📈</span> Weibull Analytics</span>
+            </button>
+            <button onclick="switchNavTab('configuration'); toggleMobileMenu();" class="w-full flex items-center justify-between px-3 py-2 rounded-lg text-slate-200 hover:bg-[#132f54] hover:text-white text-left font-medium transition">
+              <span class="flex items-center gap-2"><span>⚙️</span> Control Plane Config</span>
+            </button>
+            <button onclick="switchNavTab('logs'); toggleMobileMenu();" class="w-full flex items-center justify-between px-3 py-2 rounded-lg text-slate-200 hover:bg-[#132f54] hover:text-white text-left font-medium transition">
+              <span class="flex items-center gap-2"><span>📜</span> Structured Event Logs</span>
+            </button>
+            <button onclick="switchNavTab('alerts'); toggleMobileMenu();" class="w-full flex items-center justify-between px-3 py-2 rounded-lg text-slate-200 hover:bg-[#132f54] hover:text-white text-left font-medium transition">
+              <span class="flex items-center gap-2"><span>🚨</span> Security & SRE Alerts</span>
+              <span class="w-4 h-4 rounded-full flex items-center justify-center text-[10px] font-bold bg-[#ef4444] text-white">2</span>
+            </button>
+            <button onclick="switchNavTab('docs'); toggleMobileMenu();" class="w-full flex items-center justify-between px-3 py-2 rounded-lg text-indigo-400 hover:bg-[#132f54] hover:text-white text-left font-medium transition">
+              <span class="flex items-center gap-2"><span>📖</span> Playbook & Video Docs</span>
+            </button>
+          </div>
+
         </nav>
       </div>
 
