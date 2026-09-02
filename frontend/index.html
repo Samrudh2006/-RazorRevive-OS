@@ -2800,8 +2800,8 @@
   <!-- ========================================================================= -->
   <!-- FLOATING RAZOR CYBER-HUMANOID AI COPILOT WIDGET (BOTTOM RIGHT) -->
   <!-- ========================================================================= -->
-  <!-- Floating Trigger Pill (Enlarged & Always Visible on Mobile & Desktop) -->
-  <div class="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-[9999]" style="z-index: 9999 !important;">
+  <!-- Floating Trigger Pill (Elevated on mobile above bottom nav bar: bottom-20 lg:bottom-6) -->
+  <div class="fixed bottom-20 lg:bottom-6 right-4 sm:right-6 z-[9999]" style="z-index: 9999 !important;">
     <button onclick="toggleAiCopilotDrawer()" id="ai-copilot-trigger" class="relative group px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-full bg-gradient-to-r from-[#0c55ea] via-[#0284c7] to-[#38bdf8] text-white text-xs sm:text-sm font-extrabold shadow-2xl flex items-center gap-2.5 sm:gap-3 hover:scale-105 active:scale-95 transition-all duration-200 border-2 border-white/50 cursor-pointer">
       <span class="absolute -top-1 -right-1 flex h-4 w-4">
         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
@@ -2818,8 +2818,8 @@
     </button>
   </div>
 
-  <!-- Floating Copilot Interactive Drawer (Always on Top of All Layers on Mobile & Desktop) -->
-  <div id="ai-copilot-drawer" class="hidden fixed bottom-20 right-3 left-3 sm:left-auto sm:right-6 sm:bottom-22 z-[10000] w-auto sm:w-[440px] max-h-[85vh] overflow-y-auto rounded-3xl bg-white dark:bg-[#0c182c] border-2 border-blue-500/60 shadow-2xl p-4 sm:p-5 space-y-4 transition-all duration-300 text-xs" style="z-index: 10000 !important;">
+  <!-- Floating Copilot Interactive Drawer (Elevated above mobile nav) -->
+  <div id="ai-copilot-drawer" class="hidden fixed bottom-24 right-3 left-3 sm:left-auto sm:right-6 sm:bottom-22 z-[10000] w-auto sm:w-[440px] max-h-[78vh] overflow-y-auto rounded-3xl bg-white dark:bg-[#0c182c] border-2 border-blue-500/60 shadow-2xl p-4 sm:p-5 space-y-4 transition-all duration-300 text-xs" style="z-index: 10000 !important;">
     
     <!-- Header with Big Front-Facing Cyber Humanoid Avatar -->
     <div class="flex items-center justify-between border-b border-slate-200 dark:border-[#142442] pb-3.5">
@@ -5046,12 +5046,60 @@
       }
     }
 
+    // High-Fidelity Natural Speech Synthesis Engine
+    function speakText(text) {
+      if (!('speechSynthesis' in window)) {
+        showToast("Speech synthesis not supported in this browser.", "warning");
+        return;
+      }
+
+      window.speechSynthesis.cancel(); // Stop any ongoing speech
+
+      // Clean robotic characters, markdown, symbols, brackets, and code syntax
+      const clean = text
+        .replace(/[🤖⚡📱🎙️🛡️📊🏛️💾💳🚀\[\]\(\)\*\#\_\`\:\;]/g, " ")
+        .replace(/\b(https?:\/\/\S+)/gi, "")
+        .replace(/\s+/g, " ")
+        .trim();
+
+      if (!clean) return;
+
+      const utterance = new SpeechSynthesisUtterance(clean);
+      const voices = window.speechSynthesis.getVoices();
+
+      // Prioritize High-Quality Human/Neural Natural voices in OS (Google, Microsoft Neural, Apple Samantha/Alex)
+      let selectedVoice = voices.find(v => 
+        (v.name.includes("Natural") || v.name.includes("Online") || v.name.includes("Neural")) && v.lang.startsWith("en")
+      ) || voices.find(v => 
+        (v.name.includes("Google") || v.name.includes("Samantha") || v.name.includes("Alex") || v.name.includes("Daniel") || v.name.includes("Karen") || v.name.includes("Ravi") || v.name.includes("Heera")) && v.lang.startsWith("en")
+      ) || voices.find(v => 
+        v.lang === "en-IN" || v.lang === "en-GB" || v.lang === "en-US"
+      );
+
+      if (selectedVoice) {
+        utterance.voice = selectedVoice;
+      }
+
+      // Natural Human Conversational Cadence Parameters
+      utterance.rate = 1.02;   // Natural lively pace (eliminates slow robotic drag)
+      utterance.pitch = 1.04;  // Friendly, clear, non-monotone pitch
+      utterance.volume = 1.0;
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    // Pre-populate voices on page load
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = () => {
+        window.speechSynthesis.getVoices();
+      };
+    }
+
     function speakCopilotResponse() {
       const box = document.getElementById("copilot-response-text");
       if (!box) return;
-      const cleanText = box.innerText.replace(/[🤖⚡📱🎙️🛡️📊🏛️💾💳🚀\[\]]/g, "").trim();
-      speakText(cleanText);
-      showToast("🔊 Speaking Razor Copilot insight...", "info");
+      speakText(box.innerText);
+      showToast("🔊 Speaking in Natural AI SRE Voice...", "info");
     }
   </script>
 </body>
