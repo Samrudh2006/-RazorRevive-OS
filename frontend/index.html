@@ -2800,39 +2800,45 @@
   <!-- ========================================================================= -->
   <!-- FLOATING RAZOR CYBER-HUMANOID AI COPILOT WIDGET (BOTTOM RIGHT) -->
   <!-- ========================================================================= -->
-  <!-- Floating Trigger Pill -->
-  <div class="fixed bottom-5 right-5 z-40">
-    <button onclick="toggleAiCopilotDrawer()" id="ai-copilot-trigger" class="relative group px-4 py-2.5 rounded-full bg-gradient-to-r from-[#0c55ea] via-[#0284c7] to-[#38bdf8] text-white text-xs font-bold shadow-2xl flex items-center gap-2.5 hover:scale-105 active:scale-95 transition-all duration-200 border border-white/30 cursor-pointer">
-      <span class="absolute -top-1 -right-1 flex h-3.5 w-3.5">
+  <!-- Floating Trigger Pill (Enlarged & Mobile Optimized) -->
+  <div class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40">
+    <button onclick="toggleAiCopilotDrawer()" id="ai-copilot-trigger" class="relative group px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-full bg-gradient-to-r from-[#0c55ea] via-[#0284c7] to-[#38bdf8] text-white text-xs sm:text-sm font-extrabold shadow-2xl flex items-center gap-2.5 sm:gap-3 hover:scale-105 active:scale-95 transition-all duration-200 border-2 border-white/40 cursor-pointer">
+      <span class="absolute -top-1 -right-1 flex h-4 w-4">
         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-        <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-400 border border-white"></span>
+        <span class="relative inline-flex rounded-full h-4 w-4 bg-emerald-400 border-2 border-white"></span>
       </span>
-      <!-- Front-Facing Razor Copilot Avatar Image -->
-      <img src="/copilot_avatar.jpg" onerror="this.onerror=null; this.src='/static/copilot_avatar.jpg';" alt="Razor Copilot" class="w-6 h-6 rounded-full border border-emerald-400 object-cover shadow-md">
-      <span class="font-extrabold tracking-wide">Razor Copilot</span>
+      <!-- Enlarged Front-Facing Razor Copilot Avatar Image -->
+      <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full p-0.5 bg-gradient-to-tr from-emerald-400 via-sky-300 to-white shadow-md shrink-0">
+        <img src="/copilot_avatar.jpg" onerror="this.onerror=null; this.src='/static/copilot_avatar.jpg';" alt="Razor Copilot" class="w-full h-full rounded-full object-cover">
+      </div>
+      <div class="flex flex-col text-left leading-none pr-1">
+        <span class="font-black tracking-wide text-xs sm:text-sm">Razor Copilot</span>
+        <span class="text-[9px] sm:text-[10px] text-sky-100 font-medium hidden xs:block mt-0.5">Autonomous SRE</span>
+      </div>
     </button>
   </div>
 
-  <!-- Floating Copilot Interactive Drawer -->
-  <div id="ai-copilot-drawer" class="hidden fixed bottom-20 right-5 z-50 w-[420px] max-w-[calc(100vw-2.5rem)] rounded-2xl bg-white dark:bg-[#0c182c] border border-blue-500/40 shadow-2xl p-4 space-y-3.5 transition-all duration-300 text-xs">
+  <!-- Floating Copilot Interactive Drawer (Full Mobile Responsive Width & Padding) -->
+  <div id="ai-copilot-drawer" class="hidden fixed bottom-18 right-3 left-3 sm:left-auto sm:right-6 sm:bottom-22 z-50 w-auto sm:w-[440px] max-h-[85vh] overflow-y-auto rounded-3xl bg-white dark:bg-[#0c182c] border-2 border-blue-500/50 shadow-2xl p-4 sm:p-5 space-y-4 transition-all duration-300 text-xs">
     
-    <!-- Header with Front-Facing Cyber Humanoid Avatar -->
-    <div class="flex items-center justify-between border-b border-slate-200 dark:border-[#142442] pb-3">
-      <div class="flex items-center gap-3">
-        <!-- Front-Facing Avatar Badge -->
-        <div class="relative w-11 h-11 rounded-full p-0.5 bg-gradient-to-tr from-emerald-400 via-sky-400 to-blue-600 shadow-xl shrink-0">
-          <img src="/copilot_avatar.jpg" onerror="this.onerror=null; this.src='/static/copilot_avatar.jpg';" alt="Razor Copilot Avatar" class="w-full h-full rounded-full object-cover">
-          <span class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-emerald-400 rounded-full border-2 border-white dark:border-[#0c182c]"></span>
+    <!-- Header with Big Front-Facing Cyber Humanoid Avatar -->
+    <div class="flex items-center justify-between border-b border-slate-200 dark:border-[#142442] pb-3.5">
+      <div class="flex items-center gap-3.5">
+        <!-- Big Front-Facing Avatar Badge -->
+        <div class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl p-0.5 bg-gradient-to-tr from-emerald-400 via-sky-400 to-blue-600 shadow-xl shrink-0">
+          <img src="/copilot_avatar.jpg" onerror="this.onerror=null; this.src='/static/copilot_avatar.jpg';" alt="Razor Copilot Avatar" class="w-full h-full rounded-2xl object-cover">
+          <span class="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-400 rounded-full border-2 border-white dark:border-[#0c182c]"></span>
         </div>
         <div>
-          <div class="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-1.5">
+          <div class="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white flex items-center gap-1.5 flex-wrap">
             <span>Razor Humanoid Copilot</span>
-            <span class="px-1.5 py-0.2 rounded text-[9px] font-black bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-400 border border-emerald-500/40">AI SRE</span>
+            <span class="px-2 py-0.5 rounded-full text-[9px] font-black bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-400 border border-emerald-500/40">AI SRE</span>
           </div>
-          <div class="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold">● Fully Trained on RazorRevive Control Plane</div>
+          <div class="text-[10.5px] sm:text-[11px] text-emerald-600 dark:text-emerald-400 font-bold mt-0.5">● Fully Trained on RazorRevive Control Plane</div>
+          <div class="text-[10px] text-slate-500 dark:text-slate-400">Autonomous Payment Recovery Intelligence</div>
         </div>
       </div>
-      <button onclick="toggleAiCopilotDrawer()" class="p-1 text-slate-400 hover:text-slate-600 dark:hover:text-white rounded-lg transition font-bold text-sm">✕</button>
+      <button onclick="toggleAiCopilotDrawer()" class="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-white rounded-xl bg-slate-100 dark:bg-slate-800 transition font-bold text-sm cursor-pointer">✕</button>
     </div>
 
     <!-- Quick Question Tags (Horizontal Scroll / Grid) -->
