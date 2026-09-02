@@ -2761,6 +2761,87 @@
     </div>
   </template>
 
+  <!-- ========================================================================= -->
+  <!-- FLOATING AI COPILOT & SRE ASSISTANT WIDGET (BOTTOM RIGHT) -->
+  <!-- ========================================================================= -->
+  <!-- Floating Trigger Pill -->
+  <div class="fixed bottom-5 right-5 z-40">
+    <button onclick="toggleAiCopilotDrawer()" id="ai-copilot-trigger" class="relative group px-4 py-2.5 rounded-full bg-gradient-to-r from-[#0c55ea] via-[#0284c7] to-[#38bdf8] text-white text-xs font-bold shadow-2xl flex items-center gap-2.5 hover:scale-105 active:scale-95 transition-all duration-200 border border-white/20">
+      <span class="absolute -top-1 -right-1 flex h-3 w-3">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-300"></span>
+      </span>
+      <svg class="w-4 h-4 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+      </svg>
+      <span>✨ AI SRE Copilot</span>
+    </button>
+  </div>
+
+  <!-- Floating Copilot Interactive Drawer -->
+  <div id="ai-copilot-drawer" class="hidden fixed bottom-20 right-5 z-50 w-96 max-w-[calc(100vw-2.5rem)] rounded-2xl bg-white dark:bg-[#0c182c] border border-blue-500/30 shadow-2xl p-4 space-y-3.5 transition-all duration-300 text-xs">
+    
+    <!-- Header -->
+    <div class="flex items-center justify-between border-b border-slate-200 dark:border-[#142442] pb-3">
+      <div class="flex items-center gap-2">
+        <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-[#0c55ea] to-[#38bdf8] flex items-center justify-center text-white text-xs font-bold shadow-sm">
+          ⚡
+        </div>
+        <div>
+          <div class="font-bold text-slate-900 dark:text-white">RazorRevive AI Copilot</div>
+          <div class="text-[10px] text-emerald-600 dark:text-emerald-400 font-medium">● Autonomous Control Plane Active</div>
+        </div>
+      </div>
+      <button onclick="toggleAiCopilotDrawer()" class="p-1 text-slate-400 hover:text-slate-600 dark:hover:text-white rounded-lg transition">✕</button>
+    </div>
+
+    <!-- Live Telemetry Mini Status -->
+    <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-[#081224] border border-slate-200 dark:border-[#142442] space-y-1 text-[11px] mono">
+      <div class="flex justify-between">
+        <span class="text-slate-500">NPCI Switch Monitor:</span>
+        <span class="text-emerald-600 dark:text-emerald-400 font-bold">7 Rails Healthy / 1 Degraded (SBI)</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="text-slate-500">Distributed CAS Mutex:</span>
+        <span class="text-sky-600 dark:text-sky-400 font-bold">100% Zero-Collision Lock</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="text-slate-500">Deterministic Policy:</span>
+        <span class="text-purple-600 dark:text-purple-400 font-bold">TRAI + Discount Clamps Enforced</span>
+      </div>
+    </div>
+
+    <!-- Quick Question Buttons -->
+    <div class="space-y-1.5">
+      <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Ask Copilot (Instant Insights):</div>
+      <div class="grid grid-cols-1 gap-1.5">
+        <button onclick="askCopilotPrompt('sbi')" class="w-full text-left p-2 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-[#142442]/60 dark:hover:bg-[#1e3a6a] text-slate-800 dark:text-slate-200 text-[11px] font-medium transition">
+          ⚡ Why is SBI Switch Degraded & how is retry shifted?
+        </button>
+        <button onclick="askCopilotPrompt('whatsapp')" class="w-full text-left p-2 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-[#142442]/60 dark:hover:bg-[#1e3a6a] text-slate-800 dark:text-slate-200 text-[11px] font-medium transition">
+          📱 How does 1-Click WhatsApp UPI QR recovery work?
+        </button>
+        <button onclick="askCopilotPrompt('voice')" class="w-full text-left p-2 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-[#142442]/60 dark:hover:bg-[#1e3a6a] text-slate-800 dark:text-slate-200 text-[11px] font-medium transition">
+          🎙️ How does B2B Hinglish Voice handle GST disputes?
+        </button>
+        <button onclick="askCopilotPrompt('mutex')" class="w-full text-left p-2 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-[#142442]/60 dark:hover:bg-[#1e3a6a] text-slate-800 dark:text-slate-200 text-[11px] font-medium transition">
+          🛡️ How does Atomic CAS Mutex prevent Double-Debits?
+        </button>
+      </div>
+    </div>
+
+    <!-- Copilot AI Dynamic Response Box -->
+    <div id="copilot-response-box" class="p-3 rounded-xl bg-blue-50 dark:bg-[#071328] border border-blue-200 dark:border-blue-900/60 space-y-1 text-[11px] text-slate-700 dark:text-slate-300">
+      <div class="font-bold text-[#0c55ea] dark:text-[#38bdf8] flex items-center gap-1.5">
+        <span>🤖 Copilot Insight:</span>
+      </div>
+      <div id="copilot-response-text" class="leading-relaxed">
+        Click any quick prompt above to inspect live AI rationale, Weibull calculations, and deterministic policy enforcement proofs.
+      </div>
+    </div>
+
+  </div>
+
   <!-- SCRIPT LOGIC -->
   <script>
     // Component Mount Helper
@@ -4850,6 +4931,34 @@
       if (drawer) {
         drawer.classList.toggle('hidden');
       }
+    }
+
+    // Floating AI Copilot & SRE Assistant Drawer Controller
+    function toggleAiCopilotDrawer() {
+      const drawer = document.getElementById("ai-copilot-drawer");
+      if (drawer) {
+        drawer.classList.toggle("hidden");
+      }
+    }
+
+    const COPILOT_KNOWLEDGE = {
+      sbi: "⚡ [SBI SWITCH TELEMETRY]: Real-time webhook telemetry detected gateway latency > 890ms on INB-UPI (error code NPCI-SBI-202). Rather than triggering naive retries that fail, our Weibull hazard function shifted the optimal recovery retry target to +45 minutes (peak 91.4% recovery window), while activating circuit breaker protection.",
+      whatsapp: "📱 [1-CLICK WHATSAPP RECOVERY]: For soft card declines & insufficient funds, RazorRevive suppresses further card debits to avoid bank penalty fees. It generates an authentic WhatsApp notification with a dynamic, pre-filled UPI Intent link (`upi://pay?...`) and a dense scannable QR code. Customer captures payment in 1-tap with sub-second latency.",
+      voice: "🎙️ [B2B HINGLISH VOICE & GST DISPUTES]: High-ticket corporate invoices (>₹50k) are handled via our autonomous B2B Voice agent. When a CFO disputes a GSTIN mismatch, the AI parses the utterance in Hinglish, extracts valid 15-character GSTINs, proposes an atomic invoice mutation, and registers an auto-debit Promise-to-Pay (PTP) for Friday 11:00 AM while suppressing annoying reminder calls.",
+      mutex: "🛡️ [ATOMIC CAS MUTEX LOCK]: To eliminate double-debits during concurrent webhook replays (e.g. 50 simultaneous bank retries), RazorRevive acquires a distributed Compare-And-Swap lock on `merchant_id:payment_id`. Thread 1 processes the event, while threads 2 through 50 receive immediate HTTP 409 Conflict. All outcomes are sealed in our SHA-256 Tamper-Evident Ledger."
+    };
+
+    function askCopilotPrompt(topic) {
+      const box = document.getElementById("copilot-response-text");
+      if (!box) return;
+      
+      box.innerHTML = `<span class="animate-pulse text-sky-400">Analyzing live control plane telemetry...</span>`;
+      
+      setTimeout(() => {
+        const text = COPILOT_KNOWLEDGE[topic] || "Analyzing live telemetry...";
+        box.innerHTML = `<div class="font-medium text-slate-800 dark:text-slate-200">${text}</div>`;
+        showToast("✨ AI Copilot Insight loaded!", "info");
+      }, 250);
     }
   </script>
 </body>
