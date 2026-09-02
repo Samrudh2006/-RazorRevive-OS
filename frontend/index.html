@@ -3445,26 +3445,32 @@
       if (type === 'A') {
         switchNavTab('overview');
         document.querySelectorAll("#fast-scenario-select").forEach(el => el.value = "GATEWAY_ERROR");
-        document.querySelectorAll("#fast-amount").forEach(el => el.value = 2499);
-        document.querySelectorAll("#fast-pay-id").forEach(el => el.value = "pay_9A12BC34DE");
+        document.querySelectorAll("#fast-amount").forEach(el => el.value = 12500);
+        document.querySelectorAll("#fast-pay-id").forEach(el => el.value = "pay_SBI_504_OUTAGE");
         triggerFastLoopPipeline();
+        simulateBankDegradation('SBI');
+        showToast("⚡ [Scenario A] SBI Switch Outage Ingested: Shifted Weibull Retry to +45m (91.4% Window)", "warning");
       } else if (type === 'B') {
         switchNavTab('overview');
         document.querySelectorAll("#fast-scenario-select").forEach(el => el.value = "INSUFFICIENT_FUNDS");
-        document.querySelectorAll("#fast-amount").forEach(el => el.value = 1499);
-        document.querySelectorAll("#fast-pay-id").forEach(el => el.value = "pay_B2C_001");
+        document.querySelectorAll("#fast-amount").forEach(el => el.value = 2499);
+        document.querySelectorAll("#fast-pay-id").forEach(el => el.value = "pay_B2C_SOFT_DECLINE");
         triggerFastLoopPipeline();
+        setTimeout(openWhatsAppPreviewModal, 400);
+        showToast("📱 [Scenario B] Soft Balance Decline: 1-Click WhatsApp Recovery & UPI QR Generated!", "success");
       } else if (type === 'C') {
         switchNavTab('deep_loop');
         document.querySelectorAll("#voice-speech-select").forEach(el => el.selectedIndex = 0);
         triggerVoiceTurnAction();
+        showToast("🎙️ [Scenario C] B2B GST Dispute: Voice Agent Proposed Mutation & Locked PTP", "info");
       } else if (type === 'D') {
-        switchNavTab('deep_loop');
-        document.querySelectorAll("#voice-speech-select").forEach(el => el.selectedIndex = 1);
-        triggerVoiceTurnAction();
+        switchNavTab('ptp_calendar');
+        loadPTPRecords();
+        showToast("📅 [Scenario D] Promise-to-Pay Registered: Reminders Suppressed until Friday 11:00 AM IST", "success");
       } else if (type === 'E') {
         switchNavTab('red_team');
         runLiveAttack(1);
+        showToast("🛡️ [Scenario E] 50-Webhook Storm Contained: 0 Double Debits (CAS Mutex Verified)", "error");
       }
     }
 
@@ -3515,7 +3521,7 @@
         refreshAuditLedger();
 
       } catch (err) {
-        alert("Pipeline notice: " + err.message);
+        showToast("Pipeline Notice: " + err.message, "warning");
       } finally {
         document.querySelectorAll("#fast-loop-btn").forEach(btn => {
           btn.disabled = false;
@@ -3525,7 +3531,7 @@
     }
 
     async function triggerVoiceTurnAction() {
-      const speech = document.querySelector("#voice-speech-select")?.value || "";
+      const speech = document.querySelector("#voice-speech-select")?.value || "Humara GSTIN galat print ho gaya hai, revised invoice reissue kar do.";
       const invId = document.querySelector("#voice-inv-id")?.value || "inv_enterprise_998";
       const amt = parseFloat(document.querySelector("#voice-inv-amount")?.value || 85000);
 
@@ -3548,12 +3554,12 @@
         // Speak the agent speech via Web Speech API
         speakText(data.agent_speech_response);
 
-        alert(`Deep-Loop Voice Turn Resolved!\n\n• Intent: ${data.intent_detected}\n• Action: ${data.action_taken}\n• Agent Response: "${data.agent_speech_response}"\n• PTP Lock: ${data.ptp_created ? 'ACTIVE (Reminders Suppressed)' : 'N/A'}\n• Invoice Mutated: ${data.invoice_mutated ? 'YES (GSTIN Updated & Reissued)' : 'NO'}`);
+        showToast(`🎙️ Voice Turn Resolved! Intent: ${data.intent_detected} • PTP Locked`, "success");
         
         refreshAuditLedger();
         loadPTPRecords();
       } catch (err) {
-        alert("Voice turn error: " + err.message);
+        showToast("Voice Turn Error: " + err.message, "error");
       } finally {
         document.querySelectorAll("#voice-turn-btn").forEach(btn => {
           btn.disabled = false;
@@ -3583,9 +3589,9 @@
         document.querySelectorAll("#bm-human-esc").forEach(el => el.innerText = s.human_escalations);
         document.querySelectorAll("#bm-safety-supp").forEach(el => el.innerText = s.safety_suppressions);
 
-        alert(`100-Batch Benchmark Completed!\n\n• Recovery Rate: ${s.recovery_rate_pct.toFixed(2)}%\n• Recovered GMV: ₹${Math.round(s.recovered_gmv).toLocaleString()}\n• Idempotency Violations: 0\n• Policy Violations: 0`);
+        showToast(`🏆 100-Batch Benchmark Completed! Recovery Rate: ${s.recovery_rate_pct.toFixed(2)}% • 0 Violations`, "success");
       } catch (err) {
-        alert("Benchmark error: " + err.message);
+        showToast("Benchmark Error: " + err.message, "error");
       } finally {
         if (btnText) btnText.innerText = "Run 100-Batch Benchmark";
       }
