@@ -4011,9 +4011,9 @@
         if (json.success && json.data.switches) {
           json.data.switches.forEach(s => {
             if (BANK_SWITCH_STATES[s.bank_code]) {
-              BANK_SWITCH_STATES[s.bank_code].state = s.state;
-              BANK_SWITCH_STATES[s.bank_code].sr = s.success_rate_pct;
-              BANK_SWITCH_STATES[s.bank_code].latency = s.latency_ms;
+              BANK_SWITCH_STATES[s.bank_code].state = s.switch_state || s.state || "HEALTHY";
+              BANK_SWITCH_STATES[s.bank_code].sr = typeof s.success_rate_pct === 'number' ? s.success_rate_pct : 95.0;
+              BANK_SWITCH_STATES[s.bank_code].latency = typeof s.avg_latency_ms === 'number' ? s.avg_latency_ms : (typeof s.latency_ms === 'number' ? s.latency_ms : 180.0);
             }
           });
         }
