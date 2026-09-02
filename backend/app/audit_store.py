@@ -32,6 +32,7 @@ class CryptographicAuditLedger:
                     trace_id TEXT NOT NULL,
                     timestamp REAL NOT NULL,
                     merchant_id TEXT NOT NULL,
+                    merchant_api_key_id TEXT DEFAULT 'default_key',
                     payment_id TEXT NOT NULL,
                     event_type TEXT NOT NULL,
                     failure_class TEXT,
@@ -46,6 +47,13 @@ class CryptographicAuditLedger:
             conn.execute("CREATE INDEX IF NOT EXISTS idx_audit_pay ON audit_chain_ledger (payment_id)")
             conn.execute("CREATE INDEX IF NOT EXISTS idx_audit_trace ON audit_chain_ledger (trace_id)")
             conn.execute("CREATE INDEX IF NOT EXISTS idx_audit_seq ON audit_chain_ledger (sequence_id)")
+
+            cursor = conn.cursor()
+            cursor.execute("PRAGMA table_info(audit_chain_ledger);")
+            cols = [c[1] for c in cursor.fetchall()]
+            if "merchant_api_key_id" not in cols:
+                conn.execute("ALTER TABLE audit_chain_ledger ADD COLUMN merchant_api_key_id TEXT DEFAULT 'default_key';")
+            conn.execute("CREATE INDEX IF NOT EXISTS idx_audit_merch ON audit_chain_ledger (merchant_id, merchant_api_key_id)")
 
     def _get_latest_hash(self, conn: sqlite3.Connection) -> str:
         cursor = conn.cursor()

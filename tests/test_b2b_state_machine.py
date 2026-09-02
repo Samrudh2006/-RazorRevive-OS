@@ -6,6 +6,7 @@ from backend.app.b2b.ptp_engine import PTPStore
 def test_fsm_valid_transition_lifecycle():
     fsm = B2BReceivablesStateMachine()
     inv_id = "inv_fsm_test_01"
+    fsm.reset_state(inv_id)
 
     # OVERDUE -> CONTACT_PENDING
     t1 = fsm.transition(inv_id, "CONTACT_PENDING", "TRIGGER_CALL")

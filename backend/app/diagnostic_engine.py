@@ -213,6 +213,68 @@ class DiagnosticEngine:
             "strategy": "ESCALATE_HUMAN",
             "confidence": 0.97,
             "reasons": ["GEOGRAPHIC_IP_MISMATCH", "SECURITY_RISK"]
+        },
+        # --- Card Network Tokenization Error Codes (Visa VTS / Mastercard MDES / RuPay) ---
+        "TOKEN_REVOKED": {
+            "class": "EXPIRED_MANDATE",
+            "strategy": "DISPATCH_PAYMENT_LINK",
+            "confidence": 0.96,
+            "reasons": ["CARDHOLDER_REVOKED_TOKEN", "NETWORK_TOKEN_REPROVISION_REQUIRED"]
+        },
+        "TOKEN_SUSPENDED": {
+            "class": "EXPIRED_MANDATE",
+            "strategy": "DISPATCH_PAYMENT_LINK",
+            "confidence": 0.91,
+            "reasons": ["ISSUER_TEMPORARY_TOKEN_SUSPENSION", "STEP_UP_AUTH_NEEDED"]
+        },
+        "CARD_TOKEN_CRYPTOGRAM_INVALID": {
+            "class": "EXPIRED_MANDATE",
+            "strategy": "DISPATCH_PAYMENT_LINK",
+            "confidence": 0.95,
+            "reasons": ["CRYPTOGRAM_EXPIRED_OR_REUSED", "REPROVISION_FRESH_CRYPTOGRAM"]
+        },
+        "TOKEN_DELETED": {
+            "class": "EXPIRED_MANDATE",
+            "strategy": "DISPATCH_PAYMENT_LINK",
+            "confidence": 0.94,
+            "reasons": ["TOKEN_REMOVED_FROM_DEVICE_VAULT", "ENROLL_NEW_CARD"]
+        },
+        # --- NPCI UPI Banking Switch Degradation Codes ---
+        "UPI_U30_DEGRADATION": {
+            "class": "TRANSIENT_GATEWAY",
+            "strategy": "DELAYED_RETRY",
+            "confidence": 0.96,
+            "reasons": ["NPCI_UPI_U30_CORE_SWITCH_DEGRADATION", "RETRY_AFTER_SWITCH_RECOVERY"]
+        },
+        "UPI_ZM_INVALID_MPIN": {
+            "class": "ABANDONED_AUTH",
+            "strategy": "DISPATCH_PAYMENT_LINK",
+            "confidence": 0.93,
+            "reasons": ["CUSTOMER_ENTERED_INVALID_UPI_PIN", "DISPATCH_RETRY_LINK"]
+        },
+        "UPI_XB_BENEFICIARY_DOWN": {
+            "class": "TRANSIENT_GATEWAY",
+            "strategy": "DELAYED_RETRY",
+            "confidence": 0.95,
+            "reasons": ["BENEFICIARY_BANK_SWITCH_UNREACHABLE", "TEMPORARY_UPI_OUTAGE"]
+        },
+        "UPI_ZH_PSP_TIMEOUT": {
+            "class": "TRANSIENT_GATEWAY",
+            "strategy": "DELAYED_RETRY",
+            "confidence": 0.94,
+            "reasons": ["PSP_APPLICATION_TIMEOUT_RESPONSE", "DYNAMIC_WEIBULL_RETRY"]
+        },
+        "UPI_UT_TRANSACTION_LIMIT_EXCEEDED": {
+            "class": "INSUFFICIENT_FUNDS",
+            "strategy": "DISPATCH_PAYMENT_LINK",
+            "confidence": 0.90,
+            "reasons": ["BANK_DAILY_UPI_LIMIT_BREACHED", "USE_NETBANKING_OR_CARD"]
+        },
+        "NPCI_SWITCH_DEGRADATION": {
+            "class": "TRANSIENT_GATEWAY",
+            "strategy": "DELAYED_RETRY",
+            "confidence": 0.97,
+            "reasons": ["NPCI_CENTRAL_SWITCH_CONGESTION", "SCHEDULED_HAZARD_OPTIMIZATION"]
         }
     }
 

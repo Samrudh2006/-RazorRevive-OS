@@ -92,3 +92,62 @@ class PolicyVerdict(BaseModel):
     applied_modifications: List[str] = Field(default_factory=list)
     effective_discount: float = 0.0
     scheduled_epoch: Optional[float] = None
+
+# --- Phase 1 & 8: NPCI Switch Telemetry & Live Degradation ---
+SwitchHealthStateType = Literal["HEALTHY", "DEGRADED", "OUTAGE"]
+
+class NPCISwitchStatus(BaseModel):
+    bank_code: str = Field(..., description="Bank identifier (e.g. HDFC, SBI, ICICI, AXIS, KOTAK)")
+    bank_name: str
+    switch_state: SwitchHealthStateType
+    success_rate_pct: float = Field(..., ge=0.0, le=100.0)
+    avg_latency_ms: float = Field(..., ge=0.0)
+    last_updated: float = Field(default_factory=time.time)
+    active_incidents: List[str] = Field(default_factory=list)
+    circuit_breaker_tripped: bool = False
+    recommended_fallback_rail: Optional[str] = None
+
+# --- Phase 1 & 4: Card Network Token Lifecycle (Visa VTS / Mastercard MDES / RuPay) ---
+CardTokenStatusType = Literal["ACTIVE", "SUSPENDED", "REVOKED", "CRYPTOGRAM_EXPIRED", "DELETED"]
+CardNetworkType = Literal["VISA_VTS", "MASTERCARD_MDES", "RUPAY_TOKEN", "GENERIC_NETWORK"]
+
+class CardTokenLifecycleRecord(BaseModel):
+    token_id: str
+    card_network: CardNetworkType
+    token_status: CardTokenStatusType
+    last_four_digits: str
+    expiry_month: int
+    expiry_year: int
+    revocation_reason: Optional[str] = None
+    remediation_action: Literal[
+        "AUTOMATIC_TOKEN_REPROVISION",
+        "STEP_UP_2FA_CONSENT",
+        "FALLBACK_UPI_INTENT",
+        "CUSTOMER_PAYMENT_LINK"
+    ] = "AUTOMATIC_TOKEN_REPROVISION"
+    retry_allowed_on_token: bool = True
+    lifecycle_event_epoch: float = Field(default_factory=time.time)
+
+# --- Phase 2: Enterprise Bulk CSV Ingestion & Batch Recovery ---
+class BulkRecoveryItem(BaseModel):
+    payment_id: str
+    amount: float
+    error_code: str
+    error_description: Optional[str] = ""
+    customer_phone: Optional[str] = None
+    customer_email: Optional[str] = None
+    bank_code: Optional[str] = "HDFC"
+    method: Optional[str] = "upi"
+
+class BulkRecoveryBatchResponse(BaseModel):
+    batch_id: str
+    total_processed: int
+    recoverable_count: int
+    suppressed_count: int
+    escalated_count: int
+    projected_recovery_gmv_inr: float
+    total_batch_gmv_inr: float
+    recovery_rate_pct: float
+    processing_time_ms: float
+    items: List[Dict[str, Any]]
+

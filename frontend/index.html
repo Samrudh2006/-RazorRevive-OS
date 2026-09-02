@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>RazorRevive-OS | AI Revenue Recovery Control Plane</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -408,6 +410,39 @@
           <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#063b22] text-[#10b981] border border-[#0e5c36]">Live</span>
         </button>
 
+        <!-- NPCI Switch Radar (PHASE 1 & 8) -->
+        <button onclick="switchNavTab('npci_switch')" id="nav-npci_switch" class="w-full flex items-center justify-between px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
+          <div class="flex items-center gap-2.5">
+            <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+            <span>NPCI Switch Radar</span>
+          </div>
+          <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#08284d] text-[#38bdf8] border border-[#0c55ea]">Rail</span>
+        </button>
+
+        <!-- Bulk Batch Ingestion (PHASE 2 & 10) -->
+        <button onclick="switchNavTab('bulk_recovery')" id="nav-bulk_recovery" class="w-full flex items-center justify-between px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
+          <div class="flex items-center gap-2.5">
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+            </svg>
+            <span>Bulk Batch CSV</span>
+          </div>
+          <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#063b22] text-[#10b981] border border-[#0e5c36]">CSV</span>
+        </button>
+
+        <!-- Card Token Lifecycle (PHASE 1 & 4) -->
+        <button onclick="switchNavTab('card_tokens')" id="nav-card_tokens" class="w-full flex items-center justify-between px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
+          <div class="flex items-center gap-2.5">
+            <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+            </svg>
+            <span>Card Token Lifecycle</span>
+          </div>
+          <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#25131d] text-[#f59e0b] border border-[#d97706]">Token</span>
+        </button>
+
         <!-- Deep Loop -->
         <button onclick="switchNavTab('deep_loop')" id="nav-deep_loop" class="w-full flex items-center justify-between px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
           <div class="flex items-center gap-2.5">
@@ -417,6 +452,17 @@
             <span>Deep Loop</span>
           </div>
           <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#2e1065] text-[#c084fc] border border-[#581c87]">Voice</span>
+        </button>
+
+        <!-- Financial Yield ROI (PHASE 2 & 10) -->
+        <button onclick="switchNavTab('financial_yield')" id="nav-financial_yield" class="w-full flex items-center justify-between px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
+          <div class="flex items-center gap-2.5">
+            <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span>Financial Yield & ROI</span>
+          </div>
+          <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#2e1065] text-[#c084fc] border border-[#581c87]">Yield</span>
         </button>
 
         <!-- Red-Team Lab (NEW STANDOUT FEATURE) -->
@@ -621,61 +667,101 @@
           <div id="benchmark-summary-slot"></div>
         </div>
 
-        <!-- INTERACTIVE LIVE MERCHANT ROI CALCULATOR WIDGET -->
+        <!-- SRE OPERATIONAL NPCI SWITCH & BANKING RAIL TELEMETRY MATRIX (PHASE 1 & 8) -->
         <div class="custom-card p-5 space-y-4">
-          <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 border-b border-[#1e293b] pb-3">
+          <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 border-b border-[#142442] pb-3">
             <div>
               <div class="text-sm font-bold text-white flex items-center gap-2">
-                <span class="text-blue-500 font-bold">⚡</span>
-                <span>Interactive Merchant Revenue Expansion & ROI Calculator</span>
+                <span class="text-sky-400 font-bold">⚡</span>
+                <span>Live NPCI Switch & Major Issuing Bank Gateway Telemetry</span>
               </div>
-              <p class="text-xs text-slate-400 mt-0.5">Calculate net new cash flow unlocked for your business by RazorRevive-OS local open-source AI</p>
+              <p class="text-xs text-slate-400 mt-0.5">Real-time switch heartbeat feeds dynamically modulating Weibull recovery hazard curves & circuit breakers</p>
             </div>
-            <span class="px-3 py-1 rounded-full text-xs font-bold text-emerald-400 bg-emerald-950/40 border border-emerald-800/60 mono">100% Local AI (₹0 API Cost)</span>
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-1 rounded-full text-xs font-bold text-emerald-400 bg-emerald-950/40 border border-emerald-800/60 mono flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                <span>NPCI UPI Switch: ONLINE</span>
+              </span>
+              <button onclick="refreshNPCITelemetryGrid()" class="px-2.5 py-1 bg-[#081224] hover:bg-[#0c1b36] border border-[#142442] text-xs font-semibold text-sky-400 rounded-lg mono transition">
+                ↻ Refresh Grid
+              </button>
+            </div>
           </div>
 
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <!-- Sliders -->
-            <div class="space-y-4 bg-[#081224] p-4 rounded-xl border border-[#142442]">
-              <div>
-                <div class="flex justify-between text-xs font-semibold text-slate-300 mb-1">
-                  <span>Monthly Processed GMV:</span>
-                  <span class="text-blue-400 mono font-bold" id="slider-gmv-val">₹1,00,00,000 (1 Cr)</span>
+          <!-- Live Bank Switch Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3.5" id="overview-npci-grid">
+            <!-- Bank Cards injected dynamically or defaulted -->
+            <div class="p-3.5 rounded-xl bg-[#081224] border border-[#142442] space-y-2">
+              <div class="flex justify-between items-start">
+                <div>
+                  <div class="text-xs font-bold text-white">HDFC Bank UPI</div>
+                  <div class="text-[10px] text-slate-400 mono">Switch ID: HDFC_CORE_01</div>
                 </div>
-                <input type="range" min="1000000" max="50000000" step="500000" value="10000000" id="slider-gmv" oninput="updateLiveRoiCalculator()" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-600">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#063b22] text-[#10b981] border border-[#0e5c36]">HEALTHY</span>
               </div>
-
-              <div>
-                <div class="flex justify-between text-xs font-semibold text-slate-300 mb-1">
-                  <span>Estimated Payment Failure Rate:</span>
-                  <span class="text-amber-400 mono font-bold" id="slider-fail-val">12.5%</span>
-                </div>
-                <input type="range" min="5.0" max="25.0" step="0.5" value="12.5" id="slider-fail" oninput="updateLiveRoiCalculator()" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-amber-500">
+              <div class="grid grid-cols-2 gap-2 text-[11px] mono pt-1 border-t border-[#142442]/60">
+                <div><span class="text-slate-400">SR:</span> <span class="text-emerald-400 font-bold">98.4%</span></div>
+                <div><span class="text-slate-400">Latency:</span> <span class="text-sky-300">145ms</span></div>
               </div>
             </div>
 
-            <!-- Projections Output Grid -->
-            <div class="grid grid-cols-2 gap-3">
-              <div class="p-3 bg-[#081224] rounded-xl border border-[#142442]">
-                <div class="text-[11px] text-slate-400 font-medium">Monthly Recovered GMV</div>
-                <div class="text-xl font-bold text-emerald-400 mono mt-1" id="roi-out-monthly">₹5,28,000</div>
-                <div class="text-[10px] text-slate-400 mt-0.5">Based on 42.24% Recovery</div>
+            <div class="p-3.5 rounded-xl bg-[#081224] border border-amber-900/40 space-y-2">
+              <div class="flex justify-between items-start">
+                <div>
+                  <div class="text-xs font-bold text-white">SBI Switch (U30)</div>
+                  <div class="text-[10px] text-slate-400 mono">Switch ID: SBI_INB_04</div>
+                </div>
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#25131d] text-amber-400 border border-amber-900/60">DEGRADED</span>
               </div>
-              <div class="p-3 bg-[#081224] rounded-xl border border-[#142442]">
-                <div class="text-[11px] text-slate-400 font-medium">Annualized Run-Rate</div>
-                <div class="text-xl font-bold text-blue-400 mono mt-1" id="roi-out-annual">₹63,36,000</div>
-                <div class="text-[10px] text-slate-400 mt-0.5">+5.28% Net Top-Line Growth</div>
+              <div class="grid grid-cols-2 gap-2 text-[11px] mono pt-1 border-t border-[#142442]/60">
+                <div><span class="text-slate-400">SR:</span> <span class="text-amber-400 font-bold">78.2%</span></div>
+                <div><span class="text-slate-400">Latency:</span> <span class="text-amber-300">890ms</span></div>
               </div>
-              <div class="p-3 bg-[#081224] rounded-xl border border-[#142442]">
-                <div class="text-[11px] text-slate-400 font-medium">Retained Customers</div>
-                <div class="text-xl font-bold text-purple-400 mono mt-1" id="roi-out-users">385 / mo</div>
-                <div class="text-[10px] text-slate-400 mt-0.5">Prevented Churn</div>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-[#081224] border border-[#142442] space-y-2">
+              <div class="flex justify-between items-start">
+                <div>
+                  <div class="text-xs font-bold text-white">ICICI Bank Rail</div>
+                  <div class="text-[10px] text-slate-400 mono">Switch ID: ICIC_NODE_02</div>
+                </div>
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#063b22] text-[#10b981] border border-[#0e5c36]">HEALTHY</span>
               </div>
-              <div class="p-3 bg-[#081224] rounded-xl border border-[#142442]">
-                <div class="text-[11px] text-slate-400 font-medium">Cloud AI Token Cost</div>
-                <div class="text-xl font-bold text-emerald-400 mono mt-1">₹0.00 / mo</div>
-                <div class="text-[10px] text-slate-400 mt-0.5">₹15,000+ API Bills Saved</div>
+              <div class="grid grid-cols-2 gap-2 text-[11px] mono pt-1 border-t border-[#142442]/60">
+                <div><span class="text-slate-400">SR:</span> <span class="text-emerald-400 font-bold">99.1%</span></div>
+                <div><span class="text-slate-400">Latency:</span> <span class="text-sky-300">110ms</span></div>
               </div>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-[#081224] border border-[#142442] space-y-2">
+              <div class="flex justify-between items-start">
+                <div>
+                  <div class="text-xs font-bold text-white">Axis Bank Mandates</div>
+                  <div class="text-[10px] text-slate-400 mono">Switch ID: UTIB_MANDATE_01</div>
+                </div>
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#063b22] text-[#10b981] border border-[#0e5c36]">HEALTHY</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 text-[11px] mono pt-1 border-t border-[#142442]/60">
+                <div><span class="text-slate-400">SR:</span> <span class="text-emerald-400 font-bold">97.6%</span></div>
+                <div><span class="text-slate-400">Latency:</span> <span class="text-sky-300">190ms</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SRE Quick Actions & Circuit Breakers -->
+          <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-[#142442] text-xs">
+            <div class="flex items-center gap-2 text-slate-400 mono">
+              <span>Circuit Breaker Status:</span>
+              <span class="text-emerald-400 font-bold">CLOSED (Passing All Healthy Traffic)</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="simulateBankDegradation('SBI')" class="px-3 py-1.5 bg-[#1e1217] hover:bg-[#2c1722] border border-amber-900/50 text-amber-300 rounded-lg mono transition">
+                ⚡ Toggle SBI Degradation
+              </button>
+              <button onclick="switchNavTab('npci_switch')" class="px-3 py-1.5 bg-[#08284d] hover:bg-[#0c3a6e] text-sky-300 rounded-lg mono font-semibold transition flex items-center gap-1.5">
+                <span>View Full Switch Radar</span>
+                <span>→</span>
+              </button>
             </div>
           </div>
         </div>
@@ -1154,9 +1240,363 @@
       </div>
 
       <!-- ========================================================================= -->
-      <!-- VIEW: LIVE LOGS STREAM -->
+      <!-- VIEW: NPCI SWITCH TELEMETRY RADAR (PHASE 1 & 8) -->
       <!-- ========================================================================= -->
-      <div id="view-logs" class="hidden space-y-4">
+      <div id="view-npci_switch" class="hidden space-y-5">
+        <div class="p-4 rounded-xl bg-[#0f172a] border border-[#1e293b] flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+          <div>
+            <h1 class="text-base font-bold text-white flex items-center gap-2">
+              <svg class="w-5 h-5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              </svg>
+              <span>NPCI UPI Switch & Issuing Bank Live Telemetry Control Plane</span>
+            </h1>
+            <p class="text-xs text-slate-400 mt-0.5">Sub-second telemetry ingestion dynamically shifting Weibull hazard curves and tripping local circuit breakers</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="px-2.5 py-1 rounded-full text-xs font-bold text-emerald-400 bg-emerald-950/40 border border-emerald-800/60 mono flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+              <span>NPCI Switch: REALTIME</span>
+            </span>
+            <button onclick="refreshFullNPCISwitchView()" class="h-8 px-3 rounded-lg bg-[#08284d] hover:bg-[#0c3a6e] text-sky-300 text-xs font-semibold mono transition">
+              ↻ Refresh Telemetry
+            </button>
+          </div>
+        </div>
+
+        <!-- 7-Bank Issuing Switch Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id="full-npci-switch-cards">
+          <!-- Dynamically populated or rendered -->
+        </div>
+
+        <!-- Interactive Switch Simulator & Circuit Breaker Controller -->
+        <div class="custom-card p-5 space-y-4">
+          <div class="flex justify-between items-center pb-3 border-b border-[#142442]">
+            <div>
+              <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                <span>🎛️ NPCI Switch Telemetry Simulator & SRE Injection Sandbox</span>
+              </h3>
+              <p class="text-xs text-slate-400 mt-0.5">Test dynamic Weibull retry adaptation by injecting simulated bank degradation or outage</p>
+            </div>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#063b22] text-[#10b981] border border-[#0e5c36] mono">Sandbox Active</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
+            <div>
+              <label class="text-slate-400 block mb-1">Target Bank Switch:</label>
+              <select id="npci-sim-bank" class="w-full bg-[#081224] border border-[#142442] text-white rounded-lg p-2 mono outline-none">
+                <option value="HDFC">HDFC Bank</option>
+                <option value="SBI" selected>SBI (State Bank of India)</option>
+                <option value="ICICI">ICICI Bank</option>
+                <option value="AXIS">Axis Bank</option>
+                <option value="KOTAK">Kotak Mahindra Bank</option>
+                <option value="PNB">Punjab National Bank</option>
+                <option value="YESB">Yes Bank</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="text-slate-400 block mb-1">Simulated Status:</label>
+              <select id="npci-sim-status" class="w-full bg-[#081224] border border-[#142442] text-white rounded-lg p-2 mono outline-none">
+                <option value="HEALTHY">HEALTHY (98%+ SR, <200ms)</option>
+                <option value="DEGRADED" selected>DEGRADED (70-85% SR, >800ms)</option>
+                <option value="OUTAGE">OUTAGE (<50% SR, Circuit Tripped)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="text-slate-400 block mb-1">Simulated Success Rate (%):</label>
+              <input type="number" id="npci-sim-sr" value="78.0" min="10" max="100" step="1" class="w-full bg-[#081224] border border-[#142442] text-white rounded-lg p-2 mono outline-none">
+            </div>
+
+            <div class="flex items-end">
+              <button onclick="injectSimulatedNPCIStatus()" class="w-full h-9 bg-[#0c55ea] hover:bg-[#0940b5] text-white font-semibold rounded-lg text-xs mono transition flex items-center justify-center gap-1.5 shadow-md">
+                <span>⚡ Inject Switch Telemetry</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="p-3 bg-[#081224] rounded-lg border border-[#142442] text-xs text-slate-300 mono" id="npci-sim-feedback">
+            [READY] Select a bank switch above to simulate real-time degradation signals and observe Weibull hazard adaptation.
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================================================================= -->
+      <!-- VIEW: ENTERPRISE BULK BATCH CSV INGESTION (PHASE 2 & 10) -->
+      <!-- ========================================================================= -->
+      <div id="view-bulk_recovery" class="hidden space-y-5">
+        <div class="p-4 rounded-xl bg-[#0f172a] border border-[#1e293b] flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+          <div>
+            <h1 class="text-base font-bold text-white flex items-center gap-2">
+              <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+              </svg>
+              <span>Enterprise Bulk CSV Ingestion & Batch Dispute Engine</span>
+            </h1>
+            <p class="text-xs text-slate-400 mt-0.5">High-throughput batch processor diagnosing, optimizing, and scheduling hundreds of failed payments simultaneously</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="generateAndLoadSampleCsv()" class="h-8 px-3 rounded-lg bg-[#08284d] hover:bg-[#0c3a6e] text-sky-300 text-xs font-semibold mono transition flex items-center gap-1.5">
+              <span>📄 Load Sample 25-Case CSV</span>
+            </button>
+            <button onclick="exportBatchResolutionCsv()" class="h-8 px-3 rounded-lg bg-[#0b2518] hover:bg-[#0e3522] text-[#10b981] border border-[#166534] text-xs font-bold mono transition flex items-center gap-1.5">
+              <span>⬇ Export Resolution CSV</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Upload Container / Dropzone -->
+        <div class="custom-card p-6 border-dashed border-2 border-[#1e3a6a] hover:border-sky-500 rounded-2xl text-center space-y-3 transition-colors cursor-pointer" onclick="document.getElementById('bulk-csv-input').click()">
+          <input type="file" id="bulk-csv-input" accept=".csv" class="hidden" onchange="handleBulkCsvFileSelected(event)">
+          <div class="w-12 h-12 rounded-full bg-[#08284d] text-sky-400 flex items-center justify-center mx-auto shadow-inner">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+          </div>
+          <div>
+            <div class="text-sm font-bold text-white">Click or Drag & Drop Enterprise Payment Failure CSV</div>
+            <div class="text-xs text-slate-400 mt-1">Accepts UTF-8 CSV with columns: <span class="mono text-sky-300">payment_id, amount, customer_phone, error_code, bank, customer_name</span></div>
+          </div>
+        </div>
+
+        <!-- Batch Execution Summary Metrics (Hidden until uploaded) -->
+        <div id="bulk-summary-metrics" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3.5">
+          <div class="custom-card p-3.5">
+            <div class="text-xs text-slate-400 font-medium">Batch Size</div>
+            <div class="text-2xl font-bold text-white mono mt-1" id="bulk-kpi-total">25</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">Transactions Ingested</div>
+          </div>
+          <div class="custom-card p-3.5">
+            <div class="text-xs text-slate-400 font-medium">At-Risk GMV</div>
+            <div class="text-2xl font-bold text-amber-400 mono mt-1" id="bulk-kpi-at-risk">₹1,84,500</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">Total Batch Value</div>
+          </div>
+          <div class="custom-card p-3.5">
+            <div class="text-xs text-slate-400 font-medium">Recoverable GMV</div>
+            <div class="text-2xl font-bold text-emerald-400 mono mt-1" id="bulk-kpi-recovered">₹1,42,800</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">77.4% Expected Yield</div>
+          </div>
+          <div class="custom-card p-3.5">
+            <div class="text-xs text-slate-400 font-medium">Delayed Retries</div>
+            <div class="text-2xl font-bold text-sky-400 mono mt-1" id="bulk-kpi-delayed">16</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">Poisson/Weibull Window</div>
+          </div>
+          <div class="custom-card p-3.5">
+            <div class="text-xs text-slate-400 font-medium">Direct Links / 2FA</div>
+            <div class="text-2xl font-bold text-purple-400 mono mt-1" id="bulk-kpi-links">7</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">WhatsApp / UPI Intent</div>
+          </div>
+          <div class="custom-card p-3.5">
+            <div class="text-xs text-slate-400 font-medium">Processing Time</div>
+            <div class="text-2xl font-bold text-emerald-400 mono mt-1" id="bulk-kpi-latency">4.2ms</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">Sub-ms Vector Engine</div>
+          </div>
+        </div>
+
+        <!-- Batch Resolution Table -->
+        <div class="custom-card p-5 space-y-3">
+          <div class="flex justify-between items-center">
+            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+              <span>📋 Batch Payment Diagnostics & Action Plan</span>
+            </h3>
+            <span class="text-xs mono text-slate-400" id="bulk-table-count">Showing 25 transactions</span>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300 mono">
+              <thead class="bg-[#050c1b] text-slate-400 uppercase text-[10px] border-y border-[#142442]">
+                <tr>
+                  <th class="p-2.5">Payment ID</th>
+                  <th class="p-2.5">Amount (INR)</th>
+                  <th class="p-2.5">Bank Rail</th>
+                  <th class="p-2.5">Diagnostic Class</th>
+                  <th class="p-2.5">Optimal Strategy</th>
+                  <th class="p-2.5">Recommended Action</th>
+                  <th class="p-2.5">Scheduled Time</th>
+                  <th class="p-2.5">Confidence</th>
+                  <th class="p-2.5">Policy</th>
+                </tr>
+              </thead>
+              <tbody id="bulk-table-body" class="divide-y divide-[#142442]">
+                <!-- Batch items rendered here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================================================================= -->
+      <!-- VIEW: CARD NETWORK TOKEN LIFECYCLE (PHASE 1 & 4) -->
+      <!-- ========================================================================= -->
+      <div id="view-card_tokens" class="hidden space-y-5">
+        <div class="p-4 rounded-xl bg-[#0f172a] border border-[#1e293b] flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+          <div>
+            <h1 class="text-base font-bold text-white flex items-center gap-2">
+              <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+              </svg>
+              <span>Card Network Token Lifecycle & Cryptogram Revocation Manager</span>
+            </h1>
+            <p class="text-xs text-slate-400 mt-0.5">RBI-mandated CoFT token monitoring covering Visa VTS, Mastercard MDES, and RuPay Tokenization</p>
+          </div>
+          <span class="px-2.5 py-1 rounded-full text-xs font-bold text-amber-400 bg-amber-950/40 border border-amber-800/60 mono">
+            RBI CoFT Compliant
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+          <!-- Token Inspector Form -->
+          <div class="custom-card p-5 space-y-4">
+            <h3 class="text-sm font-bold text-white">🔍 Token Status Inspector</h3>
+            <div class="space-y-3 text-xs">
+              <div>
+                <label class="text-slate-400 block mb-1">Token ID:</label>
+                <input type="text" id="token-insp-id" value="tok_visa_vts_882910" class="w-full bg-[#081224] border border-[#142442] text-white rounded-lg p-2 mono outline-none">
+              </div>
+              <div>
+                <label class="text-slate-400 block mb-1">Card Network:</label>
+                <select id="token-insp-net" class="w-full bg-[#081224] border border-[#142442] text-white rounded-lg p-2 mono outline-none">
+                  <option value="VISA">Visa (VTS - Visa Token Service)</option>
+                  <option value="MASTERCARD">Mastercard (MDES)</option>
+                  <option value="RUPAY">RuPay Tokenization</option>
+                </select>
+              </div>
+              <div>
+                <label class="text-slate-400 block mb-1">Simulated Network State:</label>
+                <select id="token-insp-state" class="w-full bg-[#081224] border border-[#142442] text-white rounded-lg p-2 mono outline-none">
+                  <option value="ACTIVE">ACTIVE (Healthy Cryptogram)</option>
+                  <option value="CRYPTOGRAM_EXPIRED" selected>CRYPTOGRAM_EXPIRED (>24h)</option>
+                  <option value="SUSPENDED">SUSPENDED (Card Blocked by Bank)</option>
+                  <option value="REVOKED">REVOKED (Card Replaced / Lost)</option>
+                  <option value="DELETED">DELETED (Customer Removed Consent)</option>
+                </select>
+              </div>
+              <button onclick="inspectCardTokenAction()" class="w-full py-2.5 bg-[#0c55ea] hover:bg-[#0940b5] text-white font-semibold rounded-lg mono transition flex items-center justify-center gap-1.5 shadow-md">
+                <span>⚡ Inspect & Run Remediation</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Token Lifecycle State Machine & Remediation Output -->
+          <div class="custom-card p-5 space-y-4 lg:col-span-2">
+            <h3 class="text-sm font-bold text-white">🔄 Deterministic Remediation Decision</h3>
+            <div class="p-4 bg-[#081224] rounded-xl border border-[#142442] space-y-3" id="token-remediation-box">
+              <div class="flex justify-between items-center pb-2 border-b border-[#142442]">
+                <span class="text-xs text-slate-400 font-medium">Remediation Action:</span>
+                <span class="px-2.5 py-0.5 rounded text-xs font-bold bg-[#25131d] text-amber-400 border border-amber-900/60 mono" id="token-res-action">
+                  AUTOMATIC_TOKEN_REPROVISION
+                </span>
+              </div>
+              <div class="grid grid-cols-2 gap-3 text-xs mono">
+                <div>
+                  <span class="text-slate-400">Can Auto-Retry:</span>
+                  <span class="text-emerald-400 font-bold ml-1" id="token-res-retry">YES (Post-Reprovision)</span>
+                </div>
+                <div>
+                  <span class="text-slate-400">Step-Up 2FA Required:</span>
+                  <span class="text-amber-300 font-bold ml-1" id="token-res-2fa">NO</span>
+                </div>
+                <div>
+                  <span class="text-slate-400">Customer Outreach:</span>
+                  <span class="text-slate-200 ml-1" id="token-res-outreach">DISPATCH_TOKEN_UPDATE_LINK</span>
+                </div>
+                <div>
+                  <span class="text-slate-400">Next Action:</span>
+                  <span class="text-sky-300 ml-1" id="token-res-next">Acquire New Dynamic CVV</span>
+                </div>
+              </div>
+              <div class="text-[11px] text-slate-400 pt-2 border-t border-[#142442]" id="token-res-desc">
+                The stored token cryptogram has expired past the 24-hour network validity window. RazorRevive-OS automatically calls Visa VTS / Mastercard MDES API to reprovision a fresh cryptogram without disrupting checkout conversion.
+              </div>
+            </div>
+
+            <!-- Network Lifecycle Reference Matrix -->
+            <div class="grid grid-cols-3 gap-2.5 text-[11px] mono">
+              <div class="p-2.5 rounded-lg bg-[#050c1b] border border-[#142442]">
+                <div class="text-slate-400 font-semibold">Visa VTS</div>
+                <div class="text-emerald-400 font-bold mt-0.5">Auto-Reprovision</div>
+                <div class="text-[9px] text-slate-400">Dynamic CVV fetch</div>
+              </div>
+              <div class="p-2.5 rounded-lg bg-[#050c1b] border border-[#142442]">
+                <div class="text-slate-400 font-semibold">Mastercard MDES</div>
+                <div class="text-emerald-400 font-bold mt-0.5">PAR Mapping</div>
+                <div class="text-[9px] text-slate-400">Account range routing</div>
+              </div>
+              <div class="p-2.5 rounded-lg bg-[#050c1b] border border-[#142442]">
+                <div class="text-slate-400 font-semibold">RuPay Token</div>
+                <div class="text-sky-400 font-bold mt-0.5">Fallback UPI</div>
+                <div class="text-[9px] text-slate-400">1-click intent shift</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================================================================= -->
+      <!-- VIEW: ENTERPRISE FINANCIAL YIELD & ROI ANALYTICS (PHASE 2 & 10) -->
+      <!-- ========================================================================= -->
+      <div id="view-financial_yield" class="hidden space-y-5">
+        <div class="p-4 rounded-xl bg-[#0f172a] border border-[#1e293b] flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+          <div>
+            <h1 class="text-base font-bold text-white flex items-center gap-2">
+              <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <span>Enterprise Financial Yield & GMV Recovery Modeling</span>
+            </h1>
+            <p class="text-xs text-slate-400 mt-0.5">Mathematical projection model calibrated on 100-case empirical test suite and local zero-cost AI architecture</p>
+          </div>
+          <span class="px-3 py-1 rounded-full text-xs font-bold text-emerald-400 bg-emerald-950/40 border border-emerald-800/60 mono">
+            100% Local AI (₹0 Cloud API Bills)
+          </span>
+        </div>
+
+        <div class="custom-card p-6 space-y-6">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Sliders -->
+            <div class="space-y-4 bg-[#081224] p-5 rounded-xl border border-[#142442]">
+              <div>
+                <div class="flex justify-between text-xs font-semibold text-slate-300 mb-1.5">
+                  <span>Monthly Processed GMV:</span>
+                  <span class="text-blue-400 mono font-bold text-sm" id="slider-gmv-val">₹1,00,00,000 (1 Cr)</span>
+                </div>
+                <input type="range" min="1000000" max="50000000" step="500000" value="10000000" id="slider-gmv" oninput="updateLiveRoiCalculator()" class="w-full h-2.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-600">
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs font-semibold text-slate-300 mb-1.5">
+                  <span>Estimated Payment Failure Rate:</span>
+                  <span class="text-amber-400 mono font-bold text-sm" id="slider-fail-val">12.5%</span>
+                </div>
+                <input type="range" min="5.0" max="25.0" step="0.5" value="12.5" id="slider-fail" oninput="updateLiveRoiCalculator()" class="w-full h-2.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-amber-500">
+              </div>
+            </div>
+
+            <!-- Projections Output Grid -->
+            <div class="grid grid-cols-2 gap-3.5">
+              <div class="p-4 bg-[#081224] rounded-xl border border-[#142442]">
+                <div class="text-xs text-slate-400 font-medium">Monthly Recovered GMV</div>
+                <div class="text-2xl font-bold text-emerald-400 mono mt-1" id="roi-out-monthly">₹5,28,000</div>
+                <div class="text-[10px] text-slate-400 mt-0.5">Calibrated 42.24% Net Rate</div>
+              </div>
+              <div class="p-4 bg-[#081224] rounded-xl border border-[#142442]">
+                <div class="text-xs text-slate-400 font-medium">Annualized Run-Rate</div>
+                <div class="text-2xl font-bold text-blue-400 mono mt-1" id="roi-out-annual">₹63,36,000</div>
+                <div class="text-[10px] text-slate-400 mt-0.5">+5.28% Net Top-Line Growth</div>
+              </div>
+              <div class="p-4 bg-[#081224] rounded-xl border border-[#142442]">
+                <div class="text-xs text-slate-400 font-medium">Retained Customers</div>
+                <div class="text-2xl font-bold text-purple-400 mono mt-1" id="roi-out-users">385 / mo</div>
+                <div class="text-[10px] text-slate-400 mt-0.5">Prevented Drop-Offs</div>
+              </div>
+              <div class="p-4 bg-[#081224] rounded-xl border border-[#142442]">
+                <div class="text-xs text-slate-400 font-medium">Cloud AI Token Cost</div>
+                <div class="text-2xl font-bold text-emerald-400 mono mt-1">₹0.00 / mo</div>
+                <div class="text-[10px] text-slate-400 mt-0.5">₹15,000+ API Cost Saved</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
         <div class="custom-card p-5 space-y-4">
           <div class="flex justify-between items-center pb-3 border-b border-[#142442]">
             <div>
@@ -1855,7 +2295,8 @@
       }
 
       const views = [
-        'overview', 'fast_loop', 'deep_loop', 'red_team', 'ptp_calendar',
+        'overview', 'fast_loop', 'npci_switch', 'bulk_recovery', 'card_tokens',
+        'deep_loop', 'financial_yield', 'red_team', 'ptp_calendar',
         'audit_ledger', 'benchmark', 'policy_engine', 'analytics',
         'configuration', 'logs', 'alerts', 'docs'
       ];
@@ -1874,7 +2315,11 @@
       if (tabName === 'ptp_calendar') loadPTPRecords();
       if (tabName === 'logs') loadLiveLogs();
       if (tabName === 'audit_ledger' || tabName === 'overview') refreshAuditLedger();
+      if (tabName === 'overview' || tabName === 'npci_switch') refreshFullNPCISwitchView();
       if (tabName === 'analytics') renderWeibullCurve();
+      if (tabName === 'bulk_recovery' && !window.latestBatchData) generateAndLoadSampleCsv();
+      if (tabName === 'card_tokens') inspectCardTokenAction();
+      if (tabName === 'financial_yield') updateLiveRoiCalculator();
     }
 
     // Universal Resilient API Client with Multi-Port Discovery & Hermetic Offline Fallbacks
@@ -1995,7 +2440,324 @@
         };
       }
 
+      if (url.includes("/api/v1/telemetry/npci-switch")) {
+        return {
+          overall_status: "HEALTHY",
+          active_switches: 7,
+          timestamp: new Date().toISOString(),
+          switches: {
+            "HDFC": { bank_code: "HDFC", bank_name: "HDFC Bank", status: "HEALTHY", success_rate_pct: 98.4, average_latency_ms: 145.0, circuit_breaker_tripped: false },
+            "SBI": { bank_code: "SBI", bank_name: "State Bank of India", status: "DEGRADED", success_rate_pct: 78.2, average_latency_ms: 890.0, circuit_breaker_tripped: false },
+            "ICICI": { bank_code: "ICICI", bank_name: "ICICI Bank", status: "HEALTHY", success_rate_pct: 99.1, average_latency_ms: 110.0, circuit_breaker_tripped: false },
+            "AXIS": { bank_code: "AXIS", bank_name: "Axis Bank", status: "HEALTHY", success_rate_pct: 97.6, average_latency_ms: 190.0, circuit_breaker_tripped: false },
+            "KOTAK": { bank_code: "KOTAK", bank_name: "Kotak Mahindra Bank", status: "HEALTHY", success_rate_pct: 98.0, average_latency_ms: 160.0, circuit_breaker_tripped: false },
+            "PNB": { bank_code: "PNB", bank_name: "Punjab National Bank", status: "HEALTHY", success_rate_pct: 96.5, average_latency_ms: 220.0, circuit_breaker_tripped: false },
+            "YESB": { bank_code: "YESB", bank_name: "Yes Bank", status: "HEALTHY", success_rate_pct: 98.8, average_latency_ms: 130.0, circuit_breaker_tripped: false }
+          }
+        };
+      }
+
+      if (url.includes("/api/v1/recovery/card-token/inspect")) {
+        const state = body?.state || "CRYPTOGRAM_EXPIRED";
+        const net = body?.network || "VISA";
+        return {
+          token_id: body?.token_id || "tok_visa_vts_882910",
+          network: net,
+          state: state,
+          can_auto_retry: state === "CRYPTOGRAM_EXPIRED",
+          step_up_2fa_required: state === "SUSPENDED" || state === "REVOKED",
+          recommended_remediation: state === "CRYPTOGRAM_EXPIRED" ? "AUTOMATIC_TOKEN_REPROVISION" : (state === "SUSPENDED" ? "STEP_UP_2FA_CONSENT" : "FALLBACK_UPI_INTENT"),
+          remediation_description: state === "CRYPTOGRAM_EXPIRED" 
+            ? "Stored token cryptogram expired past 24h validity. Auto-reprovisioned fresh cryptogram via Visa VTS."
+            : "Card token invalid. Initiated fallback 1-click UPI intent recovery.",
+          customer_outreach_action: state === "CRYPTOGRAM_EXPIRED" ? "DISPATCH_TOKEN_UPDATE_LINK" : "TRIGGER_WHATSAPP_RECOVERY"
+        };
+      }
+
       return { success: true, message: "Simulated response" };
+    }
+
+    // =========================================================================
+    // NPCI SWITCH TELEMETRY UI HANDLERS (PHASE 1 & 8)
+    // =========================================================================
+    async function refreshFullNPCISwitchView() {
+      try {
+        const data = await safeApiCall("/api/v1/telemetry/npci-switch");
+        const switches = data.switches || {};
+        
+        // Render Overview Mini Grid
+        const overviewGrid = document.getElementById("overview-npci-grid");
+        if (overviewGrid) {
+          overviewGrid.innerHTML = Object.values(switches).slice(0, 4).map(s => renderBankCardHtml(s)).join("");
+        }
+
+        // Render Full NPCI Grid
+        const fullGrid = document.getElementById("full-npci-switch-cards");
+        if (fullGrid) {
+          fullGrid.innerHTML = Object.values(switches).map(s => renderBankCardHtml(s)).join("");
+        }
+      } catch (err) {
+        console.error("NPCI Telemetry refresh error", err);
+      }
+    }
+
+    function renderBankCardHtml(s) {
+      const isDegraded = s.status === "DEGRADED";
+      const isOutage = s.status === "OUTAGE";
+      const badgeColor = isOutage 
+        ? "bg-[#3f0f13] text-rose-400 border-rose-900/60" 
+        : (isDegraded ? "bg-[#25131d] text-amber-400 border-amber-900/60" : "bg-[#063b22] text-[#10b981] border-[#0e5c36]");
+      const cardBorder = isOutage ? "border-rose-900/50" : (isDegraded ? "border-amber-900/40" : "border-[#142442]");
+
+      return `
+        <div class="p-3.5 rounded-xl bg-[#081224] border ${cardBorder} space-y-2 transition-all hover:scale-[1.01]">
+          <div class="flex justify-between items-start">
+            <div>
+              <div class="text-xs font-bold text-white">${s.bank_name || s.bank_code}</div>
+              <div class="text-[10px] text-slate-400 mono">Code: ${s.bank_code}</div>
+            </div>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold ${badgeColor} border mono">${s.status}</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2 text-[11px] mono pt-1 border-t border-[#142442]/60">
+            <div><span class="text-slate-400">SR:</span> <span class="${isDegraded || isOutage ? 'text-amber-400' : 'text-emerald-400'} font-bold">${s.success_rate_pct.toFixed(1)}%</span></div>
+            <div><span class="text-slate-400">Latency:</span> <span class="text-sky-300">${Math.round(s.average_latency_ms)}ms</span></div>
+          </div>
+          <div class="text-[10px] text-slate-400 mono flex justify-between pt-0.5">
+            <span>Circuit Breaker:</span>
+            <span class="${s.circuit_breaker_tripped ? 'text-rose-400 font-bold' : 'text-emerald-400'}">${s.circuit_breaker_tripped ? 'TRIPPED' : 'CLOSED'}</span>
+          </div>
+        </div>
+      `;
+    }
+
+    async function refreshNPCITelemetryGrid() {
+      await refreshFullNPCISwitchView();
+    }
+
+    async function simulateBankDegradation(bankCode) {
+      try {
+        const feedback = document.getElementById("npci-sim-feedback");
+        const currentData = await safeApiCall("/api/v1/telemetry/npci-switch");
+        const bank = currentData?.switches?.[bankCode];
+        const newStatus = (bank && bank.status === "DEGRADED") ? "HEALTHY" : "DEGRADED";
+        const newSr = newStatus === "HEALTHY" ? 98.5 : 74.0;
+        const newLat = newStatus === "HEALTHY" ? 130.0 : 920.0;
+
+        await safeApiCall("/api/v1/telemetry/npci-switch/update", "POST", {
+          bank_code: bankCode,
+          status: newStatus,
+          success_rate_pct: newSr,
+          average_latency_ms: newLat
+        });
+
+        if (feedback) {
+          feedback.innerHTML = `[${new Date().toLocaleTimeString()}] <span class="text-emerald-400 font-bold">✓ Telemetry Updated:</span> ${bankCode} switch updated to <strong>${newStatus}</strong> (SR: ${newSr}%, Latency: ${newLat}ms). Dynamic Weibull peak shifted.`;
+        }
+        await refreshFullNPCISwitchView();
+        showToast(`⚡ ${bankCode} switch toggled to ${newStatus}`, "success");
+      } catch (err) {
+        showToast("Error updating switch: " + err.message, "error");
+      }
+    }
+
+    async function injectSimulatedNPCIStatus() {
+      const bank = document.getElementById("npci-sim-bank")?.value || "SBI";
+      const status = document.getElementById("npci-sim-status")?.value || "DEGRADED";
+      const sr = parseFloat(document.getElementById("npci-sim-sr")?.value || 78.0);
+      const lat = status === "HEALTHY" ? 140.0 : (status === "DEGRADED" ? 850.0 : 3500.0);
+
+      const feedback = document.getElementById("npci-sim-feedback");
+      if (feedback) {
+        feedback.innerHTML = `[INJECTING] Sending live telemetry payload for ${bank}...`;
+      }
+
+      try {
+        const res = await safeApiCall("/api/v1/telemetry/npci-switch/update", "POST", {
+          bank_code: bank,
+          status: status,
+          success_rate_pct: sr,
+          average_latency_ms: lat
+        });
+
+        if (feedback) {
+          feedback.innerHTML = `[${new Date().toLocaleTimeString()}] <span class="text-emerald-400 font-bold">✓ INJECTED:</span> ${bank} status is now <strong>${status}</strong> (${sr}% SR, ${lat}ms). Circuit breaker: ${status === 'OUTAGE' ? 'TRIPPED' : 'CLOSED'}.`;
+        }
+        await refreshFullNPCISwitchView();
+        showToast(`⚡ ${bank} switch updated to ${status}!`, "success");
+      } catch (err) {
+        if (feedback) feedback.innerText = "Error: " + err.message;
+      }
+    }
+
+    // =========================================================================
+    // CARD NETWORK TOKEN LIFECYCLE UI HANDLERS (PHASE 1 & 4)
+    // =========================================================================
+    async function inspectCardTokenAction() {
+      const tokId = document.getElementById("token-insp-id")?.value || "tok_visa_vts_882910";
+      const net = document.getElementById("token-insp-net")?.value || "VISA";
+      const state = document.getElementById("token-insp-state")?.value || "CRYPTOGRAM_EXPIRED";
+
+      try {
+        const data = await safeApiCall("/api/v1/recovery/card-token/inspect", "POST", {
+          token_id: tokId,
+          network: net,
+          state: state
+        });
+
+        const actionEl = document.getElementById("token-res-action");
+        const retryEl = document.getElementById("token-res-retry");
+        const faEl = document.getElementById("token-res-2fa");
+        const outreachEl = document.getElementById("token-res-outreach");
+        const descEl = document.getElementById("token-res-desc");
+
+        if (actionEl) actionEl.innerText = data.recommended_remediation;
+        if (retryEl) retryEl.innerText = data.can_auto_retry ? "YES (Post-Reprovision)" : "NO";
+        if (faEl) faEl.innerText = data.step_up_2fa_required ? "YES" : "NO";
+        if (outreachEl) outreachEl.innerText = data.customer_outreach_action;
+        if (descEl) descEl.innerText = data.remediation_description;
+
+      } catch (err) {
+        console.error("Token inspection error", err);
+      }
+    }
+
+    // =========================================================================
+    // BULK BATCH CSV INGESTION UI HANDLERS (PHASE 2 & 10)
+    // =========================================================================
+    window.latestBatchData = null;
+
+    function generateAndLoadSampleCsv() {
+      const sampleRows = [
+        { payment_id: "pay_bulk_001", amount: 2499.0, customer_phone: "+919876543210", error_code: "GATEWAY_ERROR", bank: "HDFC", customer_name: "Rahul Sharma" },
+        { payment_id: "pay_bulk_002", amount: 1499.0, customer_phone: "+919876543211", error_code: "INSUFFICIENT_FUNDS", bank: "SBI", customer_name: "Priya Patel" },
+        { payment_id: "pay_bulk_003", amount: 85000.0, customer_phone: "+919876543212", error_code: "CARD_EXPIRED", bank: "ICICI", customer_name: "TechCorp India" },
+        { payment_id: "pay_bulk_004", amount: 3200.0, customer_phone: "+919876543213", error_code: "UPI_U30_DEGRADATION", bank: "SBI", customer_name: "Amit Kumar" },
+        { payment_id: "pay_bulk_005", amount: 599.0, customer_phone: "+919876543214", error_code: "TOKEN_REVOKED", bank: "AXIS", customer_name: "Sneha Reddy" },
+        { payment_id: "pay_bulk_006", amount: 12500.0, customer_phone: "+919876543215", error_code: "GATEWAY_TIMEOUT", bank: "HDFC", customer_name: "Vikram Singh" },
+        { payment_id: "pay_bulk_007", amount: 45000.0, customer_phone: "+919876543216", error_code: "INSUFFICIENT_FUNDS", bank: "KOTAK", customer_name: "Nova Logistics" },
+        { payment_id: "pay_bulk_008", amount: 1899.0, customer_phone: "+919876543217", error_code: "AUTHENTICATION_FAILED", bank: "PNB", customer_name: "Rohan Verma" },
+        { payment_id: "pay_bulk_009", amount: 999.0, customer_phone: "+919876543218", error_code: "GATEWAY_ERROR", bank: "YESB", customer_name: "Deepa Gupta" },
+        { payment_id: "pay_bulk_010", amount: 24999.0, customer_phone: "+919876543219", error_code: "CARD_TOKEN_CRYPTOGRAM_INVALID", bank: "HDFC", customer_name: "Aarav Nair" }
+      ];
+
+      processBatchJsonItems(sampleRows);
+      showToast("⚡ Loaded sample batch CSV (10 transactions)!", "success");
+    }
+
+    async function handleBulkCsvFileSelected(e) {
+      const file = e.target.files?.[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = async function(evt) {
+        const text = evt.target.result;
+        const lines = text.split(/\r?\n/).filter(l => l.trim().length > 0);
+        if (lines.length < 2) {
+          showToast("CSV must have at least 1 data row.", "error");
+          return;
+        }
+
+        const headers = lines[0].split(",").map(h => h.trim().toLowerCase());
+        const items = [];
+
+        for (let i = 1; i < lines.length; i++) {
+          const cols = lines[i].split(",").map(c => c.trim());
+          if (cols.length >= 4) {
+            items.push({
+              payment_id: cols[0] || `pay_batch_${i}`,
+              amount: parseFloat(cols[1]) || 1999.0,
+              customer_phone: cols[2] || "+919876543210",
+              error_code: cols[3] || "GATEWAY_ERROR",
+              bank: cols[4] || "HDFC",
+              customer_name: cols[5] || `Customer ${i}`
+            });
+          }
+        }
+
+        await processBatchJsonItems(items);
+        showToast(`⚡ Processed ${items.length} CSV transactions in batch!`, "success");
+      };
+      reader.readAsText(file);
+    }
+
+    async function processBatchJsonItems(items) {
+      try {
+        const res = await safeApiCall("/api/v1/recovery/batch-json", "POST", { items: items });
+        window.latestBatchData = res;
+        renderBatchResults(res);
+      } catch (err) {
+        console.error("Batch processing error", err);
+      }
+    }
+
+    function renderBatchResults(data) {
+      const totalEl = document.getElementById("bulk-kpi-total");
+      const atRiskEl = document.getElementById("bulk-kpi-at-risk");
+      const recEl = document.getElementById("bulk-kpi-recovered");
+      const delEl = document.getElementById("bulk-kpi-delayed");
+      const linksEl = document.getElementById("bulk-kpi-links");
+      const latEl = document.getElementById("bulk-kpi-latency");
+      const countEl = document.getElementById("bulk-table-count");
+
+      if (totalEl) totalEl.innerText = data.total_ingested || data.items?.length || 10;
+      if (atRiskEl) atRiskEl.innerText = `₹${(data.total_at_risk_gmv || 0).toLocaleString('en-IN')}`;
+      if (recEl) recEl.innerText = `₹${(data.expected_recovery_gmv || 0).toLocaleString('en-IN')}`;
+      if (delEl) delEl.innerText = data.delayed_retries_scheduled || 0;
+      if (linksEl) linksEl.innerText = data.direct_recovery_links_dispatched || 0;
+      if (latEl) latEl.innerText = `${(data.processing_time_ms || 2.4).toFixed(1)}ms`;
+      if (countEl) countEl.innerText = `Showing ${data.items?.length || 0} diagnosed transactions`;
+
+      const tbody = document.getElementById("bulk-table-body");
+      if (tbody && data.items) {
+        tbody.innerHTML = data.items.map(item => `
+          <tr class="hover:bg-[#081224] transition-colors">
+            <td class="p-2.5 text-white font-medium">${item.payment_id}</td>
+            <td class="p-2.5 text-emerald-400 font-bold">₹${item.amount.toLocaleString('en-IN')}</td>
+            <td class="p-2.5 text-slate-300">${item.bank || 'HDFC'}</td>
+            <td class="p-2.5 text-sky-400">${item.failure_class}</td>
+            <td class="p-2.5 text-slate-200">${item.strategy}</td>
+            <td class="p-2.5 text-slate-300">${item.action}</td>
+            <td class="p-2.5 text-purple-300">${item.scheduled_retry_at || 'Immediate (+0m)'}</td>
+            <td class="p-2.5 text-slate-300">${item.confidence.toFixed(2)}</td>
+            <td class="p-2.5"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#063b22] text-[#10b981]">${item.policy_result}</span></td>
+          </tr>
+        `).join("");
+      }
+    }
+
+    function exportBatchResolutionCsv() {
+      if (!window.latestBatchData || !window.latestBatchData.items) {
+        showToast("No batch results to export. Load sample or upload CSV first.", "error");
+        return;
+      }
+
+      const headers = ["payment_id", "amount", "bank", "failure_class", "strategy", "action", "scheduled_retry_at", "confidence", "policy_result"];
+      const csvRows = [headers.join(",")];
+
+      window.latestBatchData.items.forEach(it => {
+        csvRows.push([
+          it.payment_id,
+          it.amount,
+          it.bank || "HDFC",
+          it.failure_class,
+          it.strategy,
+          `"${it.action}"`,
+          it.scheduled_retry_at || "Immediate",
+          it.confidence,
+          it.policy_result
+        ].join(","));
+      });
+
+      const blob = new Blob([csvRows.join("\n")], { type: "text/csv" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `razorrevive_batch_resolution_${Date.now()}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast("Resolution CSV exported successfully!", "success");
     }
 
     // Web Speech API Voice Synthesizer with Audio Waveform Animation
@@ -2732,10 +3494,12 @@
 
     mountComponents();
     refreshAuditLedger();
+    refreshFullNPCISwitchView();
     renderWeibullCurve();
     initFintech3DTopology();
     updateLiveRoiCalculator();
     setInterval(refreshAuditLedger, 5000);
+    setInterval(refreshFullNPCISwitchView, 10000);
 
   </script>
 

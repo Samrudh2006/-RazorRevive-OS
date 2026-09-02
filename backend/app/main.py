@@ -6,7 +6,7 @@ import uuid
 import time
 import urllib.parse
 from typing import Dict, Any, Optional, List
-from fastapi import FastAPI, HTTPException, Header, Request, BackgroundTasks, status, Response
+from fastapi import FastAPI, HTTPException, Header, Request, BackgroundTasks, status, Response, UploadFile, File
 
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.exceptions import RequestValidationError
@@ -14,11 +14,17 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 from backend.app.config import settings
-from backend.app.schemas import ApiResponse, ApiError, DiagnosisProposal, PolicyVerdict
+from backend.app.schemas import (
+    ApiResponse, ApiError, DiagnosisProposal, PolicyVerdict,
+    NPCISwitchStatus, CardTokenLifecycleRecord, BulkRecoveryItem, BulkRecoveryBatchResponse
+)
 from backend.app.security import verify_razorpay_signature, idempotency_store, mask_pii_string
 from backend.app.audit_store import audit_store
 from backend.app.diagnostic_engine import diagnostic_engine
 from backend.app.recovery_optimizer import recovery_optimizer
+from backend.app.telemetry_npci import npci_telemetry
+from backend.app.token_lifecycle import card_token_manager
+from backend.app.bulk_processor import bulk_processor
 from backend.app.gateways import default_gateway
 from backend.app.b2b import b2b_voice_engine, ptp_store, b2b_fsm
 from backend.app.b2b.voice_agent import VoiceDialogueTurnRequest, VoiceDialogueResponse
@@ -904,4 +910,156 @@ async def generate_upi_recovery_qr(req: UpiQrRequest, request: Request):
         "trace_id": trace_id,
         "timestamp": time.time()
     }
+
+# --- Phase 1 & 8: NPCI Switch Telemetry Endpoints ---
+
+@app.get("/api/v1/telemetry/npci-switch", tags=["System & Telemetry"], summary="Fetch Live NPCI Banking Switch Telemetry")
+async def get_npci_switch_telemetry(request: Request):
+    """
+    Returns real-time health, success rates, latency, and degradation states
+    for all monitored Indian core banking switches (HDFC, SBI, ICICI, Axis, Kotak, PNB, Yes Bank).
+    """
+    trace_id = getattr(request.state, "trace_id", f"tr_{uuid.uuid4().hex[:12]}")
+    switches = npci_telemetry.get_all_switches()
+    return {
+        "success": True,
+        "data": {
+            "total_monitored_switches": len(switches),
+            "switches": [s.model_dump() for s in switches]
+        },
+        "trace_id": trace_id,
+        "timestamp": time.time()
+    }
+
+class UpdateSwitchTelemetryRequest(BaseModel):
+    bank_code: str
+    state: str = Field(default="DEGRADED", description="HEALTHY | DEGRADED | OUTAGE")
+    success_rate_pct: float = Field(default=68.5, ge=0.0, le=100.0)
+    latency_ms: float = Field(default=850.0, ge=0.0)
+    incidents: Optional[List[str]] = Field(default_factory=list)
+
+@app.post("/api/v1/telemetry/npci-switch/update", tags=["System & Telemetry"], summary="Ingest/Simulate Switch Telemetry Event")
+async def update_npci_switch_telemetry(req: UpdateSwitchTelemetryRequest, request: Request):
+    trace_id = getattr(request.state, "trace_id", f"tr_{uuid.uuid4().hex[:12]}")
+    updated = npci_telemetry.update_switch_telemetry(
+        bank_code=req.bank_code,
+        state=req.state, # type: ignore
+        success_rate_pct=req.success_rate_pct,
+        latency_ms=req.latency_ms,
+        incidents=req.incidents
+    )
+    log_system_event("WARN" if req.state != "HEALTHY" else "INFO", "NPCITelemetry", f"Switch {req.bank_code} updated to {req.state}", trace_id=trace_id)
+    return {
+        "success": True,
+        "data": updated.model_dump(),
+        "trace_id": trace_id,
+        "timestamp": time.time()
+    }
+
+# --- Phase 1 & 4: Card Network Token Lifecycle Endpoints ---
+
+class InspectTokenRequest(BaseModel):
+    token_id: str = Field(default="tok_visa_vts_8829")
+    error_code: str = Field(default="TOKEN_REVOKED")
+    card_network: str = Field(default="VISA_VTS")
+    last_four: str = Field(default="4321")
+
+@app.post("/api/v1/recovery/card-token/inspect", tags=["Fast-Loop Recovery Engine"], summary="Inspect Card Network Token Failure & Remediate")
+async def inspect_card_token_failure(req: InspectTokenRequest, request: Request):
+    trace_id = getattr(request.state, "trace_id", f"tr_{uuid.uuid4().hex[:12]}")
+    record = card_token_manager.inspect_token_error(
+        token_id=req.token_id,
+        error_code=req.error_code,
+        card_network=req.card_network, # type: ignore
+        last_four=req.last_four
+    )
+    return {
+        "success": True,
+        "data": record.model_dump(),
+        "trace_id": trace_id,
+        "timestamp": time.time()
+    }
+
+# --- Phase 2: Enterprise Bulk CSV Ingestion & Batch Dispute Resolution ---
+
+@app.post("/api/v1/recovery/batch-upload", tags=["Fast-Loop Recovery Engine"], summary="Upload & Process Bulk Failed Payment CSV Batch")
+async def upload_bulk_recovery_csv(
+    file: UploadFile = File(...),
+    merchant_id: str = "merch_enterprise_default",
+    request: Request = None
+):
+    """
+    Ingests an enterprise CSV file of failed transactions, runs sub-millisecond vector
+    diagnosis, computes dynamic Weibull recovery hazard curves, checks policy constraints,
+    and commits audit hash-chains for the entire batch.
+    """
+    trace_id = getattr(request.state, "trace_id", f"tr_{uuid.uuid4().hex[:12]}") if request else f"tr_{uuid.uuid4().hex[:12]}"
+    content_bytes = await file.read()
+    csv_str = content_bytes.decode("utf-8", errors="replace")
+    
+    items = bulk_processor.parse_csv(csv_str)
+    if not items:
+        raise HTTPException(status_code=400, detail="CSV contained no valid transaction records or invalid header formatting.")
+    
+    batch_res = bulk_processor.process_batch(items, merchant_id=merchant_id)
+    log_system_event("INFO", "BulkProcessor", f"Batch {batch_res.batch_id} processed {batch_res.total_processed} items with {batch_res.recovery_rate_pct}% recovery rate", trace_id=trace_id)
+    
+    return {
+        "success": True,
+        "data": batch_res.model_dump(),
+        "trace_id": trace_id,
+        "timestamp": time.time()
+    }
+
+class BulkJsonRequest(BaseModel):
+    merchant_id: str = Field(default="merch_enterprise_default")
+    items: List[BulkRecoveryItem]
+
+@app.post("/api/v1/recovery/batch-json", tags=["Fast-Loop Recovery Engine"], summary="Process Bulk Failed Payment JSON Array")
+async def process_bulk_recovery_json(req: BulkJsonRequest, request: Request):
+    trace_id = getattr(request.state, "trace_id", f"tr_{uuid.uuid4().hex[:12]}")
+    if not req.items:
+        raise HTTPException(status_code=400, detail="items array must not be empty.")
+    
+    batch_res = bulk_processor.process_batch(req.items, merchant_id=req.merchant_id)
+    return {
+        "success": True,
+        "data": batch_res.model_dump(),
+        "trace_id": trace_id,
+        "timestamp": time.time()
+    }
+
+# --- Phase 3 & 9: B2B Session Durability & FSM State Inspection ---
+
+@app.get("/api/v1/b2b/session/{invoice_id}/state", tags=["Deep-Loop B2B Voice & PTP"], summary="Fetch Durable B2B FSM State for Invoice")
+async def get_b2b_invoice_state(invoice_id: str, request: Request):
+    trace_id = getattr(request.state, "trace_id", f"tr_{uuid.uuid4().hex[:12]}")
+    state = b2b_fsm.get_state(invoice_id)
+    history = b2b_fsm.get_history(invoice_id)
+    return {
+        "success": True,
+        "data": {
+            "invoice_id": invoice_id,
+            "current_state": state,
+            "total_transitions": len(history),
+            "latest_transition": history[-1].model_dump() if history else None
+        },
+        "trace_id": trace_id,
+        "timestamp": time.time()
+    }
+
+@app.get("/api/v1/b2b/session/{invoice_id}/history", tags=["Deep-Loop B2B Voice & PTP"], summary="Fetch Durable B2B FSM Transition History")
+async def get_b2b_invoice_history(invoice_id: str, request: Request):
+    trace_id = getattr(request.state, "trace_id", f"tr_{uuid.uuid4().hex[:12]}")
+    history = b2b_fsm.get_history(invoice_id)
+    return {
+        "success": True,
+        "data": {
+            "invoice_id": invoice_id,
+            "history": [h.model_dump() for h in history]
+        },
+        "trace_id": trace_id,
+        "timestamp": time.time()
+    }
+
 

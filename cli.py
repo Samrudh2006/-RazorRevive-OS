@@ -77,8 +77,8 @@ def cmd_simulate_attack(args):
     print_header(f"Adversarial Attack Simulation: {args.attack.upper()}")
     
     if args.attack == "storm":
-        print("[TEST] Launching 50-thread concurrent duplicate webhook storm on pay_storm_998...")
-        key = "merchant_test:pay_storm_998"
+        print("[TEST] Launching 50-thread concurrent duplicate webhook storm...")
+        key = f"merchant_test:pay_storm_{int(time.time() * 1000)}"
         acquired = 0
         dropped = 0
         for i in range(50):

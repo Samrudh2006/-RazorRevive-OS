@@ -29,27 +29,89 @@ class B2BReceivablesStateMachine:
 
     # Strict transition table (from_state -> set of allowed to_states)
     VALID_TRANSITIONS: Dict[str, Set[str]] = {
-        "OVERDUE": {"CONTACT_PENDING", "ESCALATED", "SUPPRESSED"},
-        "CONTACT_PENDING": {"CONTACTED", "FAILED", "ESCALATED"},
-        "CONTACTED": {"DISPUTE_DETECTED", "PTP_REGISTERED", "RECOVERED", "ESCALATED"},
-        "DISPUTE_DETECTED": {"DISPUTE_REVIEW", "ESCALATED"},
-        "DISPUTE_REVIEW": {"RESOLUTION_PROPOSED", "ESCALATED", "FAILED"},
-        "RESOLUTION_PROPOSED": {"PTP_REGISTERED", "PAYMENT_PENDING", "RECOVERED", "ESCALATED"},
-        "PTP_REGISTERED": {"PAYMENT_PENDING", "RECOVERED", "ESCALATED", "FAILED"},
-        "PAYMENT_PENDING": {"RECOVERED", "FAILED", "ESCALATED"},
+        "OVERDUE": {"CONTACT_PENDING", "ESCALATED", "SUPPRESSED", "CONTACTED"},
+        "CONTACT_PENDING": {"CONTACTED", "FAILED", "ESCALATED", "DISPUTE_DETECTED"},
+        "CONTACTED": {"DISPUTE_DETECTED", "PTP_REGISTERED", "RECOVERED", "ESCALATED", "PAYMENT_PENDING"},
+        "DISPUTE_DETECTED": {"DISPUTE_REVIEW", "ESCALATED", "RESOLUTION_PROPOSED"},
+        "DISPUTE_REVIEW": {"RESOLUTION_PROPOSED", "ESCALATED", "FAILED", "DISPUTE_DETECTED"},
+        "RESOLUTION_PROPOSED": {"PTP_REGISTERED", "PAYMENT_PENDING", "RECOVERED", "ESCALATED", "DISPUTE_DETECTED", "DISPUTE_REVIEW", "CONTACTED"},
+        "PTP_REGISTERED": {"PAYMENT_PENDING", "RECOVERED", "ESCALATED", "FAILED", "DISPUTE_DETECTED"},
+        "PAYMENT_PENDING": {"RECOVERED", "FAILED", "ESCALATED", "PTP_REGISTERED"},
         "RECOVERED": {"CLOSED"},
-        "ESCALATED": {"CLOSED", "DISPUTE_REVIEW", "PTP_REGISTERED"},
+        "ESCALATED": {"CLOSED", "DISPUTE_REVIEW", "PTP_REGISTERED", "CONTACTED"},
         "FAILED": {"CONTACT_PENDING", "ESCALATED", "CLOSED"},
         "SUPPRESSED": {"CLOSED"},
         "CLOSED": set()
     }
 
-    def __init__(self):
+    def reset_state(self, invoice_id: str, state: str = "OVERDUE"):
+        self._active_states[invoice_id] = state
+        try:
+            conn = self._get_conn()
+            with conn:
+                conn.execute("DELETE FROM b2b_fsm_states WHERE invoice_id = ?", (invoice_id,))
+                conn.execute("DELETE FROM b2b_fsm_history WHERE invoice_id = ?", (invoice_id,))
+        except Exception:
+            pass
+
+    def __init__(self, db_path: Optional[str] = None):
+        self.db_path = db_path
         self._active_states: Dict[str, str] = {}
         self._transition_history: Dict[str, List[B2BStateTransition]] = {}
+        self._init_db()
+
+    def _get_conn(self):
+        from backend.app.security import get_db_connection
+        from backend.app.config import settings
+        target_path = self.db_path or settings.DATABASE_PATH
+        return get_db_connection(target_path)
+
+    def _init_db(self):
+        try:
+            conn = self._get_conn()
+            with conn:
+                conn.execute("""
+                    CREATE TABLE IF NOT EXISTS b2b_fsm_states (
+                        invoice_id TEXT PRIMARY KEY,
+                        current_state TEXT NOT NULL,
+                        updated_at REAL NOT NULL
+                    )
+                """)
+                conn.execute("""
+                    CREATE TABLE IF NOT EXISTS b2b_fsm_history (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        invoice_id TEXT NOT NULL,
+                        from_state TEXT NOT NULL,
+                        to_state TEXT NOT NULL,
+                        trigger_event TEXT NOT NULL,
+                        actor TEXT NOT NULL,
+                        timestamp REAL NOT NULL,
+                        metadata_json TEXT
+                    )
+                """)
+                conn.execute("CREATE INDEX IF NOT EXISTS idx_fsm_inv ON b2b_fsm_history (invoice_id)")
+                # Hydrate in-memory cache
+                cursor = conn.cursor()
+                cursor.execute("SELECT invoice_id, current_state FROM b2b_fsm_states")
+                for row in cursor.fetchall():
+                    self._active_states[row[0]] = row[1]
+        except Exception as e:
+            logger.warning(f"[B2B_FSM] DB init warning (using in-memory fallback): {e}")
 
     def get_state(self, invoice_id: str) -> str:
-        return self._active_states.get(invoice_id, "OVERDUE")
+        if invoice_id in self._active_states:
+            return self._active_states[invoice_id]
+        try:
+            conn = self._get_conn()
+            cursor = conn.cursor()
+            cursor.execute("SELECT current_state FROM b2b_fsm_states WHERE invoice_id = ?", (invoice_id,))
+            row = cursor.fetchone()
+            if row:
+                self._active_states[invoice_id] = row[0]
+                return row[0]
+        except Exception:
+            pass
+        return "OVERDUE"
 
     def transition(
         self,
@@ -60,7 +122,7 @@ class B2BReceivablesStateMachine:
         metadata: Optional[Dict[str, Any]] = None
     ) -> B2BStateTransition:
         """
-        Executes a validated state transition. Raises ValueError on invalid transition.
+        Executes a validated state transition with durable SQLite WAL persistence. Raises ValueError on invalid transition.
         """
         current_state = self.get_state(invoice_id)
 
@@ -73,13 +135,14 @@ class B2BReceivablesStateMachine:
             logger.error(f"[B2B_FSM_VIOLATION] {err_msg}")
             raise ValueError(err_msg)
 
+        now = time.time()
         transition_record = B2BStateTransition(
             invoice_id=invoice_id,
             from_state=current_state,
             to_state=to_state,
             trigger_event=trigger_event,
             actor=actor,
-            timestamp=time.time(),
+            timestamp=now,
             metadata=metadata or {}
         )
 
@@ -88,10 +151,52 @@ class B2BReceivablesStateMachine:
             self._transition_history[invoice_id] = []
         self._transition_history[invoice_id].append(transition_record)
 
+        # Durable SQLite persistence
+        try:
+            import json
+            conn = self._get_conn()
+            with conn:
+                conn.execute("""
+                    INSERT INTO b2b_fsm_states (invoice_id, current_state, updated_at)
+                    VALUES (?, ?, ?)
+                    ON CONFLICT(invoice_id) DO UPDATE SET current_state = excluded.current_state, updated_at = excluded.updated_at
+                """, (invoice_id, to_state, now))
+                conn.execute("""
+                    INSERT INTO b2b_fsm_history (invoice_id, from_state, to_state, trigger_event, actor, timestamp, metadata_json)
+                    VALUES (?, ?, ?, ?, ?, ?, ?)
+                """, (invoice_id, current_state, to_state, trigger_event, actor, now, json.dumps(metadata or {})))
+        except Exception as e:
+            logger.error(f"[B2B_FSM_PERSISTENCE_ERROR] Failed to persist state for {invoice_id}: {e}")
+
         logger.info(f"[B2B_FSM] Invoice {invoice_id}: {current_state} -> {to_state} via {trigger_event}")
         return transition_record
 
     def get_history(self, invoice_id: str) -> List[B2BStateTransition]:
-        return self._transition_history.get(invoice_id, [])
+        if invoice_id in self._transition_history and self._transition_history[invoice_id]:
+            return self._transition_history[invoice_id]
+        # Query from DB if available
+        try:
+            import json
+            conn = self._get_conn()
+            cursor = conn.cursor()
+            cursor.execute("""
+                SELECT invoice_id, from_state, to_state, trigger_event, actor, timestamp, metadata_json
+                FROM b2b_fsm_history WHERE invoice_id = ? ORDER BY id ASC
+            """, (invoice_id,))
+            records = []
+            for row in cursor.fetchall():
+                records.append(B2BStateTransition(
+                    invoice_id=row[0],
+                    from_state=row[1],
+                    to_state=row[2],
+                    trigger_event=row[3],
+                    actor=row[4],
+                    timestamp=row[5],
+                    metadata=json.loads(row[6]) if row[6] else {}
+                ))
+            self._transition_history[invoice_id] = records
+            return records
+        except Exception:
+            return []
 
 b2b_fsm = B2BReceivablesStateMachine()

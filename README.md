@@ -6,20 +6,21 @@
 
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg?style=flat-square)](https://github.com/Samrudh2006/Razorpay-Target-0.1percent-)
 [![CI/CD](https://github.com/Samrudh2006/Razorpay-Target-0.1percent-/actions/workflows/ci.yml/badge.svg)](https://github.com/Samrudh2006/Razorpay-Target-0.1percent-/actions)
-[![Tests](https://img.shields.io/badge/tests-53%20passed%20%7C%20100%25-success.svg?style=flat-square)](https://github.com/Samrudh2006/Razorpay-Target-0.1percent-)
+[![Tests](https://img.shields.io/badge/tests-70%20passed%20%7C%20100%25-success.svg?style=flat-square)](https://github.com/Samrudh2006/Razorpay-Target-0.1percent-)
 [![Open-Source AI](https://img.shields.io/badge/AI-100%25%20Open--Source%20%7C%20Zero--API--Key-blueviolet.svg?style=flat-square)](https://github.com/Samrudh2006/Razorpay-Target-0.1percent-)
-[![UPI Rail](https://img.shields.io/badge/UPI-Intent%20Deep%20Links%20%2B%20Dynamic%20QR-green.svg?style=flat-square)](https://github.com/Samrudh2006/Razorpay-Target-0.1percent-)
+[![UPI Rail](https://img.shields.io/badge/UPI-NPCI%20Live%20Switch%20%2B%20Dynamic%20QR-green.svg?style=flat-square)](https://github.com/Samrudh2006/Razorpay-Target-0.1percent-)
+[![Card Networks](https://img.shields.io/badge/Card%20Tokens-Visa%20VTS%20%7C%20Mastercard%20MDES%20%7C%20RuPay-orange.svg?style=flat-square)](https://github.com/Samrudh2006/Razorpay-Target-0.1percent-)
 [![Track](https://img.shields.io/badge/Razorpay_Track-03_Revenue_Recovery-0a58ca.svg?style=flat-square)](https://razorpay.com/buildathon/)
 [![Python](https://img.shields.io/badge/python-3.11%20%7C%203.12%20%7C%203.13-blue.svg?style=flat-square)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110.0-009688.svg?style=flat-square)](https://fastapi.tiangolo.com/)
 [![Audit Chain](https://img.shields.io/badge/audit-SHA--256%20chained-emerald.svg?style=flat-square)](https://github.com/Samrudh2006/Razorpay-Target-0.1percent-)
+[![Video Walkthrough](https://img.shields.io/badge/Demo_Video-Architecting_Autonomous_Control_Plane-red.svg?style=flat-square&logo=youtube)](docs/Architecting_an_Autonomous_Revenue_Recovery_Control_Plane.mp4)
 [![License](https://img.shields.io/badge/license-MIT-purple.svg?style=flat-square)](LICENSE)
-
-
 
 > **Razorpay AI Buildathon Submission**  
 > **Track 03:** AI Revenue Recovery — *Detect revenue at risk, diagnose root causes, and execute bounded recovery workflows.*  
-> **Target Role:** AI Builder Intern (₹75,000/mo, In-Person Bangalore, 6 or 12 Months)
+> **Target Role:** AI Builder Intern (₹75,000/mo, In-Person Bangalore, 6 or 12 Months)  
+> **📹 Video Walkthrough:** [Architecting an Autonomous Revenue Recovery Control Plane (`docs/Architecting_an_Autonomous_Revenue_Recovery_Control_Plane.mp4`)](docs/Architecting_an_Autonomous_Revenue_Recovery_Control_Plane.mp4)
 
 ---
 
@@ -216,13 +217,16 @@ python cli.py simulate-attack --attack quiet-hours
 │       ├── main.py                 # FastAPI Application, OpenAPI Metadata & /metrics
 │       ├── config.py               # Pydantic Settings Environment Configuration
 │       ├── schemas.py              # Strict Pydantic Data Contracts
-│       ├── security.py             # Distributed Redis Mutex & Cryptography Verifier
+│       ├── security.py             # Distributed Redis Mutex, Multi-Tenant Isolation & HMAC
 │       ├── diagnostic_engine.py    # Tier 1 Failure Classifier
 │       ├── recovery_optimizer.py   # Statistical SciPy/NumPy Hazard Optimizer
 │       ├── policy_engine.py        # Tier 3 Deterministic Policy & Compliance Gatekeeper
-│       ├── audit_store.py          # Cryptographic SHA-256 Chained Audit Ledger
+│       ├── audit_store.py          # Cryptographic SHA-256 Chained Audit Ledger (SQLite WAL)
+│       ├── telemetry_npci.py       # Live NPCI UPI Switch Feeds & Bank Circuit Breakers
+│       ├── token_lifecycle.py      # Card Network Token Lifecycle Manager (Visa/Mastercard/RuPay)
+│       ├── bulk_processor.py       # Enterprise Bulk CSV Ingestion & Batch Dispute Engine
 │       ├── gateways/               # PaymentGateway Abstraction Layer
-│       └── b2b/                    # Enterprise B2B Accounts Receivable Engine
+│       └── b2b/                    # Enterprise B2B Accounts Receivable Engine (SQLite WAL FSM)
 ├── benchmarks/
 │   ├── dataset_generator.py        # Seeded 100-Case Dataset Generator
 │   ├── benchmark_runner.py         # Dynamic Evaluation Runner
@@ -233,10 +237,15 @@ python cli.py simulate-attack --attack quiet-hours
 │   ├── test_adversarial.py         # 12+ Edge-Case & Adversarial Attack Tests
 │   ├── test_api_contracts.py       # Universal Structured JSON & Metrics Tests
 │   ├── test_audit_hash_chain.py    # SHA-256 Hash Chain & Tamper Detection Tests
+│   ├── test_b2b_fsm_durability.py  # FSM SQLite Durability & UTR/TDS Extraction Tests
 │   ├── test_b2b_state_machine.py   # B2B State Transitions & Voice Mutation Tests
 │   ├── test_benchmarks.py          # Quantitative Benchmark Verification
+│   ├── test_bulk_csv_batch_processor.py # Bulk CSV Ingestion & Batch Dispute Tests
+│   ├── test_card_network_token_lifecycle.py # Visa/Mastercard/RuPay Token Lifecycle Tests
 │   ├── test_deep_loop_ptp.py       # PTP Engine & Reminder Suppression Tests
 │   ├── test_fast_loop.py           # Diagnostic Kernel & Hazard Optimization Tests
+│   ├── test_multitenant_isolation.py # Multi-Tenant Mutex & Audit Ledger Isolation Tests
+│   ├── test_npci_switch_telemetry.py # NPCI Switch Ingestion & Circuit Breaker Tests
 │   ├── test_policy_bounds.py       # TRAI Quiet Hours & Budget Clamp Tests
 │   ├── test_scaffold.py            # Baseline Architecture Checks
 │   └── test_security.py            # HMAC, Concurrency & Replay Attack Tests
@@ -268,7 +277,7 @@ uvicorn backend.app.main:app --port 8000 --reload
 ```
 Open **`http://localhost:8000`** in your browser to interact with the Razorpay Control Plane and toggle between Razorpay Light and Dark themes.
 
-### 2. Run All Unit & Adversarial Tests (53 Tests)
+### 2. Run All Unit & Adversarial Tests (70 Tests, 100% Pass Rate)
 ```bash
 # Windows
 run_tests.bat

@@ -13,7 +13,7 @@ from backend.app.policy_engine import policy_engine
 from backend.app.gateways import default_gateway
 from benchmarks.dataset_generator import generate_held_out_benchmark_dataset
 
-def run_held_out_benchmark(dataset_path: str = "benchmarks/test_dataset_100.json") -> Dict[str, Any]:
+def run_held_out_benchmark(dataset_path: str = "benchmarks/test_dataset_100.json", verbose: bool = True) -> Dict[str, Any]:
     """
     Executes the full 100-case held-out benchmark suite through the true AI & policy engine.
     Computes honest, reproducible quantitative fintech metrics.
