@@ -867,82 +867,64 @@
       <div id="view-overview" class="space-y-5">
         
         <!-- 6 KPI CARDS HEADER -->
-        <!-- 6 TOP KPI CARDS (Clear Dataset Attribution) -->
-        <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3.5">
+        <!-- EXECUTIVE 4-HERO METRIC CARDS (Clean, Uncluttered, Distinct Attribution) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           
-          <!-- Card 1: Live Cohort Recovery Rate -->
-          <div class="custom-card p-3.5">
-            <div class="flex items-center gap-1.5 text-xs text-slate-400 font-medium">
-              <svg class="w-3.5 h-3.5 text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
-              </svg>
-              <span>Live Cohort Yield</span>
+          <!-- Card 1: Live Simulated Yield -->
+          <div class="custom-card p-4.5 rounded-2xl space-y-2">
+            <div class="flex items-center justify-between text-xs text-slate-400 font-medium">
+              <span class="font-semibold text-slate-700 dark:text-slate-300">Live Simulated Yield</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">Active Stream</span>
             </div>
-            <div class="text-2xl font-bold text-white mt-1 mono" id="kpi-net-recovery">78.39%</div>
-            <div class="text-[10px] text-emerald-400 font-medium mt-0.5">Live Demo Simulation</div>
+            <div class="text-3xl font-extrabold text-slate-900 dark:text-white mono tracking-tight" id="kpi-net-recovery">78.39%</div>
+            <div class="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1.5 pt-0.5">
+              <span class="text-emerald-600 dark:text-emerald-400 font-semibold" id="kpi-recovered-gmv">₹4,25,600</span>
+              <span>recovered of ₹5.42L</span>
+            </div>
           </div>
 
-          <!-- Card 2: Recovered GMV -->
-          <div class="custom-card p-3.5">
-            <div class="flex items-center gap-1.5 text-xs text-slate-400 font-medium">
-              <span class="text-xs font-bold text-[#38bdf8]">₹</span>
-              <span>Recovered GMV</span>
+          <!-- Card 2: 100-Case Benchmark Yield -->
+          <div class="custom-card p-4.5 rounded-2xl space-y-2">
+            <div class="flex items-center justify-between text-xs text-slate-400 font-medium">
+              <span class="font-semibold text-slate-700 dark:text-slate-300">Empirical 100 Benchmark</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-500/10 text-blue-600 dark:text-sky-400 border border-blue-500/20">Held-Out Suite</span>
             </div>
-            <div class="text-2xl font-bold text-white mt-1 mono" id="kpi-recovered-gmv">₹4,25,600</div>
-            <div class="text-[10px] text-slate-400 mt-0.5">From ₹5,42,850 Live Cohort</div>
+            <div class="text-3xl font-extrabold text-slate-900 dark:text-white mono tracking-tight">42.24%</div>
+            <div class="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1.5 pt-0.5">
+              <span class="text-blue-600 dark:text-sky-400 font-semibold">₹4,15,450</span>
+              <span>net yield (77/100 Tx)</span>
+            </div>
           </div>
 
-          <!-- Card 3: At-Risk GMV -->
-          <div class="custom-card p-3.5">
-            <div class="flex items-center gap-1.5 text-xs text-slate-400 font-medium">
-              <svg class="w-3.5 h-3.5 text-[#f59e0b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-              </svg>
-              <span>Live At-Risk GMV</span>
+          <!-- Card 3: Double-Debit Defense -->
+          <div class="custom-card p-4.5 rounded-2xl space-y-2">
+            <div class="flex items-center justify-between text-xs text-slate-400 font-medium">
+              <span class="font-semibold text-slate-700 dark:text-slate-300">Double-Debit Defense</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">100% Mutex</span>
             </div>
-            <div class="text-2xl font-bold text-white mt-1 mono" id="kpi-at-risk-gmv">₹5,42,850</div>
-            <div class="text-[10px] text-slate-400 mt-0.5">Active Sandbox Stream</div>
+            <div class="text-3xl font-extrabold text-slate-900 dark:text-white mono tracking-tight" id="kpi-idempotency">0 Violations</div>
+            <div class="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1.5 pt-0.5">
+              <span class="text-emerald-600 dark:text-emerald-400 font-semibold">100% Zero-Collision</span>
+              <span>CAS Lock</span>
+            </div>
           </div>
 
-          <!-- Card 4: Idempotency Violations -->
-          <div class="custom-card p-3.5">
-            <div class="flex items-center gap-1.5 text-xs text-slate-400 font-medium">
-              <svg class="w-3.5 h-3.5 text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-              </svg>
-              <span>Idempotency Violations</span>
+          <!-- Card 4: Mean Decision Latency -->
+          <div class="custom-card p-4.5 rounded-2xl space-y-2">
+            <div class="flex items-center justify-between text-xs text-slate-400 font-medium">
+              <span class="font-semibold text-slate-700 dark:text-slate-300">Mean Orchestration</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-500/10 text-purple-600 dark:text-purple-300 border border-purple-500/20">Fast-Path</span>
             </div>
-            <div class="text-2xl font-bold text-white mt-1 mono" id="kpi-idempotency">0</div>
-            <div class="text-[10px] text-slate-400 mt-0.5">0.23ms CAS Mutex Gate</div>
-          </div>
-
-          <!-- Card 5: TRAI Compliance -->
-          <div class="custom-card p-3.5">
-            <div class="flex items-center gap-1.5 text-xs text-slate-400 font-medium">
-              <svg class="w-3.5 h-3.5 text-[#8b5cf6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
-              </svg>
-              <span>TRAI Compliance</span>
+            <div class="text-3xl font-extrabold text-slate-900 dark:text-white mono tracking-tight">18.4ms</div>
+            <div class="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1.5 pt-0.5">
+              <span class="text-purple-600 dark:text-purple-300 font-semibold">0.23ms</span>
+              <span>in-memory policy gate</span>
             </div>
-            <div class="text-2xl font-bold text-white mt-1 mono" id="kpi-trai">100%</div>
-            <div class="text-[10px] text-slate-400 mt-0.5">0 Late-Night Messages (9PM-9AM)</div>
-          </div>
-
-          <!-- Card 6: Orchestration Latency -->
-          <div class="custom-card p-3.5">
-            <div class="flex items-center gap-1.5 text-xs text-slate-400 font-medium">
-              <svg class="w-3.5 h-3.5 text-[#38bdf8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-              </svg>
-              <span>Mean Latency</span>
-            </div>
-            <div class="text-2xl font-bold text-white mt-1 mono">18.4ms</div>
-            <div class="text-[10px] text-slate-400 mt-0.5">End-to-End Orchestration</div>
           </div>
 
         </div>
 
-        <!-- TWO MAIN SENTINELS -->
+        <!-- TWO MAIN SENTINELS (Fast-Loop B2C on Left, Deep-Loop B2B Voice on Right) -->
         <div class="grid grid-cols-1 xl:grid-cols-2 gap-5">
           <div id="fast-loop-container-slot"></div>
           <div id="deep-loop-container-slot"></div>
@@ -954,22 +936,22 @@
           <div id="benchmark-summary-slot"></div>
         </div>
 
-        <!-- SRE OPERATIONAL NPCI SWITCH & BANKING RAIL TELEMETRY MATRIX (PHASE 1 & 8) -->
-        <div class="custom-card p-5 space-y-4">
-          <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 border-b border-[#142442] pb-3">
+        <!-- SRE OPERATIONAL NPCI SWITCH & BANKING RAIL TELEMETRY MATRIX -->
+        <div class="custom-card p-5 space-y-4 rounded-2xl">
+          <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-3">
             <div>
-              <div class="text-sm font-bold text-white flex items-center gap-2">
-                <span class="text-sky-400 font-bold">⚡</span>
+              <div class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <span class="text-blue-600 dark:text-sky-400 font-bold">⚡</span>
                 <span>Payment Rail Health Simulator & Signal Ingestion Layer</span>
               </div>
-              <p class="text-xs text-slate-400 mt-0.5">Pluggable rail health signal layer designed to ingest authorized NPCI & Bank gateway webhooks to modulate Weibull hazard curves</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Pluggable rail health signal layer designed to ingest authorized NPCI & Bank gateway webhooks to modulate Weibull hazard curves</p>
             </div>
             <div class="flex items-center gap-2">
-              <span class="px-2.5 py-1 rounded-full text-xs font-bold text-emerald-400 bg-emerald-950/40 border border-emerald-800/60 mono flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+              <span class="px-2.5 py-1 rounded-full text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 mono flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
                 <span>Signal Ingestion: ACTIVE</span>
               </span>
-              <button onclick="refreshNPCITelemetryGrid()" class="px-2.5 py-1 bg-[#081224] hover:bg-[#0c1b36] border border-[#142442] text-xs font-semibold text-sky-400 rounded-lg mono transition">
+              <button onclick="refreshNPCITelemetryGrid()" class="px-3 py-1 bg-slate-100 dark:bg-[#0f172a] hover:bg-slate-200 dark:hover:bg-[#1e293b] border border-slate-200 dark:border-slate-700 text-xs font-semibold text-blue-600 dark:text-sky-400 rounded-lg mono transition cursor-pointer">
                 ↻ Refresh Signals
               </button>
             </div>
