@@ -453,19 +453,19 @@
         </div>
         <div>
           <div class="flex items-center gap-2">
-            <span class="text-base sm:text-lg font-bold text-[#0c2340] header-brand-title tracking-tight">RazorRevive<span class="text-[#0c55ea]">-OS</span></span>
+            <span class="text-base sm:text-lg font-bold text-slate-900 dark:text-white header-brand-title tracking-tight">RazorRevive<span class="text-[#0c55ea] dark:text-[#38bdf8]">-OS</span></span>
           </div>
-          <div class="text-[10px] sm:text-[11px] text-slate-500 font-medium leading-none mt-0.5 hidden xs:block">AI Revenue Recovery Control Plane</div>
+          <div class="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 font-medium leading-none mt-0.5 hidden xs:block">AI Revenue Recovery Control Plane</div>
         </div>
       </div>
     </div>
 
     <!-- CENTER EYEBROW & METADATA -->
     <div class="hidden xl:flex flex-col items-center justify-center">
-      <div class="text-[11px] font-bold text-[#0c55ea] tracking-wider uppercase">
+      <div class="text-[11px] font-bold text-[#0c55ea] dark:text-[#38bdf8] tracking-wider uppercase">
         RAZORPAY AI BUILDATHON • TRACK 03
       </div>
-      <div class="text-[11px] text-slate-500 font-normal leading-tight mt-0.5">
+      <div class="text-[11px] text-slate-600 dark:text-slate-300 font-normal leading-tight mt-0.5">
         Autonomous Revenue Recovery, Dynamic Mandate Retrier & B2B Voice PTP Engine
       </div>
     </div>
@@ -474,7 +474,7 @@
     <div class="flex items-center gap-2">
 
       <!-- RUN 100-BATCH BENCHMARK BUTTON -->
-      <button onclick="runBenchmarkAction()" id="header-benchmark-btn" class="h-8 sm:h-9 px-2.5 sm:px-4 rounded-lg btn-primary text-xs font-semibold flex items-center gap-1.5 sm:gap-2 shadow-sm">
+      <button onclick="runBenchmarkAction()" id="header-benchmark-btn" class="h-8 sm:h-9 px-2.5 sm:px-4 rounded-lg btn-primary text-xs font-semibold flex items-center gap-1.5 sm:gap-2 shadow-sm cursor-pointer">
         <svg class="w-3.5 h-3.5 text-blue-100 shrink-0" fill="currentColor" viewBox="0 0 20 20">
           <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
         </svg>
@@ -482,18 +482,18 @@
         <span class="sm:hidden font-bold">100-Batch</span>
       </button>
 
-      <!-- DEMO SCENARIOS DROPDOWN BUTTON -->
+      <!-- DEMO SCENARIOS DROPDOWN BUTTON (High Contrast in Light & Dark Mode) -->
       <div class="relative">
-        <button onclick="toggleScenariosMenu()" id="scenarios-btn" class="h-8 sm:h-9 px-2.5 sm:px-3 rounded-lg btn-secondary text-xs font-medium flex items-center gap-1">
-          <span class="hidden sm:inline">Demo Scenarios</span>
-          <span class="sm:hidden">Scenarios</span>
-          <svg class="w-3 h-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <button onclick="toggleScenariosMenu()" id="scenarios-btn" class="h-8 sm:h-9 px-3 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-[#0f1f38] dark:hover:bg-[#162a4d] border border-slate-300 dark:border-[#1e3a6a] text-slate-900 dark:text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all cursor-pointer">
+          <span class="hidden sm:inline">⚡ Demo Scenarios</span>
+          <span class="sm:hidden">⚡ Scenarios</span>
+          <svg class="w-3.5 h-3.5 text-slate-500 dark:text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
           </svg>
         </button>
 
         <!-- Dropdown Menu -->
-        <div id="scenarios-dropdown" class="hidden absolute right-0 mt-2 w-72 bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-[#1e293b] rounded-xl shadow-xl z-50 p-2 space-y-1">
+        <div id="scenarios-dropdown" class="hidden absolute right-0 mt-2 w-72 bg-white dark:bg-[#0c182c] border border-slate-200 dark:border-[#1e293b] rounded-xl shadow-2xl z-50 p-2 space-y-1">
           <button onclick="selectScenario('A')" class="w-full text-left p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-[#172339] transition text-xs">
             <div class="font-bold text-sky-600 dark:text-sky-400 mono text-[11px]">Scenario A: Bank Outage 504</div>
             <div class="text-[10px] text-slate-600 dark:text-slate-300">HDFC Degradation → Poisson Hazard Window</div>
@@ -867,64 +867,82 @@
       <div id="view-overview" class="space-y-5">
         
         <!-- 6 KPI CARDS HEADER -->
-        <!-- EXECUTIVE 4-HERO METRIC CARDS (Clean, Uncluttered, Distinct Attribution) -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- 6 TOP KPI CARDS (Clear Dataset Attribution) -->
+        <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3.5">
           
-          <!-- Card 1: Live Simulated Yield -->
-          <div class="custom-card p-4.5 rounded-2xl space-y-2">
-            <div class="flex items-center justify-between text-xs text-slate-400 font-medium">
-              <span class="font-semibold text-slate-700 dark:text-slate-300">Live Simulated Yield</span>
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">Active Stream</span>
+          <!-- Card 1: Live Cohort Recovery Rate -->
+          <div class="custom-card p-3.5">
+            <div class="flex items-center gap-1.5 text-xs text-slate-400 font-medium">
+              <svg class="w-3.5 h-3.5 text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+              </svg>
+              <span>Live Cohort Yield</span>
             </div>
-            <div class="text-3xl font-extrabold text-slate-900 dark:text-white mono tracking-tight" id="kpi-net-recovery">78.39%</div>
-            <div class="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1.5 pt-0.5">
-              <span class="text-emerald-600 dark:text-emerald-400 font-semibold" id="kpi-recovered-gmv">₹4,25,600</span>
-              <span>recovered of ₹5.42L</span>
-            </div>
+            <div class="text-2xl font-bold text-white mt-1 mono" id="kpi-net-recovery">78.39%</div>
+            <div class="text-[10px] text-emerald-400 font-medium mt-0.5">Live Demo Simulation</div>
           </div>
 
-          <!-- Card 2: 100-Case Benchmark Yield -->
-          <div class="custom-card p-4.5 rounded-2xl space-y-2">
-            <div class="flex items-center justify-between text-xs text-slate-400 font-medium">
-              <span class="font-semibold text-slate-700 dark:text-slate-300">Empirical 100 Benchmark</span>
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-500/10 text-blue-600 dark:text-sky-400 border border-blue-500/20">Held-Out Suite</span>
+          <!-- Card 2: Recovered GMV -->
+          <div class="custom-card p-3.5">
+            <div class="flex items-center gap-1.5 text-xs text-slate-400 font-medium">
+              <span class="text-xs font-bold text-[#38bdf8]">₹</span>
+              <span>Recovered GMV</span>
             </div>
-            <div class="text-3xl font-extrabold text-slate-900 dark:text-white mono tracking-tight">42.24%</div>
-            <div class="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1.5 pt-0.5">
-              <span class="text-blue-600 dark:text-sky-400 font-semibold">₹4,15,450</span>
-              <span>net yield (77/100 Tx)</span>
-            </div>
+            <div class="text-2xl font-bold text-white mt-1 mono" id="kpi-recovered-gmv">₹4,25,600</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">From ₹5,42,850 Live Cohort</div>
           </div>
 
-          <!-- Card 3: Double-Debit Defense -->
-          <div class="custom-card p-4.5 rounded-2xl space-y-2">
-            <div class="flex items-center justify-between text-xs text-slate-400 font-medium">
-              <span class="font-semibold text-slate-700 dark:text-slate-300">Double-Debit Defense</span>
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">100% Mutex</span>
+          <!-- Card 3: At-Risk GMV -->
+          <div class="custom-card p-3.5">
+            <div class="flex items-center gap-1.5 text-xs text-slate-400 font-medium">
+              <svg class="w-3.5 h-3.5 text-[#f59e0b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+              </svg>
+              <span>Live At-Risk GMV</span>
             </div>
-            <div class="text-3xl font-extrabold text-slate-900 dark:text-white mono tracking-tight" id="kpi-idempotency">0 Violations</div>
-            <div class="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1.5 pt-0.5">
-              <span class="text-emerald-600 dark:text-emerald-400 font-semibold">100% Zero-Collision</span>
-              <span>CAS Lock</span>
-            </div>
+            <div class="text-2xl font-bold text-white mt-1 mono" id="kpi-at-risk-gmv">₹5,42,850</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">Active Sandbox Stream</div>
           </div>
 
-          <!-- Card 4: Mean Decision Latency -->
-          <div class="custom-card p-4.5 rounded-2xl space-y-2">
-            <div class="flex items-center justify-between text-xs text-slate-400 font-medium">
-              <span class="font-semibold text-slate-700 dark:text-slate-300">Mean Orchestration</span>
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-500/10 text-purple-600 dark:text-purple-300 border border-purple-500/20">Fast-Path</span>
+          <!-- Card 4: Idempotency Violations -->
+          <div class="custom-card p-3.5">
+            <div class="flex items-center gap-1.5 text-xs text-slate-400 font-medium">
+              <svg class="w-3.5 h-3.5 text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+              <span>Idempotency Violations</span>
             </div>
-            <div class="text-3xl font-extrabold text-slate-900 dark:text-white mono tracking-tight">18.4ms</div>
-            <div class="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1.5 pt-0.5">
-              <span class="text-purple-600 dark:text-purple-300 font-semibold">0.23ms</span>
-              <span>in-memory policy gate</span>
+            <div class="text-2xl font-bold text-white mt-1 mono" id="kpi-idempotency">0</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">0.23ms CAS Mutex Gate</div>
+          </div>
+
+          <!-- Card 5: TRAI Compliance -->
+          <div class="custom-card p-3.5">
+            <div class="flex items-center gap-1.5 text-xs text-slate-400 font-medium">
+              <svg class="w-3.5 h-3.5 text-[#8b5cf6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+              </svg>
+              <span>TRAI Compliance</span>
             </div>
+            <div class="text-2xl font-bold text-white mt-1 mono" id="kpi-trai">100%</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">0 Late-Night Messages (9PM-9AM)</div>
+          </div>
+
+          <!-- Card 6: Orchestration Latency -->
+          <div class="custom-card p-3.5">
+            <div class="flex items-center gap-1.5 text-xs text-slate-400 font-medium">
+              <svg class="w-3.5 h-3.5 text-[#38bdf8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              </svg>
+              <span>Mean Latency</span>
+            </div>
+            <div class="text-2xl font-bold text-white mt-1 mono">18.4ms</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">End-to-End Orchestration</div>
           </div>
 
         </div>
 
-        <!-- TWO MAIN SENTINELS (Fast-Loop B2C on Left, Deep-Loop B2B Voice on Right) -->
+        <!-- TWO MAIN SENTINELS -->
         <div class="grid grid-cols-1 xl:grid-cols-2 gap-5">
           <div id="fast-loop-container-slot"></div>
           <div id="deep-loop-container-slot"></div>
@@ -936,22 +954,22 @@
           <div id="benchmark-summary-slot"></div>
         </div>
 
-        <!-- SRE OPERATIONAL NPCI SWITCH & BANKING RAIL TELEMETRY MATRIX -->
-        <div class="custom-card p-5 space-y-4 rounded-2xl">
-          <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-3">
+        <!-- SRE OPERATIONAL NPCI SWITCH & BANKING RAIL TELEMETRY MATRIX (PHASE 1 & 8) -->
+        <div class="custom-card p-5 space-y-4">
+          <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 border-b border-[#142442] pb-3">
             <div>
-              <div class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <span class="text-blue-600 dark:text-sky-400 font-bold">⚡</span>
+              <div class="text-sm font-bold text-white flex items-center gap-2">
+                <span class="text-sky-400 font-bold">⚡</span>
                 <span>Payment Rail Health Simulator & Signal Ingestion Layer</span>
               </div>
-              <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Pluggable rail health signal layer designed to ingest authorized NPCI & Bank gateway webhooks to modulate Weibull hazard curves</p>
+              <p class="text-xs text-slate-400 mt-0.5">Pluggable rail health signal layer designed to ingest authorized NPCI & Bank gateway webhooks to modulate Weibull hazard curves</p>
             </div>
             <div class="flex items-center gap-2">
-              <span class="px-2.5 py-1 rounded-full text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 mono flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+              <span class="px-2.5 py-1 rounded-full text-xs font-bold text-emerald-400 bg-emerald-950/40 border border-emerald-800/60 mono flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
                 <span>Signal Ingestion: ACTIVE</span>
               </span>
-              <button onclick="refreshNPCITelemetryGrid()" class="px-3 py-1 bg-slate-100 dark:bg-[#0f172a] hover:bg-slate-200 dark:hover:bg-[#1e293b] border border-slate-200 dark:border-slate-700 text-xs font-semibold text-blue-600 dark:text-sky-400 rounded-lg mono transition cursor-pointer">
+              <button onclick="refreshNPCITelemetryGrid()" class="px-2.5 py-1 bg-[#081224] hover:bg-[#0c1b36] border border-[#142442] text-xs font-semibold text-sky-400 rounded-lg mono transition">
                 ↻ Refresh Signals
               </button>
             </div>
@@ -2766,22 +2784,8 @@
         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
         <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-400 border border-white"></span>
       </span>
-      <!-- Cybernetic Humanoid Robot Icon -->
-      <div class="w-5 h-5 flex items-center justify-center">
-        <svg viewBox="0 0 36 36" class="w-5 h-5 drop-shadow">
-          <!-- Cyber Visor Head -->
-          <path d="M7 14 C7 8, 29 8, 29 14 L28 26 C28 30, 8 30, 8 26 Z" fill="#0c2340" stroke="#38bdf8" stroke-width="1.8"/>
-          <!-- Glowing Cyan Visor Eyes -->
-          <rect x="11" y="16" width="14" height="4" rx="2" fill="#00f0ff" filter="drop-shadow(0 0 4px #00f0ff)"/>
-          <line x1="18" y1="16" x2="18" y2="20" stroke="#0c2340" stroke-width="1.5"/>
-          <!-- Head Antenna & Neural Arc -->
-          <path d="M18 8 L18 3 M15 3 L21 3" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round"/>
-          <circle cx="18" cy="2" r="1.5" fill="#10b981"/>
-          <!-- Ear Lightning Ports -->
-          <polygon points="5,17 7,13 7,21" fill="#38bdf8"/>
-          <polygon points="31,17 29,13 29,21" fill="#38bdf8"/>
-        </svg>
-      </div>
+      <!-- Front-Facing Razor Copilot Avatar Image -->
+      <img src="/assets/copilot_avatar.jpg" alt="Razor Copilot" class="w-6 h-6 rounded-full border border-emerald-400 object-cover shadow-md">
       <span class="font-extrabold tracking-wide">Razor Copilot</span>
     </button>
   </div>
@@ -2789,26 +2793,18 @@
   <!-- Floating Copilot Interactive Drawer -->
   <div id="ai-copilot-drawer" class="hidden fixed bottom-20 right-5 z-50 w-[420px] max-w-[calc(100vw-2.5rem)] rounded-2xl bg-white dark:bg-[#0c182c] border border-blue-500/40 shadow-2xl p-4 space-y-3.5 transition-all duration-300 text-xs">
     
-    <!-- Header with Cyber Humanoid Avatar -->
+    <!-- Header with Front-Facing Cyber Humanoid Avatar -->
     <div class="flex items-center justify-between border-b border-slate-200 dark:border-[#142442] pb-3">
-      <div class="flex items-center gap-2.5">
-        <!-- Humanoid Robot Avatar Badge -->
-        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-[#0c2340] to-[#0c55ea] border border-[#38bdf8]/50 flex items-center justify-center shadow-lg relative">
-          <svg viewBox="0 0 36 36" class="w-6 h-6">
-            <path d="M7 14 C7 8, 29 8, 29 14 L28 26 C28 30, 8 30, 8 26 Z" fill="#0c2340" stroke="#38bdf8" stroke-width="1.8"/>
-            <rect x="11" y="16" width="14" height="4" rx="2" fill="#00f0ff"/>
-            <line x1="18" y1="16" x2="18" y2="20" stroke="#0c2340" stroke-width="1.5"/>
-            <path d="M18 8 L18 3 M15 3 L21 3" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round"/>
-            <circle cx="18" cy="2" r="1.5" fill="#10b981"/>
-            <polygon points="5,17 7,13 7,21" fill="#38bdf8"/>
-            <polygon points="31,17 29,13 29,21" fill="#38bdf8"/>
-          </svg>
-          <span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-400 rounded-full border border-[#0c182c]"></span>
+      <div class="flex items-center gap-3">
+        <!-- Front-Facing Avatar Badge -->
+        <div class="relative w-11 h-11 rounded-full p-0.5 bg-gradient-to-tr from-emerald-400 via-sky-400 to-blue-600 shadow-xl shrink-0">
+          <img src="/assets/copilot_avatar.jpg" alt="Razor Copilot Avatar" class="w-full h-full rounded-full object-cover">
+          <span class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-emerald-400 rounded-full border-2 border-white dark:border-[#0c182c]"></span>
         </div>
         <div>
           <div class="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-1.5">
             <span>Razor Humanoid Copilot</span>
-            <span class="px-1.5 py-0.2 rounded text-[9px] font-black bg-blue-100 text-blue-800 dark:bg-blue-900/60 dark:text-sky-300 border border-blue-400/40">AI SRE</span>
+            <span class="px-1.5 py-0.2 rounded text-[9px] font-black bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-400 border border-emerald-500/40">AI SRE</span>
           </div>
           <div class="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold">● Fully Trained on RazorRevive Control Plane</div>
         </div>
