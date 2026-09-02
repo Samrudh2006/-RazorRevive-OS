@@ -3878,6 +3878,195 @@
       }
     }
 
+    // NPCI Core Banking Switch Telemetry State & SRE Controller
+    const BANK_SWITCH_STATES = {
+      HDFC: { name: "HDFC Bank UPI", switchId: "HDFC_CORE_01", state: "HEALTHY", sr: 98.4, latency: 145 },
+      SBI: { name: "SBI Switch (U30)", switchId: "SBI_INB_04", state: "DEGRADED", sr: 78.2, latency: 890 },
+      ICICI: { name: "ICICI Bank Rail", switchId: "ICIC_NODE_02", state: "HEALTHY", sr: 99.1, latency: 110 },
+      AXIS: { name: "Axis Bank Mandates", switchId: "UTIB_MANDATE_01", state: "HEALTHY", sr: 97.6, latency: 190 },
+      KOTAK: { name: "Kotak Mahindra", switchId: "KKBK_UPI_01", state: "HEALTHY", sr: 96.8, latency: 220 },
+      PNB: { name: "Punjab National Bank", switchId: "PUNB_SWITCH_03", state: "HEALTHY", sr: 95.2, latency: 310 },
+      YESB: { name: "Yes Bank PSP Hub", switchId: "YESB_HUB_01", state: "HEALTHY", sr: 97.9, latency: 175 }
+    };
+
+    function updateOverviewBankGrid() {
+      const container = document.getElementById("overview-npci-grid");
+      if (!container) return;
+
+      const displayKeys = ["HDFC", "SBI", "ICICI", "AXIS"];
+      container.innerHTML = displayKeys.map(k => {
+        const b = BANK_SWITCH_STATES[k] || { name: k, switchId: k + "_01", state: "HEALTHY", sr: 98.0, latency: 150 };
+        const isDegraded = b.state === "DEGRADED";
+        const isOutage = b.state === "OUTAGE";
+        const borderClass = isOutage ? "border-rose-900/60 bg-[#1c080b]" : (isDegraded ? "border-amber-900/60 bg-[#1e1208]" : "border-[#142442] bg-[#081224]");
+        const badgeClass = isOutage ? "bg-[#380b10] text-rose-400 border border-rose-800" : (isDegraded ? "bg-[#25131d] text-amber-400 border border-amber-900/60" : "bg-[#063b22] text-[#10b981] border border-[#0e5c36]");
+        const valColor = isOutage ? "text-rose-400" : (isDegraded ? "text-amber-400" : "text-emerald-400");
+        const latColor = isOutage ? "text-rose-300" : (isDegraded ? "text-amber-300" : "text-sky-300");
+
+        return `
+          <div class="p-3.5 rounded-xl ${borderClass} space-y-2 transition-all">
+            <div class="flex justify-between items-start">
+              <div>
+                <div class="text-xs font-bold text-white">${b.name}</div>
+                <div class="text-[10px] text-slate-400 mono">Switch ID: ${b.switchId}</div>
+              </div>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold ${badgeClass}">${b.state}</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2 text-[11px] mono pt-1 border-t border-[#142442]/60">
+              <div><span class="text-slate-400">SR:</span> <span class="${valColor} font-bold">${b.sr.toFixed(1)}%</span></div>
+              <div><span class="text-slate-400">Latency:</span> <span class="${latColor}">${Math.round(b.latency)}ms</span></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    async function simulateBankDegradation(bankCode = 'SBI') {
+      const current = BANK_SWITCH_STATES[bankCode] || BANK_SWITCH_STATES['SBI'];
+      const newState = current.state === 'HEALTHY' ? 'DEGRADED' : 'HEALTHY';
+      const newSr = newState === 'DEGRADED' ? 72.4 : 98.8;
+      const newLatency = newState === 'DEGRADED' ? 950.0 : 140.0;
+      
+      current.state = newState;
+      current.sr = newSr;
+      current.latency = newLatency;
+
+      try {
+        await fetch("/api/v1/telemetry/npci-switch/update", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            bank_code: bankCode,
+            state: newState,
+            success_rate_pct: newSr,
+            latency_ms: newLatency,
+            incidents: newState === 'DEGRADED' ? ["Simulated Latency Spike (>900ms)"] : []
+          })
+        });
+      } catch (err) {
+        console.warn("Backend telemetry sync notice:", err);
+      }
+
+      updateOverviewBankGrid();
+      refreshFullNPCISwitchView();
+
+      if (newState === 'DEGRADED') {
+        showToast(`⚡ ${bankCode} Switch toggled to DEGRADED (Latency: ${newLatency}ms). Dynamic Weibull retry shifted to +45m peak!`, "warning");
+      } else {
+        showToast(`✓ ${bankCode} Switch restored to HEALTHY (SR: ${newSr}%). Circuit breaker closed.`, "success");
+      }
+    }
+
+    async function injectSimulatedNPCIStatus() {
+      const bankSelect = document.getElementById("npci-sim-bank");
+      const statusSelect = document.getElementById("npci-sim-status");
+      const srInput = document.getElementById("npci-sim-sr");
+      const feedback = document.getElementById("npci-sim-feedback");
+
+      const bankCode = bankSelect ? bankSelect.value : "SBI";
+      const state = statusSelect ? statusSelect.value : "DEGRADED";
+      const sr = srInput ? parseFloat(srInput.value) || 75.0 : 75.0;
+      const latency = state === 'OUTAGE' ? 4500.0 : (state === 'DEGRADED' ? 880.0 : 150.0);
+
+      if (BANK_SWITCH_STATES[bankCode]) {
+        BANK_SWITCH_STATES[bankCode].state = state;
+        BANK_SWITCH_STATES[bankCode].sr = sr;
+        BANK_SWITCH_STATES[bankCode].latency = latency;
+      }
+
+      try {
+        await fetch("/api/v1/telemetry/npci-switch/update", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            bank_code: bankCode,
+            state: state,
+            success_rate_pct: sr,
+            latency_ms: latency,
+            incidents: state !== 'HEALTHY' ? [`Injected ${state} condition`] : []
+          })
+        });
+      } catch (e) {}
+
+      updateOverviewBankGrid();
+      refreshFullNPCISwitchView();
+
+      if (feedback) {
+        feedback.innerHTML = `
+          <div class="text-emerald-400 font-bold">[TELEMETRY INJECTED] ${bankCode} &rarr; ${state}</div>
+          <div class="text-slate-300">Success Rate: ${sr}% • Latency: ${latency}ms • Adaptive Weibull Hazard shifted automatically.</div>
+        `;
+      }
+      showToast(`⚡ NPCI Telemetry Injected: ${bankCode} is now ${state}`, state === 'HEALTHY' ? "success" : "warning");
+    }
+
+    async function refreshFullNPCISwitchView() {
+      const container = document.getElementById("full-npci-switch-cards");
+      if (!container) return;
+
+      try {
+        const res = await fetch("/api/v1/telemetry/npci-switch");
+        const json = await res.json();
+        if (json.success && json.data.switches) {
+          json.data.switches.forEach(s => {
+            if (BANK_SWITCH_STATES[s.bank_code]) {
+              BANK_SWITCH_STATES[s.bank_code].state = s.state;
+              BANK_SWITCH_STATES[s.bank_code].sr = s.success_rate_pct;
+              BANK_SWITCH_STATES[s.bank_code].latency = s.latency_ms;
+            }
+          });
+        }
+      } catch (e) {}
+
+      const allBanks = Object.keys(BANK_SWITCH_STATES);
+      container.innerHTML = allBanks.map(k => {
+        const b = BANK_SWITCH_STATES[k];
+        const isDegraded = b.state === "DEGRADED";
+        const isOutage = b.state === "OUTAGE";
+        const borderClass = isOutage ? "border-rose-900/60 bg-[#1c080b]" : (isDegraded ? "border-amber-900/60 bg-[#1e1208]" : "border-[#142442] bg-[#081224]");
+        const badgeClass = isOutage ? "bg-[#380b10] text-rose-400 border border-rose-800" : (isDegraded ? "bg-[#25131d] text-amber-400 border border-amber-900/60" : "bg-[#063b22] text-[#10b981] border border-[#0e5c36]");
+        const valColor = isOutage ? "text-rose-400" : (isDegraded ? "text-amber-400" : "text-emerald-400");
+        const barColor = isOutage ? "bg-rose-500" : (isDegraded ? "bg-amber-500" : "bg-emerald-500");
+
+        return `
+          <div class="p-4 rounded-xl ${borderClass} space-y-3 shadow-md transition-all">
+            <div class="flex justify-between items-start">
+              <div>
+                <div class="text-xs font-bold text-white">${b.name}</div>
+                <div class="text-[10px] text-slate-400 mono">${b.switchId}</div>
+              </div>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold ${badgeClass}">${b.state}</span>
+            </div>
+
+            <div class="space-y-1">
+              <div class="flex justify-between text-[11px] mono">
+                <span class="text-slate-400">Success Rate:</span>
+                <span class="${valColor} font-bold">${b.sr.toFixed(1)}%</span>
+              </div>
+              <div class="w-full bg-[#0d1b30] rounded-full h-1.5 overflow-hidden">
+                <div class="${barColor} h-1.5 rounded-full transition-all duration-500" style="width: ${Math.min(100, b.sr)}%"></div>
+              </div>
+            </div>
+
+            <div class="flex justify-between text-[11px] mono pt-1 border-t border-[#142442]/60">
+              <span class="text-slate-400">Latency:</span>
+              <span class="text-sky-300 font-bold">${Math.round(b.latency)}ms</span>
+            </div>
+
+            <button onclick="simulateBankDegradation('${k}')" class="w-full py-1.5 bg-[#142442] hover:bg-[#1e3a6a] text-sky-300 hover:text-white rounded-lg text-[10px] font-bold mono transition cursor-pointer">
+              ⚡ Toggle ${k} State
+            </button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function refreshNPCITelemetryGrid() {
+      refreshFullNPCISwitchView();
+      updateOverviewBankGrid();
+      showToast("NPCI Banking Telemetry Radar Synchronized!", "success");
+    }
+
     function triggerSimulatedSecurityAlert() {
       const container = document.getElementById("alerts-container");
       const badge = document.getElementById("alerts-count-badge");
@@ -4027,6 +4216,7 @@
     }
 
     mountComponents();
+    updateOverviewBankGrid();
     refreshAuditLedger();
     refreshFullNPCISwitchView();
     renderWeibullCurve();
