@@ -438,189 +438,205 @@
   <div class="flex-1 flex overflow-hidden pb-16 lg:pb-0">
 
     <!-- LEFT SIDEBAR -->
-    <aside id="app-sidebar" class="w-60 bg-[#0c2340] border-r border-[#132f54] flex flex-col justify-between p-3 shrink-0 hidden lg:flex">
+    <aside id="app-sidebar" class="w-60 bg-[#0c2340] border-r border-[#132f54] flex flex-col p-3 shrink-0 hidden lg:flex overflow-y-auto max-h-[calc(100vh-4rem)] sticky top-16 select-none custom-scrollbar">
       
-      <div>
-        <!-- NAV ITEMS -->
-        <nav class="space-y-1 text-xs pt-1" id="sidebar-nav">
+      <!-- NAV ITEMS -->
+      <nav class="space-y-3 text-xs pt-1 flex-1" id="sidebar-nav">
         
-        <!-- Overview -->
-        <button onclick="switchNavTab('overview')" id="nav-overview" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg nav-btn-active transition-all text-left">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
-          </svg>
-          <span>Overview</span>
-        </button>
+        <!-- SECTION 1: CORE RECOVERY ENGINES -->
+        <div>
+          <div class="px-3 pb-1.5 text-[10px] font-bold tracking-wider uppercase text-slate-400">Core Engines</div>
+          <div class="space-y-0.5">
+            <!-- Overview -->
+            <button onclick="switchNavTab('overview')" id="nav-overview" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg nav-btn-active transition-all text-left">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+              </svg>
+              <span>Overview</span>
+            </button>
 
-        <!-- Fast Loop -->
-        <button onclick="switchNavTab('fast_loop')" id="nav-fast_loop" class="w-full flex items-center justify-between px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
-          <div class="flex items-center gap-2.5">
-            <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-            </svg>
-            <span>Fast Loop</span>
+            <!-- Fast Loop -->
+            <button onclick="switchNavTab('fast_loop')" id="nav-fast_loop" class="w-full flex items-center justify-between px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
+              <div class="flex items-center gap-2.5">
+                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+                <span>Fast Loop Sentinel</span>
+              </div>
+              <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#063b22] text-[#10b981] border border-[#0e5c36]">Live</span>
+            </button>
+
+            <!-- NPCI Switch Radar (PHASE 1 & 8) -->
+            <button onclick="switchNavTab('npci_switch')" id="nav-npci_switch" class="w-full flex items-center justify-between px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
+              <div class="flex items-center gap-2.5">
+                <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+                <span>NPCI Switch Radar</span>
+              </div>
+              <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#08284d] text-[#38bdf8] border border-[#0c55ea]">Rail</span>
+            </button>
+
+            <!-- Bulk Batch Ingestion (PHASE 2 & 10) -->
+            <button onclick="switchNavTab('bulk_recovery')" id="nav-bulk_recovery" class="w-full flex items-center justify-between px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
+              <div class="flex items-center gap-2.5">
+                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                </svg>
+                <span>Bulk Batch CSV</span>
+              </div>
+              <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#063b22] text-[#10b981] border border-[#0e5c36]">CSV</span>
+            </button>
+
+            <!-- Card Token Lifecycle (PHASE 1 & 4) -->
+            <button onclick="switchNavTab('card_tokens')" id="nav-card_tokens" class="w-full flex items-center justify-between px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
+              <div class="flex items-center gap-2.5">
+                <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+                </svg>
+                <span>Card Token Lifecycle</span>
+              </div>
+              <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#25131d] text-[#f59e0b] border border-[#d97706]">Token</span>
+            </button>
+
+            <!-- Deep Loop -->
+            <button onclick="switchNavTab('deep_loop')" id="nav-deep_loop" class="w-full flex items-center justify-between px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
+              <div class="flex items-center gap-2.5">
+                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z"/>
+                </svg>
+                <span>Deep Loop Voice</span>
+              </div>
+              <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#2e1065] text-[#c084fc] border border-[#581c87]">Voice</span>
+            </button>
+
+            <!-- Financial Yield ROI -->
+            <button onclick="switchNavTab('financial_yield')" id="nav-financial_yield" class="w-full flex items-center justify-between px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
+              <div class="flex items-center gap-2.5">
+                <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <span>Financial Yield & ROI</span>
+            </div>
+            <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#2e1065] text-[#c084fc] border border-[#581c87]">Yield</span>
+          </button>
           </div>
-          <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#063b22] text-[#10b981] border border-[#0e5c36]">Live</span>
-        </button>
+        </div>
 
-        <!-- NPCI Switch Radar (PHASE 1 & 8) -->
-        <button onclick="switchNavTab('npci_switch')" id="nav-npci_switch" class="w-full flex items-center justify-between px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
-          <div class="flex items-center gap-2.5">
-            <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-            </svg>
-            <span>NPCI Switch Radar</span>
+        <!-- SECTION 2: VERIFICATION & LABS -->
+        <div>
+          <div class="px-3 pb-1.5 text-[10px] font-bold tracking-wider uppercase text-slate-400">Labs & Verification</div>
+          <div class="space-y-0.5">
+            <!-- Red-Team Lab -->
+            <button onclick="switchNavTab('red_team')" id="nav-red_team" class="w-full flex items-center justify-between px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
+              <div class="flex items-center gap-2.5">
+                <svg class="w-4 h-4 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                </svg>
+                <span>Red-Team Lab</span>
+              </div>
+              <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#3f0f13] text-[#ef4444] border border-[#7f1d1d]">Attack</span>
+            </button>
+
+            <!-- PTP Calendar -->
+            <button onclick="switchNavTab('ptp_calendar')" id="nav-ptp_calendar" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
+              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+              <span>PTP Calendar</span>
+            </button>
+
+            <!-- Audit Ledger -->
+            <button onclick="switchNavTab('audit_ledger')" id="nav-audit_ledger" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
+              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              </svg>
+              <span>Audit Ledger (SHA-256)</span>
+            </button>
+
+            <!-- Benchmark -->
+            <button onclick="switchNavTab('benchmark')" id="nav-benchmark" class="w-full flex items-center justify-between px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
+              <div class="flex items-center gap-2.5">
+                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                </svg>
+                <span>100-Case Benchmark</span>
+              </div>
+              <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#063b22] text-[#10b981] border border-[#0e5c36]">100</span>
+            </button>
           </div>
-          <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#08284d] text-[#38bdf8] border border-[#0c55ea]">Rail</span>
-        </button>
+        </div>
 
-        <!-- Bulk Batch Ingestion (PHASE 2 & 10) -->
-        <button onclick="switchNavTab('bulk_recovery')" id="nav-bulk_recovery" class="w-full flex items-center justify-between px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
-          <div class="flex items-center gap-2.5">
-            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
-            </svg>
-            <span>Bulk Batch CSV</span>
+        <!-- SECTION 3: OBSERVABILITY & GOVERNANCE -->
+        <div>
+          <div class="px-3 pb-1.5 text-[10px] font-bold tracking-wider uppercase text-slate-400">Governance & System</div>
+          <div class="space-y-0.5">
+            <!-- Policy Engine -->
+            <button onclick="switchNavTab('policy_engine')" id="nav-policy_engine" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
+              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+              <span>Policy Engine</span>
+            </button>
+
+            <!-- Analytics -->
+            <button onclick="switchNavTab('analytics')" id="nav-analytics" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
+              <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/>
+              </svg>
+              <span>Weibull Analytics</span>
+            </button>
+
+            <!-- Configuration -->
+            <button onclick="switchNavTab('configuration')" id="nav-configuration" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
+              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+              <span>Configuration</span>
+            </button>
+
+            <!-- Logs -->
+            <button onclick="switchNavTab('logs')" id="nav-logs" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
+              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+              <span>Structured Logs</span>
+            </button>
+
+            <!-- Alerts -->
+            <button onclick="switchNavTab('alerts')" id="nav-alerts" class="w-full flex items-center justify-between px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
+              <div class="flex items-center gap-2.5">
+                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                </svg>
+                <span>Security Alerts</span>
+              </div>
+              <span class="w-4 h-4 rounded-full flex items-center justify-center text-[10px] font-bold bg-[#ef4444] text-white">2</span>
+            </button>
+
+            <!-- Docs -->
+            <button onclick="switchNavTab('docs')" id="nav-docs" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
+              <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+              </svg>
+              <span>Documentation & Playbook</span>
+            </button>
           </div>
-          <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#063b22] text-[#10b981] border border-[#0e5c36]">CSV</span>
-        </button>
+        </div>
 
-        <!-- Card Token Lifecycle (PHASE 1 & 4) -->
-        <button onclick="switchNavTab('card_tokens')" id="nav-card_tokens" class="w-full flex items-center justify-between px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
-          <div class="flex items-center gap-2.5">
-            <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
-            </svg>
-            <span>Card Token Lifecycle</span>
-          </div>
-          <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#25131d] text-[#f59e0b] border border-[#d97706]">Token</span>
-        </button>
+      </nav>
 
-        <!-- Deep Loop -->
-        <button onclick="switchNavTab('deep_loop')" id="nav-deep_loop" class="w-full flex items-center justify-between px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
-          <div class="flex items-center gap-2.5">
-            <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z"/>
-            </svg>
-            <span>Deep Loop</span>
-          </div>
-          <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#2e1065] text-[#c084fc] border border-[#581c87]">Voice</span>
-        </button>
-
-        <!-- Financial Yield ROI (PHASE 2 & 10) -->
-        <button onclick="switchNavTab('financial_yield')" id="nav-financial_yield" class="w-full flex items-center justify-between px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
-          <div class="flex items-center gap-2.5">
-            <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-            <span>Financial Yield & ROI</span>
-          </div>
-          <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#2e1065] text-[#c084fc] border border-[#581c87]">Yield</span>
-        </button>
-
-        <!-- Red-Team Lab (NEW STANDOUT FEATURE) -->
-        <button onclick="switchNavTab('red_team')" id="nav-red_team" class="w-full flex items-center justify-between px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
-          <div class="flex items-center gap-2.5">
-            <svg class="w-4 h-4 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
-            </svg>
-            <span>Red-Team Lab</span>
-          </div>
-          <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#3f0f13] text-[#ef4444] border border-[#7f1d1d]">Attack</span>
-        </button>
-
-        <!-- PTP Calendar -->
-        <button onclick="switchNavTab('ptp_calendar')" id="nav-ptp_calendar" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
-          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-          </svg>
-          <span>PTP Calendar</span>
-        </button>
-
-        <!-- Audit Ledger -->
-        <button onclick="switchNavTab('audit_ledger')" id="nav-audit_ledger" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
-          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-          </svg>
-          <span>Audit Ledger</span>
-        </button>
-
-        <!-- Benchmark -->
-        <button onclick="switchNavTab('benchmark')" id="nav-benchmark" class="w-full flex items-center justify-between px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
-          <div class="flex items-center gap-2.5">
-            <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-            </svg>
-            <span>Benchmark</span>
-          </div>
-          <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#063b22] text-[#10b981] border border-[#0e5c36]">100</span>
-        </button>
-
-        <!-- Policy Engine -->
-        <button onclick="switchNavTab('policy_engine')" id="nav-policy_engine" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
-          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-          </svg>
-          <span>Policy Engine</span>
-        </button>
-
-        <!-- Analytics (Weibull Simulator) -->
-        <button onclick="switchNavTab('analytics')" id="nav-analytics" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
-          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/>
-          </svg>
-          <span>Analytics</span>
-        </button>
-
-        <!-- Configuration -->
-        <button onclick="switchNavTab('configuration')" id="nav-configuration" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
-          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-          </svg>
-          <span>Configuration</span>
-        </button>
-
-        <!-- Logs -->
-        <button onclick="switchNavTab('logs')" id="nav-logs" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
-          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-          </svg>
-          <span>Logs</span>
-        </button>
-
-        <!-- Alerts -->
-        <button onclick="switchNavTab('alerts')" id="nav-alerts" class="w-full flex items-center justify-between px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
-          <div class="flex items-center gap-2.5">
-            <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
-            </svg>
-            <span>Alerts</span>
-          </div>
-          <span class="w-4 h-4 rounded-full flex items-center justify-center text-[10px] font-bold bg-[#ef4444] text-white">2</span>
-        </button>
-
-        <!-- Docs -->
-        <button onclick="switchNavTab('docs')" id="nav-docs" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg nav-btn-inactive transition-all text-left">
-          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-          </svg>
-          <span>Docs</span>
-        </button>
-
-        </nav>
-      </div>
-
-      <!-- SYSTEM STATUS FOOTER CARD -->
-      <div class="p-3 rounded-lg bg-[#081224] border border-[#142442] space-y-1.5">
-        <div class="text-[10px] uppercase font-bold tracking-wider text-slate-400">System Status</div>
+      <!-- SYSTEM STATUS FOOTER CARD (Attached directly to navigation bottom) -->
+      <div class="mt-4 pt-3 border-t border-[#132f54] space-y-1.5 shrink-0">
+        <div class="text-[9px] uppercase font-bold tracking-wider text-slate-400">System Status</div>
         <div class="flex items-center gap-2 text-xs font-semibold text-[#10b981]">
           <svg class="w-4 h-4 text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
           </svg>
           <span>All Systems Operational</span>
         </div>
-        <div class="text-[10px] text-slate-400 mono">v1.0.0</div>
+        <div class="text-[9px] text-slate-400 mono">v1.1.0 • SHA-256 Ledger Head Active</div>
       </div>
 
     </aside>
