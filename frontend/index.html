@@ -3968,11 +3968,53 @@
       }
     }
 
+    function toggleWhatsAppQrCode() {
+      const qrContainer = document.getElementById("wa-qr-container");
+      const toggleText = document.getElementById("wa-qr-toggle-text");
+      if (!qrContainer) return;
+
+      if (qrContainer.classList.contains("hidden")) {
+        qrContainer.classList.remove("hidden");
+        if (toggleText) toggleText.textContent = "▲ Hide UPI QR Code";
+
+        // Fetch dynamic QR code from backend API if available
+        const payId = document.getElementById("wa-order-id")?.textContent || "pay_9A12BC34DE";
+        const amtStr = document.getElementById("wa-amount")?.textContent || "₹2,499.00";
+        const amt = parseFloat(amtStr.replace(/[^0-9.]/g, "")) || 2499.0;
+
+        fetch("/api/v1/recovery/upi-qr", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            payment_id: payId,
+            amount: amt,
+            merchant_vpa: "razorrevive.merchant@razorpay",
+            merchant_name: "Razorpay Merchant"
+          })
+        })
+        .then(res => res.json())
+        .then(res => {
+          if (res.success && res.data.svg_qr) {
+            const mount = document.getElementById("wa-qr-code-mount");
+            if (mount) mount.innerHTML = res.data.svg_qr;
+          }
+        })
+        .catch(() => {});
+      } else {
+        qrContainer.classList.add("hidden");
+        if (toggleText) toggleText.textContent = "📱 Show Dynamic UPI QR Code";
+      }
+    }
+
     function resetWhatsAppModalView() {
       const buttonsContainer = document.getElementById("wa-buttons-container");
       const successState = document.getElementById("wa-success-state");
+      const qrContainer = document.getElementById("wa-qr-container");
+      const toggleText = document.getElementById("wa-qr-toggle-text");
       if (successState) successState.classList.add("hidden");
       if (buttonsContainer) buttonsContainer.classList.remove("hidden");
+      if (qrContainer) qrContainer.classList.add("hidden");
+      if (toggleText) toggleText.textContent = "📱 Show Dynamic UPI QR Code";
     }
 
     function copyUpiIntentUri() {
@@ -4127,6 +4169,53 @@
                 <span>Paytm</span>
               </button>
 
+            </div>
+
+            <!-- Dynamic UPI QR Code Toggle Button -->
+            <button onclick="toggleWhatsAppQrCode()" class="w-full py-2 bg-[#182229] hover:bg-[#202c33] active:bg-[#2a3942] text-[11px] text-sky-400 hover:text-sky-300 font-semibold rounded-xl border border-[#2a3942] transition-all cursor-pointer flex items-center justify-center gap-1.5 shadow-sm">
+              <svg class="w-3.5 h-3.5 text-sky-400" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M3 3h8v8H3V3zm2 2v4h4V5H5zm8-2h8v8h-8V3zm2 2v4h4V5h-4zM3 13h8v8H3v-8zm2 2v4h4v-4H5zm13-2h3v2h-3v-2zm-3 2h2v3h-2v-3zm3 3h3v3h-3v-3zm-5 1h2v2h-2v-2zm2 2h3v2h-3v-2z"/>
+              </svg>
+              <span id="wa-qr-toggle-text">📱 Show Dynamic UPI QR Code</span>
+            </button>
+
+            <!-- Dynamic Interactive QR Code Box (Hidden by default, expandable) -->
+            <div id="wa-qr-container" class="hidden p-3 bg-[#111b21] rounded-2xl border border-[#2a3942] text-center space-y-2.5">
+              <div class="text-[10px] font-semibold text-slate-300">Scan with any UPI App (GPay / PhonePe / Paytm)</div>
+              
+              <div class="w-40 h-40 bg-white p-2 rounded-xl mx-auto shadow-md flex items-center justify-center relative overflow-hidden" id="wa-qr-code-mount">
+                <!-- Fallback Real SVG QR Code with UPI Badge -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="144" height="144">
+                  <rect width="200" height="200" fill="#ffffff" rx="8"/>
+                  <rect x="15" y="15" width="45" height="45" fill="#0C2340"/>
+                  <rect x="25" y="25" width="25" height="25" fill="#ffffff"/>
+                  <rect x="32" y="32" width="11" height="11" fill="#0C2340"/>
+                  <rect x="140" y="15" width="45" height="45" fill="#0C2340"/>
+                  <rect x="150" y="25" width="25" height="25" fill="#ffffff"/>
+                  <rect x="157" y="32" width="11" height="11" fill="#0C2340"/>
+                  <rect x="15" y="140" width="45" height="45" fill="#0C2340"/>
+                  <rect x="25" y="150" width="25" height="25" fill="#ffffff"/>
+                  <rect x="32" y="157" width="11" height="11" fill="#0C2340"/>
+                  <rect x="75" y="20" width="15" height="15" fill="#0C55EA"/>
+                  <rect x="105" y="20" width="15" height="15" fill="#0C2340"/>
+                  <rect x="75" y="50" width="15" height="15" fill="#0C2340"/>
+                  <rect x="105" y="50" width="15" height="15" fill="#0C55EA"/>
+                  <rect x="75" y="140" width="15" height="15" fill="#0C2340"/>
+                  <rect x="105" y="140" width="15" height="15" fill="#0C55EA"/>
+                  <rect x="140" y="75" width="15" height="15" fill="#0C55EA"/>
+                  <rect x="140" y="105" width="15" height="15" fill="#0C2340"/>
+                  <circle cx="100" cy="100" r="18" fill="#0C55EA"/>
+                  <text x="100" y="104" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#ffffff" text-anchor="middle">UPI</text>
+                </svg>
+              </div>
+
+              <div class="text-[9.5px] text-[#8696a0] mono">
+                VPA: <span class="text-white">razorrevive.merchant@razorpay</span>
+              </div>
+
+              <button onclick="simulateUpiAppPayment('UPI QR Scan')" class="w-full py-1.5 bg-[#00a884] hover:bg-[#008f6f] text-white text-[10px] font-bold rounded-lg shadow transition">
+                ⚡ Simulate QR Code Scanned & Paid
+              </button>
             </div>
 
             <!-- Copy URI Option -->
