@@ -2705,81 +2705,174 @@
 
   </script>
 
-  <!-- WHATSAPP OUTREACH PREVIEW MODAL -->
-  <div id="whatsapp-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
-    <div class="bg-[#111b21] border border-[#222d34] rounded-3xl w-full max-w-sm shadow-2xl overflow-hidden">
-      <!-- Phone Top Notch Bar -->
-      <div class="bg-[#202c33] px-4 py-3 flex items-center justify-between border-b border-[#2a3942]">
-        <div class="flex items-center gap-2.5">
-          <div class="w-8 h-8 rounded-full bg-[#00a884] flex items-center justify-center font-bold text-white text-xs shadow">
-            R
+  <!-- HYPER-REALISTIC WHATSAPP SMARTPHONE MOCKUP MODAL -->
+  <div id="whatsapp-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-[#111b21] border border-[#2a3942] rounded-[32px] w-full max-w-sm shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] overflow-hidden flex flex-col">
+      
+      <!-- Phone Top Status / Header Bar -->
+      <div class="bg-[#202c33] px-3.5 py-2.5 flex items-center justify-between border-b border-[#2a3942] select-none">
+        <div class="flex items-center gap-2">
+          <!-- Back arrow & Avatar -->
+          <button onclick="closeWhatsAppPreviewModal()" class="text-[#aebac1] hover:text-white p-1 -ml-1">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          
+          <!-- Official Razorpay Avatar -->
+          <div class="relative">
+            <div class="w-9 h-9 rounded-full bg-[#0c2340] border border-[#0c55ea] flex items-center justify-center shadow-inner overflow-hidden">
+              <svg class="w-5 h-5 text-[#0c55ea]" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <div class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-[#00a884] rounded-full border-2 border-[#202c33] flex items-center justify-center">
+              <svg class="w-2 h-2 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            </div>
           </div>
+
           <div>
-            <div class="text-xs font-semibold text-white flex items-center gap-1">
-              <span>Razorpay Verified</span>
+            <div class="text-xs font-bold text-white flex items-center gap-1">
+              <span>Razorpay</span>
               <svg class="w-3.5 h-3.5 text-[#00a884]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
             </div>
-            <div class="text-[10px] text-slate-400">Official Payment Recovery Bot</div>
+            <div class="text-[9.5px] text-[#8696a0]">Official Business Account</div>
           </div>
         </div>
-        <button onclick="closeWhatsAppPreviewModal()" class="text-slate-400 hover:text-white text-lg font-bold">✕</button>
+
+        <!-- WhatsApp Action Icons -->
+        <div class="flex items-center gap-3 text-[#aebac1]">
+          <svg class="w-4 h-4 hover:text-white cursor-pointer" fill="currentColor" viewBox="0 0 24 24"><path d="M17 10.5V7a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h12a1 1 0 001-1v-3.5l4 4v-11l-4 4z"/></svg>
+          <svg class="w-4 h-4 hover:text-white cursor-pointer" fill="currentColor" viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-2.2 2.2a15.053 15.053 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 3.99c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg>
+          <button onclick="closeWhatsAppPreviewModal()" class="text-[#aebac1] hover:text-white font-bold text-sm ml-1">✕</button>
+        </div>
       </div>
 
-      <!-- Chat Bubble Container -->
-      <div class="p-4 space-y-3 bg-[#0b141a] min-h-[300px]">
-        <!-- System Notice -->
+      <!-- WhatsApp Chat Area with Authentic Dark Wallpaper -->
+      <div class="p-3.5 space-y-3 bg-[#0b141a] min-h-[340px] flex-1 overflow-y-auto" style="background-image: radial-gradient(#182229 1px, transparent 1px); background-size: 16px 16px;">
+        
+        <!-- Date Badge -->
         <div class="text-center">
-          <span class="px-2 py-1 rounded bg-[#182229] text-[9px] text-[#8696a0] mono">🔒 End-to-end encrypted • DPDP Act Compliant</span>
+          <span class="px-2.5 py-0.5 rounded-md bg-[#182229] text-[9.5px] text-[#8696a0] font-medium shadow-sm">TODAY</span>
         </div>
 
-        <!-- WhatsApp Message Bubble -->
-        <div class="bg-[#202c33] rounded-2xl rounded-tl-sm p-3.5 space-y-2.5 text-slate-200 shadow-md border border-[#2a3942]">
-          <div class="text-xs font-semibold text-[#00a884] flex items-center gap-1.5">
-            <span>⚡ Razorpay Priority Checkout Nudge</span>
+        <!-- End-to-End Encryption Notice -->
+        <div class="text-center px-4">
+          <div class="inline-block px-3 py-1.5 rounded-lg bg-[#182229]/90 border border-[#222d34] text-[9px] text-[#ffd279] text-center leading-tight shadow-sm">
+            🔒 Messages and calls are end-to-end encrypted. DPDP Act 2023 Compliant.
           </div>
-          <p class="text-[11px] leading-relaxed text-slate-300" id="wa-message-body">
-            Hi <span class="font-semibold text-white">Rahul</span>, your recent payment for order was interrupted due to an issuing bank timeout. Click below to complete in 1-click via UPI:
+        </div>
+
+        <!-- Incoming WhatsApp Bubble -->
+        <div class="relative max-w-[92%] bg-[#202c33] rounded-2xl rounded-tl-sm p-3.5 space-y-2.5 text-slate-200 shadow-md border border-[#2a3942]/60">
+          
+          <!-- Verified Business Header Pill -->
+          <div class="text-[11px] font-bold text-[#00a884] flex items-center justify-between border-b border-[#2a3942] pb-1.5">
+            <span class="flex items-center gap-1.5">
+              <span>⚡ Razorpay Priority Recovery</span>
+            </span>
+            <span class="text-[9px] text-[#8696a0] mono font-normal">Fast-Loop Sentinel</span>
+          </div>
+
+          <!-- Body Text -->
+          <p class="text-[11px] leading-relaxed text-[#d1d7db]" id="wa-message-body">
+            Hi <span class="font-semibold text-white">Rahul</span>, your payment for order was interrupted due to an issuing bank timeout. Complete your payment instantly in 1-click:
           </p>
+
+          <!-- Order Summary Card -->
           <div class="p-2.5 bg-[#111b21] rounded-xl border border-[#2a3942] space-y-1">
-            <div class="flex justify-between text-[10px] text-slate-400">
+            <div class="flex justify-between text-[10px] text-[#8696a0]">
               <span>Order ID:</span>
-              <span class="mono text-slate-300" id="wa-order-id">pay_9A12BC34DE</span>
+              <span class="mono text-white font-medium" id="wa-order-id">pay_9A12BC34DE</span>
             </div>
-            <div class="flex justify-between text-[10px] text-slate-400">
+            <div class="flex justify-between text-[10px] text-[#8696a0] items-center">
               <span>Amount Due:</span>
-              <span class="mono text-emerald-400 font-bold" id="wa-amount">₹2,499.00</span>
+              <span class="mono text-[#00a884] font-bold text-xs" id="wa-amount">₹2,499.00</span>
             </div>
           </div>
 
           <!-- Dynamic Success State Container -->
           <div id="wa-success-state" class="hidden"></div>
 
-          <!-- 1-Click Pay Buttons -->
-          <div id="wa-buttons-container" class="space-y-1.5 pt-1">
-            <button onclick="simulateUpiAppPayment('UPI Intent')" class="w-full py-2.5 bg-[#00a884] hover:bg-[#008f6f] active:scale-98 text-white text-xs font-bold rounded-xl flex items-center justify-center gap-2 shadow-lg transition-all cursor-pointer">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-              <span>⚡ 1-Click Pay with UPI Intent</span>
+          <!-- Payment Action Buttons with Authentic Logos -->
+          <div id="wa-buttons-container" class="space-y-2 pt-1">
+            
+            <!-- 1-Click Pay with UPI Intent Button -->
+            <button onclick="simulateUpiAppPayment('UPI Intent')" class="w-full py-2.5 bg-[#00a884] hover:bg-[#008f6f] active:scale-[0.98] text-white text-xs font-bold rounded-xl flex items-center justify-center gap-2 shadow-lg transition-all cursor-pointer">
+              <!-- BHIM UPI Logo -->
+              <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+              </svg>
+              <span>1-Click Pay with UPI Intent</span>
             </button>
-            <div class="flex gap-1.5">
-              <button onclick="simulateUpiAppPayment('GPay')" class="flex-1 py-1.5 bg-[#182229] hover:bg-[#2a3942] active:bg-[#00a884] active:text-white text-[11px] text-slate-200 font-semibold rounded-lg border border-[#2a3942] transition-colors cursor-pointer flex items-center justify-center gap-1">
+
+            <!-- Specific UPI Provider App Buttons with Real Brand Logos -->
+            <div class="grid grid-cols-3 gap-1.5">
+              
+              <!-- GPay Button -->
+              <button onclick="simulateUpiAppPayment('GPay')" class="py-2 px-1.5 bg-[#182229] hover:bg-[#202c33] active:bg-[#2a3942] text-[11px] text-white font-semibold rounded-xl border border-[#2a3942] transition-all cursor-pointer flex items-center justify-center gap-1.5 shadow-sm">
+                <!-- Google 'G' Multi-Color Logo -->
+                <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24">
+                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                </svg>
                 <span>GPay</span>
               </button>
-              <button onclick="simulateUpiAppPayment('PhonePe')" class="flex-1 py-1.5 bg-[#182229] hover:bg-[#2a3942] active:bg-[#00a884] active:text-white text-[11px] text-slate-200 font-semibold rounded-lg border border-[#2a3942] transition-colors cursor-pointer flex items-center justify-center gap-1">
+
+              <!-- PhonePe Button -->
+              <button onclick="simulateUpiAppPayment('PhonePe')" class="py-2 px-1.5 bg-[#182229] hover:bg-[#202c33] active:bg-[#2a3942] text-[11px] text-white font-semibold rounded-xl border border-[#2a3942] transition-all cursor-pointer flex items-center justify-center gap-1.5 shadow-sm">
+                <!-- PhonePe Iconic Purple Logo -->
+                <div class="w-3.5 h-3.5 rounded-full bg-[#5f259f] flex items-center justify-center text-white text-[8.5px] font-black leading-none shrink-0">
+                  पे
+                </div>
                 <span>PhonePe</span>
               </button>
-              <button onclick="simulateUpiAppPayment('Paytm')" class="flex-1 py-1.5 bg-[#182229] hover:bg-[#2a3942] active:bg-[#00a884] active:text-white text-[11px] text-slate-200 font-semibold rounded-lg border border-[#2a3942] transition-colors cursor-pointer flex items-center justify-center gap-1">
+
+              <!-- Paytm Button -->
+              <button onclick="simulateUpiAppPayment('Paytm')" class="py-2 px-1.5 bg-[#182229] hover:bg-[#202c33] active:bg-[#2a3942] text-[11px] text-white font-semibold rounded-xl border border-[#2a3942] transition-all cursor-pointer flex items-center justify-center gap-1.5 shadow-sm">
+                <!-- Paytm Iconic Cyan Logo -->
+                <div class="w-3.5 h-3.5 rounded bg-[#002e6e] flex items-center justify-center text-[#00baf2] text-[8px] font-black leading-none shrink-0">
+                  P
+                </div>
                 <span>Paytm</span>
               </button>
+
             </div>
+
+            <!-- Copy URI Option -->
             <div class="text-center pt-0.5">
-              <button onclick="copyUpiIntentUri()" class="text-[9px] text-[#8696a0] hover:text-[#34d399] underline mono">
+              <button onclick="copyUpiIntentUri()" class="text-[9.5px] text-[#8696a0] hover:text-[#00a884] transition-colors mono">
                 📋 Copy Raw UPI Intent URI
               </button>
             </div>
           </div>
-          <div class="text-[9px] text-right text-[#8696a0] mono">Just now ✓✓</div>
+
+          <!-- Message Time & Read Receipts -->
+          <div class="flex items-center justify-end gap-1 text-[9.5px] text-[#8696a0] pt-0.5">
+            <span>10:52 AM</span>
+            <span class="text-[#53bdeb]">✓✓</span>
+          </div>
+
         </div>
       </div>
+
+      <!-- Authentic WhatsApp Bottom Input Bar -->
+      <div class="bg-[#202c33] px-3 py-2 flex items-center gap-2 border-t border-[#2a3942] select-none">
+        <div class="flex-1 bg-[#2a3942] rounded-full px-3.5 py-1.5 flex items-center justify-between text-[#8696a0]">
+          <div class="flex items-center gap-2">
+            <span class="text-sm">😊</span>
+            <span class="text-xs text-[#8696a0]">Message</span>
+          </div>
+          <div class="flex items-center gap-2.5 text-[#8696a0]">
+            <span class="text-xs hover:text-white cursor-pointer">📎</span>
+            <span class="text-xs hover:text-white cursor-pointer">📷</span>
+          </div>
+        </div>
+        <div class="w-8 h-8 rounded-full bg-[#00a884] flex items-center justify-center text-white text-xs cursor-pointer shadow-md">
+          🎙️
+        </div>
+      </div>
+
     </div>
   </div>
 </body>
