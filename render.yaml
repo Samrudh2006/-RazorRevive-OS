@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: razorrevive-os
+    runtime: python
+    buildCommand: "pip install --upgrade pip && pip install -r requirements.txt"
+    startCommand: "uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: ENVIRONMENT
+        value: production
+      - key: LOG_LEVEL
+        value: INFO
+      - key: MUTEX_BACKEND
+        value: sqlite_wal
+    healthCheckPath: /health
+    autoDeploy: true
