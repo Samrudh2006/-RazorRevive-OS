@@ -49,43 +49,43 @@
   </script>
   <style>
     :root, html.light {
-      --bg-page: #f4f6fa;
+      --bg-page: #f8fafc;
       --bg-header: #ffffff;
       --border-header: #e2e8f0;
       --bg-sidebar: #0c2340;
       --border-sidebar: #132f54;
       --bg-card: #ffffff;
       --border-card: #e2e8f0;
-      --bg-inner: #f8fafc;
+      --bg-inner: #f1f5f9;
       --border-inner: #e2e8f0;
       --text-title: #0f172a;
       --text-sub: #334155;
       --text-meta: #64748b;
       --color-brand: #0c55ea;
-      --card-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.05);
+      --card-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.08), 0 1px 2px -1px rgba(15, 23, 42, 0.08);
     }
     html.dark {
-      --bg-page: #090e17;
-      --bg-header: #0b1120;
-      --border-header: #1e293b;
-      --bg-sidebar: #0b1120;
-      --border-sidebar: #1e293b;
-      --bg-card: #0f172a;
-      --border-card: #1e293b;
-      --bg-inner: #090e17;
-      --border-inner: #1e293b;
+      --bg-page: #080e1a;
+      --bg-header: #0c182c;
+      --border-header: #142442;
+      --bg-sidebar: #0c2340;
+      --border-sidebar: #132f54;
+      --bg-card: #0c182c;
+      --border-card: #142442;
+      --bg-inner: #081224;
+      --border-inner: #142442;
       --text-title: #f8fafc;
       --text-sub: #cbd5e1;
       --text-meta: #94a3b8;
       --color-brand: #0c55ea;
-      --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.25);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
     }
     body {
       background-color: var(--bg-page);
       color: var(--text-title);
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       overflow-x: hidden;
-      transition: background-color 0.15s ease, color 0.15s ease;
+      transition: background-color 0.2s ease, color 0.2s ease;
     }
     .mono {
       font-family: 'JetBrains Mono', monospace;
@@ -93,74 +93,226 @@
     .custom-card {
       background-color: var(--bg-card) !important;
       border: 1px solid var(--border-card) !important;
-      border-radius: 0.625rem;
+      border-radius: 0.75rem;
       box-shadow: var(--card-shadow);
       color: var(--text-title);
     }
-    .custom-card:hover {
-      border-color: #cbd5e1;
-    }
 
-    /* Scoped Light Theme Contrast Fixes (Preserves Dark Navy Sidebar & Blue Buttons) */
-    html.light main .text-white,
-    html.light .custom-card .text-white,
-    html.light #app-header .text-white {
+    /* =========================================================================
+       COMPREHENSIVE LIGHT THEME CONTRAST & LEGIBILITY ENGINE
+       ========================================================================= */
+    html.light body {
+      background-color: #f1f5f9 !important;
       color: #0f172a !important;
     }
-    html.light main .text-slate-200,
-    html.light .custom-card .text-slate-200 {
-      color: #1e293b !important;
-    }
-    html.light main .text-slate-300,
-    html.light .custom-card .text-slate-300 {
-      color: #334155 !important;
-    }
-    html.light main .text-slate-400,
-    html.light .custom-card .text-slate-400 {
-      color: #64748b !important;
-    }
 
-    /* Inner containers in light mode */
-    html.light main .bg-\[\#050c1b\],
-    html.light main .bg-\[\#090e17\],
+    /* Main view backgrounds & Cards in Light Mode */
+    html.light main {
+      background-color: #f1f5f9 !important;
+    }
+    html.light main .bg-\[\#0c182c\],
+    html.light main .bg-\[\#0c2340\],
     html.light main .bg-\[\#081224\],
+    html.light main .bg-\[\#050c1b\],
+    html.light main .bg-\[\#071328\],
+    html.light main .bg-\[\#0a1628\],
+    html.light main .bg-\[\#090e17\],
     html.light main .bg-\[\#0f172a\],
     html.light main .bg-\[\#060a12\] {
-      background-color: #f8fafc !important;
+      background-color: #ffffff !important;
+      border-color: #e2e8f0 !important;
+      box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.06);
     }
-    html.light main .border-\[\#142442\],
-    html.light main .border-\[\#1e293b\],
-    html.light main .border-\[\#1b345f\] {
+
+    /* Inner containers, nested panels, & table wrappers */
+    html.light main .bg-\[\#0d1b30\],
+    html.light main .bg-\[\#060e1d\],
+    html.light main .bg-\[\#091322\],
+    html.light main .bg-\[\#08101e\] {
+      background-color: #f8fafc !important;
       border-color: #e2e8f0 !important;
     }
 
-    /* Form Inputs */
+    /* General Border Color normalization */
+    html.light main .border-\[\#142442\],
+    html.light main .border-\[\#142442\]\/60,
+    html.light main .border-\[\#132f54\],
+    html.light main .border-\[\#1e293b\],
+    html.light main .border-\[\#1e3a6a\],
+    html.light main .border-\[\#1b345f\],
+    html.light main .border-\[\#2a4365\] {
+      border-color: #e2e8f0 !important;
+    }
+
+    /* Text Color Legibility Upgrades in Light Mode */
+    html.light main .text-white,
+    html.light main .text-slate-100 {
+      color: #0f172a !important;
+      font-weight: 600;
+    }
+    html.light main .text-slate-200 {
+      color: #1e293b !important;
+    }
+    html.light main .text-slate-300 {
+      color: #334155 !important;
+    }
+    html.light main .text-slate-400 {
+      color: #64748b !important;
+    }
+    html.light main .text-slate-500 {
+      color: #475569 !important;
+    }
+
+    /* Accent & Brand Colors in Light Mode */
+    html.light main .text-sky-300,
+    html.light main .text-sky-400 {
+      color: #0284c7 !important;
+    }
+    html.light main .text-emerald-300,
+    html.light main .text-emerald-400 {
+      color: #059669 !important;
+    }
+    html.light main .text-amber-300,
+    html.light main .text-amber-400 {
+      color: #d97706 !important;
+    }
+    html.light main .text-purple-300,
+    html.light main .text-purple-400 {
+      color: #7c3aed !important;
+    }
+    html.light main .text-indigo-300,
+    html.light main .text-indigo-400 {
+      color: #4f46e5 !important;
+    }
+    html.light main .text-rose-300,
+    html.light main .text-rose-400 {
+      color: #e11d48 !important;
+    }
+
+    /* Badges & Status Pills in Light Mode */
+    html.light main .bg-\[\#063b22\] {
+      background-color: #ecfdf5 !important;
+      color: #065f46 !important;
+      border: 1px solid #a7f3d0 !important;
+    }
+    html.light main .bg-\[\#25131d\],
+    html.light main .bg-\[\#1e1208\] {
+      background-color: #fffbeb !important;
+      color: #92400e !important;
+      border: 1px solid #fde68a !important;
+    }
+    html.light main .bg-\[\#380b10\],
+    html.light main .bg-\[\#3f0f13\],
+    html.light main .bg-\[\#1c080b\] {
+      background-color: #fef2f2 !important;
+      color: #991b1b !important;
+      border: 1px solid #fecaca !important;
+    }
+    html.light main .bg-\[\#08284d\] {
+      background-color: #eff6ff !important;
+      color: #1e40af !important;
+      border: 1px solid #bfdbfe !important;
+    }
+    html.light main .bg-\[\#2e1065\] {
+      background-color: #faf5ff !important;
+      color: #6b21a8 !important;
+      border: 1px solid #e9d5ff !important;
+    }
+
+    /* Interactive Buttons & Quick-Action Pills in Light Mode */
+    html.light main .bg-\[\#142442\],
+    html.light main .bg-\[\#122038\],
+    html.light main .bg-\[\#182a4d\] {
+      background-color: #f1f5f9 !important;
+      color: #1e293b !important;
+      border: 1px solid #cbd5e1 !important;
+    }
+    html.light main .bg-\[\#142442\]:hover,
+    html.light main .bg-\[\#122038\]:hover {
+      background-color: #e2e8f0 !important;
+      color: #0f172a !important;
+    }
+
+    /* Form Inputs & Select Elements */
     html.light input,
     html.light select,
     html.light textarea {
       background-color: #ffffff !important;
-      border-color: #cbd5e1 !important;
+      border: 1px solid #cbd5e1 !important;
       color: #0f172a !important;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     }
     html.light input:focus,
-    html.light select:focus {
+    html.light select:focus,
+    html.light textarea:focus {
       border-color: #0c55ea !important;
+      outline: 2px solid rgba(12, 85, 234, 0.2) !important;
     }
 
-    /* Header */
+    /* Tables in Light Mode */
+    html.light table thead tr {
+      background-color: #f8fafc !important;
+      border-bottom: 2px solid #e2e8f0 !important;
+    }
+    html.light table thead th {
+      color: #475569 !important;
+      font-weight: 700 !important;
+    }
+    html.light table tbody tr {
+      border-bottom: 1px solid #f1f5f9 !important;
+    }
+    html.light table tbody tr:hover {
+      background-color: #f8fafc !important;
+    }
+    html.light table tbody td {
+      color: #1e293b !important;
+    }
+
+    /* Terminals, Console Logs, & Code Blocks (Sleek Dark Navy Contrast in ALL Themes) */
+    #red-team-console,
+    #event-log-container,
+    .mono-code-block,
+    .terminal-window {
+      background-color: #070d18 !important;
+      border: 1px solid #1e293b !important;
+      color: #38bdf8 !important;
+    }
+    #red-team-console .text-slate-400,
+    #event-log-container .text-slate-400 {
+      color: #94a3b8 !important;
+    }
+    #red-team-console .text-emerald-400,
+    #event-log-container .text-emerald-400 {
+      color: #34d399 !important;
+    }
+    #red-team-console .text-rose-400,
+    #event-log-container .text-rose-400 {
+      color: #fb7185 !important;
+    }
+    #red-team-console .text-amber-400,
+    #event-log-container .text-amber-400 {
+      color: #fbbf24 !important;
+    }
+
+    /* Header in Light Mode */
     html.light #app-header {
       background-color: #ffffff !important;
-      border-color: #e2e8f0 !important;
+      border-bottom: 1px solid #e2e8f0 !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
     html.light #app-header .header-brand-title {
       color: #0c2340 !important;
     }
+    html.light #app-header .text-white {
+      color: #0f172a !important;
+    }
 
-    /* Sidebar ALWAYS Dark Navy with High Contrast White/Light Slate Text */
+    /* Sidebar ALWAYS Stays Premium Deep Navy with High-Contrast White Text */
     #app-sidebar,
-    html.light #app-sidebar {
+    html.light #app-sidebar,
+    html.dark #app-sidebar {
       background-color: #0c2340 !important;
-      border-color: #132f54 !important;
+      border-right: 1px solid #132f54 !important;
     }
     #app-sidebar .text-white,
     html.light #app-sidebar .text-white {
@@ -185,38 +337,17 @@
       color: #ffffff !important;
     }
 
-    /* Primary Action Buttons ALWAYS Crisp White Text */
+    /* Primary Action Buttons (Always Vivid Blue with White Text) */
     .btn-primary,
-    .btn-primary *,
     html.light .btn-primary,
-    html.light .btn-primary * {
+    html.dark .btn-primary {
       background-color: #0c55ea !important;
       color: #ffffff !important;
+      font-weight: 600;
     }
     .btn-primary:hover,
     html.light .btn-primary:hover {
       background-color: #0a47c4 !important;
-    }
-
-    /* Secondary Buttons */
-    .btn-secondary {
-      background-color: #ffffff;
-      color: #1e293b;
-      border: 1px solid #cbd5e1;
-      transition: all 0.15s ease-in-out;
-    }
-    html.dark .btn-secondary {
-      background-color: #1e293b;
-      color: #e2e8f0;
-      border: 1px solid #334155;
-    }
-    .btn-secondary:hover {
-      background-color: #f1f5f9;
-      color: #0f172a;
-    }
-    html.dark .btn-secondary:hover {
-      background-color: #334155;
-      color: #ffffff;
     }
 
     /* Dedicated High-Contrast Terminal Console */
@@ -3719,6 +3850,46 @@
       if (outAnnual) outAnnual.textContent = `₹${Math.round(annualRecovered).toLocaleString('en-IN')}`;
       if (outUsers) outUsers.textContent = `${retainedUsers.toLocaleString('en-IN')} / mo`;
     }
+
+    // Global Theme Switcher (Dark Mode / High-Contrast Light Mode)
+    function toggleThemeMode() {
+      const html = document.documentElement;
+      const isDark = html.classList.contains('dark');
+      const icon = document.getElementById('theme-icon');
+
+      if (isDark) {
+        html.classList.remove('dark');
+        html.classList.add('light');
+        if (icon) icon.innerText = '🌙';
+        localStorage.setItem('theme', 'light');
+        showToast("☀️ Switched to High-Contrast Light Mode", "info");
+      } else {
+        html.classList.remove('light');
+        html.classList.add('dark');
+        if (icon) icon.innerText = '☀️';
+        localStorage.setItem('theme', 'dark');
+        showToast("🌙 Switched to Deep Navy Dark Mode", "info");
+      }
+
+      if (typeof renderWeibullCurve === 'function') {
+        setTimeout(renderWeibullCurve, 50);
+      }
+    }
+
+    // Auto-detect saved theme preference on page boot
+    document.addEventListener("DOMContentLoaded", () => {
+      const savedTheme = localStorage.getItem('theme');
+      const icon = document.getElementById('theme-icon');
+      if (savedTheme === 'light') {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light');
+        if (icon) icon.innerText = '🌙';
+      } else {
+        document.documentElement.classList.remove('light');
+        document.documentElement.classList.add('dark');
+        if (icon) icon.innerText = '☀️';
+      }
+    });
 
     // Interactive Weibull Hazard Function Canvas Renderer
     function renderWeibullCurve() {
