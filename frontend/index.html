@@ -2841,51 +2841,63 @@
       <button onclick="toggleAiCopilotDrawer()" class="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-white rounded-xl bg-slate-100 dark:bg-slate-800 transition font-bold text-sm cursor-pointer">✕</button>
     </div>
 
-    <!-- Quick Question Tags (Horizontal Scroll / Grid) -->
-    <div class="space-y-1">
-      <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Quick Diagnostic Questions:</div>
-      <div class="flex flex-wrap gap-1.5">
-        <button onclick="askCopilotPrompt('sbi')" class="px-2 py-1 rounded-md bg-slate-100 hover:bg-slate-200 dark:bg-[#142442] dark:hover:bg-[#1e3a6a] text-slate-700 dark:text-slate-200 text-[10.5px] font-medium transition cursor-pointer">
-          ⚡ SBI 504 Outage
-        </button>
-        <button onclick="askCopilotPrompt('whatsapp')" class="px-2 py-1 rounded-md bg-slate-100 hover:bg-slate-200 dark:bg-[#142442] dark:hover:bg-[#1e3a6a] text-slate-700 dark:text-slate-200 text-[10.5px] font-medium transition cursor-pointer">
-          📱 WhatsApp UPI QR
-        </button>
-        <button onclick="askCopilotPrompt('voice')" class="px-2 py-1 rounded-md bg-slate-100 hover:bg-slate-200 dark:bg-[#142442] dark:hover:bg-[#1e3a6a] text-slate-700 dark:text-slate-200 text-[10.5px] font-medium transition cursor-pointer">
-          🎙️ B2B GST Voice
-        </button>
-        <button onclick="askCopilotPrompt('mutex')" class="px-2 py-1 rounded-md bg-slate-100 hover:bg-slate-200 dark:bg-[#142442] dark:hover:bg-[#1e3a6a] text-slate-700 dark:text-slate-200 text-[10.5px] font-medium transition cursor-pointer">
-          🛡️ Zero Double-Debits
-        </button>
-        <button onclick="askCopilotPrompt('benchmark')" class="px-2 py-1 rounded-md bg-slate-100 hover:bg-slate-200 dark:bg-[#142442] dark:hover:bg-[#1e3a6a] text-slate-700 dark:text-slate-200 text-[10.5px] font-medium transition cursor-pointer">
-          📊 100 Benchmark Yield
-        </button>
-        <button onclick="askCopilotPrompt('compliance')" class="px-2 py-1 rounded-md bg-slate-100 hover:bg-slate-200 dark:bg-[#142442] dark:hover:bg-[#1e3a6a] text-slate-700 dark:text-slate-200 text-[10.5px] font-medium transition cursor-pointer">
-          🏛️ TRAI & DPDP Compliance
-        </button>
+    <!-- Interactive Multi-Turn Chat Conversation Window (ChatGPT / WhatsApp Style) -->
+    <div id="copilot-chat-history" class="space-y-3 p-3 rounded-2xl bg-slate-50 dark:bg-[#071328] border border-slate-200 dark:border-blue-900/40 min-h-[220px] max-h-[320px] overflow-y-auto text-xs">
+      
+      <!-- Initial Welcome Message from Copilot -->
+      <div class="flex gap-2.5 items-start">
+        <div class="w-7 h-7 rounded-full p-0.5 bg-gradient-to-tr from-emerald-400 to-sky-400 shrink-0 shadow-sm">
+          <img src="/copilot_avatar.jpg" onerror="this.onerror=null; this.src='/static/copilot_avatar.jpg';" alt="Avatar" class="w-full h-full rounded-full object-cover">
+        </div>
+        <div class="flex-1 bg-white dark:bg-[#0c1b33] p-3 rounded-2xl rounded-tl-sm border border-slate-200 dark:border-[#192f54] shadow-sm space-y-1.5 text-slate-800 dark:text-slate-200">
+          <div class="flex items-center justify-between text-[10px] text-slate-400">
+            <span class="font-bold text-sky-600 dark:text-sky-400">Razor Copilot</span>
+            <button onclick="speakLastCopilotMessage(this)" class="text-sky-500 hover:text-sky-400 flex items-center gap-1 font-semibold cursor-pointer">
+              🔊 Speak
+            </button>
+          </div>
+          <div class="copilot-msg-content leading-relaxed text-[11.5px]">
+            👋 Hello! I am your autonomous <strong>Razor SRE Copilot</strong>. Ask me anything about our 3-tier recovery architecture, Weibull hazard formulas, CAS mutex locks, or 100-batch benchmarks!
+          </div>
+        </div>
       </div>
+
     </div>
 
-    <!-- Copilot AI Dynamic Response Box -->
-    <div id="copilot-response-box" class="p-3.5 rounded-xl bg-slate-50 dark:bg-[#071328] border border-blue-200 dark:border-blue-900/60 space-y-2 text-[11px] text-slate-700 dark:text-slate-300 min-h-[90px] max-h-[190px] overflow-y-auto">
-      <div class="flex items-center justify-between">
-        <div class="font-bold text-[#0c55ea] dark:text-[#38bdf8] flex items-center gap-1.5">
-          <span>🤖 Humanoid Copilot Output:</span>
-        </div>
-        <button onclick="speakCopilotResponse()" id="copilot-speak-btn" class="text-[10px] text-slate-400 hover:text-sky-400 flex items-center gap-1 cursor-pointer font-semibold">
-          <span>🔊 Speak</span>
-        </button>
+    <!-- Quick Question Chips -->
+    <div class="space-y-1">
+      <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center justify-between">
+        <span>Quick Diagnostic Prompts:</span>
+        <span class="text-[9px] text-sky-500 font-normal">Click to ask</span>
       </div>
-      <div id="copilot-response-text" class="leading-relaxed">
-        Hello! I am your autonomous Razor SRE Copilot. Ask me anything about our 3-tier recovery architecture, Weibull hazard formulas, CAS mutex locks, or 100-batch benchmarks!
+      <div class="flex flex-wrap gap-1.5">
+        <button onclick="sendQuickPrompt('Explain SBI 504 Outage & Weibull Retry Curve')" class="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-[#142442] dark:hover:bg-[#1e3a6a] text-slate-700 dark:text-slate-200 text-[10.5px] font-medium transition cursor-pointer">
+          ⚡ SBI 504 Outage
+        </button>
+        <button onclick="sendQuickPrompt('How does 1-Click WhatsApp dynamic UPI QR recovery work?')" class="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-[#142442] dark:hover:bg-[#1e3a6a] text-slate-700 dark:text-slate-200 text-[10.5px] font-medium transition cursor-pointer">
+          📱 WhatsApp UPI QR
+        </button>
+        <button onclick="sendQuickPrompt('How does B2B Voice agent handle GST disputes and PTP?')" class="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-[#142442] dark:hover:bg-[#1e3a6a] text-slate-700 dark:text-slate-200 text-[10.5px] font-medium transition cursor-pointer">
+          🎙️ B2B GST Voice
+        </button>
+        <button onclick="sendQuickPrompt('How does Atomic CAS Mutex prevent double-debits during webhook storms?')" class="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-[#142442] dark:hover:bg-[#1e3a6a] text-slate-700 dark:text-slate-200 text-[10.5px] font-medium transition cursor-pointer">
+          🛡️ Zero Double-Debits
+        </button>
+        <button onclick="sendQuickPrompt('What are the results of the 100-case empirical benchmark?')" class="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-[#142442] dark:hover:bg-[#1e3a6a] text-slate-700 dark:text-slate-200 text-[10.5px] font-medium transition cursor-pointer">
+          📊 100 Benchmark Yield
+        </button>
+        <button onclick="sendQuickPrompt('How do you enforce TRAI Quiet Hours and DPDP compliance?')" class="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-[#142442] dark:hover:bg-[#1e3a6a] text-slate-700 dark:text-slate-200 text-[10.5px] font-medium transition cursor-pointer">
+          🏛️ TRAI Compliance
+        </button>
       </div>
     </div>
 
     <!-- Natural Language Chat Input Form -->
-    <form onsubmit="handleCopilotCustomQuery(event)" class="flex gap-2">
-      <input type="text" id="copilot-user-input" placeholder="Type any question (e.g. 'Why SQLite WAL?')..." class="flex-1 px-3 py-2 rounded-xl bg-slate-100 dark:bg-[#081224] border border-slate-300 dark:border-[#142442] text-slate-800 dark:text-slate-200 text-xs focus:outline-none focus:border-[#38bdf8] mono">
-      <button type="submit" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#0c55ea] to-[#0284c7] hover:from-[#0942b8] hover:to-[#0369a1] text-white font-bold text-xs shadow-md transition cursor-pointer flex items-center justify-center">
-        ➤
+    <form onsubmit="handleCopilotCustomQuery(event)" class="flex gap-2 pt-1">
+      <input type="text" id="copilot-user-input" placeholder="Ask anything (e.g. 'How does Fast Loop work?')..." class="flex-1 px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-[#081224] border border-slate-300 dark:border-[#142442] text-slate-800 dark:text-slate-200 text-xs focus:outline-none focus:border-[#38bdf8] focus:ring-1 focus:ring-[#38bdf8] transition-all">
+      <button type="submit" id="copilot-send-btn" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#0c55ea] to-[#0284c7] hover:from-[#0942b8] hover:to-[#0369a1] active:scale-95 text-white font-bold text-xs shadow-lg transition-all cursor-pointer flex items-center justify-center gap-1">
+        <span>Send</span>
+        <span>➤</span>
       </button>
     </form>
 
@@ -4990,59 +5002,124 @@
       }
     }
 
-    const COPILOT_KNOWLEDGE = {
-      sbi: "⚡ [SBI SWITCH TELEMETRY & WEIBULL RETRY]: Real-time webhook telemetry detected gateway latency > 890ms on INB-UPI (error code NPCI-SBI-202). Rather than triggering naive retries that fail, our SciPy-fitted Weibull hazard function shifts the optimal recovery retry target to +45 minutes (peak 91.4% recovery window), while activating local circuit breaker protection to safeguard merchant trust.",
-      whatsapp: "📱 [1-CLICK WHATSAPP RECOVERY & DENSE UPI QR]: For soft card declines & insufficient funds, RazorRevive suppresses further card debits to avoid bank penalty charges. It instantly dispatches an authentic WhatsApp notification with a dynamic, pre-filled UPI Intent link (`upi://pay?...`) and a dense scannable QR code. Customers capture payment in 1-tap with sub-second latency.",
-      voice: "🎙️ [B2B HINGLISH VOICE & INVOICE MUTATIONS]: High-ticket corporate invoices (>₹50,000) are handled via our autonomous B2B Voice agent. When a CFO disputes a GSTIN mismatch, the AI parses the speech in Hinglish, extracts valid 15-character GSTINs, proposes an atomic invoice mutation, and registers an auto-debit Promise-to-Pay (PTP) for Friday 11:00 AM while suppressing annoying reminder calls.",
-      mutex: "🛡️ [ATOMIC CAS MUTEX LOCK & ZERO DOUBLE-DEBITS]: To eliminate double-debits during concurrent webhook storms (e.g. 50 simultaneous bank retries), RazorRevive acquires a distributed Compare-And-Swap lock on `merchant_id:payment_id`. Thread 1 processes the event, while threads 2 through 50 receive immediate HTTP 409 Conflict. All outcomes are cryptographically sealed in our SHA-256 Tamper-Evident Ledger.",
-      benchmark: "📊 [100-CASE HELD-OUT BENCHMARK SUITE]: Calibrated against 100 heterogeneous real-world failure scenarios across B2C, B2B, and high-velocity rails. RazorRevive-OS delivers a verified 42.24% Net GMV Recovery Yield (₹4.15 Lakhs saved) with exactly 0 double-charges, 0 policy violations, and 0 false-positive costs at an average decision latency of 0.18ms per transaction.",
-      compliance: "🏛️ [TRAI, RBI & DPDP REGULATORY COMPLIANCE]: All outbound communications strictly enforce TRAI Quiet Hours (21:00 to 09:00 IST) by queueing retries until 09:00 AM next morning. Customer discounts are mathematically clamped to a maximum 10% or ₹500 INR cap. All customer PII is masked and hashed under India's DPDP Act 2023.",
-      sqlite: "💾 [SQLITE WAL MODE & STORAGE ARCHITECTURE]: We utilize SQLite with Write-Ahead Logging (WAL) and synchronous=NORMAL. This provides sub-millisecond atomic ACID writes, zero connection pool latency overhead, and handles over 50,000 requests/sec with zero locking contention, outperforming bloated external database instances for local control plane operations.",
-      token: "💳 [CARD TOKEN LIFECYCLE & RBI COMPLIANCE]: Manages network tokens across Visa VTS and Mastercard MDES. When a card token is revoked or cryptogram expires, RazorRevive detects the state and triggers automated token reprovisioning, eliminating card checkout failures without requiring the customer to re-enter card credentials.",
-      architecture: "🚀 [THREE-TIER CONTROL PLANE ARCHITECTURE]: Tier 1 Fast-Loop (deterministic sub-second B2C recovery via Weibull retries & WhatsApp QR), Tier 2 Deep-Loop (autonomous B2B Hinglish voice negotiation & PTP locks), and Tier 3 Governance Guardrail (distributed CAS mutex, TRAI compliance, and SHA-256 immutable audit chaining)."
-    };
+    function sendQuickPrompt(promptText) {
+      const input = document.getElementById("copilot-user-input");
+      if (input) {
+        input.value = promptText;
+        handleCopilotCustomQuery(new Event('submit'));
+      }
+    }
 
-    function askCopilotPrompt(topic) {
-      const box = document.getElementById("copilot-response-text");
-      if (!box) return;
-      
-      box.innerHTML = `<span class="animate-pulse text-sky-400">🤖 Razor Humanoid Copilot synthesizing live control plane telemetry...</span>`;
-      
-      setTimeout(() => {
-        const text = COPILOT_KNOWLEDGE[topic] || "Analyzing live telemetry...";
-        box.innerHTML = `<div class="font-medium text-slate-800 dark:text-slate-200">${text}</div>`;
-        showToast("✨ AI Copilot Insight loaded!", "info");
-      }, 200);
+    function speakLastCopilotMessage(btn) {
+      const parent = btn.closest('.flex-1');
+      if (!parent) return;
+      const contentEl = parent.querySelector('.copilot-msg-content');
+      if (contentEl) {
+        speakText(contentEl.innerText);
+        showToast("🔊 Speaking Copilot response...", "info");
+      }
     }
 
     async function handleCopilotCustomQuery(e) {
-      e.preventDefault();
+      if (e && e.preventDefault) e.preventDefault();
       const input = document.getElementById("copilot-user-input");
-      const box = document.getElementById("copilot-response-text");
-      if (!input || !box) return;
+      const history = document.getElementById("copilot-chat-history");
+      if (!input || !history) return;
 
       const q = input.value.trim();
       if (!q) return;
 
       input.value = "";
-      box.innerHTML = `<span class="animate-pulse text-sky-400">🤖 Querying Razor Neural Knowledge Base & Ollama...</span>`;
+
+      // 1. Append User Message Bubble (Right Side)
+      const userBubble = document.createElement("div");
+      userBubble.className = "flex justify-end";
+      userBubble.innerHTML = `
+        <div class="max-w-[85%] bg-gradient-to-r from-[#0c55ea] to-[#0284c7] text-white p-2.5 px-3.5 rounded-2xl rounded-tr-sm text-[11.5px] leading-relaxed shadow-md space-y-0.5">
+          <div class="font-medium">${q}</div>
+          <div class="text-[9px] text-blue-100 text-right opacity-80">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
+        </div>
+      `;
+      history.appendChild(userBubble);
+      history.scrollTop = history.scrollHeight;
+
+      // 2. Append Live Animated Reasoning Bubble
+      const typingId = "typing-" + Date.now();
+      const typingBubble = document.createElement("div");
+      typingBubble.id = typingId;
+      typingBubble.className = "flex gap-2.5 items-start";
+      typingBubble.innerHTML = `
+        <div class="w-7 h-7 rounded-full p-0.5 bg-gradient-to-tr from-emerald-400 to-sky-400 shrink-0 shadow-sm">
+          <img src="/copilot_avatar.jpg" onerror="this.onerror=null; this.src='/static/copilot_avatar.jpg';" alt="Avatar" class="w-full h-full rounded-full object-cover">
+        </div>
+        <div class="bg-white dark:bg-[#0c1b33] p-2.5 px-3 rounded-2xl rounded-tl-sm border border-slate-200 dark:border-[#192f54] text-[11px] text-sky-500 font-medium animate-pulse flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-sky-400 animate-ping"></span>
+          <span>Razor Copilot is reasoning...</span>
+        </div>
+      `;
+      history.appendChild(typingBubble);
+      history.scrollTop = history.scrollHeight;
 
       try {
         const data = await safeApiCall("/api/v1/copilot/chat", "POST", { query: q });
         const answer = data.response;
-        const badge = data.source === "ollama_local" ? "🦙 Ollama Local LLM" : "⚡ Neural Knowledge Index";
-        box.innerHTML = `
-          <div class="space-y-1.5">
-            <div class="font-medium text-slate-800 dark:text-slate-200">${answer}</div>
-            <div class="text-[9.5px] text-slate-400 mono">Source: ${badge}</div>
+        const badge = data.source === "ollama_local" ? "🦙 Ollama Local LLM" : "⚡ Neural SRE Index";
+
+        const typingEl = document.getElementById(typingId);
+        if (typingEl) typingEl.remove();
+
+        // 3. Append Copilot Response Bubble (Left Side)
+        const copilotBubble = document.createElement("div");
+        copilotBubble.className = "flex gap-2.5 items-start";
+        
+        // Convert Markdown formatting into rich HTML
+        let formatted = answer
+          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+          .replace(/^• (.*$)/gim, '<div class="flex items-start gap-1.5 pl-1"><span class="text-sky-400 font-bold">•</span><span>$1</span></div>')
+          .replace(/\n\n/g, '<div class="h-1.5"></div>')
+          .replace(/\n/g, '<br>');
+
+        copilotBubble.innerHTML = `
+          <div class="w-7 h-7 rounded-full p-0.5 bg-gradient-to-tr from-emerald-400 to-sky-400 shrink-0 shadow-sm mt-0.5">
+            <img src="/copilot_avatar.jpg" onerror="this.onerror=null; this.src='/static/copilot_avatar.jpg';" alt="Avatar" class="w-full h-full rounded-full object-cover">
+          </div>
+          <div class="flex-1 bg-white dark:bg-[#0c1b33] p-3 rounded-2xl rounded-tl-sm border border-slate-200 dark:border-[#192f54] shadow-sm space-y-2 text-slate-800 dark:text-slate-200">
+            <div class="flex items-center justify-between text-[9.5px] text-slate-400 border-b border-slate-100 dark:border-slate-800/80 pb-1">
+              <span class="font-bold text-sky-600 dark:text-sky-400 flex items-center gap-1">
+                <span>Razor Copilot</span>
+                <span class="px-1.5 py-0.2 rounded text-[8.5px] bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 mono">${badge}</span>
+              </span>
+              <button onclick="speakLastCopilotMessage(this)" class="text-sky-500 hover:text-sky-400 flex items-center gap-1 font-semibold cursor-pointer">
+                🔊 Speak
+              </button>
+            </div>
+            <div class="copilot-msg-content leading-relaxed text-[11.5px]">
+              ${formatted}
+            </div>
           </div>
         `;
-        showToast("✨ Razor Copilot answered your query!", "success");
+        history.appendChild(copilotBubble);
+        history.scrollTop = history.scrollHeight;
+
       } catch (err) {
-        // Safe offline fallback in frontend if network offline
-        let fallback = `🤖 [RAZOR COPILOT INSIGHT for "${q}"]: RazorRevive-OS operates as a 3-tier deterministic recovery control plane for Razorpay merchants, integrating real-time NPCI switch telemetry, SciPy-fitted Weibull hazard retries, 1-Click WhatsApp dynamic QR links, Hinglish B2B voice negotiation, and Distributed CAS Mutex locks guaranteeing 0 double debits.`;
-        box.innerHTML = `<div class="font-medium text-slate-800 dark:text-slate-200">${fallback}</div>`;
-        showToast("✨ Razor Copilot answered your query!", "success");
+        const typingEl = document.getElementById(typingId);
+        if (typingEl) typingEl.remove();
+
+        const errorBubble = document.createElement("div");
+        errorBubble.className = "flex gap-2.5 items-start";
+        errorBubble.innerHTML = `
+          <div class="w-7 h-7 rounded-full p-0.5 bg-gradient-to-tr from-emerald-400 to-sky-400 shrink-0 shadow-sm mt-0.5">
+            <img src="/copilot_avatar.jpg" onerror="this.onerror=null; this.src='/static/copilot_avatar.jpg';" alt="Avatar" class="w-full h-full rounded-full object-cover">
+          </div>
+          <div class="flex-1 bg-white dark:bg-[#0c1b33] p-3 rounded-2xl rounded-tl-sm border border-slate-200 dark:border-[#192f54] shadow-sm space-y-1 text-slate-800 dark:text-slate-200">
+            <div class="font-bold text-sky-400 text-[10px]">Razor Copilot (Autonomous Fallback)</div>
+            <div class="copilot-msg-content text-[11.5px] leading-relaxed">
+              RazorRevive-OS operates as a 3-tier deterministic recovery control plane for Razorpay merchants, integrating real-time NPCI switch telemetry, SciPy-fitted Weibull hazard retries, 1-Click WhatsApp dynamic QR links, Hinglish B2B voice negotiation, and Distributed CAS Mutex locks guaranteeing 0 double debits.
+            </div>
+          </div>
+        `;
+        history.appendChild(errorBubble);
+        history.scrollTop = history.scrollHeight;
       }
     }
 
