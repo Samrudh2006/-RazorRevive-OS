@@ -287,33 +287,43 @@
 <body class="min-h-screen flex flex-col antialiased selection:bg-[#0c55ea] selection:text-white">
 
   <!-- TOP APP HEADER -->
-  <header id="app-header" class="h-16 border-b border-[#e2e8f0] bg-[#ffffff] px-5 flex items-center justify-between sticky top-0 z-50 transition-colors">
+  <header id="app-header" class="h-16 border-b border-[#e2e8f0] bg-[#ffffff] px-3 sm:px-5 flex items-center justify-between sticky top-0 z-50 transition-colors">
     
-    <!-- LEFT LOGO & SUBTITLE -->
-    <div class="flex items-center gap-3 cursor-pointer" onclick="switchNavTab('overview')">
-      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0c2340] via-[#0c55ea] to-[#38bdf8] p-0.5 shadow-md flex items-center justify-center">
-        <div class="w-full h-full bg-[#0c2340] rounded-[10px] flex items-center justify-center">
-          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none">
-            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="url(#rzp-grad-logo)" stroke="#38bdf8" stroke-width="1.2" stroke-linejoin="round"/>
-            <defs>
-              <linearGradient id="rzp-grad-logo" x1="3" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#0c55ea"/>
-                <stop offset="1" stop-color="#38bdf8"/>
-              </linearGradient>
-            </defs>
-          </svg>
+    <!-- LEFT LOGO & MOBILE HAMBURGER -->
+    <div class="flex items-center gap-2.5">
+      <!-- Mobile Drawer Hamburger Toggle -->
+      <button onclick="toggleMobileMenu()" class="lg:hidden p-1.5 -ml-1 text-[#0c2340] dark:text-slate-200 hover:text-[#0c55ea] rounded-lg focus:outline-none" aria-label="Open Navigation Menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+
+      <!-- Logo & Title -->
+      <div class="flex items-center gap-2.5 cursor-pointer" onclick="switchNavTab('overview')">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-[#0c2340] via-[#0c55ea] to-[#38bdf8] p-0.5 shadow-md flex items-center justify-center shrink-0">
+          <div class="w-full h-full bg-[#0c2340] rounded-[10px] flex items-center justify-center">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="url(#rzp-grad-logo)" stroke="#38bdf8" stroke-width="1.2" stroke-linejoin="round"/>
+              <defs>
+                <linearGradient id="rzp-grad-logo" x1="3" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#0c55ea"/>
+                  <stop offset="1" stop-color="#38bdf8"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
         </div>
-      </div>
-      <div>
-        <div class="flex items-center gap-2">
-          <span class="text-lg font-bold text-[#0c2340] header-brand-title tracking-tight">RazorRevive<span class="text-[#0c55ea]">-OS</span></span>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-base sm:text-lg font-bold text-[#0c2340] header-brand-title tracking-tight">RazorRevive<span class="text-[#0c55ea]">-OS</span></span>
+          </div>
+          <div class="text-[10px] sm:text-[11px] text-slate-500 font-medium leading-none mt-0.5 hidden xs:block">AI Revenue Recovery Control Plane</div>
         </div>
-        <div class="text-[11px] text-slate-500 font-medium leading-none mt-0.5">AI Revenue Recovery Control Plane</div>
       </div>
     </div>
 
     <!-- CENTER EYEBROW & METADATA -->
-    <div class="hidden md:flex flex-col items-center justify-center">
+    <div class="hidden xl:flex flex-col items-center justify-center">
       <div class="text-[11px] font-bold text-[#0c55ea] tracking-wider uppercase">
         RAZORPAY AI BUILDATHON • TRACK 03
       </div>
@@ -323,20 +333,22 @@
     </div>
 
     <!-- RIGHT HEADER CONTROLS -->
-    <div class="flex items-center gap-2.5">
+    <div class="flex items-center gap-2">
 
       <!-- RUN 100-BATCH BENCHMARK BUTTON -->
-      <button onclick="runBenchmarkAction()" id="header-benchmark-btn" class="h-9 px-4 rounded-lg btn-primary text-xs font-semibold flex items-center gap-2 shadow-sm">
-        <svg class="w-3.5 h-3.5 text-blue-100" fill="currentColor" viewBox="0 0 20 20">
+      <button onclick="runBenchmarkAction()" id="header-benchmark-btn" class="h-8 sm:h-9 px-2.5 sm:px-4 rounded-lg btn-primary text-xs font-semibold flex items-center gap-1.5 sm:gap-2 shadow-sm">
+        <svg class="w-3.5 h-3.5 text-blue-100 shrink-0" fill="currentColor" viewBox="0 0 20 20">
           <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
         </svg>
-        <span id="benchmark-btn-text">Run 100-Batch Benchmark</span>
+        <span id="benchmark-btn-text" class="hidden sm:inline">Run 100-Batch Benchmark</span>
+        <span class="sm:hidden font-bold">100-Batch</span>
       </button>
 
       <!-- DEMO SCENARIOS DROPDOWN BUTTON -->
       <div class="relative">
-        <button onclick="toggleScenariosMenu()" id="scenarios-btn" class="h-9 px-3 rounded-lg btn-secondary text-xs font-medium flex items-center gap-1.5">
-          <span>Demo Scenarios</span>
+        <button onclick="toggleScenariosMenu()" id="scenarios-btn" class="h-8 sm:h-9 px-2.5 sm:px-3 rounded-lg btn-secondary text-xs font-medium flex items-center gap-1">
+          <span class="hidden sm:inline">Demo Scenarios</span>
+          <span class="sm:hidden">Scenarios</span>
           <svg class="w-3 h-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
           </svg>
@@ -367,22 +379,63 @@
         </div>
       </div>
 
-      <!-- SIMULATION MODE PILL -->
-      <div class="h-8 px-3 rounded-full bg-[#ecfdf5] dark:bg-[#0b2518] border border-[#a7f3d0] dark:border-[#166534] flex items-center gap-1.5">
+      <!-- SIMULATION MODE PILL (Hidden on small mobile) -->
+      <div class="h-8 px-2.5 sm:px-3 rounded-full bg-[#ecfdf5] dark:bg-[#0b2518] border border-[#a7f3d0] dark:border-[#166534] hidden md:flex items-center gap-1.5">
         <span class="w-2 h-2 rounded-full bg-[#10b981]"></span>
-        <span class="text-[10px] font-bold text-[#047857] dark:text-[#10b981] tracking-wider mono uppercase">SIMULATION MODE</span>
+        <span class="text-[10px] font-bold text-[#047857] dark:text-[#10b981] tracking-wider mono uppercase">SIMULATION</span>
       </div>
 
+      <!-- THEME TOGGLE BUTTON -->
+      <button onclick="toggleThemeMode()" id="theme-toggle-btn" class="h-8 w-8 sm:h-9 sm:w-9 rounded-lg border border-slate-200 dark:border-[#1e293b] bg-slate-50 dark:bg-[#081224] flex items-center justify-center text-sm shadow-sm transition">
+        <span id="theme-icon">☀️</span>
+      </button>
+
       <!-- USER AVATAR -->
-      <div class="w-8 h-8 rounded-full bg-[#0c2340] border border-[#132f54] flex items-center justify-center text-xs font-bold text-white shadow-sm">
+      <div class="w-8 h-8 rounded-full bg-[#0c2340] border border-[#132f54] flex items-center justify-center text-xs font-bold text-white shadow-sm shrink-0">
         RR
       </div>
 
     </div>
   </header>
 
+  <!-- MOBILE SLIDING DRAWER OVERLAY -->
+  <div id="mobile-drawer" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex lg:hidden">
+    <div class="w-72 bg-[#0c2340] h-full p-4 flex flex-col justify-between overflow-y-auto shadow-2xl border-r border-[#132f54]">
+      <div class="space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-[#132f54]">
+          <div class="text-sm font-bold text-white flex items-center gap-2">
+            <span>⚡ RazorRevive Menu</span>
+          </div>
+          <button onclick="toggleMobileMenu()" class="p-1.5 text-slate-400 hover:text-white rounded-lg">✕</button>
+        </div>
+
+        <nav class="space-y-1 text-xs" id="mobile-sidebar-nav">
+          <button onclick="switchNavTab('overview'); toggleMobileMenu();" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-[#132f54] hover:text-white text-left font-medium">🏠 Overview</button>
+          <button onclick="switchNavTab('fast_loop'); toggleMobileMenu();" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-[#132f54] hover:text-white text-left font-medium">⚡ Fast Loop Sentinel</button>
+          <button onclick="switchNavTab('npci_switch'); toggleMobileMenu();" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sky-400 hover:bg-[#132f54] hover:text-white text-left font-medium">📡 NPCI Switch Radar</button>
+          <button onclick="switchNavTab('bulk_recovery'); toggleMobileMenu();" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-emerald-400 hover:bg-[#132f54] hover:text-white text-left font-medium">📄 Bulk Batch CSV</button>
+          <button onclick="switchNavTab('card_tokens'); toggleMobileMenu();" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-amber-400 hover:bg-[#132f54] hover:text-white text-left font-medium">💳 Card Token Lifecycle</button>
+          <button onclick="switchNavTab('deep_loop'); toggleMobileMenu();" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-purple-400 hover:bg-[#132f54] hover:text-white text-left font-medium">🎙️ Deep Loop Voice</button>
+          <button onclick="switchNavTab('financial_yield'); toggleMobileMenu();" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-indigo-400 hover:bg-[#132f54] hover:text-white text-left font-medium">💰 Financial Yield & ROI</button>
+          <button onclick="switchNavTab('red_team'); toggleMobileMenu();" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-rose-400 hover:bg-[#132f54] hover:text-white text-left font-medium">🛡️ Red-Team Lab</button>
+          <button onclick="switchNavTab('ptp_calendar'); toggleMobileMenu();" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-[#132f54] hover:text-white text-left font-medium">📅 PTP Calendar</button>
+          <button onclick="switchNavTab('audit_ledger'); toggleMobileMenu();" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-[#132f54] hover:text-white text-left font-medium">🔒 Audit Ledger (SHA-256)</button>
+          <button onclick="switchNavTab('benchmark'); toggleMobileMenu();" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-[#132f54] hover:text-white text-left font-medium">📊 100-Case Benchmark</button>
+          <button onclick="switchNavTab('policy_engine'); toggleMobileMenu();" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-[#132f54] hover:text-white text-left font-medium">⚖️ Policy Engine</button>
+          <button onclick="switchNavTab('analytics'); toggleMobileMenu();" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-[#132f54] hover:text-white text-left font-medium">📈 Weibull Analytics</button>
+          <button onclick="switchNavTab('logs'); toggleMobileMenu();" class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-[#132f54] hover:text-white text-left font-medium">📜 Live Logs</button>
+        </nav>
+      </div>
+
+      <div class="p-3 rounded-lg bg-[#081224] border border-[#142442] text-[10px] text-slate-400 mono">
+        RazorRevive-OS v1.1.0 • Mobile Active
+      </div>
+    </div>
+    <div class="flex-1" onclick="toggleMobileMenu()"></div>
+  </div>
+
   <!-- BODY CONTENT WRAPPER -->
-  <div class="flex-1 flex overflow-hidden">
+  <div class="flex-1 flex overflow-hidden pb-16 lg:pb-0">
 
     <!-- LEFT SIDEBAR -->
     <aside id="app-sidebar" class="w-60 bg-[#0c2340] border-r border-[#132f54] flex flex-col justify-between p-3 shrink-0 hidden lg:flex">
@@ -3673,6 +3726,48 @@
 
     </div>
   </div>
+
+  <!-- FIXED MOBILE BOTTOM NAVIGATION BAR (Visible on screens < lg) -->
+  <nav id="mobile-bottom-nav" class="fixed bottom-0 left-0 right-0 h-16 bg-[#0c2340] border-t border-[#132f54] z-40 flex items-center justify-around px-2 lg:hidden shadow-2xl backdrop-blur-md">
+    <!-- Overview Tab -->
+    <button onclick="switchNavTab('overview')" class="flex flex-col items-center justify-center gap-1 text-slate-300 hover:text-white px-2 py-1">
+      <span class="text-base">🏠</span>
+      <span class="text-[10px] font-medium">Overview</span>
+    </button>
+
+    <!-- Fast Loop -->
+    <button onclick="switchNavTab('fast_loop')" class="flex flex-col items-center justify-center gap-1 text-slate-300 hover:text-white px-2 py-1">
+      <span class="text-base">⚡</span>
+      <span class="text-[10px] font-medium">Fast Loop</span>
+    </button>
+
+    <!-- NPCI Switch -->
+    <button onclick="switchNavTab('npci_switch')" class="flex flex-col items-center justify-center gap-1 text-sky-400 hover:text-white px-2 py-1">
+      <span class="text-base">📡</span>
+      <span class="text-[10px] font-medium">Radar</span>
+    </button>
+
+    <!-- Voice Deep Loop -->
+    <button onclick="switchNavTab('deep_loop')" class="flex flex-col items-center justify-center gap-1 text-purple-400 hover:text-white px-2 py-1">
+      <span class="text-base">🎙️</span>
+      <span class="text-[10px] font-medium">Voice</span>
+    </button>
+
+    <!-- Menu Toggle -->
+    <button onclick="toggleMobileMenu()" class="flex flex-col items-center justify-center gap-1 text-slate-300 hover:text-white px-2 py-1">
+      <span class="text-base">☰</span>
+      <span class="text-[10px] font-medium">All Views</span>
+    </button>
+  </nav>
+
+  <script>
+    function toggleMobileMenu() {
+      const drawer = document.getElementById('mobile-drawer');
+      if (drawer) {
+        drawer.classList.toggle('hidden');
+      }
+    }
+  </script>
 </body>
 </html>
 
