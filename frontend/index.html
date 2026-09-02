@@ -2622,11 +2622,13 @@
 
       const waOrder = document.getElementById("wa-order-id");
       const waAmt = document.getElementById("wa-amount");
-      const waUpi = document.getElementById("wa-upi-btn");
+      const waSuccessState = document.getElementById("wa-success-state");
+      const waButtonsContainer = document.getElementById("wa-buttons-container");
 
       if (waOrder) waOrder.textContent = payId;
       if (waAmt) waAmt.textContent = `₹${amt.toFixed(2)}`;
-      if (waUpi) waUpi.href = `upi://pay?pa=merchant@razorpay&pn=RazorRevive&am=${amt.toFixed(2)}&cu=INR`;
+      if (waSuccessState) waSuccessState.classList.add("hidden");
+      if (waButtonsContainer) waButtonsContainer.classList.remove("hidden");
 
       const modal = document.getElementById("whatsapp-modal");
       if (modal) modal.classList.remove("hidden");
@@ -2635,6 +2637,63 @@
     function closeWhatsAppPreviewModal() {
       const modal = document.getElementById("whatsapp-modal");
       if (modal) modal.classList.add("hidden");
+    }
+
+    function simulateUpiAppPayment(appName) {
+      const buttonsContainer = document.getElementById("wa-buttons-container");
+      const successState = document.getElementById("wa-success-state");
+      const successMsg = document.getElementById("wa-success-msg");
+      const amt = document.getElementById("wa-amount") ? document.getElementById("wa-amount").textContent : "₹2,499.00";
+      const orderId = document.getElementById("wa-order-id") ? document.getElementById("wa-order-id").textContent : "pay_9A12BC34DE";
+
+      if (buttonsContainer) buttonsContainer.classList.add("hidden");
+      if (successState) {
+        successState.classList.remove("hidden");
+        successState.innerHTML = `
+          <div class="p-3 bg-[#064e3b]/80 border border-[#059669] rounded-xl text-center space-y-1.5 animate-pulse">
+            <div class="text-xs font-bold text-[#34d399] flex items-center justify-center gap-1.5">
+              <svg class="w-4 h-4 animate-spin text-[#34d399]" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+              <span>Authorizing via ${appName}...</span>
+            </div>
+            <div class="text-[10px] text-slate-300">Processing ${amt} on ${appName} Gateway Rail</div>
+          </div>
+        `;
+
+        setTimeout(() => {
+          successState.innerHTML = `
+            <div class="p-3 bg-[#064e3b] border border-[#10b981] rounded-xl text-center space-y-2 shadow-lg">
+              <div class="w-7 h-7 bg-[#10b981] rounded-full mx-auto flex items-center justify-center text-white text-xs font-bold shadow">
+                ✓
+              </div>
+              <div class="text-xs font-bold text-white">Payment Recovered via ${appName}!</div>
+              <div class="text-[10px] text-emerald-200">
+                <span class="font-semibold text-white">${amt}</span> captured & settled instantly.<br>
+                <span class="mono text-[9px] text-emerald-300">Auth Code: UPI_${Math.random().toString(36).substring(2, 8).toUpperCase()}</span>
+              </div>
+              <button onclick="resetWhatsAppModalView()" class="mt-1 px-3 py-1 bg-[#047857] hover:bg-[#059669] text-white text-[10px] font-semibold rounded-lg transition-colors">
+                Test Another Method
+              </button>
+            </div>
+          `;
+          showToast(`⚡ ${orderId} Recovered (${amt}) via ${appName}!`, "success");
+        }, 700);
+      }
+    }
+
+    function resetWhatsAppModalView() {
+      const buttonsContainer = document.getElementById("wa-buttons-container");
+      const successState = document.getElementById("wa-success-state");
+      if (successState) successState.classList.add("hidden");
+      if (buttonsContainer) buttonsContainer.classList.remove("hidden");
+    }
+
+    function copyUpiIntentUri() {
+      const amtInput = document.getElementById("fast-amount");
+      const amt = amtInput ? parseFloat(amtInput.value) || 2499.0 : 2499.0;
+      const uri = `upi://pay?pa=razorrevive.merchant@razorpay&pn=Razorpay+Merchant&am=${amt.toFixed(2)}&cu=INR&tn=Invoice+Recovery`;
+      navigator.clipboard.writeText(uri).then(() => {
+        showToast("UPI Intent URI copied to clipboard!", "success");
+      });
     }
 
     mountComponents();
@@ -2652,7 +2711,7 @@
       <!-- Phone Top Notch Bar -->
       <div class="bg-[#202c33] px-4 py-3 flex items-center justify-between border-b border-[#2a3942]">
         <div class="flex items-center gap-2.5">
-          <div class="w-8 h-8 rounded-full bg-[#00a884] flex items-center justify-center font-bold text-white text-xs">
+          <div class="w-8 h-8 rounded-full bg-[#00a884] flex items-center justify-center font-bold text-white text-xs shadow">
             R
           </div>
           <div>
@@ -2667,7 +2726,7 @@
       </div>
 
       <!-- Chat Bubble Container -->
-      <div class="p-4 space-y-3 bg-[#0b141a] min-h-[280px]">
+      <div class="p-4 space-y-3 bg-[#0b141a] min-h-[300px]">
         <!-- System Notice -->
         <div class="text-center">
           <span class="px-2 py-1 rounded bg-[#182229] text-[9px] text-[#8696a0] mono">🔒 End-to-end encrypted • DPDP Act Compliant</span>
@@ -2692,16 +2751,30 @@
             </div>
           </div>
 
+          <!-- Dynamic Success State Container -->
+          <div id="wa-success-state" class="hidden"></div>
+
           <!-- 1-Click Pay Buttons -->
-          <div class="space-y-1.5 pt-1">
-            <a id="wa-upi-btn" href="upi://pay?pa=merchant@razorpay&pn=RazorRevive&am=2499.00&cu=INR" target="_blank" class="w-full py-2 bg-[#00a884] hover:bg-[#008f6f] text-white text-xs font-bold rounded-xl flex items-center justify-center gap-2 shadow-lg transition-colors">
+          <div id="wa-buttons-container" class="space-y-1.5 pt-1">
+            <button onclick="simulateUpiAppPayment('UPI Intent')" class="w-full py-2.5 bg-[#00a884] hover:bg-[#008f6f] active:scale-98 text-white text-xs font-bold rounded-xl flex items-center justify-center gap-2 shadow-lg transition-all cursor-pointer">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-              <span>1-Click Pay with UPI Intent</span>
-            </a>
+              <span>⚡ 1-Click Pay with UPI Intent</span>
+            </button>
             <div class="flex gap-1.5">
-              <button class="flex-1 py-1.5 bg-[#182229] hover:bg-[#202c33] text-[10px] text-[#8696a0] font-medium rounded-lg border border-[#2a3942]">GPay</button>
-              <button class="flex-1 py-1.5 bg-[#182229] hover:bg-[#202c33] text-[10px] text-[#8696a0] font-medium rounded-lg border border-[#2a3942]">PhonePe</button>
-              <button class="flex-1 py-1.5 bg-[#182229] hover:bg-[#202c33] text-[10px] text-[#8696a0] font-medium rounded-lg border border-[#2a3942]">Paytm</button>
+              <button onclick="simulateUpiAppPayment('GPay')" class="flex-1 py-1.5 bg-[#182229] hover:bg-[#2a3942] active:bg-[#00a884] active:text-white text-[11px] text-slate-200 font-semibold rounded-lg border border-[#2a3942] transition-colors cursor-pointer flex items-center justify-center gap-1">
+                <span>GPay</span>
+              </button>
+              <button onclick="simulateUpiAppPayment('PhonePe')" class="flex-1 py-1.5 bg-[#182229] hover:bg-[#2a3942] active:bg-[#00a884] active:text-white text-[11px] text-slate-200 font-semibold rounded-lg border border-[#2a3942] transition-colors cursor-pointer flex items-center justify-center gap-1">
+                <span>PhonePe</span>
+              </button>
+              <button onclick="simulateUpiAppPayment('Paytm')" class="flex-1 py-1.5 bg-[#182229] hover:bg-[#2a3942] active:bg-[#00a884] active:text-white text-[11px] text-slate-200 font-semibold rounded-lg border border-[#2a3942] transition-colors cursor-pointer flex items-center justify-center gap-1">
+                <span>Paytm</span>
+              </button>
+            </div>
+            <div class="text-center pt-0.5">
+              <button onclick="copyUpiIntentUri()" class="text-[9px] text-[#8696a0] hover:text-[#34d399] underline mono">
+                📋 Copy Raw UPI Intent URI
+              </button>
             </div>
           </div>
           <div class="text-[9px] text-right text-[#8696a0] mono">Just now ✓✓</div>
