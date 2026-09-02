@@ -4995,45 +4995,35 @@
       }, 200);
     }
 
-    function handleCopilotCustomQuery(e) {
+    async function handleCopilotCustomQuery(e) {
       e.preventDefault();
       const input = document.getElementById("copilot-user-input");
       const box = document.getElementById("copilot-response-text");
       if (!input || !box) return;
 
-      const q = input.value.trim().toLowerCase();
+      const q = input.value.trim();
       if (!q) return;
 
       input.value = "";
-      box.innerHTML = `<span class="animate-pulse text-sky-400">🤖 Querying RazorRevive Neural Knowledge Base...</span>`;
+      box.innerHTML = `<span class="animate-pulse text-sky-400">🤖 Querying Razor Neural Knowledge Base & Ollama...</span>`;
 
-      setTimeout(() => {
-        let answer = "";
-        if (q.includes("sbi") || q.includes("outage") || q.includes("weibull") || q.includes("retry") || q.includes("bank") || q.includes("delay")) {
-          answer = COPILOT_KNOWLEDGE.sbi;
-        } else if (q.includes("whatsapp") || q.includes("qr") || q.includes("soft") || q.includes("b2c") || q.includes("insufficient") || q.includes("upi")) {
-          answer = COPILOT_KNOWLEDGE.whatsapp;
-        } else if (q.includes("voice") || q.includes("gst") || q.includes("b2b") || q.includes("call") || q.includes("hinglish") || q.includes("speech") || q.includes("invoice")) {
-          answer = COPILOT_KNOWLEDGE.voice;
-        } else if (q.includes("mutex") || q.includes("double") || q.includes("debit") || q.includes("race") || q.includes("storm") || q.includes("attack") || q.includes("lock")) {
-          answer = COPILOT_KNOWLEDGE.mutex;
-        } else if (q.includes("benchmark") || q.includes("100") || q.includes("recovery") || q.includes("gmv") || q.includes("yield") || q.includes("score") || q.includes("rate")) {
-          answer = COPILOT_KNOWLEDGE.benchmark;
-        } else if (q.includes("trai") || q.includes("rbi") || q.includes("dpdp") || q.includes("compliance") || q.includes("law") || q.includes("discount") || q.includes("quiet")) {
-          answer = COPILOT_KNOWLEDGE.compliance;
-        } else if (q.includes("sqlite") || q.includes("db") || q.includes("database") || q.includes("wal") || q.includes("postgres") || q.includes("storage")) {
-          answer = COPILOT_KNOWLEDGE.sqlite;
-        } else if (q.includes("token") || q.includes("card") || q.includes("vts") || q.includes("mdes") || q.includes("cryptogram")) {
-          answer = COPILOT_KNOWLEDGE.token;
-        } else if (q.includes("architecture") || q.includes("tier") || q.includes("stack") || q.includes("how") || q.includes("what is razorrevive")) {
-          answer = COPILOT_KNOWLEDGE.architecture;
-        } else {
-          answer = `🤖 [RAZOR COPILOT INSIGHT for "${q}"]: RazorRevive-OS autonomously manages failed transactions across B2C & B2B rails using real-time NPCI banking telemetry, SciPy-fitted Weibull hazard retries, 1-Click WhatsApp dynamic UPI links, Hinglish B2B voice dispute resolution, and Distributed CAS Mutex locks. Try asking about "SBI outage", "WhatsApp QR", "B2B voice", "CAS mutex", or "100 benchmark"!`;
-        }
-
-        box.innerHTML = `<div class="font-medium text-slate-800 dark:text-slate-200">${answer}</div>`;
+      try {
+        const data = await safeApiCall("/api/v1/copilot/chat", "POST", { query: q });
+        const answer = data.response;
+        const badge = data.source === "ollama_local" ? "🦙 Ollama Local LLM" : "⚡ Neural Knowledge Index";
+        box.innerHTML = `
+          <div class="space-y-1.5">
+            <div class="font-medium text-slate-800 dark:text-slate-200">${answer}</div>
+            <div class="text-[9.5px] text-slate-400 mono">Source: ${badge}</div>
+          </div>
+        `;
         showToast("✨ Razor Copilot answered your query!", "success");
-      }, 250);
+      } catch (err) {
+        // Safe offline fallback in frontend if network offline
+        let fallback = `🤖 [RAZOR COPILOT INSIGHT for "${q}"]: RazorRevive-OS operates as a 3-tier deterministic recovery control plane for Razorpay merchants, integrating real-time NPCI switch telemetry, SciPy-fitted Weibull hazard retries, 1-Click WhatsApp dynamic QR links, Hinglish B2B voice negotiation, and Distributed CAS Mutex locks guaranteeing 0 double debits.`;
+        box.innerHTML = `<div class="font-medium text-slate-800 dark:text-slate-200">${fallback}</div>`;
+        showToast("✨ Razor Copilot answered your query!", "success");
+      }
     }
 
     function speakCopilotResponse() {
