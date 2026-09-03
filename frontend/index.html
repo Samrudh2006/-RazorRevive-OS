@@ -14,6 +14,7 @@
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -495,6 +496,13 @@
 
     <!-- RIGHT HEADER CONTROLS -->
     <div class="flex items-center gap-2">
+
+      <!-- CMDK COMMAND PALETTE TRIGGER BUTTON -->
+      <button onclick="openCommandPalette()" class="hidden lg:flex items-center gap-2 h-8 sm:h-9 px-3 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-[#081224] dark:hover:bg-[#0c182c] border border-slate-300 dark:border-[#1e293b] text-slate-600 dark:text-slate-300 text-xs font-semibold transition cursor-pointer shadow-sm">
+        <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <span>Search commands...</span>
+        <kbd class="px-1.5 py-0.5 rounded text-[10px] bg-slate-200 dark:bg-[#142442] border border-slate-300 dark:border-[#1e3a6a] text-slate-700 dark:text-slate-300 mono font-bold">⌘K</kbd>
+      </button>
 
       <!-- 60-SECOND GUIDED SRE TOUR BUTTON -->
       <button onclick="startGuidedTour()" id="header-tour-btn" class="h-8 sm:h-9 px-2.5 sm:px-3.5 rounded-lg bg-gradient-to-r from-[#8b5cf6] to-[#0c55ea] hover:from-[#7c3aed] hover:to-[#0942b8] text-white text-xs font-bold flex items-center gap-1.5 shadow-md transition-all cursor-pointer hover:scale-105 active:scale-95 border border-purple-400/30">
@@ -3743,9 +3751,10 @@
         const data = await safeApiCall("/api/v1/benchmark/run", "POST");
         const s = data.summary;
 
-        document.getElementById("kpi-net-recovery").innerText = `${s.recovery_rate_pct.toFixed(2)}%`;
-        document.getElementById("kpi-recovered-gmv").innerText = `₹${Math.round(s.recovered_gmv).toLocaleString()}`;
-        document.getElementById("kpi-at-risk-gmv").innerText = `₹${Math.round(s.at_risk_gmv).toLocaleString()}`;
+        // Animate metrics rolling up smoothly
+        countUpValue("kpi-net-recovery", 0, s.recovery_rate_pct, 1200, "", "%", 2);
+        countUpValue("kpi-recovered-gmv", 0, s.recovered_gmv, 1400, "₹", "", 0);
+        countUpValue("kpi-at-risk-gmv", 0, s.at_risk_gmv, 1400, "₹", "", 0);
         document.getElementById("kpi-human-escalations").innerText = s.human_escalations;
 
         document.querySelectorAll("#bm-total-tx").forEach(el => el.innerText = s.total_transactions);
@@ -3756,6 +3765,7 @@
         document.querySelectorAll("#bm-human-esc").forEach(el => el.innerText = s.human_escalations);
         document.querySelectorAll("#bm-safety-supp").forEach(el => el.innerText = s.safety_suppressions);
 
+        triggerCelebrationConfetti();
         showToast(`🏆 100-Batch Benchmark Completed! Recovery Rate: ${s.recovery_rate_pct.toFixed(2)}% • 0 Violations`, "success");
       } catch (err) {
         showToast("Benchmark Error: " + err.message, "error");
@@ -4598,6 +4608,7 @@
               </button>
             </div>
           `;
+          triggerCelebrationConfetti();
           showToast(`⚡ ${orderId} Recovered (${amt}) via ${appName}!`, "success");
         }, 700);
       }
@@ -4995,6 +5006,176 @@
       if (tourActive) showTourStep(currentTourIndex);
     });
 
+    // =========================================================================
+    // 🎊 CELEBRATION CONFETTI ENGINE
+    // =========================================================================
+    function triggerCelebrationConfetti() {
+      if (typeof confetti === "function") {
+        confetti({
+          particleCount: 75,
+          spread: 80,
+          origin: { y: 0.6 },
+          colors: ['#0c55ea', '#10b981', '#38bdf8', '#8b5cf6', '#f59e0b']
+        });
+      }
+    }
+
+    // =========================================================================
+    // 📈 SMOOTH NUMBER COUNTER TICK-UP ENGINE (COUNTUP)
+    // =========================================================================
+    function countUpValue(elementId, start, end, duration = 1200, prefix = "", suffix = "", decimals = 0) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      const startTime = performance.now();
+      function update(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+        const current = start + (end - start) * ease;
+        el.textContent = `${prefix}${current.toLocaleString(undefined, { minimumFractionDigits: decimals, maximumFractionDigits: decimals })}${suffix}`;
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    }
+
+    function animateAllKpis() {
+      countUpValue('kpi-net-recovery', 0, 78.39, 1300, '', '%', 2);
+      countUpValue('kpi-recovered-gmv', 0, 425600, 1500, '₹', '', 0);
+      countUpValue('kpi-at-risk-gmv', 0, 542850, 1500, '₹', '', 0);
+    }
+
+    // =========================================================================
+    // ⚡ CMDK COMMAND PALETTE ENGINE (CTRL+K / CMD+K)
+    // =========================================================================
+    const CMDK_COMMANDS = [
+      { id: "tour", title: "🧭 Start 60-Second Guided SRE Architecture Tour", category: "Actions", action: () => startGuidedTour() },
+      { id: "benchmark", title: "🚀 Run 100-Batch Benchmark Simulation", category: "Actions", action: () => runBenchmarkAction() },
+      { id: "whatsapp", title: "💬 Preview WhatsApp 1-Click Recovery & UPI QR", category: "Actions", action: () => openWhatsAppPreviewModal() },
+      { id: "copilot", title: "🤖 Open Razor Humanoid AI Copilot Drawer", category: "Actions", action: () => toggleAiCopilotDrawer() },
+      { id: "scenario_a", title: "⚡ Scenario A: Bank Outage 504 (Weibull +45m Retry)", category: "Scenarios", action: () => selectScenario('A') },
+      { id: "scenario_b", title: "📱 Scenario B: Soft Decline (1-Click UPI Payment Link)", category: "Scenarios", action: () => selectScenario('B') },
+      { id: "scenario_c", title: "🧾 Scenario C: B2B GSTIN Mutation Proposal & PTP", category: "Scenarios", action: () => selectScenario('C') },
+      { id: "scenario_d", title: "📅 Scenario D: Promise-to-Pay (PTP) Lock Calendar", category: "Scenarios", action: () => selectScenario('D') },
+      { id: "scenario_e", title: "🛡️ Scenario E: 50-Webhook Storm (CAS Mutex Race)", category: "Scenarios", action: () => selectScenario('E') },
+      { id: "nav_overview", title: "🏠 Switch View: Master SRE Overview Dashboard", category: "Navigation", action: () => switchNavTab('overview') },
+      { id: "nav_fast_loop", title: "⚡ Switch View: Fast-Loop B2C Mandates & UPI Links", category: "Navigation", action: () => switchNavTab('fast_loop') },
+      { id: "nav_npci", title: "📡 Switch View: NPCI 7-Bank Rail Telemetry Radar", category: "Navigation", action: () => switchNavTab('npci_switch') },
+      { id: "nav_deep_loop", title: "🎙️ Switch View: Deep-Loop Autonomous Voice Agent", category: "Navigation", action: () => switchNavTab('deep_loop') },
+      { id: "nav_bulk", title: "📄 Switch View: Bulk CSV Batch Processor", category: "Navigation", action: () => switchNavTab('bulk_recovery') },
+      { id: "nav_audit", title: "📜 Switch View: SHA-256 Tamper-Evident Audit Ledger", category: "Navigation", action: () => switchNavTab('audit_ledger') },
+      { id: "nav_yield", title: "💰 Switch View: Financial Yield & ROI Calculator", category: "Navigation", action: () => switchNavTab('financial_yield') },
+      { id: "nav_tokens", title: "🔁 Switch View: Card Network Token Lifecycle", category: "Navigation", action: () => switchNavTab('card_tokens') },
+      { id: "nav_docs", title: "📖 Switch View: System Architecture & Video Playbook", category: "Navigation", action: () => switchNavTab('docs') }
+    ];
+
+    let cmdkSelectedIndex = 0;
+    let filteredCmdkList = [...CMDK_COMMANDS];
+
+    function openCommandPalette() {
+      const modal = document.getElementById("command-palette-modal");
+      const input = document.getElementById("cmdk-search-input");
+      if (modal) {
+        modal.classList.remove("hidden");
+        modal.style.display = "flex";
+        cmdkSelectedIndex = 0;
+        filterCommandPalette("");
+        if (input) {
+          input.value = "";
+          setTimeout(() => input.focus(), 50);
+        }
+      }
+    }
+
+    function closeCommandPalette() {
+      const modal = document.getElementById("command-palette-modal");
+      if (modal) {
+        modal.classList.add("hidden");
+        modal.style.display = "none";
+      }
+    }
+
+    function filterCommandPalette(query) {
+      const q = query.toLowerCase().trim();
+      const listContainer = document.getElementById("cmdk-results-list");
+      if (!listContainer) return;
+
+      filteredCmdkList = CMDK_COMMANDS.filter(c => 
+        c.title.toLowerCase().includes(q) || c.category.toLowerCase().includes(q)
+      );
+
+      if (filteredCmdkList.length === 0) {
+        listContainer.innerHTML = `
+          <div class="p-6 text-center text-slate-400 text-xs">
+            <span class="text-base">🔍</span> No matching commands found for "${query}"
+          </div>
+        `;
+        return;
+      }
+
+      if (cmdkSelectedIndex >= filteredCmdkList.length) {
+        cmdkSelectedIndex = 0;
+      }
+
+      listContainer.innerHTML = filteredCmdkList.map((c, idx) => `
+        <div onclick="executePaletteCommand(${idx})" class="p-2.5 px-3 rounded-xl flex items-center justify-between cursor-pointer transition-all ${idx === cmdkSelectedIndex ? 'bg-[#0c55ea] text-white font-bold shadow-md' : 'text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-[#142442]'}">
+          <div class="flex items-center gap-2.5 text-xs">
+            <span class="text-sm">${c.title.split(' ')[0]}</span>
+            <span>${c.title.substring(c.title.indexOf(' ') + 1)}</span>
+          </div>
+          <span class="px-2 py-0.5 rounded text-[9px] font-bold uppercase mono ${idx === cmdkSelectedIndex ? 'bg-white/20 text-white' : 'bg-slate-200 dark:bg-[#0c182c] text-slate-500 dark:text-slate-400'}">${c.category}</span>
+        </div>
+      `).join('');
+    }
+
+    function executePaletteCommand(index) {
+      const cmd = filteredCmdkList[index];
+      if (cmd && typeof cmd.action === "function") {
+        closeCommandPalette();
+        cmd.action();
+      }
+    }
+
+    // Global Keydown Listeners for Cmd+K / Ctrl+K and Palette Arrows
+    window.addEventListener("keydown", (e) => {
+      // 1. Trigger Command Palette (Ctrl+K or Cmd+K)
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        const modal = document.getElementById("command-palette-modal");
+        if (modal && !modal.classList.contains("hidden")) {
+          closeCommandPalette();
+        } else {
+          openCommandPalette();
+        }
+        return;
+      }
+
+      // 2. Command Palette Active Key Navigation
+      const modal = document.getElementById("command-palette-modal");
+      if (modal && !modal.classList.contains("hidden")) {
+        if (e.key === "Escape") {
+          e.preventDefault();
+          closeCommandPalette();
+        } else if (e.key === "ArrowDown") {
+          e.preventDefault();
+          if (filteredCmdkList.length > 0) {
+            cmdkSelectedIndex = (cmdkSelectedIndex + 1) % filteredCmdkList.length;
+            filterCommandPalette(document.getElementById("cmdk-search-input")?.value || "");
+          }
+        } else if (e.key === "ArrowUp") {
+          e.preventDefault();
+          if (filteredCmdkList.length > 0) {
+            cmdkSelectedIndex = (cmdkSelectedIndex - 1 + filteredCmdkList.length) % filteredCmdkList.length;
+            filterCommandPalette(document.getElementById("cmdk-search-input")?.value || "");
+          }
+        } else if (e.key === "Enter") {
+          e.preventDefault();
+          if (filteredCmdkList.length > 0) {
+            executePaletteCommand(cmdkSelectedIndex);
+          }
+        }
+      }
+    });
+
     mountComponents();
     updateOverviewBankGrid();
     refreshAuditLedger();
@@ -5002,10 +5183,37 @@
     renderWeibullCurve();
     initFintech3DTopology();
     updateLiveRoiCalculator();
+    animateAllKpis();
     setInterval(refreshAuditLedger, 5000);
     setInterval(refreshFullNPCISwitchView, 10000);
 
   </script>
+
+  <!-- CMDK SPOTLIGHT COMMAND PALETTE MODAL -->
+  <div id="command-palette-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden items-start justify-center pt-[12vh] p-3 sm:p-4 z-[99999]" style="z-index: 99999 !important; display: none;" onclick="if(event.target===this) closeCommandPalette()">
+    <div class="bg-white dark:bg-[#081224] border-2 border-sky-500/60 rounded-3xl w-full max-w-xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col transition-all duration-200" onclick="event.stopPropagation()">
+      <!-- Search Input Header -->
+      <div class="p-3 sm:p-4 border-b border-slate-200 dark:border-[#142442] flex items-center gap-3">
+        <svg class="w-5 h-5 text-sky-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input type="text" id="cmdk-search-input" oninput="filterCommandPalette(this.value)" placeholder="Type a command or search (e.g., 'benchmark', 'whatsapp', 'sbi', 'scenario')..." class="w-full bg-transparent text-sm text-slate-900 dark:text-white placeholder-slate-400 outline-none font-medium">
+        <kbd class="hidden sm:inline px-2 py-0.5 rounded text-[10px] bg-slate-100 dark:bg-[#142442] border border-slate-300 dark:border-[#1e3a6a] text-slate-500 dark:text-slate-400 mono font-bold">ESC</kbd>
+      </div>
+
+      <!-- Command Results List -->
+      <div id="cmdk-results-list" class="p-2 max-h-[380px] overflow-y-auto space-y-1 text-xs select-none">
+        <!-- Results rendered dynamically by filterCommandPalette() -->
+      </div>
+
+      <!-- Palette Footer -->
+      <div class="px-4 py-2 bg-slate-50 dark:bg-[#050c1a] border-t border-slate-200 dark:border-[#142442] flex items-center justify-between text-[10.5px] text-slate-500 dark:text-slate-400">
+        <div class="flex items-center gap-3">
+          <span>Navigate: <kbd class="font-bold mono">↑</kbd> <kbd class="font-bold mono">↓</kbd></span>
+          <span>Select: <kbd class="font-bold mono">↵ Enter</kbd></span>
+        </div>
+        <span>RazorRevive-OS Command Palette</span>
+      </div>
+    </div>
+  </div>
 
   <!-- HYPER-REALISTIC WHATSAPP SMARTPHONE MOCKUP MODAL -->
   <div id="whatsapp-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md hidden items-center justify-center p-3 sm:p-4 z-[99999]" style="z-index: 99999 !important; display: none;" onclick="if(event.target===this) closeWhatsAppPreviewModal()">
