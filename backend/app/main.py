@@ -1216,11 +1216,13 @@ async def copilot_chat_endpoint(req: CopilotChatRequest, request: Request):
         )
     else:
         answer = (
-            f"🤖 **Razor Copilot Diagnostic Insight for: \"{query}\"**\n\n"
-            "RazorRevive-OS is operating in live active mode. Key architectural pillars:\n"
-            "• **Fast-Loop**: Webhook ingestion with Weibull hazard-adjusted retries (+45m on bank downtime).\n"
-            "• **Deep-Loop**: Conversational Hinglish B2B voice resolution with atomic invoice mutation.\n"
-            "• **Policy Engine**: In-memory CAS mutex locks ensuring zero double-debit collisions."
+            f"🤖 **Razor Copilot Domain Architect Insight** (Query: *\"{query}\"*):\n\n"
+            "As an autonomous **Fintech SRE & Revenue Recovery Copilot**, my reasoning scope is strictly bounded to the RazorRevive-OS operational telemetry:\n\n"
+            "• **Issuing Bank Resilience**: SciPy Weibull survival models dynamically mode-shift retry windows (+45m optimal delay on 504 timeouts).\n"
+            "• **Omnichannel Pivot**: Instant 1-Click WhatsApp UPI Intent & QR dispatch on soft card declines.\n"
+            "• **B2B Autonomous Voice**: Hinglish negotiation with CFO approval gates and Promise-to-Pay (PTP) locks.\n"
+            "• **Zero-Trust Safety**: Distributed CAS Mutex locks guaranteeing 0 double-debit collisions.\n\n"
+            "💡 *Tip: Try asking me about 'Weibull hazard formula', 'CAS Mutex concurrency', 'TRAI quiet hours', or 'B2B GSTIN dispute'!*"
         )
 
     return {
