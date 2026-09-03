@@ -496,6 +496,13 @@
     <!-- RIGHT HEADER CONTROLS -->
     <div class="flex items-center gap-2">
 
+      <!-- 60-SECOND GUIDED SRE TOUR BUTTON -->
+      <button onclick="startGuidedTour()" id="header-tour-btn" class="h-8 sm:h-9 px-2.5 sm:px-3.5 rounded-lg bg-gradient-to-r from-[#8b5cf6] to-[#0c55ea] hover:from-[#7c3aed] hover:to-[#0942b8] text-white text-xs font-bold flex items-center gap-1.5 shadow-md transition-all cursor-pointer hover:scale-105 active:scale-95 border border-purple-400/30">
+        <span class="animate-pulse">🧭</span>
+        <span class="hidden sm:inline">60s Guided Tour</span>
+        <span class="sm:hidden font-bold">Tour</span>
+      </button>
+
       <!-- RUN 100-BATCH BENCHMARK BUTTON -->
       <button onclick="runBenchmarkAction()" id="header-benchmark-btn" class="h-8 sm:h-9 px-2.5 sm:px-4 rounded-lg btn-primary text-xs font-semibold flex items-center gap-1.5 sm:gap-2 shadow-sm cursor-pointer">
         <svg class="w-3.5 h-3.5 text-blue-100 shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -2827,7 +2834,7 @@
       </span>
       <!-- Enlarged Front-Facing Razor Copilot Avatar Image -->
       <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full p-0.5 bg-gradient-to-tr from-emerald-400 via-sky-300 to-white shadow-md shrink-0">
-        <img src="/copilot_avatar.jpg" onerror="this.onerror=null; this.src='/static/copilot_avatar.jpg';" alt="Razor Copilot" class="w-full h-full rounded-full object-cover">
+        <img src="copilot_avatar.jpg" onerror="this.onerror=null; this.src='assets/copilot_avatar.jpg'; if(!this.src) this.src='/copilot_avatar.jpg';" alt="Razor Copilot" class="w-full h-full rounded-full object-cover">
       </div>
       <div class="flex flex-col text-left leading-none pr-1">
         <span class="font-black tracking-wide text-xs sm:text-sm">Razor Copilot</span>
@@ -2844,7 +2851,7 @@
       <div class="flex items-center gap-3.5">
         <!-- Big Front-Facing Avatar Badge -->
         <div class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl p-0.5 bg-gradient-to-tr from-emerald-400 via-sky-400 to-blue-600 shadow-xl shrink-0">
-          <img src="/copilot_avatar.jpg" onerror="this.onerror=null; this.src='/static/copilot_avatar.jpg';" alt="Razor Copilot Avatar" class="w-full h-full rounded-2xl object-cover">
+          <img src="copilot_avatar.jpg" onerror="this.onerror=null; this.src='assets/copilot_avatar.jpg'; if(!this.src) this.src='/copilot_avatar.jpg';" alt="Razor Copilot Avatar" class="w-full h-full rounded-2xl object-cover">
           <span class="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-400 rounded-full border-2 border-white dark:border-[#0c182c]"></span>
         </div>
         <div>
@@ -2865,7 +2872,7 @@
       <!-- Initial Welcome Message from Copilot -->
       <div class="flex gap-2.5 items-start">
         <div class="w-7 h-7 rounded-full p-0.5 bg-gradient-to-tr from-emerald-400 to-sky-400 shrink-0 shadow-sm">
-          <img src="/copilot_avatar.jpg" onerror="this.onerror=null; this.src='/static/copilot_avatar.jpg';" alt="Avatar" class="w-full h-full rounded-full object-cover">
+          <img src="copilot_avatar.jpg" onerror="this.onerror=null; this.src='assets/copilot_avatar.jpg'; if(!this.src) this.src='/copilot_avatar.jpg';" alt="Avatar" class="w-full h-full rounded-full object-cover">
         </div>
         <div class="flex-1 bg-white dark:bg-[#0c1b33] p-3 rounded-2xl rounded-tl-sm border border-slate-200 dark:border-[#192f54] shadow-sm space-y-1.5 text-slate-800 dark:text-slate-200">
           <div class="flex items-center justify-between text-[10px] text-slate-400">
@@ -4747,6 +4754,247 @@
       });
     }
 
+    // =========================================================================
+    // 🧭 60-SECOND INTERACTIVE GUIDED SRE ARCHITECTURE TOUR ENGINE
+    // =========================================================================
+    const TOUR_STEPS = [
+      {
+        target: "#overview-kpi-grid",
+        fallbackTarget: "#view-overview .grid",
+        tab: "overview",
+        title: "1. Real-Time SRE Recovery Telemetry",
+        badge: "Live Telemetry",
+        badgeColor: "bg-emerald-950/80 text-emerald-400 border-emerald-500/40",
+        description: "Monitors <strong>Live Cohort Yield (78.39%)</strong> vs <strong>Held-Out 100-Case Benchmark (42.24%)</strong> with a mean orchestration latency of <strong>18.4ms</strong> and exactly <strong>0 double-debit collisions</strong>.",
+        highlightPadding: 8
+      },
+      {
+        target: "#fast-loop-panel",
+        fallbackTarget: "#fast-loop-container-slot",
+        tab: "overview",
+        title: "2. Fast-Loop: Weibull Retries & UPI Links",
+        badge: "Tier 1 & 2 Fast-Loop",
+        badgeColor: "bg-sky-950/80 text-sky-400 border-sky-500/40",
+        description: "Replaces naive static retries with <strong>SciPy Weibull Hazard models</strong> (+45m optimal survival peak on bank outages) and generates dynamic <strong>1-Click WhatsApp links</strong> with scannable UPI QR codes.",
+        highlightPadding: 10
+      },
+      {
+        target: "#deep-loop-panel",
+        fallbackTarget: "#deep-loop-container-slot",
+        tab: "overview",
+        title: "3. Deep-Loop: Hinglish B2B Voice & CFO Gate",
+        badge: "Tier 2 Conversational",
+        badgeColor: "bg-purple-950/80 text-purple-300 border-purple-500/40",
+        description: "Handles high-value B2B invoice disputes (>₹50,000) via autonomous <strong>Hinglish voice parsing</strong>. Generates GSTIN invoice mutation proposals flagged for <strong>CFO Approval</strong> and locks PTP schedules.",
+        highlightPadding: 10
+      },
+      {
+        target: "#overview-rail-section",
+        fallbackTarget: "#overview-npci-grid",
+        tab: "overview",
+        title: "4. Pluggable Banking Rail Health Radar",
+        badge: "Signal Ingestion",
+        badgeColor: "bg-amber-950/80 text-amber-300 border-amber-500/40",
+        description: "Ingests real-time banking telemetry across 7 major rails (HDFC, SBI, ICICI, etc.) to <strong>dynamically trip circuit breakers</strong> and prevent cascading gateway failures.",
+        highlightPadding: 8
+      },
+      {
+        target: "#audit-ledger-section",
+        fallbackTarget: "#audit-ledger-slot",
+        tab: "overview",
+        title: "5. SHA-256 Tamper-Evident Audit Ledger",
+        badge: "Cryptographic Forensics",
+        badgeColor: "bg-emerald-950/80 text-emerald-400 border-emerald-500/40",
+        description: "Every recovery decision, discount clamp (≤10%, ≤₹500), and TRAI quiet-hour rule (21:00-09:00 IST) is committed to an immutable <strong>SHA-256 sequential hash chain</strong> in SQLite WAL mode.",
+        highlightPadding: 8
+      }
+    ];
+
+    let currentTourIndex = 0;
+    let tourActive = false;
+
+    function startGuidedTour() {
+      tourActive = true;
+      currentTourIndex = 0;
+      switchNavTab('overview');
+      showTourStep(currentTourIndex);
+      showToast("🧭 Starting 60-Second Guided SRE Architecture Tour", "info");
+    }
+
+    function showTourStep(index) {
+      if (index < 0 || index >= TOUR_STEPS.length) {
+        exitGuidedTour();
+        return;
+      }
+      currentTourIndex = index;
+      const step = TOUR_STEPS[index];
+
+      if (step.tab) {
+        switchNavTab(step.tab);
+      }
+
+      setTimeout(() => {
+        let el = document.querySelector(step.target) || document.querySelector(step.fallbackTarget);
+        if (!el) {
+          // Retry selector
+          el = document.getElementById(step.target.replace("#", "")) || document.body;
+        }
+
+        // Smooth scroll target into view with margin
+        el.scrollIntoView({ behavior: "smooth", block: "center" });
+
+        setTimeout(() => {
+          renderTourOverlay(el, step, index);
+        }, 350);
+      }, 100);
+    }
+
+    function renderTourOverlay(targetEl, step, index) {
+      let overlay = document.getElementById("guided-tour-overlay");
+      if (!overlay) {
+        overlay = document.createElement("div");
+        overlay.id = "guided-tour-overlay";
+        overlay.className = "fixed inset-0 pointer-events-none z-[99998] transition-all duration-300";
+        overlay.innerHTML = `
+          <!-- Dark Dimming Backdrop with Cutout Spotlight -->
+          <div id="tour-spotlight-box" class="absolute rounded-2xl pointer-events-none transition-all duration-300 border-2 border-sky-400 shadow-[0_0_0_9999px_rgba(3,7,18,0.85),0_0_35px_rgba(56,189,248,0.7)] animate-pulse"></div>
+          
+          <!-- Glassmorphic Guided Popover Card -->
+          <div id="tour-popover-card" class="absolute pointer-events-auto w-auto max-w-[92vw] sm:max-w-md rounded-2xl bg-white/95 dark:bg-[#0c182c]/95 backdrop-blur-xl border-2 border-sky-500/70 shadow-2xl p-4 sm:p-5 space-y-3.5 text-slate-900 dark:text-slate-100 transition-all duration-300 z-10">
+            <!-- Header -->
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-blue-900/50 pb-2.5">
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider mono ${step.badgeColor || 'bg-blue-950 text-sky-400 border-blue-800'}" id="tour-badge">${step.badge}</span>
+                <span class="text-xs font-bold text-slate-500 dark:text-slate-400 mono" id="tour-step-counter">Step ${index + 1} of ${TOUR_STEPS.length}</span>
+              </div>
+              <button onclick="exitGuidedTour()" class="p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition font-bold text-sm cursor-pointer">✕</button>
+            </div>
+
+            <!-- Title & Body -->
+            <div class="space-y-1.5">
+              <h4 class="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white" id="tour-title">${step.title}</h4>
+              <p class="text-xs sm:text-[12.5px] leading-relaxed text-slate-700 dark:text-slate-300 font-normal" id="tour-desc">${step.description}</p>
+            </div>
+
+            <!-- Footer Controls & Progress Dots -->
+            <div class="flex items-center justify-between pt-2 border-t border-slate-200 dark:border-blue-900/40">
+              <!-- Dots -->
+              <div class="flex items-center gap-1.5" id="tour-dots-container">
+                ${TOUR_STEPS.map((_, i) => `<span class="w-2 h-2 rounded-full transition-all ${i === index ? 'w-5 bg-sky-400' : 'bg-slate-300 dark:bg-slate-700'}"></span>`).join('')}
+              </div>
+
+              <!-- Buttons -->
+              <div class="flex items-center gap-2">
+                <button onclick="prevTourStep()" id="tour-prev-btn" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-[#142442] dark:hover:bg-[#1c335a] text-slate-700 dark:text-slate-200 text-xs font-bold transition cursor-pointer ${index === 0 ? 'opacity-40 pointer-events-none' : ''}">
+                  ⬅ Back
+                </button>
+                <button onclick="nextTourStep()" id="tour-next-btn" class="px-4 py-1.5 rounded-xl bg-gradient-to-r from-[#0c55ea] to-[#0284c7] hover:from-[#0942b8] hover:to-[#0369a1] text-white text-xs font-extrabold shadow-lg transition-all active:scale-95 cursor-pointer">
+                  ${index === TOUR_STEPS.length - 1 ? 'Finish Tour 🎉' : 'Next ➔'}
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(overlay);
+      }
+
+      const rect = targetEl.getBoundingClientRect();
+      const pad = step.highlightPadding || 8;
+
+      const spotBox = document.getElementById("tour-spotlight-box");
+      const popover = document.getElementById("tour-popover-card");
+
+      if (spotBox) {
+        spotBox.style.top = `${Math.max(0, rect.top - pad)}px`;
+        spotBox.style.left = `${Math.max(0, rect.left - pad)}px`;
+        spotBox.style.width = `${rect.width + (pad * 2)}px`;
+        spotBox.style.height = `${rect.height + (pad * 2)}px`;
+      }
+
+      // Update contents
+      const badgeEl = document.getElementById("tour-badge");
+      const counterEl = document.getElementById("tour-step-counter");
+      const titleEl = document.getElementById("tour-title");
+      const descEl = document.getElementById("tour-desc");
+      const dotsContainer = document.getElementById("tour-dots-container");
+      const prevBtn = document.getElementById("tour-prev-btn");
+      const nextBtn = document.getElementById("tour-next-btn");
+
+      if (badgeEl) {
+        badgeEl.textContent = step.badge;
+        badgeEl.className = `px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider mono ${step.badgeColor}`;
+      }
+      if (counterEl) counterEl.textContent = `Step ${index + 1} of ${TOUR_STEPS.length}`;
+      if (titleEl) titleEl.textContent = step.title;
+      if (descEl) descEl.innerHTML = step.description;
+      if (dotsContainer) {
+        dotsContainer.innerHTML = TOUR_STEPS.map((_, i) => 
+          `<span class="w-2 h-2 rounded-full transition-all ${i === index ? 'w-5 bg-sky-400' : 'bg-slate-300 dark:bg-slate-700'}"></span>`
+        ).join('');
+      }
+      if (prevBtn) {
+        if (index === 0) prevBtn.classList.add("opacity-40", "pointer-events-none");
+        else prevBtn.classList.remove("opacity-40", "pointer-events-none");
+      }
+      if (nextBtn) {
+        nextBtn.textContent = (index === TOUR_STEPS.length - 1) ? "Finish Tour 🎉" : "Next ➔";
+      }
+
+      // Calculate Popover Position (Smart Auto-Placement)
+      if (popover) {
+        const popW = Math.min(420, window.innerWidth - 32);
+        const popH = popover.offsetHeight || 200;
+
+        let top = rect.bottom + 16;
+        let left = rect.left + (rect.width / 2) - (popW / 2);
+
+        // If overflowing bottom, place above
+        if (top + popH > window.innerHeight - 20) {
+          top = Math.max(20, rect.top - popH - 16);
+        }
+
+        // Clamp horizontal boundaries
+        if (left < 16) left = 16;
+        if (left + popW > window.innerWidth - 16) left = window.innerWidth - popW - 16;
+
+        popover.style.top = `${top}px`;
+        popover.style.left = `${left}px`;
+      }
+    }
+
+    function nextTourStep() {
+      if (currentTourIndex < TOUR_STEPS.length - 1) {
+        showTourStep(currentTourIndex + 1);
+      } else {
+        exitGuidedTour();
+        showToast("🎉 Tour Completed! Explore live scenarios or run benchmarks!", "success");
+      }
+    }
+
+    function prevTourStep() {
+      if (currentTourIndex > 0) {
+        showTourStep(currentTourIndex - 1);
+      }
+    }
+
+    function exitGuidedTour() {
+      tourActive = false;
+      const overlay = document.getElementById("guided-tour-overlay");
+      if (overlay) overlay.remove();
+    }
+
+    // Keyboard Navigation for Guided Tour (Escape, Left, Right)
+    window.addEventListener("keydown", (e) => {
+      if (!tourActive) return;
+      if (e.key === "Escape") exitGuidedTour();
+      if (e.key === "ArrowRight") nextTourStep();
+      if (e.key === "ArrowLeft") prevTourStep();
+    });
+
+    window.addEventListener("resize", () => {
+      if (tourActive) showTourStep(currentTourIndex);
+    });
+
     mountComponents();
     updateOverviewBankGrid();
     refreshAuditLedger();
@@ -5074,7 +5322,7 @@
       typingBubble.className = "flex gap-2.5 items-start";
       typingBubble.innerHTML = `
         <div class="w-7 h-7 rounded-full p-0.5 bg-gradient-to-tr from-emerald-400 to-sky-400 shrink-0 shadow-sm">
-          <img src="/copilot_avatar.jpg" onerror="this.onerror=null; this.src='/static/copilot_avatar.jpg';" alt="Avatar" class="w-full h-full rounded-full object-cover">
+          <img src="copilot_avatar.jpg" onerror="this.onerror=null; this.src='assets/copilot_avatar.jpg'; if(!this.src) this.src='/copilot_avatar.jpg';" alt="Avatar" class="w-full h-full rounded-full object-cover">
         </div>
         <div class="bg-white dark:bg-[#0c1b33] p-2.5 px-3 rounded-2xl rounded-tl-sm border border-slate-200 dark:border-[#192f54] text-[11px] text-sky-500 font-medium animate-pulse flex items-center gap-1.5">
           <span class="w-2 h-2 rounded-full bg-sky-400 animate-ping"></span>
@@ -5105,7 +5353,7 @@
 
         copilotBubble.innerHTML = `
           <div class="w-7 h-7 rounded-full p-0.5 bg-gradient-to-tr from-emerald-400 to-sky-400 shrink-0 shadow-sm mt-0.5">
-            <img src="/copilot_avatar.jpg" onerror="this.onerror=null; this.src='/static/copilot_avatar.jpg';" alt="Avatar" class="w-full h-full rounded-full object-cover">
+            <img src="copilot_avatar.jpg" onerror="this.onerror=null; this.src='assets/copilot_avatar.jpg'; if(!this.src) this.src='/copilot_avatar.jpg';" alt="Avatar" class="w-full h-full rounded-full object-cover">
           </div>
           <div class="flex-1 bg-white dark:bg-[#0c1b33] p-3 rounded-2xl rounded-tl-sm border border-slate-200 dark:border-[#192f54] shadow-sm space-y-2 text-slate-800 dark:text-slate-200">
             <div class="flex items-center justify-between text-[9.5px] text-slate-400 border-b border-slate-100 dark:border-slate-800/80 pb-1">
