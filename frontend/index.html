@@ -2996,7 +2996,7 @@
     async function safeApiCall(url, method = "GET", body = null) {
       const targetUrls = [
         url,
-        "http://127.0.0.1:8000" + url,
+        (typeof window !== "undefined" && window.location ? window.location.origin + url : url),
         "http://localhost:8000" + url
       ];
 
@@ -3006,7 +3006,7 @@
             "Content-Type": "application/json", 
             "X-Trace-ID": "tr_" + Math.random().toString(36).substring(2, 12) 
           };
-          const opts = { method, headers, signal: AbortSignal.timeout(1500) };
+          const opts = { method, headers, signal: AbortSignal.timeout(5000) };
           if (body) opts.body = JSON.stringify(body);
 
           const res = await fetch(fullUrl, opts);
