@@ -260,12 +260,38 @@ python cli.py simulate-attack --attack quiet-hours
 ├── run_benchmarks.bat              # One-Click Benchmark Runner
 ├── run_tests.bat                   # One-Click Pytest Runner
 ├── ARCHITECTURE.md                 # In-Depth Technical Whitepaper
+├── docs/PROJECT_OBSERVATION_DOCUMENT.md # Full Academic Research & Empirical Observation Whitepaper
 └── README.md
 ```
 
 ---
 
-## 7. Quickstart & Local Execution
+## 7. 🔬 Empirical Research, Tier-1 Case Studies & Formal Prior Art
+
+Unlike toy prototypes that rely on unconstrained, blind LLM prompts or static retry loops, **RazorRevive-OS** is grounded in formal empirical research, survival analysis, and the unique regulatory realities of the Indian banking landscape:
+
+### 7.1 Tier-1 Case Studies vs. RazorRevive-OS Differentials
+
+| Architecture | Operational Mechanism | Fundamental Limitation | The RazorRevive-OS Advantage |
+| :--- | :--- | :--- | :--- |
+| **Stripe (Smart Retries)** | Offline classifier predicts discrete time slots on closed global card networks. | Unconstrained retry regime. Does not optimize a continuous hazard rate or interpret time-to-event dynamics. | Uses **SciPy Weibull Hazard Survival Modeling** where shape $k < 1$ diagnoses liquidity/salary delay, while $k > 1$ diagnoses structural credential failure, pivoting to omnichannel WhatsApp UPI links. |
+| **Razorpay (Optimizer)** | Real-time AI routing across acquirers/gateways (spatial optimization). | Optimizes *which* rail now, not *when* to retry or *how* to negotiate under regulatory attempt budgets. | Solves the **temporal dimension** under Indian compliance constraints (NPCI Autopay 24-48h pre-debit notices, NACH return fees). |
+| **Netflix (Dunning)** | Silent background retries with soft deadlines and grace periods on ₹499 consumer plans. | Never negotiates. Fails on commercial invoices where the blocker is a missing GSTIN or PO number. | Implements **Deep-Loop Autonomous Voice Negotiation** in Hinglish for B2B invoices (>₹50,000) with CFO approval gates and Promise-to-Pay (PTP) calendar locks. |
+| **Uber (Arrears Flow)** | User-initiated 1-tap fallback when requesting the next ride. | Relies on an organic marketplace re-engagement trigger absent in B2B subscriptions. | Mathematically **manufactures the trigger at the calculated Weibull hazard peak** via 1-Click WhatsApp UPI Intent links and dynamic QR codes. |
+
+### 7.2 Indian Regulatory & Compliance Boundaries
+* **UPI Autopay (NPCI UPI/OC-223/FY2025-26)**: Mandates 24–48h pre-debit notifications; silent immediate re-attempts are prohibited.
+* **NACH Return Fee Caps (NPCI/2023-24/NACH/001 & 007)**: Caps re-presentations per return code and penalizes high return rates on originators.
+* **TRAI Quiet-Hours & DPDP PII Shielding**: Enforces strict outreach suppression between 21:00 and 09:00 IST and masks sensitive phone numbers.
+
+### 7.3 Data Pipeline & Academic Foundations
+* **Synthetic Substrates**: Modeled on Sparkov high-resolution temporal arrivals, calibrated with NPCI monthly UPI statistics and Dataful NACH rejection trends, using Alibaba microservice cluster traces to generate realistic correlated switch outage cascades.
+* **Academic References**: Built upon formal survival modeling and high-throughput consensus literature, including *DeFi Survival Analysis* (ACM DLT 2024), *FinSurvival* (MLResearch 2025), *Deep Extended Hazard Models* (NeurIPS 2021), *FastPay* (ACM AFT 2020), and *LogPlayer* (eBay, 2019).
+* 📄 **Read the full 15-page Whitepaper**: [`docs/PROJECT_OBSERVATION_DOCUMENT.md`](docs/PROJECT_OBSERVATION_DOCUMENT.md)
+
+---
+
+## 8. Quickstart & Local Execution
 
 ### 1. Launch Control Plane Dashboard
 ```bash
