@@ -963,16 +963,16 @@
             <div class="text-[10px] text-slate-400 mt-0.5">0.23ms CAS Mutex Gate</div>
           </div>
 
-          <!-- Card 5: TRAI Compliance -->
+          <!-- Card 5: TRAI Quiet-Hours Logic -->
           <div class="custom-card p-3.5">
             <div class="flex items-center gap-1.5 text-xs text-slate-400 font-medium">
               <svg class="w-3.5 h-3.5 text-[#8b5cf6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
               </svg>
-              <span>TRAI Compliance</span>
+              <span>TRAI Quiet-Hours Logic</span>
             </div>
             <div class="text-2xl font-bold text-white mt-1 mono" id="kpi-trai">100%</div>
-            <div class="text-[10px] text-slate-400 mt-0.5">0 Late-Night Messages (9PM-9AM)</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">0 Late-Night Outreach (9PM-9AM Queue)</div>
           </div>
 
           <!-- Card 6: Orchestration Latency -->
@@ -4519,9 +4519,9 @@
     }
 
     function openWhatsAppPreviewModal() {
-      const amtInput = document.getElementById("fast-amount");
-      const payIdInput = document.getElementById("fast-pay-id");
-      const phoneInput = document.getElementById("fast-phone");
+      const amtInput = document.querySelector("#fast-amount");
+      const payIdInput = document.querySelector("#fast-pay-id");
+      const phoneInput = document.querySelector("#fast-phone");
 
       const amt = amtInput ? parseFloat(amtInput.value) || 2499.0 : 2499.0;
       const payId = payIdInput ? payIdInput.value : "pay_9A12BC34DE";
@@ -4537,12 +4537,18 @@
       if (waButtonsContainer) waButtonsContainer.classList.remove("hidden");
 
       const modal = document.getElementById("whatsapp-modal");
-      if (modal) modal.classList.remove("hidden");
+      if (modal) {
+        modal.classList.remove("hidden");
+        modal.style.display = "flex";
+      }
     }
 
     function closeWhatsAppPreviewModal() {
       const modal = document.getElementById("whatsapp-modal");
-      if (modal) modal.classList.add("hidden");
+      if (modal) {
+        modal.classList.add("hidden");
+        modal.style.display = "none";
+      }
     }
 
     function simulateUpiAppPayment(appName) {
@@ -4750,8 +4756,8 @@
   </script>
 
   <!-- HYPER-REALISTIC WHATSAPP SMARTPHONE MOCKUP MODAL -->
-  <div id="whatsapp-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4">
-    <div class="bg-[#111b21] border border-[#2a3942] rounded-[32px] w-full max-w-sm shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] overflow-hidden flex flex-col">
+  <div id="whatsapp-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md hidden items-center justify-center p-3 sm:p-4 z-[99999]" style="z-index: 99999 !important; display: none;" onclick="if(event.target===this) closeWhatsAppPreviewModal()">
+    <div class="bg-[#111b21] border border-[#2a3942] rounded-[32px] w-full max-w-sm shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] overflow-hidden flex flex-col" onclick="event.stopPropagation()">
       
       <!-- Phone Top Status / Header Bar -->
       <div class="bg-[#202c33] px-3.5 py-2.5 flex items-center justify-between border-b border-[#2a3942] select-none">
@@ -4761,7 +4767,7 @@
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
           </button>
           
-          <!-- Official Razorpay Avatar -->
+          <!-- Verified Merchant Avatar -->
           <div class="relative">
             <div class="w-9 h-9 rounded-full bg-[#0c2340] border border-[#0c55ea] flex items-center justify-center shadow-inner overflow-hidden">
               <svg class="w-5 h-5 text-[#0c55ea]" fill="currentColor" viewBox="0 0 24 24">
@@ -4775,10 +4781,10 @@
 
           <div>
             <div class="text-xs font-bold text-white flex items-center gap-1">
-              <span>Razorpay</span>
+              <span>Merchant Recovery</span>
               <svg class="w-3.5 h-3.5 text-[#00a884]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
             </div>
-            <div class="text-[9.5px] text-[#8696a0]">Official Business Account</div>
+            <div class="text-[9.5px] text-[#8696a0]">Powered by Razorpay Gateway</div>
           </div>
         </div>
 
@@ -4801,7 +4807,7 @@
         <!-- End-to-End Encryption Notice -->
         <div class="text-center px-4">
           <div class="inline-block px-3 py-1.5 rounded-lg bg-[#182229]/90 border border-[#222d34] text-[9px] text-[#ffd279] text-center leading-tight shadow-sm">
-            🔒 Messages and calls are end-to-end encrypted. DPDP Act 2023 Compliant.
+            🔒 Messages are end-to-end encrypted. Designed with DPDP PII Protection Guardrails.
           </div>
         </div>
 
@@ -4811,7 +4817,7 @@
           <!-- Verified Business Header Pill -->
           <div class="text-[11px] font-bold text-[#00a884] flex items-center justify-between border-b border-[#2a3942] pb-1.5">
             <span class="flex items-center gap-1.5">
-              <span>⚡ Razorpay Priority Recovery</span>
+              <span>⚡ 1-Click Payment Recovery</span>
             </span>
             <span class="text-[9px] text-[#8696a0] mono font-normal">Fast-Loop Sentinel</span>
           </div>
