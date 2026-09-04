@@ -1093,13 +1093,14 @@
           <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-[#142442] text-xs">
             <div class="flex items-center gap-2 text-slate-400 mono">
               <span>Circuit Breaker Status:</span>
-              <span class="text-emerald-400 font-bold">CLOSED (Passing All Healthy Traffic)</span>
+              <span id="circuit-breaker-status-badge" class="px-2.5 py-0.5 rounded text-[11px] font-bold bg-[#25131d] text-amber-400 border border-amber-900/60 animate-pulse">TRIPPED (Holding Traffic for Weibull +45m Window)</span>
             </div>
             <div class="flex items-center gap-2">
-              <button onclick="simulateBankDegradation('SBI')" class="px-3 py-1.5 bg-[#1e1217] hover:bg-[#2c1722] border border-amber-900/50 text-amber-300 rounded-lg mono transition">
-                ⚡ Toggle SBI Degradation
+              <button id="btn-toggle-sbi" onclick="simulateBankDegradation('SBI')" class="px-3 py-1.5 bg-[#25131d] hover:bg-[#381628] border border-amber-500/70 text-amber-300 rounded-lg mono transition font-semibold flex items-center gap-1.5 cursor-pointer shadow-lg shadow-amber-950/40">
+                <span>⚡</span>
+                <span id="btn-toggle-sbi-label">Toggle SBI State (Currently DEGRADED)</span>
               </button>
-              <button onclick="switchNavTab('npci_switch')" class="px-3 py-1.5 bg-[#08284d] hover:bg-[#0c3a6e] text-sky-300 rounded-lg mono font-semibold transition flex items-center gap-1.5">
+              <button onclick="switchNavTab('npci_switch')" class="px-3 py-1.5 bg-[#08284d] hover:bg-[#0c3a6e] text-sky-300 rounded-lg mono font-semibold transition flex items-center gap-1.5 cursor-pointer">
                 <span>View Full Switch Radar</span>
                 <span>→</span>
               </button>
@@ -3280,31 +3281,7 @@
       await refreshFullNPCISwitchView();
     }
 
-    async function simulateBankDegradation(bankCode) {
-      try {
-        const feedback = document.getElementById("npci-sim-feedback");
-        const currentData = await safeApiCall("/api/v1/telemetry/npci-switch");
-        const bank = currentData?.switches?.[bankCode];
-        const newStatus = (bank && bank.status === "DEGRADED") ? "HEALTHY" : "DEGRADED";
-        const newSr = newStatus === "HEALTHY" ? 98.5 : 74.0;
-        const newLat = newStatus === "HEALTHY" ? 130.0 : 920.0;
-
-        await safeApiCall("/api/v1/telemetry/npci-switch/update", "POST", {
-          bank_code: bankCode,
-          status: newStatus,
-          success_rate_pct: newSr,
-          average_latency_ms: newLat
-        });
-
-        if (feedback) {
-          feedback.innerHTML = `[${new Date().toLocaleTimeString()}] <span class="text-emerald-400 font-bold">✓ Telemetry Updated:</span> ${bankCode} switch updated to <strong>${newStatus}</strong> (SR: ${newSr}%, Latency: ${newLat}ms). Dynamic Weibull peak shifted.`;
-        }
-        await refreshFullNPCISwitchView();
-        showToast(`⚡ ${bankCode} switch toggled to ${newStatus}`, "success");
-      } catch (err) {
-        showToast("Error updating switch: " + err.message, "error");
-      }
-    }
+    // Note: simulateBankDegradation is centrally managed in the Master SRE Controller below
 
     async function injectSimulatedNPCIStatus() {
       const bank = document.getElementById("npci-sim-bank")?.value || "SBI";
@@ -4402,34 +4379,66 @@
 
     function updateOverviewBankGrid() {
       const container = document.getElementById("overview-npci-grid");
-      if (!container) return;
+      if (container) {
+        const displayKeys = ["HDFC", "SBI", "ICICI", "AXIS"];
+        container.innerHTML = displayKeys.map(k => {
+          const b = BANK_SWITCH_STATES[k] || { name: k, switchId: k + "_01", state: "HEALTHY", sr: 98.0, latency: 150 };
+          const isDegraded = b.state === "DEGRADED";
+          const isOutage = b.state === "OUTAGE";
+          const borderClass = isOutage ? "border-rose-900/60 bg-[#1c080b]" : (isDegraded ? "border-amber-900/60 bg-[#1e1208]" : "border-[#142442] bg-[#081224]");
+          const badgeClass = isOutage ? "bg-[#380b10] text-rose-400 border border-rose-800" : (isDegraded ? "bg-[#25131d] text-amber-400 border border-amber-900/60" : "bg-[#063b22] text-[#10b981] border border-[#0e5c36]");
+          const valColor = isOutage ? "text-rose-400" : (isDegraded ? "text-amber-400" : "text-emerald-400");
+          const latColor = isOutage ? "text-rose-300" : (isDegraded ? "text-amber-300" : "text-sky-300");
 
-      const displayKeys = ["HDFC", "SBI", "ICICI", "AXIS"];
-      container.innerHTML = displayKeys.map(k => {
-        const b = BANK_SWITCH_STATES[k] || { name: k, switchId: k + "_01", state: "HEALTHY", sr: 98.0, latency: 150 };
-        const isDegraded = b.state === "DEGRADED";
-        const isOutage = b.state === "OUTAGE";
-        const borderClass = isOutage ? "border-rose-900/60 bg-[#1c080b]" : (isDegraded ? "border-amber-900/60 bg-[#1e1208]" : "border-[#142442] bg-[#081224]");
-        const badgeClass = isOutage ? "bg-[#380b10] text-rose-400 border border-rose-800" : (isDegraded ? "bg-[#25131d] text-amber-400 border border-amber-900/60" : "bg-[#063b22] text-[#10b981] border border-[#0e5c36]");
-        const valColor = isOutage ? "text-rose-400" : (isDegraded ? "text-amber-400" : "text-emerald-400");
-        const latColor = isOutage ? "text-rose-300" : (isDegraded ? "text-amber-300" : "text-sky-300");
-
-        return `
-          <div class="p-3.5 rounded-xl ${borderClass} space-y-2 transition-all">
-            <div class="flex justify-between items-start">
-              <div>
-                <div class="text-xs font-bold text-white">${b.name}</div>
-                <div class="text-[10px] text-slate-400 mono">Switch ID: ${b.switchId}</div>
+          return `
+            <div class="p-3.5 rounded-xl ${borderClass} space-y-2 transition-all shadow-md">
+              <div class="flex justify-between items-start">
+                <div>
+                  <div class="text-xs font-bold text-white">${b.name}</div>
+                  <div class="text-[10px] text-slate-400 mono">Switch ID: ${b.switchId}</div>
+                </div>
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold ${badgeClass}">${b.state}</span>
               </div>
-              <span class="px-2 py-0.5 rounded text-[10px] font-bold ${badgeClass}">${b.state}</span>
+              <div class="grid grid-cols-2 gap-2 text-[11px] mono pt-1 border-t border-[#142442]/60">
+                <div><span class="text-slate-400">SR:</span> <span class="${valColor} font-bold">${b.sr.toFixed(1)}%</span></div>
+                <div><span class="text-slate-400">Latency:</span> <span class="${latColor}">${Math.round(b.latency)}ms</span></div>
+              </div>
             </div>
-            <div class="grid grid-cols-2 gap-2 text-[11px] mono pt-1 border-t border-[#142442]/60">
-              <div><span class="text-slate-400">SR:</span> <span class="${valColor} font-bold">${b.sr.toFixed(1)}%</span></div>
-              <div><span class="text-slate-400">Latency:</span> <span class="${latColor}">${Math.round(b.latency)}ms</span></div>
-            </div>
-          </div>
-        `;
-      }).join('');
+          `;
+        }).join('');
+      }
+
+      // Update SRE Circuit Breaker Status & Toggle Button reactivity
+      const sbi = BANK_SWITCH_STATES['SBI'] || { state: 'DEGRADED', sr: 78.2, latency: 890 };
+      const cbBadge = document.getElementById("circuit-breaker-status-badge");
+      const sbiBtn = document.getElementById("btn-toggle-sbi");
+      const sbiLabel = document.getElementById("btn-toggle-sbi-label");
+
+      if (cbBadge) {
+        if (sbi.state === 'DEGRADED') {
+          cbBadge.className = "px-2.5 py-0.5 rounded text-[11px] font-bold bg-[#25131d] text-amber-400 border border-amber-900/60 animate-pulse";
+          cbBadge.textContent = "TRIPPED (Holding Traffic for Weibull +45m Window)";
+        } else if (sbi.state === 'OUTAGE') {
+          cbBadge.className = "px-2.5 py-0.5 rounded text-[11px] font-bold bg-[#380b10] text-rose-400 border border-rose-800 animate-pulse";
+          cbBadge.textContent = "TRIPPED (Circuit OPEN — Complete Outage)";
+        } else {
+          cbBadge.className = "px-2.5 py-0.5 rounded text-[11px] font-bold bg-[#063b22] text-[#10b981] border border-[#0e5c36]";
+          cbBadge.textContent = "CLOSED (Passing All Healthy Traffic)";
+        }
+      }
+
+      if (sbiLabel && sbiBtn) {
+        if (sbi.state === 'DEGRADED') {
+          sbiLabel.textContent = "Restore SBI to HEALTHY (Currently DEGRADED)";
+          sbiBtn.className = "px-3 py-1.5 bg-[#25131d] hover:bg-[#381628] border border-amber-500/70 text-amber-300 rounded-lg mono transition font-semibold flex items-center gap-1.5 cursor-pointer shadow-lg shadow-amber-950/40";
+        } else if (sbi.state === 'OUTAGE') {
+          sbiLabel.textContent = "Restore SBI to HEALTHY (Currently OUTAGE)";
+          sbiBtn.className = "px-3 py-1.5 bg-[#380b10] hover:bg-[#4d1017] border border-rose-500/70 text-rose-300 rounded-lg mono transition font-semibold flex items-center gap-1.5 cursor-pointer shadow-lg shadow-rose-950/40";
+        } else {
+          sbiLabel.textContent = "Degrade SBI Switch (Simulate 504 Outage)";
+          sbiBtn.className = "px-3 py-1.5 bg-[#081224] hover:bg-[#0c1b36] border border-sky-800 text-sky-300 rounded-lg mono transition font-semibold flex items-center gap-1.5 cursor-pointer";
+        }
+      }
     }
 
     async function simulateBankDegradation(bankCode = 'SBI') {
@@ -4442,29 +4451,30 @@
       current.sr = newSr;
       current.latency = newLatency;
 
-      try {
-        await fetch("/api/v1/telemetry/npci-switch/update", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            bank_code: bankCode,
-            state: newState,
-            success_rate_pct: newSr,
-            latency_ms: newLatency,
-            incidents: newState === 'DEGRADED' ? ["Simulated Latency Spike (>900ms)"] : []
-          })
-        });
-      } catch (err) {
-        console.warn("Backend telemetry sync notice:", err);
-      }
-
+      // Instantly update UI synchronously with zero lag
       updateOverviewBankGrid();
       refreshFullNPCISwitchView();
 
+      // If degraded, also populate the Fast-Loop test fields for demo continuity
       if (newState === 'DEGRADED') {
-        showToast(`⚡ ${bankCode} Switch toggled to DEGRADED (Latency: ${newLatency}ms). Dynamic Weibull retry shifted to +45m peak!`, "warning");
+        document.querySelectorAll("#fast-scenario-select").forEach(el => el.value = "GATEWAY_ERROR");
+        document.querySelectorAll("#fast-amount").forEach(el => el.value = 12500);
+        document.querySelectorAll("#fast-pay-id").forEach(el => el.value = "pay_SBI_504_OUTAGE");
+      }
+
+      // Safe asynchronous sync with backend telemetry (tolerant to offline/Render)
+      safeApiCall("/api/v1/telemetry/npci-switch/update", "POST", {
+        bank_code: bankCode,
+        state: newState,
+        success_rate_pct: newSr,
+        latency_ms: newLatency,
+        incidents: newState === 'DEGRADED' ? ["Simulated Latency Spike (>900ms)"] : []
+      }).catch(err => console.warn("Backend telemetry sync notice:", err));
+
+      if (newState === 'DEGRADED') {
+        showToast(`⚡ ${bankCode} Switch toggled to DEGRADED (Latency: ${newLatency}ms). Circuit Breaker TRIPPED: Dynamic Weibull shifted to +45m!`, "warning");
       } else {
-        showToast(`✓ ${bankCode} Switch restored to HEALTHY (SR: ${newSr}%). Circuit breaker closed.`, "success");
+        showToast(`✓ ${bankCode} Switch restored to HEALTHY (SR: ${newSr}%). Circuit Breaker CLOSED: Normal routing resumed.`, "success");
       }
     }
 
