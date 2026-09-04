@@ -5,6 +5,7 @@ import logging
 import uuid
 import time
 import urllib.parse
+import httpx
 from typing import Dict, Any, Optional, List
 from fastapi import FastAPI, HTTPException, Header, Request, BackgroundTasks, status, Response, UploadFile, File
 

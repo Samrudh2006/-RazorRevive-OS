@@ -1,0 +1,10 @@
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
+extraPaths = [
+    ".",
+    ".venv/Lib/site-packages",
+    "backend"
+]
+reportMissingImports = "none"
+reportMissingTypeStubs = false
