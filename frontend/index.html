@@ -5604,33 +5604,53 @@
       // Function to generate rich intelligent in-browser response for any query
       function getClientSideCopilotResponse(queryText) {
         const text = queryText.toLowerCase();
-        if (text.includes("b2b") || text.includes("voice") || text.includes("gst") || text.includes("ptp") || text.includes("dispute")) {
+        if (text.includes("b2b") || text.includes("voice") || text.includes("gst") || text.includes("ptp") || text.includes("dispute") || text.includes("invoice")) {
           return "🎙️ **Autonomous B2B Hinglish Voice & Promise-to-Pay (PTP) Engine**:\n\n" +
                  "When high-ticket commercial invoices (>₹50,000) encounter payment failure:\n" +
                  "1. **Hinglish Acoustic NLP**: When a corporate client states *'Invoice mein GSTIN galat hai'*, the agent isolates the billing objection and extracts the 15-character GSTIN.\n" +
                  "2. **CFO Approval Gate**: Rather than allowing an LLM to blindly modify tax books, an immutable **MutationProposal** is placed in the CFO Sign-off Queue.\n" +
                  "3. **PTP Calendar Lock**: Upon negotiation, an auto-debit commitment is locked for **Friday 11:00 AM IST**.\n" +
                  "4. **Reminder Suppression**: The state machine automatically pauses aggressive collection nudges until the PTP window, protecting enterprise relationships.";
-        } else if (text.includes("sbi") || text.includes("hdfc") || text.includes("504") || text.includes("weibull") || text.includes("hazard") || text.includes("retry")) {
+        } else if (text.includes("sbi") || text.includes("hdfc") || text.includes("504") || text.includes("weibull") || text.includes("hazard") || text.includes("retry") || text.includes("downtime") || text.includes("outage")) {
           return "⚡ **Fast-Loop Telemetry & Weibull Hazard Retries**:\n\n" +
                  "Traditional gateways retry failed bank charges instantly, causing cascading 504 gateway timeouts.\n\n" +
                  "RazorRevive-OS solves this using a **SciPy-fitted Weibull Hazard Survival Model**:\n" +
                  "1. Calculates recovery half-life dynamics from live NPCI switch signals.\n" +
                  "2. Dynamically mode-shifts the retry window to the mathematical peak at **+45 minutes**.\n" +
                  "3. Boosts cohort recovery yield from a 42.24% baseline to **78.39%** without triggering bank rate limits.";
-        } else if (text.includes("whatsapp") || text.includes("qr") || text.includes("upi") || text.includes("soft") || text.includes("balance") || text.includes("insufficient")) {
+        } else if (text.includes("whatsapp") || text.includes("qr") || text.includes("upi") || text.includes("soft") || text.includes("balance") || text.includes("insufficient") || text.includes("card")) {
           return "📱 **1-Click WhatsApp Recovery & Dynamic Dense UPI QR**:\n\n" +
                  "For consumer soft declines (e.g., card insufficient balance):\n" +
                  "1. Halts expensive card reprocessing loops.\n" +
                  "2. Instantly generates a verified WhatsApp template with a pre-filled UPI Intent link (`upi://pay?...`) and dynamic QR code.\n" +
                  "3. The consumer taps once on Google Pay, PhonePe, or Paytm to complete payment in under 3 seconds.";
-        } else if (text.includes("mutex") || text.includes("storm") || text.includes("double") || text.includes("concurrency") || text.includes("lock") || text.includes("idempot")) {
+        } else if (text.includes("mutex") || text.includes("storm") || text.includes("double") || text.includes("concurrency") || text.includes("lock") || text.includes("idempot") || text.includes("race")) {
           return "🛡️ **Distributed Atomic CAS Mutex & Zero Double-Debits**:\n\n" +
                  "During concurrent webhook storms (tested under 50 simultaneous retry threads):\n" +
                  "1. Thread 1 acquires an in-memory atomic Compare-And-Swap (CAS) lock on `merchant_id:payment_id` in 0.23ms.\n" +
                  "2. Threads 2 through 50 are instantly rejected with **HTTP 409 Conflict**.\n" +
                  "3. Guaranteed **0 double-debit collisions and 0 idempotency violations** under extreme network chaos.";
-        } else if (text.includes("benchmark") || text.includes("yield") || text.includes("rate") || text.includes("score") || text.includes("gmv")) {
+        } else if (text.includes("architecture") || text.includes("3-tier") || text.includes("tier") || text.includes("how does") || text.includes("overview") || text.includes("control plane")) {
+          return "🏛️ **RazorRevive-OS Three-Tier Financial Isolation Boundary**:\n\n" +
+                 "• **Tier 1 (Ingestion & Mutex)**: HMAC-SHA256 signature verification, replay drift checks (<300s), and atomic CAS idempotency locks.\n" +
+                 "• **Tier 2 (AI Reasoning Kernel)**: Fast-Loop Weibull hazard survival models & Deep-Loop B2B Hinglish conversational negotiation.\n" +
+                 "• **Tier 3 (Deterministic Policy Engine)**: Hard mathematical guardrails enforcing TRAI quiet-hours (21:00-09:00 IST), discount clamping (min(10%, ₹500)), and immutable SHA-256 audit chaining.";
+        } else if (text.includes("trai") || text.includes("dpdp") || text.includes("quiet") || text.includes("compliance") || text.includes("policy") || text.includes("discount") || text.includes("clamp")) {
+          return "⚖️ **Deterministic Policy Engine & Regulatory Guardrails**:\n\n" +
+                 "1. **TRAI Quiet-Hours Logic**: Prohibits commercial automated outreach between 21:00 and 09:00 IST. Messages are placed in a deferred queue scheduled for 09:05 AM IST.\n" +
+                 "2. **Discount Clamping**: If an AI proposes an unauthorized 50% discount, the policy gate clamps it unconditionally to `min(10%, ₹500)`.\n" +
+                 "3. **DPDP PII Protection**: Irreversibly masks customer phone numbers (`+91 98765*****`) in logs and UI.";
+        } else if (text.includes("audit") || text.includes("sha") || text.includes("hash") || text.includes("ledger") || text.includes("security") || text.includes("hmac")) {
+          return "📜 **Cryptographic SHA-256 Tamper-Evident Audit Ledger**:\n\n" +
+                 "Every recovery event, discount mutation, and policy check is committed to a sequential hash chain:\n" +
+                 "$$\\text{Hash}_n = \\text{SHA-256}(\\text{Hash}_{n-1} + \\text{EventData})$$\n" +
+                 "Continuous verification from Genesis (`0000...`) to Head guarantees that tampering with historical records immediately breaks the cryptographic proof.";
+        } else if (text.includes("stripe") || text.includes("netflix") || text.includes("uber") || text.includes("competitor") || text.includes("difference")) {
+          return "🏆 **RazorRevive-OS vs. Tier-1 Industry Systems**:\n\n" +
+                 "• **vs. Stripe Smart Retries**: Stripe optimizes discrete time slots on unconstrained credit cards. RazorRevive-OS uses continuous Weibull hazard models adapted for Indian attempt caps (NPCI pre-debit notices & NACH return fees).\n" +
+                 "• **vs. Netflix Dunning**: Netflix does silent retries on ₹499 consumer plans. RazorRevive-OS handles high-value commercial B2B invoices (>₹50,000) with conversational voice negotiation.\n" +
+                 "• **vs. Uber Arrears**: Uber waits for the next ride. RazorRevive-OS mathematically manufactures the recovery trigger at the Weibull hazard peak via 1-Click WhatsApp UPI Intent links.";
+        } else if (text.includes("benchmark") || text.includes("yield") || text.includes("rate") || text.includes("score") || text.includes("gmv") || text.includes("results")) {
           return "📊 **100-Batch Empirical Benchmark Performance**:\n\n" +
                  "• **Live Net Recovery Yield**: **78.39%** (vs 42.24% static retry baseline).\n" +
                  "• **Recovered GMV**: **₹4,25,600** from ₹5,42,850 at-risk volume.\n" +
@@ -5642,7 +5662,7 @@
                  "• **Fast-Loop**: Webhook ingestion with Weibull hazard-adjusted retries (+45m on bank downtime).\n" +
                  "• **Deep-Loop**: Conversational Hinglish B2B voice resolution with atomic invoice mutation & PTP locks.\n" +
                  "• **Policy Engine**: In-memory CAS mutex locks ensuring zero double-debit collisions.\n\n" +
-                 "💡 *Tip: Ask me about 'B2B Voice & PTP', 'Weibull hazard formula', 'CAS Mutex concurrency', or 'WhatsApp UPI QR'!*";
+                 "💡 *Tip: Ask me about '3-Tier Architecture', 'B2B Voice & PTP', 'Weibull hazard formula', 'CAS Mutex concurrency', 'TRAI quiet hours', or 'vs Stripe'!*";
         }
       }
 
