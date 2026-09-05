@@ -15,6 +15,36 @@ class CardNetworkTokenLifecycleManager:
     """
 
     ERROR_TOKEN_MAP: Dict[str, Dict[str, Any]] = {
+        "ACTIVE": {
+            "status": "ACTIVE",
+            "action": "AUTOMATIC_TOKEN_REPROVISION",
+            "retry_allowed": True,
+            "reason": "Token healthy; cryptogram valid within 24-hour network validity window."
+        },
+        "CRYPTOGRAM_EXPIRED": {
+            "status": "CRYPTOGRAM_EXPIRED",
+            "action": "AUTOMATIC_TOKEN_REPROVISION",
+            "retry_allowed": True,
+            "reason": "Single-use or time-bound cryptogram expired; fresh dynamic cryptogram needed."
+        },
+        "SUSPENDED": {
+            "status": "SUSPENDED",
+            "action": "STEP_UP_2FA_CONSENT",
+            "retry_allowed": True,
+            "reason": "Issuing bank temporary suspension; step-up authentication required."
+        },
+        "REVOKED": {
+            "status": "REVOKED",
+            "action": "FALLBACK_UPI_INTENT",
+            "retry_allowed": False,
+            "reason": "Cardholder revoked token on issuer banking app; customer outreach required."
+        },
+        "DELETED": {
+            "status": "DELETED",
+            "action": "CUSTOMER_PAYMENT_LINK",
+            "retry_allowed": False,
+            "reason": "Token deleted by merchant or user; new card enrollment required."
+        },
         "TOKEN_REVOKED": {
             "status": "REVOKED",
             "action": "AUTOMATIC_TOKEN_REPROVISION",

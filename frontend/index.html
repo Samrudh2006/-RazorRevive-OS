@@ -3332,15 +3332,31 @@
         const faEl = document.getElementById("token-res-2fa");
         const outreachEl = document.getElementById("token-res-outreach");
         const descEl = document.getElementById("token-res-desc");
+        const nextEl = document.getElementById("token-res-next");
 
-        if (actionEl) actionEl.innerText = data.recommended_remediation;
-        if (retryEl) retryEl.innerText = data.can_auto_retry ? "YES (Post-Reprovision)" : "NO";
-        if (faEl) faEl.innerText = data.step_up_2fa_required ? "YES" : "NO";
-        if (outreachEl) outreachEl.innerText = data.customer_outreach_action;
-        if (descEl) descEl.innerText = data.remediation_description;
+        const action = data.recommended_remediation || data.remediation_action || (state === "ACTIVE" ? "HEALTHY_CRYPTOGRAM_READY" : "AUTOMATIC_TOKEN_REPROVISION");
+        const canRetry = data.can_auto_retry !== undefined ? data.can_auto_retry : (data.retry_allowed_on_token !== undefined ? data.retry_allowed_on_token : (state === "ACTIVE" || state === "CRYPTOGRAM_EXPIRED"));
+        const stepUp = data.step_up_2fa_required !== undefined ? data.step_up_2fa_required : (action === "STEP_UP_2FA_CONSENT" || state === "SUSPENDED");
+        const outreach = data.customer_outreach_action || (state === "ACTIVE" ? "NONE (Token Healthy)" : (canRetry ? "DISPATCH_TOKEN_UPDATE_LINK" : "TRIGGER_WHATSAPP_RECOVERY"));
+        const desc = data.remediation_description || data.revocation_reason || (state === "ACTIVE" ? "Card token and cryptogram are verified healthy with active 24h network validity." : "Token cryptogram expired; fresh dynamic cryptogram requested via card network API.");
 
+        let nextActionText = "Acquire New Dynamic CVV";
+        if (state === "ACTIVE") nextActionText = "Execute Direct Mandate Debit";
+        else if (state === "SUSPENDED") nextActionText = "Prompt Customer for 2FA Step-Up";
+        else if (state === "REVOKED") nextActionText = "Initiate Fallback UPI Mandate";
+        else if (state === "DELETED") nextActionText = "Dispatch 1-Click Card Re-enrollment Link";
+
+        if (actionEl) actionEl.innerText = action;
+        if (retryEl) retryEl.innerText = canRetry ? (state === "ACTIVE" ? "YES (Immediate)" : "YES (Post-Reprovision)") : "NO";
+        if (faEl) faEl.innerText = stepUp ? "YES" : "NO";
+        if (outreachEl) outreachEl.innerText = outreach;
+        if (descEl) descEl.innerText = desc;
+        if (nextEl) nextEl.innerText = nextActionText;
+
+        showToast(`💳 Token [${tokId}] Inspected: ${action}`, "success");
       } catch (err) {
         console.error("Token inspection error", err);
+        showToast("Token inspection error: " + err.message, "error");
       }
     }
 
@@ -3793,7 +3809,8 @@
         countUpValue("kpi-net-recovery", 0, s.recovery_rate_pct, 1200, "", "%", 2);
         countUpValue("kpi-recovered-gmv", 0, s.recovered_gmv, 1400, "₹", "", 0);
         countUpValue("kpi-at-risk-gmv", 0, s.at_risk_gmv, 1400, "₹", "", 0);
-        document.getElementById("kpi-human-escalations").innerText = s.human_escalations;
+        const humanEscKpi = document.getElementById("kpi-human-escalations");
+        if (humanEscKpi) humanEscKpi.innerText = s.human_escalations;
 
         document.querySelectorAll("#bm-total-tx").forEach(el => el.innerText = s.total_transactions);
         document.querySelectorAll("#bm-at-risk-gmv").forEach(el => el.innerText = `₹${Math.round(s.at_risk_gmv).toLocaleString()}`);

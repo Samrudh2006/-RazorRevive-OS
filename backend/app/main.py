@@ -974,22 +974,43 @@ async def update_npci_switch_telemetry(req: UpdateSwitchTelemetryRequest, reques
 
 class InspectTokenRequest(BaseModel):
     token_id: str = Field(default="tok_visa_vts_8829")
-    error_code: str = Field(default="TOKEN_REVOKED")
-    card_network: str = Field(default="VISA_VTS")
+    error_code: Optional[str] = Field(default=None)
+    state: Optional[str] = Field(default=None)
+    card_network: Optional[str] = Field(default="VISA_VTS")
+    network: Optional[str] = Field(default=None)
     last_four: str = Field(default="4321")
 
 @app.post("/api/v1/recovery/card-token/inspect", tags=["Fast-Loop Recovery Engine"], summary="Inspect Card Network Token Failure & Remediate")
 async def inspect_card_token_failure(req: InspectTokenRequest, request: Request):
     trace_id = getattr(request.state, "trace_id", f"tr_{uuid.uuid4().hex[:12]}")
+    err_code = req.error_code or req.state or "CRYPTOGRAM_EXPIRED"
+    raw_net = (req.network or req.card_network or "VISA_VTS").upper()
+    if "VISA" in raw_net:
+        net = "VISA_VTS"
+    elif "MASTER" in raw_net:
+        net = "MASTERCARD_MDES"
+    elif "RUPAY" in raw_net:
+        net = "RUPAY_TOKEN"
+    else:
+        net = "VISA_VTS"
+
     record = card_token_manager.inspect_token_error(
         token_id=req.token_id,
-        error_code=req.error_code,
-        card_network=req.card_network, # type: ignore
+        error_code=err_code,
+        card_network=net, # type: ignore
         last_four=req.last_four
     )
+
+    data = record.model_dump()
+    data["recommended_remediation"] = record.remediation_action
+    data["can_auto_retry"] = record.retry_allowed_on_token
+    data["step_up_2fa_required"] = record.remediation_action == "STEP_UP_2FA_CONSENT"
+    data["customer_outreach_action"] = "DISPATCH_TOKEN_UPDATE_LINK" if record.retry_allowed_on_token else "TRIGGER_WHATSAPP_RECOVERY"
+    data["remediation_description"] = record.revocation_reason or "Stored card network token inspected."
+
     return {
         "success": True,
-        "data": record.model_dump(),
+        "data": data,
         "trace_id": trace_id,
         "timestamp": time.time()
     }
